@@ -39,10 +39,14 @@ Change current directory to $VXLBIN and run CMake, specifying $VXLSRC
 as the source directory.
 <dl>
 <dt><b>Unix and Cygwin:</b>
-  <dd>Run
+  <dd>Run the Curses based front-end
     <pre>
       ccmake $VXLSRC
-   </pre>
+    </pre>
+   or the command line front-end
+    <pre>
+      cmake -i $VXLSRC
+    </pre>
 <dt><b>Windows:</b>
   <dd>Run CMakeSetup and specify the source and binary directories as $VXLSRC and $VXLBIN, respectively.
 </dl>
