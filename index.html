@@ -30,8 +30,8 @@
 
 VXL (the Vision-<i>something</i>-Libraries) is a collection of C++ libraries designed for computer
 vision research and implementation.  It was created from <a href="http://www.esat.kuleuven.ac.be/~targetjr/">
-TargetJr</a> and the <a href="http://www.aai.com/AAI/IUE/IUE.html">Image Understanding Environment</a>
-(IUE) with the aim of making a lighter, faster and more consistent system. VXL is written in ANSI/ISO
+TargetJr</a> and the <a href="http://www.aai.com/AAI/IUE/IUE.html">IUE</a>
+ with the aim of making a light, fast and consistent system. VXL is written in ANSI/ISO
 C++ and is designed to be portable over many platforms.
 
 The core libraries in VXL are:
@@ -41,25 +41,17 @@ The core libraries in VXL are:
 <li><b>vil (imaging)</b>: Loading, saving and manipulating images in many common file formats,
     including very large images.</li>
 <li><b>vgl (geometry)</b>: Geometry for points, curves and other elementary objects in 1, 2 or 3 dimensions.</li>
-<li><b>vsl (streaming I/O)</b>: Platform independent binary I/O functionality.</li>
-<li><b>vbl (basic templates)</b>: Useful templated C++ classes and functions in
-  STL style. e.g. smart pointers,
-  2d and 3d arrays, sparse arrays.</li>
-<li><b>vul (utilities)</b>: Useful non-numeric bit of code, e.g. for file,
-    directory, and url handling, command-line parsing, using strings, timing, etc.</li>
+<li><b>vsl (streaming I/O), vbl (basic templates), vul (utilities)</b>:
+  Miscellaneous platform-independent functionality.</li>
 </ul>
 
 As well as the core libraries, there are libraries covering <b>numerical algorithms, image processing,
 co-ordinate systems, camera geometry, stereo, video manipulation, structure recovery from
 motion, probability modelling, GUI design, classification, robust estimation,
-feature tracking, topology, structure manipulation, 3d imaging, </b>, and much more.
-These libraries may be in the VXL package, or in one of the add-on packages
-such as tbl or oxl or rpl which contain useful code that may not be up to the
-excellent quality standards of VXL.
+feature tracking, topology, structure manipulation, 3d imaging</b>, and much more.
 <p>Each core library is lightweight, and can be used without reference to the
-other core libraries.  To prevent too much interdependency between libraries,
-there are strict rules on which libraries may use each other.
-This makes the whole dependency graph quite sparse, and allows you to compile and link just
+other core libraries. Similarly, the non-core libraries don't depend on more
+than absolutely necessary, so you can compile and link just
 the libraries you really need.
 <p>For a more detailed description of the libraries see
 <a href="http://paine.wiau.man.ac.uk/pub/doc_vxl/books/core/book.html">the VXL book</a>.
