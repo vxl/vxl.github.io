@@ -16,15 +16,14 @@
 <a href="#intro">[Introduction]</a>&nbsp;&nbsp;
 <a href="#docs">[Documentation]</a>&nbsp;&nbsp;
 <a href="#examples">[Example code and images]</a>&nbsp;&nbsp;
+<a href="#download">[Download and install]</a>&nbsp;&nbsp;
 <a href="#mail">[Mailing list]</a>&nbsp;&nbsp;
-<a href="#dashboard">[Builds dashboard]</a>&nbsp;&nbsp;
-<a href="#bugs">[Bug reports]</a>&nbsp;&nbsp;
-<a href="#download">[Download and install]</a>.
+<a href="#dashboard">[Builds dashboard]</a>&nbsp;&nbsp; <a href="#bugs">[Bug reports]</a>
 <hr>
 
 
 <h2><a name = "intro">Introduction: What is VXL? </a></h2>
-VXL (the Vision-something-Libraries) is a collection of C++ libraries designed for computer
+VXL (the Vision-<i>something</i>-Libraries) is a collection of C++ libraries designed for computer
 vision research.  It was created from <a href="http://www.esat.kuleuven.ac.be/~targetjr/">
 TargetJr</a> and the <a href="http://www.aai.com/AAI/IUE/IUE.html"> Image Understanding Environment</a>
 (IUE) with the aim of making a lighter, faster and more consistent system. VXL is written in ANSI/ISO
@@ -49,18 +48,25 @@ matrix and vector classes with operations for manipulating them, such as matrix 
   directory, and url handling, command-line parsing, using strings, timing, etc.
 </ul>
 
-To prevent too much interdependency between libraries, there are strict rules on which libraries may use each other
-with vcl on the top level and vnl, vil, vgl, vsl, vbl and vul depending on it.  Since vnl, vil, vgl, vsl, vbl and
-vul are on the same level it means that they cannot refer to each other.
-Functions that would logically belong in vgl say, but depend on functions from vnl would be placed in the library
-vgl_algo.  The libraries vgl_algo, vil_algo and vnl_algo are on the third level.
-Finally there is a level of libraries with 4 letter names (v**l) which may depend on any of the
-3 letter core libraries, and possibly on each other.
-For a more detailed description of the libraries and the layering scheme see 
-<a href="http://www.isbe.man.ac.uk/public_vxl_doc/books/vxl/book.html">the VXL book</a>.
+As well as the core libraries, there are libraries covering <b>numerical
+algorithms, image processing,
+co-ordinate systems, camera geometry, stereo, video manipulation, structure recovery from
+motion, probability modelling, GUI design, classification, robust estimation,
+feature tracking, topology, structure manipulation</b>, and much more. These libraries may be in the VXL package,
+or one of the add-on packages such as TBL or OXL which contains useful code that
+may not be up to the excellent quality standards of VXL.
+<p>
 
-<a name = "docs">
-<h2>Documentation </h2> </a>
+To prevent too much interdependency between libraries, there are strict rules on which libraries may use each other
+with vcl on the top level and vnl, vil, vgl, vsl, vbl and vul depending on it.
+The higher level libraries in turn depend on the core libraries. This makes the whole
+dependency graph quite sparse, and allows you to compile and link just
+the libraries you really need.
+For a more detailed description of the libraries see 
+<a href="http://www.isbe.man.ac.uk/public_vxl_doc/books/vxl/book.html">the VXL book</a>.
+</p>
+<hr>
+<a name = "docs"><h2>Documentation </h2> </a>
 <h3>Documentation on the whole of VXL</h3> 
 There are two main references for information on the whole of VXL:
 <ul>
@@ -73,9 +79,9 @@ An alternative lay-out with essentially identical content can be found
 
 <li><a href="http://www.isbe.man.ac.uk/public_vxl_doc/books/vxl/book.html">VXL book</a>
 - this is a single reference for all high-level documentation on VXL. It currently documents
-the release version of VXL (VXL 1.0 beta).
+the release version of VXL.
 </ul>
-The <a href="http://www.isbe.man.ac.uk/search_vxl.html">documentation search</a> page is useful for quickly finding documentation on.
+The <a href="http://www.isbe.man.ac.uk/search_vxl.html">documentation search</a> page is useful for quickly finding documentation.
 
 <h3>VXL guides</h3>
 These are short guides to specific areas in VXL:
@@ -107,9 +113,15 @@ These are short guides to specific areas in VXL:
 
 xcv and vgui have not changed a lot since the last release of VXL so these guides should be useful for both 
 the release and development versions of VXL.
+<ul>
+  <li>The <a href="http://www.isbe.man.ac.uk/public_vxl_doc/books/mul/book.html">MUL
+    book</a> is an overview of libraries concerned with probability modelling,
+    classification, and registered images.</li>
+</ul>
 
-<a name = "examples">
-<h2>Example code and images</h2>
+
+<hr>
+<h2><a name = "examples">Example code and images</a></h2>
 <ul>
  <li><a href ="manuals/examples.tar.gz">Example code with no user interface</a> 
  <li><a href ="manuals/examples-with-vgui.tar.gz">Example code using vgui</a> 
@@ -117,46 +129,7 @@ the release and development versions of VXL.
  <li><a href ="manuals/images.tar.gz">Example images</a> 
 </ul>
 
-
-<h2><a name = "mail">Mailing list</a> </h2>
-The <a href="http://sourceforge.net/mail/?group_id=24293">VXL mailing
-lists</a> are at SourceForge. You can find list descriptions,
-subscription information, and archives there. Until the messages from
-the old mailing lists are populated into the SourceForge lists, you
-can browse the old archives by <a
-href="http://www.robots.ox.ac.uk/cgi-bin/Users/vxl/vxl-gen.cgi?bythread">thread</a>
-or in <a
-href="http://www.robots.ox.ac.uk/cgi-bin/Users/vxl/vxl-gen.cgi?bytime">order</a>
-of arrival.
-
- 
-<h2><a name = "dashboard">Dashboard</a> </h2>
-The <a href="http://www.cs.rpi.edu/research/vision/vxl/Testing/Dashboard/MostRecentResults-Nightly/Dashboard.html">dashboard</a>
-is a summary (collated from different machines at different sites in
-different timezones) of the current build status of VXL. More builds
-are welcome; just follow the <a href="submit-build.html">instructions for submitting a build</a>.
-
-
-<h2><a name = "bugs"> Reporting bugs to the mailing list </a> </h2>
-If you think you have found a bug, or if you have an installation or build problem
-which is not covered on this page (see below), please submit a bug
-report on <a href="http://sourceforge.net/tracker/?group_id=24293">VXL tracker</a>.
-
-Also supply the following information unless you know for certain it is not relevant:
-<ul>
-<li> Exactly what you did and exactly what goes wrong. Be verbose. We need to know this in order to help.
-     If you have problems configuring VXL, include the options you gave to configure and the output it
-     produced. If you have problems compiling VXL, include the command the makefiles issued, as well as
-     the entire error message.
-<li> Compiler and <i> compiler version number </i>. For gcc, this means we want the output of the
-     two shell commands "gcc -v" and "g++ -v" (yes, both, please - they have been known to differ). For other
-     compilers try -V, -ver, -version or read the manual.
-<li> Operating system (e.g. linux/solaris/irix) and architecture (e.g. i368/sparc/mips). If this
-     means nothing to you, give some indication of the sort of machine (e.g. does it have "Indy"
-     or "AEGIS" or "Ultra" or "Cray" or "HAL" etc written on it?).
-</ul>
-
-
+<hr>
 
 <h2><a name = "download">Download and install </a> </h2>
 You can either download  the latest official release (VXL 1.0 beta) or the latest development version of VXL.
@@ -191,6 +164,50 @@ CVS and SourceForge</a>
 <li> <a href="http://www.cs.bris.ac.uk/~cooper/sshcvs.html">SSH and
 CVS under Windows</a>
 </ul>
+
+<hr>
+<h2>Problems and where to get help </h2>
+
+
+<h3><a name = "mail">Mailing list</a> </h3>
+The <a href="http://sourceforge.net/mail/?group_id=24293">VXL mailing
+lists</a> are at SourceForge. You can find list descriptions,
+subscription information, and archives there. Until the messages from
+the old mailing lists are populated into the SourceForge lists, you
+can browse the old archives by <a
+href="http://www.robots.ox.ac.uk/cgi-bin/Users/vxl/vxl-gen.cgi?bythread">thread</a>
+or in <a
+href="http://www.robots.ox.ac.uk/cgi-bin/Users/vxl/vxl-gen.cgi?bytime">order</a>
+of arrival.
+
+ 
+<h3><a name = "dashboard">Dashboard</a> </h3>
+The <a href="http://www.cs.rpi.edu/research/vision/vxl/Testing/Dashboard/MostRecentResults-Nightly/Dashboard.html">dashboard</a>
+is a summary (collated from different machines at different sites in
+different timezones) of the current build status of VXL. More builds
+are welcome; just follow the <a href="submit-build.html">instructions for submitting a build</a>.
+
+
+<h3><a name = "bugs"> Reporting bugs to the mailing list </a> </h3>
+If you think you have found a bug, or if you have an installation or build problem
+which is not covered on this page (see below), please submit a bug
+report on <a href="http://sourceforge.net/tracker/?group_id=24293">VXL tracker</a>.
+
+Also supply the following information unless you know for certain it is not relevant:
+<ul>
+<li> Exactly what you did and exactly what goes wrong. Be verbose. We need to know this in order to help.
+     If you have problems configuring VXL, include the options you gave to configure and the output it
+     produced. If you have problems compiling VXL, include the command the makefiles issued, as well as
+     the entire error message.
+<li> Compiler and <i> compiler version number </i>. For gcc, this means we want the output of the
+     two shell commands "gcc -v" and "g++ -v" (yes, both, please - they have been known to differ). For other
+     compilers try -V, -ver, -version or read the manual.
+<li> Operating system (e.g. linux/solaris/irix) and architecture (e.g. i368/sparc/mips). If this
+     means nothing to you, give some indication of the sort of machine (e.g. does it have "Indy"
+     or "AEGIS" or "Ultra" or "Cray" or "HAL" etc written on it?).
+</ul>
+
+
 
     <hr>
     <address><a href="mailto:amithaperera@users.sourceforge.net">amithaperera@users.sourceforge.net</a></address>
