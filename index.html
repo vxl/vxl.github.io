@@ -178,14 +178,21 @@ that is used by the latest version of VXL).
 When you are checking out VXL you can use any of the 
 following <I>modulename</i>s:
 <UL>
-<LI>"all"  -  checking out everything
-<LI>"vxl"  -  checking out vxl/vxl and all required stuff (i.e., vcl and v3p)
-<LI>"vcl"  -  only vxl/vcl
+<LI>"all"  -  the sources for everything
+<LI>"vxl"  -  the core vxl and all required stuff (i.e., vcl and v3p)
+<LI>"vcl"  -  only vcl
+<LI>"gel", "mul", "oul", "oxl", "rpl", "tbl", etc:  -  the respective subsets
 <LI>"doc"  -  only www
-<LI>"gel", "mul", "oul", "oxl", "rpl, "tbl", etc:  -  the respective subsets
 </UL>
+<strong>Caveat</strong>: Even when you check out a subset of the code,
+a subsequent <tt>cvs update</tt> may pull in everything! For example,
+if you do a <tt>cvs checkout vxl</tt>, you will get <tt>src/vxl</tt>,
+<tt>src/vcl</tt>, and a couple more. If you then do <tt>cvs update
+-Pd</tt> from the <tt>src</tt> directory, you will get
+<tt>src/gel</tt>, <tt>src/oxl</tt>, etc. We can't do much about
+this. Blame CVS. :-)
 
-
+<p>
 The following links may be helpful if you work under Windows.
 <ul>
 <li> <a href="http://www.cs.bris.ac.uk/~cooper/vxlcvs.html">VXL using CVS and SourceForge</a>
