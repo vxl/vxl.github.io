@@ -2,79 +2,88 @@
 <html>
   <head>
     <title>VXL homepage</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
   </head>
 
   <body bgcolor=white>
 
 <center>
 
-<h1>The  
+<h1>The
   <a href="http://vxl.sourceforge.net/">
   <img ALT="VXL" src="logo1-quant.gif" border="0"  width="128" height="48" align="top"></a>
-    Homepage</h1> 
+    Homepage</h1>
 
-    <p>
-    C++ Libraries for Computer Vision Research and Implementation</p></center>
+    <p>C++ Libraries for Computer Vision Research and Implementation</p>
+</center>
 <hr>
+
 <b>Contents:</b>
-<a href="#intro">[Introduction]</a>&nbsp;&nbsp; <a href="#docs">[Documentation]</a>&nbsp;&nbsp;        
-<a href="#examples">[Example code and images]</a>&nbsp;&nbsp;        
-<a href="#download">[Download and install]</a>&nbsp;&nbsp;        
-<a href="#mail">[Mailing list]</a>&nbsp;&nbsp;        
-<a href="#dashboard">[Builds dashboard]</a>&nbsp;&nbsp; <a href="#bugs">[Bug reports]</a>        
+<a href="#intro">[Introduction]</a>&nbsp;&nbsp; <a href="#docs">[Documentation]</a>&nbsp;&nbsp;
+<a href="#examples">[Example code and images]</a>&nbsp;&nbsp;
+<a href="#download">[Download and install]</a>&nbsp;&nbsp;
+<a href="#mail">[Mailing list]</a>&nbsp;&nbsp;
+<a href="#dashboard">[Builds dashboard]</a>&nbsp;&nbsp; <a href="#bugs">[Bug reports]</a>
 <hr>
 
 
-<h2><a name = "intro">Introduction: What is VXL? </a></h2>
-VXL (the Vision-<i>something</i>-Libraries) is a collection of C++ libraries designed for computer        
-vision research.  It was created from <a href="http://www.esat.kuleuven.ac.be/~targetjr/">        
-TargetJr</a> and the <a href="http://www.aai.com/AAI/IUE/IUE.html"> Image Understanding Environment</a>        
-(IUE) with the aim of making a lighter, faster and more consistent system. VXL is written in ANSI/ISO        
-C++ and is designed to be portable over many platforms.        
+<h2><a name="intro">Introduction: What is VXL?</a></h2>
 
-The core libraries in VXL are:        
+VXL (the Vision-<i>something</i>-Libraries) is a collection of C++ libraries designed for computer
+vision research.  It was created from <a href="http://www.esat.kuleuven.ac.be/~targetjr/">
+TargetJr</a> and the <a href="http://www.aai.com/AAI/IUE/IUE.html">Image Understanding Environment</a>
+(IUE) with the aim of making a lighter, faster and more consistent system. VXL is written in ANSI/ISO
+C++ and is designed to be portable over many platforms.
+
+The core libraries in VXL are:
 <ul>
 <li><b>vcl (C++ compatibility layer)</b>: This library exists purely to make sure all standard C++
-libraries are the same on all compilers.  This means that all standard headers in VXL are
-preceded with the letters vcl_, so for example instead of including <code>&#60;vector&#62;</code> you would include
-<code>&#60;vcl_vector.h&#62;</code> and would use <code>vcl_vector&lt;&gt;</code> rather than <code>std::vector&lt;&gt;</code> in your
-code.</li>
+    libraries are the same on all compilers.  This means that all standard headers in VXL are
+    preceded with the letters vcl_, so for example instead of including <code>&#60;vector&#62;</code>
+    you would include <code>&#60;vcl_vector.h&#62;</code> and would use <code>vcl_vector&lt;&gt;</code>
+    rather than <code>std::vector&lt;&gt;</code> in your code.</li>
 <li><b>vnl (numerics)</b>: Numerical containers and algorithms, in particular vnl provides
-matrix and vector classes with operations for manipulating them, such as matrix decompositions.</li>
-<li><b>vil (imaging)</b>: Loading, saving and manipulating images in many common file formats, including very large images.</li>
+    matrix and vector classes with operations for manipulating them, such as matrix decompositions.</li>
+<li><b>vil (imaging)</b>: Loading, saving and manipulating images in many common file formats,
+    including very large images.</li>
 <li><b>vgl (geometry)</b>: Geometry for points, curves and other elementary objects in 1, 2 or 3 dimensions.</li>
 <li><b>vsl (streaming I/O)</b>: Platform independent binary I/O functionality.</li>
 <li><b>vbl (basic templates)</b>: A collection of useful templated C++ classes and functions
-  that would have been in the STL if we had designed it. For example smart pointers,
-  2D and 3D arrays, sparse 2D and 3D arrays.</li>
+    that would have been in the STL if we had designed it. For example smart pointers,
+    2D and 3D arrays, sparse 2D and 3D arrays.</li>
 <li><b>vul (utilities)</b>: Useful non-numeric bit of code, e.g. for file,
-  directory, and url handling, command-line parsing, using strings, timing, etc.</li>
+    directory, and url handling, command-line parsing, using strings, timing, etc.</li>
 </ul>
 
-As well as the core libraries, there are libraries covering <b>numerical        
-algorithms, image processing,
+As well as the core libraries, there are libraries covering <b>numerical algorithms, image processing,
 co-ordinate systems, camera geometry, stereo, video manipulation, structure recovery from
 motion, probability modelling, GUI design, classification, robust estimation,
-feature tracking, topology, structure manipulation</b>, and much more. These libraries may be in the VXL package,        
-or one of the add-on packages such as TBL or OXL which contains useful code that        
-may not be up to the excellent quality standards of VXL.<p>Each core library is   
-lightweight, and can be used without reference to the other core libraries. To prevent too much interdependency between libraries, there are strict rules on which libraries may use each other. 
-This makes the whole 
-dependency graph quite sparse, and allows you to compile and link just 
-the libraries you really need. 
-For a more detailed description of the libraries see  
+feature tracking, topology, structure manipulation</b>, and much more.
+These libraries may be in the VXL package, or in one of the add-on packages
+such as tbl or oxl or rpl which contain useful code that may not be up to the
+excellent quality standards of VXL.
+<p>Each core library is lightweight, and can be used without reference to the
+other core libraries.  To prevent too much interdependency between libraries,
+there are strict rules on which libraries may use each other.
+This makes the whole dependency graph quite sparse, and allows you to compile and link just
+the libraries you really need.
+<p>For a more detailed description of the libraries see
 <a href="http://www.isbe.man.ac.uk/public_vxl_doc/books/vxl/book.html">the VXL book</a>.
-</p>
+
 <hr>
-<h2><a name = "docs">Documentation </a> </h2>
-<h3>Documentation on the whole of VXL</h3> 
-There are two main references for information on the whole of VXL:        
+
+
+<h2><a name="docs">Documentation</a></h2>
+
+<h3>Documentation on the whole of VXL</h3>
+
+There are two main references for information on the whole of VXL:
 <ul>
 <li><a href="http://www.isbe.man.ac.uk/public_vxl_doc/">VXL package documentation</a>
-- this documents the latest development version of VXL.  
+- this documents the latest development version of VXL.
 It has a detailed description of every
-class and function in VXL which is auto-generated from the code using doxygen.
+class and function in VXL which is auto-generated from the code using
+<a href="http://www.stack.nl/~dimitri/doxygen/index.html">Doxygen</a>.
 An alternative lay-out with essentially identical content can be found
 <a href="http://www.esat.kuleuven.ac.be/~targetjr/vxl/">here</a>.
 
@@ -82,135 +91,142 @@ An alternative lay-out with essentially identical content can be found
 - this is a single reference for all high-level documentation on VXL. It currently documents
 the CVS snapshot of VXL.
 </ul>
-The <a href="http://www.isbe.man.ac.uk/search_vxl.html">documentation search</a> page is useful for quickly finding documentation.        
+
+The <a href="http://www.isbe.man.ac.uk/search_vxl.html">documentation search</a>
+page is useful for quickly finding documentation.
+
 
 <h3>VXL guides</h3>
-These are short guides to specific areas in VXL:        
+
+These are short guides to specific areas in VXL:
 <ul>
 <li><b>xcv</b> is an application built to demonstrate the functionality of the VXL libraries.
   <ul>
-  <li> There is a <a href="manuals/xcv/newxcv.html">guide to using xcv</A>
-     (also available <a href="manuals/xcv.ps.gz">in postscript 
-     format</a>).
+  <li>There is a <a href="manuals/xcv/newxcv.html">guide to using xcv</A>
+      (also available <a href="manuals/xcv.ps.gz">in postscript format</a>).
   <li>Download <a href="manuals/xcv.zip">xcv for Windows</a>,
-    <a href="manuals/xcv-SunOS5.bin.gz">xcv for solaris</a>.
-    and <a href="manuals/xcv-linux.bin.gz">xcv for linux</a> 
+      <a href="manuals/xcv-SunOS5.bin.gz">xcv for solaris</a>.
+      and <a href="manuals/xcv-linux.bin.gz">xcv for linux</a>
   <li>Here is some <a href ="manuals/xcvdata.tar.gz">example data</a>
-  suitable for use with xcv.
+      suitable for use with xcv.
   </ul>
 <br>
 
 <li><b>vgui</b> is the VXL graphical user interface library.
   <ul>
   <li>For a simple introduction to using VGUI there is the
-  <a href="manuals/vgui_users_guide/index.html">VGUI users guide</a>
-  (also <a href="manuals/vgui_users_guide.ps.gz">in postscript format</a>).
-   Here is the <a href ="manuals/examples-tutorial.tar.gz">
-   example code</a> used in the guide.
-  <li>The <a href="manuals/vgui_ref_manual/index.html">
-  VGUI reference manual</a> (also <a href="manuals/vgui_ref_manual.ps.gz">in postscript format</a>) is designed for developers of VGUI.
+      <a href="manuals/vgui_users_guide/index.html">VGUI users guide</a>
+      (also <a href="manuals/vgui_users_guide.ps.gz">in postscript format</a>).
+       Here is the <a href ="manuals/examples-tutorial.tar.gz">
+       example code</a> used in the guide.
+  <li>The <a href="manuals/vgui_ref_manual/index.html">VGUI
+      reference manual</a> (also <a href="manuals/vgui_ref_manual.ps.gz">in
+      postscript format</a>) is designed for developers of VGUI.
   </ul>
 </ul>
 
-xcv and vgui have not changed a lot since the last release of VXL so these guides should be useful for both         
-the release and development versions of VXL.        
+xcv and vgui have not changed a lot since the last release of VXL so these guides should be useful for both
+the release and development versions of VXL.
 <ul>
   <li>The <a href="http://www.isbe.man.ac.uk/public_vxl_doc/books/mul/book.html">MUL
-    book</a> is an overview of libraries concerned with probability modelling,
-    classification, and registered images.</li>
+      book</a> is an overview of libraries concerned with probability modelling,
+      classification, and registered images.</li>
 </ul>
 
-
 <hr>
-<h2><a name = "examples">Example code and images</a></h2>
+
+
+<h2><a name="examples">Example code and images</a></h2>
 <ul>
- <li><a href ="manuals/examples.tar.gz">Example code with no user interface</a> 
- <li><a href ="manuals/examples-with-vgui.tar.gz">Example code using vgui</a> 
- <li><a href ="manuals/examples-gtk.tar.gz">Examples using gtk</a> 
- <li><a href ="manuals/images.tar.gz">Example images</a> 
+ <li><a href ="manuals/examples.tar.gz">Example code with no user interface</a>
+ <li><a href ="manuals/examples-with-vgui.tar.gz">Example code using vgui</a>
+ <li><a href ="manuals/examples-gtk.tar.gz">Examples using gtk</a>
+ <li><a href ="manuals/images.tar.gz">Example images</a>
 </ul>
 
 <hr>
 
-<h2><a name = "download">Download and install </a> </h2>
-You can either download  the latest official release (VXL 1.0 beta) or the latest development version of VXL.        
+
+<h2><a name="download">Download and install</a></h2>
+
+You can either download the latest official release (VXL 1.0 beta) or the latest development version of VXL.
 <br>
 <br>
-VXL 1.0 beta is a frozen version of VXL.  This version is reasonably bug-free but        
-is now fairly out of date (we hope to have the release of VXL 1.0 proper in the near future).          
-If you are only interested in using VXL as a collection of libraries then this is the        
-recommended version:        
+VXL 1.0 beta is a frozen version of VXL.  This version is reasonably bug-free but
+is now fairly out of date (we hope to have the release of VXL 1.0 proper in the near future).
+If you are only interested in using VXL as a collection of libraries then this is the
+recommended version:
 <ul>
 <li><a href="releases/vxl-1.0-beta.html">Download VXL 1.0 beta</a>
 <li><a href="releases/install-beta.html">Installing beta version</a>
 </ul>
 
-If you wish you may download the latest development version of VXL (you will definitely need this version if you are        
-interested in contributing to VXL).  The latest version of VXL is available from SourceForge and can be downloaded        
-using CVS (Concurrent Versions System).  You will also need to download CMake from the KitWare website (this is a         
-tool for generating makefiles or Microsoft project files that is used by the latest version of VXL).        
+If you wish you may download the latest development version of VXL (you will definitely need this version if you are
+interested in contributing to VXL).  The latest version of VXL is available from SourceForge and can be downloaded
+using CVS (Concurrent Versions System).  You will also need to download CMake from the KitWare website (this is a
+tool for generating makefiles or Microsoft project files that is used by the latest version of VXL).
 <ul>
-<li><a href="http://www.gnu.org/software/cvs/cvs.html">CVS homepage</a>. If you are using a Windows platform 
-you may wish to use <a href="http://sources.redhat.com/cygwin/">Cygwin</a> or <a href="http://www.wincvs.org">WinCVS</a> 
-which provide a nice GUI for CVS.
+<li><a href="http://www.gnu.org/software/cvs/cvs.html">CVS homepage</a>. If you are using a Windows platform
+    you may wish to use <a href="http://sources.redhat.com/cygwin/">Cygwin</a> or
+    <a href="http://www.wincvs.org">WinCVS</a> which provide a nice GUI for CVS.
 <li><a href="http://public.kitware.com/CMake/">CMake homepage</a>
 <li><a href="http://sourceforge.net/cvs/?group_id=24293">Download latest development version of VXL</a>
 <li><a href="releases/install-latest.html">Installing latest VXL</a>
 </ul>
 
-The following links may be helpful if you work under Windows.        
+The following links may be helpful if you work under Windows.
 <ul>
-<li> <a href="http://www.cs.bris.ac.uk/~cooper/vxlcvs.html">VXL using
-CVS and SourceForge</a>
-<li> <a href="http://www.cs.bris.ac.uk/~cooper/sshcvs.html">SSH and
-CVS under Windows</a>
+<li> <a href="http://www.cs.bris.ac.uk/~cooper/vxlcvs.html">VXL using CVS and SourceForge</a>
+<li> <a href="http://www.cs.bris.ac.uk/~cooper/sshcvs.html">SSH and CVS under Windows</a>
 </ul>
 
 <hr>
-<h2>Problems and where to get help </h2>
 
 
-<h3><a name = "mail">Mailing list</a> </h3>
-The <a href="http://sourceforge.net/mail/?group_id=24293">VXL mailing        
-lists</a> are at SourceForge. You can find list descriptions,        
-subscription information, and archives there.        
+<h2>Problems and where to get help</h2>
 
- 
-<h3><a name = "dashboard">Dashboard</a> </h3>
-The <a href="http://www.cs.rpi.edu/research/vision/vxl/Testing/Dashboard/MostRecentResults-Nightly/Dashboard.html">dashboard</a>        
-is a summary (collated from different machines at different sites in        
-different timezones) of the current build status of VXL. More builds        
-are welcome; just follow the <a href="submit-build.html">instructions for submitting a build</a>.        
+<h3><a name="mail">Mailing list</a></h3>
+
+The <a href="http://sourceforge.net/mail/?group_id=24293">VXL mailing
+lists</a> are at SourceForge. You can find list descriptions,
+subscription information, and archives there.
 
 
-<h3><a name = "bugs"> Reporting bugs to the mailing list </a> </h3>
-If you think you have found a bug, or if you have an installation or build problem        
-which is not covered on this page (see below), please submit a bug        
-report on the <a href="http://lists.sourceforge.net/lists/listinfo/vxl-users">vxl-users  
-mailing list</a>. Also supply the following information unless you know for certain it is not relevant:        
+<h3><a name="dashboard">Dashboard</a></h3>
+
+The <a href="http://www.cs.rpi.edu/research/vision/vxl/Testing/Dashboard/MostRecentResults-Nightly/Dashboard.html">dashboard</a>
+is a summary (collated from different machines at different sites in
+different timezones) of the current build status of VXL. More builds
+are welcome; just follow the <a href="submit-build.html">instructions for submitting a build</a>.
+
+
+<h3><a name="bugs">Reporting bugs to the mailing list</a></h3>
+
+If you think you have found a bug, or if you have an installation or build problem
+which is not covered on this page (see below), please submit a bug
+report on the <a href="http://lists.sourceforge.net/lists/listinfo/vxl-users">vxl-users
+mailing list</a>. Also supply the following information unless you know for certain it is not relevant:
 <ul>
 <li> Exactly what you did and exactly what goes wrong. Be verbose. We need to know this in order to help.
      If you have problems configuring VXL, include the options you gave to configure and the output it
      produced. If you have problems compiling VXL, include the command the makefiles issued, as well as
      the entire error message.
-<li> Compiler and <i> compiler version number </i>. For gcc, this means we want the output of the
+<li> Compiler and <i>compiler version number</i>. For gcc, this means we want the output of the
      two shell commands "gcc -v" and "g++ -v" (yes, both, please - they have been known to differ). For other
      compilers try -V, -ver, -version or read the manual.
-<li> Operating system (e.g. linux/solaris/irix) and architecture (e.g. i368/sparc/mips). If this
+<li> Operating system (e.g. linux/solaris/irix) and architecture (e.g. i386/sparc/mips). If this
      means nothing to you, give some indication of the sort of machine (e.g. does it have "Indy"
      or "AEGIS" or "Ultra" or "Cray" or "HAL" etc written on it?).
 </ul>
 
-
-
-    <hr>
+<hr>
     <address>
       <a href="http://validator.w3.org/check/referer"><img
      src="http://www.w3.org/Icons/valid-html401" height="31" width="88"
      align=right border="0" alt="Valid HTML 4.01!"></a>
     <a href="mailto:amithaperera@users.sourceforge.net">amithaperera@users.sourceforge.net</a></address>
     <p>
-    Hosted by <A href="http://sourceforge.net"> 
+    Hosted by <A href="http://sourceforge.net">
     <IMG src="http://sourceforge.net/sflogo.php?group_id=24293&amp;type=1" alt="SourceForge Logo" align="middle" border="0"> </A>
   </body>
 </html>
