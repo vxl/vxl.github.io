@@ -17,19 +17,17 @@
 
 <hr>
 <a name = "cmake">
-<h1>Get and install CMake</h1>
+<h1>Get and install CMake</h1></a> 
 
-If you haven't already downloaded CMake then you will need to do this first. The CMake website is at 
-<a href="http://www.cmake.org/">http://www.cmake.org/</a>.
+If you haven't already downloaded CMake then you will first need to get this first from the <a href="http://www.cmake.org/">CMake website</a>.
 VXL is designed to work with the latest release of CMake, as shown on the CMake website.
 
 <hr>
 <a name = "compile">
-<h3>Compiling with CMake</h3>
+<h3>Compiling with CMake</h3></a>
 
 <p>
-Use $VXLSRC to refer to the vxl source tree. (This is $IUEROOT in the
-old make system.) Create a different directory $VXLBIN, one per platform,
+Use $VXLSRC to refer to the vxl source tree. Create a different directory $VXLBIN, one per platform,
 and run CMake from within that directory.
 </p>
 
@@ -55,7 +53,6 @@ or
 <pre>
   cmake -i $VXLSRC       (command line)
 </pre>
-</p>
 
 <p>
 This will generate the makefiles within $VXLBIN. You can now run
@@ -79,12 +76,11 @@ XFree86 GL/*.h files will be used instead of the OpenGL package GL/*.h
 files.  These two sets of header files are not compatible.  Using the
 wrong ones will lead to linking problems involving mismatched suffixes
 like @4, @8, and @12.
-</p>
 
 
 <hr>
 <a name = "cmakecache">
-<h2>The CMakeCache.txt</h2>
+<h2>The CMakeCache.txt</h2></a>
 
 <p>
 The build system is configured by setting "cache" values, which are
