@@ -1,0 +1,364 @@
+\batchmode
+\documentclass[12pt]{report}
+\makeatletter \usepackage{epsfig}
+\usepackage{epsfig}
+\usepackage{/users/kym/target/target/vxl/vgui/doc/tools/verbawf2e}
+\usepackage{/users/kym/target/target/vxl/vgui/doc/tools/cxx}
+\usepackage{alltt}
+\topmargin=-0.5in
+\oddsidemargin=-0.2in
+\evensidemargin=0.1in
+\textwidth=6.6in
+\textheight=8.9in
+\providecommand{\tr}{{\em TargetJr }}
+\parskip =.16in
+\parindent=0in
+\par\usepackage[dvips]{color}
+\pagecolor[gray]{.7}
+
+
+\makeatletter
+\count@=\the\catcode`\_ \catcode`\_=8 
+\newenvironment{tex2html_wrap}{}{} \catcode`\_=\count@
+\makeatother
+\ifx\AtBeginDocument\undefined \newcommand{\AtBeginDocument}[1]{}\fi
+\newbox\sizebox
+\setlength{\hoffset}{0pt}\setlength{\voffset}{0pt}
+\addtolength{\textheight}{\footskip}\setlength{\footskip}{0pt}
+\addtolength{\textheight}{\topmargin}\setlength{\topmargin}{0pt}
+\addtolength{\textheight}{\headheight}\setlength{\headheight}{0pt}
+\addtolength{\textheight}{\headsep}\setlength{\headsep}{0pt}
+\setlength{\textwidth}{349pt}
+\newwrite\lthtmlwrite
+\makeatletter
+\let\realnormalsize=\normalsize
+\global\topskip=2sp
+\def\preveqno{}\let\real@float=\@float \let\realend@float=\end@float
+\def\@float{\let\@savefreelist\@freelist\real@float}
+\def\end@float{\realend@float\global\let\@freelist\@savefreelist}
+\let\real@dbflt=\@dbflt \let\end@dblfloat=\end@float
+\let\@largefloatcheck=\relax
+\def\@dbflt{\let\@savefreelist\@freelist\real@dbflt}
+\def\adjustnormalsize{\def\normalsize{\mathsurround=0pt \realnormalsize
+ \parindent=0pt\abovedisplayskip=0pt\belowdisplayskip=0pt}\normalsize}%
+\def\lthtmltypeout#1{{\let\protect\string\immediate\write\lthtmlwrite{#1}}}%
+\newcommand\lthtmlhboxmathA{\adjustnormalsize\setbox\sizebox=\hbox\bgroup}%
+\newcommand\lthtmlvboxmathA{\adjustnormalsize\setbox\sizebox=\vbox\bgroup%
+ \let\ifinner=\iffalse }%
+\newcommand\lthtmlboxmathZ{\@next\next\@currlist{}{\def\next{\voidb@x}}%
+ \expandafter\box\next\egroup}%
+\newcommand\lthtmlmathtype[1]{\def\lthtmlmathenv{#1}}%
+\newcommand\lthtmllogmath{\lthtmltypeout{l2hSize %
+:\lthtmlmathenv:\the\ht\sizebox::\the\dp\sizebox::\the\wd\sizebox.\preveqno}}%
+\newcommand\lthtmlfigureA[1]{\let\@savefreelist\@freelist
+       \lthtmlmathtype{#1}\lthtmlvboxmathA}%
+\newcommand\lthtmlfigureZ{\lthtmlboxmathZ\lthtmllogmath\copy\sizebox
+       \global\let\@freelist\@savefreelist}%
+\newcommand\lthtmldisplayA[1]{\lthtmlmathtype{#1}\lthtmlvboxmathA}%
+\newcommand\lthtmldisplayB[1]{\edef\preveqno{(\theequation)}%
+  \lthtmldisplayA{#1}\let\@eqnnum\relax}%
+\newcommand\lthtmldisplayZ{\lthtmlboxmathZ\lthtmllogmath\lthtmlsetmath}%
+\newcommand\lthtmlinlinemathA[1]{\lthtmlmathtype{#1}\lthtmlhboxmathA  \vrule height1.5ex width0pt }%
+\newcommand\lthtmlinlineA[1]{\lthtmlmathtype{#1}\lthtmlhboxmathA}%
+\newcommand\lthtmlinlineZ{\egroup\expandafter\ifdim\dp\sizebox>0pt %
+  \expandafter\centerinlinemath\fi\lthtmllogmath\lthtmlsetinline}
+\newcommand\lthtmlinlinemathZ{\egroup\expandafter\ifdim\dp\sizebox>0pt %
+  \expandafter\centerinlinemath\fi\lthtmllogmath\lthtmlsetmath}
+\def\lthtmlsetinline{\hbox{\vrule width.1em\vtop{\vbox{%
+  \kern.1em\copy\sizebox}\ifdim\dp\sizebox>0pt\kern.1em\else\kern.3pt\fi
+  \ifdim\hsize>\wd\sizebox \hrule depth1pt\fi}}}
+\def\lthtmlsetmath{\hbox{\vrule width.1em\setbox1=\vtop{\vbox{%
+  \kern.1em\kern0.8 pt\hbox{\hglue.17em\copy\sizebox\hglue0.8 pt}}\kern.3pt%
+  \ifdim\dp\sizebox>0pt\kern.1em\fi \kern0.8 pt%
+  \ifdim\hsize>\wd\sizebox \hrule depth1pt\fi}\message{ht\the\ht1: dp\the\dp1}\box1}}
+\def\centerinlinemath{%\dimen1=\ht\sizebox
+  \dimen1=\ifdim\ht\sizebox<\dp\sizebox \dp\sizebox\else\ht\sizebox\fi
+  \advance\dimen1by.5pt \vrule width0pt height\dimen1 depth\dimen1 
+ \dp\sizebox=\dimen1\ht\sizebox=\dimen1\relax}
+
+\def\lthtmlcheckvsize{\ifdim\ht\sizebox<\vsize\expandafter\vfill
+  \else\expandafter\vss\fi}%
+\makeatletter \tracingstats = 1 
+
+
+\begin{document}
+\pagestyle{empty}\thispagestyle{empty}%
+\lthtmltypeout{latex2htmlLength hsize=\the\hsize}%
+\lthtmltypeout{latex2htmlLength vsize=\the\vsize}%
+\lthtmltypeout{latex2htmlLength hoffset=\the\hoffset}%
+\lthtmltypeout{latex2htmlLength voffset=\the\voffset}%
+\lthtmltypeout{latex2htmlLength topmargin=\the\topmargin}%
+\lthtmltypeout{latex2htmlLength topskip=\the\topskip}%
+\lthtmltypeout{latex2htmlLength headheight=\the\headheight}%
+\lthtmltypeout{latex2htmlLength headsep=\the\headsep}%
+\lthtmltypeout{latex2htmlLength parskip=\the\parskip}%
+\lthtmltypeout{latex2htmlLength oddsidemargin=\the\oddsidemargin}%
+\makeatletter
+\if@twoside\lthtmltypeout{latex2htmlLength evensidemargin=\the\evensidemargin}%
+\else\lthtmltypeout{latex2htmlLength evensidemargin=\the\oddsidemargin}\fi%
+\makeatother
+\stepcounter{chapter}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline17}%
+$\mbox{$\bullet$}$%
+\lthtmlinlinemathZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+{\newpage\clearpage
+\lthtmlfigureA{figure21}%
+\begin{figure}
+  \epsfig{figure=zoomer-deck-example.eps}   \end{figure}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlfigureA{verbawf28}%
+\begin{verbawf}class image\_tableau 
+  \{
+    // image data
+    char* image\_data;
+    int width, height;
+ 
+    // draw method
+    void draw() 
+    \{
+      glRasterPos(0,0);
+      glDrawPixels(..., image\_data, ...);
+     \}
+\par // handle event
+    bool handle_imple(vgui_event const &e)
+    \{
+      if (e is a draw event)
+        draw();
+      return true;
+    \}
+  \};
+\end{verbawf}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{verbawf30}%
+\begin{verbawf}class tableau 
+  \{
+  public:
+    virtual bool handle_event(vgui_event const&) = 0;
+  \};
+\end{verbawf}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlfigureA{verbawf35}%
+\begin{verbawf}class zoomer\_tableau : public tableau 
+  \{
+    vgui_slot child_tableau;
+    float zoom\_factor;
+ 
+    void draw() 
+    \{
+      // Change state
+      glScale3f(zoom\_factor, zoom\_factor, zoom\_factor);
+      // Ask child tableau to draw in new zoomed coordinates
+      child->draw();
+      // Undo the coordinate change
+      glScale3f(1/zoom\_factor, 1/zoom\_factor, 1/zoom\_factor);
+    \}
+\par // handle event
+    bool handle_imple(vgui_event const &e)
+    \{
+      if (e is a draw event)
+        draw();
+      return true;
+    \}
+  \};
+\end{verbawf}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlfigureA{verbawf39}%
+\begin{verbawf}class composite\_tableau : public tableau {
+    vgui_slot left_tableau;
+    vgui_slot right_tableau;
+\par void draw() {
+      //  move origin, clip, viewport etc, so all drawing is
+      //  in left pane
+      glScale(...);
+      ...
+      glViewport(...);
+ 
+      //  Draw the left child in the new coordinates 
+      left->draw();
+\par //  Reset for right pane
+      glScale(...);
+      ...
+      glViewport(...);
+ 
+      //  Draw the right child
+      right->draw();
+ 
+      //  Restore GL state
+      ...
+    }
+\par // handle event
+    bool handle_imple(vgui_event const &e)
+    \{
+      if (e is a draw event)
+        draw();
+      return true;
+    \}
+  };
+\end{verbawf}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlfigureA{verbawf44}%
+\begin{verbawf}class zoomer\_tableau : public tableau 
+  \{
+    vgui_slot child_tableau;
+    float zoom\_factor;
+ 
+    // Event handling method.
+    bool handle\_impl(event e) 
+    \{
+      if ({\em e is control-mouse-drag}) 
+      \{
+        //  This event interests us, use it to set the zoom factor 
+        zoom\_factor = exp(e.x);
+        //  Tell our parent we've used this event
+        return true;
+      \} 
+      else 
+      \{
+        //  This event is uninteresting to us, pass it to the child.
+        bool eaten = child->handle(e);
+\par //  Restore GL state 
+        ...
+\par //  Tell our parent whether the child used the event 
+        return eaten;
+      \}
+  \};
+\end{verbawf}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlfigureA{verbawf128}%
+\begin{verbawf}void vgui\_Foo\_adaptor::update(vgui\_message const &e)
+  \{
+    if (e.user == vgui\_tableau::msg\_redraw)
+      foo\_draw();
+    else
+      vgui\_adaptor::update(e);
+  \}
+\end{verbawf}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{verbawf132}%
+\begin{verbawf}void vgui\_Xm\_adaptor::draw() 
+  \{
+    make\_current();
+ 
+    vgui\_tableau *tableau = get\_tableau();
+ 
+    glDrawBuffer(GL\_BACK);
+ 
+    vgui\_matrix\_state::clear\_gl\_matrices();
+    if (tableau) 
+    \{
+      do\_clear();
+ 
+      vgui\_event e;
+      e.type = vgui\_DRAW;
+      dispatch(e);
+ 
+      swap\_buffers();
+    \}
+  \}
+\end{verbawf}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlfigureA{verbawf138}%
+\begin{verbawf}class vgui\_Xm : public vgui 
+  \{
+  public:
+    static vgui\_Xm* instance();
+ 
+  protected:
+    vgui\_Xm();
+    static vgui\_Xm* instance\_;
+  \};
+\end{verbawf}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{verbawf141}%
+\begin{verbawf}vgui\_Xm* vgui\_Xm::instance\_ = 0;
+ 
+  static vgui\_Xm* vgui\_Xm\_instantiation = vgui\_Xm::instance();
+ 
+  vgui\_Xm* vgui\_Xm::instance() 
+  \{
+    if (instance\_ == 0)
+      instance\_ = new vgui\_Xm;
+ 
+    return instance\_;
+  \}
+\end{verbawf}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{verbawf146}%
+\begin{verbawf}void vgui\_Xm::run\_impl() 
+  \{
+    XtAppMainLoop(app\_context);
+  \}
+ 
+  void vgui\_Fl::run=\_impl() 
+  \{
+    Fl::run();
+  \}
+\end{verbawf}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{verbawf148}%
+\begin{verbawf}vgui\_window* vgui\_Fl::produce\_window\_impl(int width, int height, char const* title) 
+  \{
+    return new vgui\_Fl\_window(width, height, title);
+  \}
+\end{verbawf}%
+\lthtmlfigureZ
+\hfill\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+
+\end{document}

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Introduction</TITLE>
+<META NAME="description" CONTENT="Introduction">
+<META NAME="keywords" CONTENT="vgui_ref_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="vgui_ref_manual.css">
+<LINK REL="next" HREF="node3.html">
+<LINK REL="previous" HREF="node1.html">
+<LINK REL="up" HREF="vgui_ref_manual.html">
+<LINK REL="next" HREF="node3.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html69"
+ HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html66"
+ HREF="vgui_ref_manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html60"
+ HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html68"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html70"
+ HREF="node3.html">Tableaux</A>
+<B> Up:</B> <A NAME="tex2html67"
+ HREF="vgui_ref_manual.html">VGUI Reference Manual</A>
+<B> Previous:</B> <A NAME="tex2html61"
+ HREF="node1.html">Contents</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00200000000000000000">
+Introduction</A>
+</H1>
+
+<P>
+This document describes VGUI, a library that provides 2D and 3D drawing in a way
+that is both simple and powerful.  The basic design goals are:
+<UL>
+<LI>Provide drawing of images and geometric primitives using OpenGL,
+        in a platform independent manner.
+<LI>Define the handling of user events such as keypresses and mouse
+        movements.
+<LI>Do *not* deal with widgets (buttons, sliders, menus etc), but
+        instead provide a single simple interface to whatever widget
+        toolkit the user chooses.  Current interfaces include ones to GTK, FLTK,
+        glut, and glX.
+<LI>OpenGL should be usable ``raw'', without any special wrapping by the
+        library, so that existing documentation is used to best advantage.
+</UL>
+The basic concept in the new GUI is that the user has access to a rectangular area
+(or areas) of the screen, on which OpenGL may be used to draw and from
+which events are received.  Such an area is called a <I>tableau</I>.
+Once-off adaptor code is provided that plugs a tableau into any supported GUI toolkit.
+
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Target Junior User</I>
+<BR><I>2000-10-31</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Tableaux</TITLE>
+<META NAME="description" CONTENT="Tableaux">
+<META NAME="keywords" CONTENT="vgui_ref_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="vgui_ref_manual.css">
+<LINK REL="next" HREF="node13.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="vgui_ref_manual.html">
+<LINK REL="next" HREF="node4.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html80"
+ HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html77"
+ HREF="vgui_ref_manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html71"
+ HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html79"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html81"
+ HREF="node4.html">Example</A>
+<B> Up:</B> <A NAME="tex2html78"
+ HREF="vgui_ref_manual.html">VGUI Reference Manual</A>
+<B> Previous:</B> <A NAME="tex2html72"
+ HREF="node2.html">Introduction</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00300000000000000000">
+Tableaux</A>
+</H1>
+
+<P>
+Currently VGUI provides several example tableaux, sufficient to
+construct complex user interfaces combining 2D and 3D with manipulators and zoom.
+So for example a ``zoomer'' tableau could provide a function to zoom an image in and out.
+We could also make a ``deck'' tableau to hold a deck of images and display one image at 
+a time (this would be useful for playing a series of images as a movie).
+
+<P>
+<BR>
+<DIV ALIGN="CENTER"><A NAME="fig1">&#160;</A><A NAME="23">&#160;</A>
+<TABLE WIDTH="50%">
+<CAPTION><STRONG>Figure 2.1:</STRONG>
+Two layouts for zoomer and deck tableaux</CAPTION>
+<TR><TD><IMG
+ WIDTH="716" HEIGHT="202"
+ SRC="img2.gif"
+ ALT="\begin{figure}
+\epsfig{figure=zoomer-deck-example.eps} \end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+<BR>
+One tableau can be included as a child of another tableau.  This creates a new 
+tableau with the functionality of both tableaux making it up.
+So the new tableau could, for example, display a deck of images <I>and</I> provide zooming.  
+
+<P>
+The order in which the inclusion is done will affect the functionality, so if the
+``zoomer'' tableau contains the ``deck'' tableau then all images will change
+size together.  If however the inclusion is done the other way around and each
+child tableau of the ``deck'' contains its own ``zoomer'' tableau
+then each image will change size independantly.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS">&#160;</A>
+<UL>
+<LI><A NAME="tex2html82"
+ HREF="node4.html">Example</A>
+<LI><A NAME="tex2html83"
+ HREF="node5.html">Adding zoom</A>
+<LI><A NAME="tex2html84"
+ HREF="node6.html">Multiple panes</A>
+<LI><A NAME="tex2html85"
+ HREF="node7.html">Event handling</A>
+<LI><A NAME="tex2html86"
+ HREF="node8.html">Types of tableaux provided in VGUI</A>
+<UL>
+<LI><A NAME="tex2html87"
+ HREF="node9.html">Graphics tableaux</A>
+<LI><A NAME="tex2html88"
+ HREF="node10.html">Grouping tableaux</A>
+<LI><A NAME="tex2html89"
+ HREF="node11.html">Coordinate system changes</A>
+<LI><A NAME="tex2html90"
+ HREF="node12.html">Debugging</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html80"
+ HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html77"
+ HREF="vgui_ref_manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html71"
+ HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html79"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html81"
+ HREF="node4.html">Example</A>
+<B> Up:</B> <A NAME="tex2html78"
+ HREF="vgui_ref_manual.html">VGUI Reference Manual</A>
+<B> Previous:</B> <A NAME="tex2html72"
+ HREF="node2.html">Introduction</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Target Junior User</I>
+<BR><I>2000-10-31</I>
+</ADDRESS>
+</BODY>
+</HTML>

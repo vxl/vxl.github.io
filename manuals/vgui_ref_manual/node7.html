@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Event handling</TITLE>
+<META NAME="description" CONTENT="Event handling">
+<META NAME="keywords" CONTENT="vgui_ref_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="vgui_ref_manual.css">
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="up" HREF="node3.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html133"
+ HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html130"
+ HREF="node3.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html124"
+ HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html132"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html134"
+ HREF="node8.html">Types of tableaux provided</A>
+<B> Up:</B> <A NAME="tex2html131"
+ HREF="node3.html">Tableaux</A>
+<B> Previous:</B> <A NAME="tex2html125"
+ HREF="node6.html">Multiple panes</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00340000000000000000">
+Event handling</A>
+</H1>
+ 
+Draw is an event rather than a virtual function so that
+all the work of the tableau is done in the handle_impl function.
+The reasoning here is that a tableau should generally be in the same
+state when drawing as when handling other events.  For example, a scribble
+program which plots points under the mouse should draw the points in
+the same coordinate system as it recieved them.   If draw and handle
+were different functions, the implementer would have to ensure that
+the state-handling code was identical in both cases.
+
+<P>
+The zoomer tableau must likely wishes to capture some mouse events in order
+to easily change the image pan and zoom.  Each tableau implements an event
+handler which takes a <TT>vgui_event</TT> structure, and either uses
+the event that it defines, or passes it to its children.  In the zoomer
+example, this might be written
+
+<P>
+<FONT SIZE="-2">
+<BR>
+<IMG
+ WIDTH="773" HEIGHT="617" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.gif"
+ ALT="\begin{verbawf}class zoomer\_tableau : public tableau
+\{
+vgui_slot child_tabl...
+...r parent whether the child used the event
+return eaten;
+\}
+\};
+\end{verbawf}">
+<BR></FONT>
+
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Target Junior User</I>
+<BR><I>2000-10-31</I>
+</ADDRESS>
+</BODY>
+</HTML>

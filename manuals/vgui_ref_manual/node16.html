@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Adding a new GUI toolkit</TITLE>
+<META NAME="description" CONTENT="Adding a new GUI toolkit">
+<META NAME="keywords" CONTENT="vgui_ref_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="vgui_ref_manual.css">
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html239"
+ HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html236"
+ HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html232"
+ HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html238"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html240"
+ HREF="node17.html">vgui_Foo_adaptor</A>
+<B> Up:</B> <A NAME="tex2html237"
+ HREF="node13.html">Adaptors</A>
+<B> Previous:</B> <A NAME="tex2html233"
+ HREF="node15.html">Using a particular GUI</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00430000000000000000">
+Adding a new GUI toolkit</A>
+</H1>
+
+<P>
+One of the key ideas of VGUI is that it can be used with any widget set or
+user interface that can embed a GL drawing area.  If the GUI toolkit you wish to
+use is not supported by VGUI then you can either: just go ahead and write your 
+application in that that toolkit, or provide a new class derived from vgui that interfaces your toolkit
+to VGUI.  The advantage of this second option is that the code you write will
+be portable to any other supported toolkit and you will be able to compile other people's
+VGUI applications on your favourite GUI toolkit.
+ 
+In order to port VGUI to a new interface there are several areas where the underlying interface
+must implement VGUI functionality. These are:
+<DL COMPACT>
+<DT>1.
+<DD>Events for the OpenGL drawing area must be
+translated into <TT>vgui_event</TT>'s that will be used by the tableaux for that drawing area.
+This will be done by a subclass of <TT>vgui_adaptor</TT> e.g. <TT>vgui_Xm_adaptor</TT>.
+<DT>2.
+<DD>Functions for manipulating a window should be provided. This will normally be done 
+by a subclass of <TT>vgui_window</TT> e.g.  <TT>vgui_Xm_window</TT>.
+ 
+<DT>3.
+<DD>VGUI functions for controlling the event loop should be implemented. These functions
+include running the event loop, running one event at a time, flushing the event loop and adding
+user produced events.
+This will be provided in a class derived from <TT>vgui</TT> e.g. <TT>vgui_Xm</TT>.
+The vgui class also has factory methods for producing <TT>vgui_window</TT>s and 
+<TT>vgui_dialog_impl</TT>s that will need to be overriden
+ 
+<DT>4.
+<DD>If the interface supports menus then it should be able to build a menu bar or popup 
+menu from the <TT>vgui_menu</TT> description. Popup menus are handled in the 
+<TT>vgui_adaptor</TT> subclass while a menubar is handled in the <TT>vgui_window</TT> subclass.
+ 
+<DT>5.
+<DD>If the interface has text entry fields, option menus and checkboxes  then it should be
+able to build a popup dialog from a <TT>vgui_dialog</TT> description. The class that provides 
+the base for dialog implementations is <TT>vgui_dialog_impl</TT>.
+</DL>
+
+<P>
+Lets suppose that the GUI toolkit you want to use is the (fictitious) ``Foo'' toolkit.  
+The following is a step-by-step guide to all the classes and functions you will need to 
+make in order to implement VGUI in the new interface system.
+ 
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS">&#160;</A>
+<UL>
+<LI><A NAME="tex2html241"
+ HREF="node17.html">vgui_Foo_adaptor</A>
+<LI><A NAME="tex2html242"
+ HREF="node18.html">vgui_Foo_window</A>
+<LI><A NAME="tex2html243"
+ HREF="node19.html">vgui_Foo</A>
+<LI><A NAME="tex2html244"
+ HREF="node20.html">Supporting menu bars</A>
+<LI><A NAME="tex2html245"
+ HREF="node21.html">Supporting pop-up menus</A>
+<LI><A NAME="tex2html246"
+ HREF="node22.html">Supporting dialog boxes</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html239"
+ HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html236"
+ HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html232"
+ HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html238"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html240"
+ HREF="node17.html">vgui_Foo_adaptor</A>
+<B> Up:</B> <A NAME="tex2html237"
+ HREF="node13.html">Adaptors</A>
+<B> Previous:</B> <A NAME="tex2html233"
+ HREF="node15.html">Using a particular GUI</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Target Junior User</I>
+<BR><I>2000-10-31</I>
+</ADDRESS>
+</BODY>
+</HTML>

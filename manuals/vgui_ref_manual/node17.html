@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>vgui_Foo_adaptor</TITLE>
+<META NAME="description" CONTENT="vgui_Foo_adaptor">
+<META NAME="keywords" CONTENT="vgui_ref_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="vgui_ref_manual.css">
+<LINK REL="next" HREF="node18.html">
+<LINK REL="previous" HREF="node16.html">
+<LINK REL="up" HREF="node16.html">
+<LINK REL="next" HREF="node18.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html256"
+ HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html253"
+ HREF="node16.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html247"
+ HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html255"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html257"
+ HREF="node18.html">vgui_Foo_window</A>
+<B> Up:</B> <A NAME="tex2html254"
+ HREF="node16.html">Adding a new GUI</A>
+<B> Previous:</B> <A NAME="tex2html248"
+ HREF="node16.html">Adding a new GUI</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00431000000000000000">
+vgui_Foo_adaptor</A>
+</H2>
+
+<P>
+Note that this is the only class that you have to implement in order to use VGUI tableaux.
+The other classes are needed if you want to use the VGUI pattern to create menus and dialog 
+boxes.
+
+<P>
+This class is derived from <TT>vgui_adaptor</TT>.  It translates events for the OpenGL drawing 
+area into <TT>vgui_event</TT>s. The most important functions to provide are :
+
+<P>
+<UL>
+<LI>a function or functions dealing with mapping events from Foo's event system into <TT>vgui_event</TT>s
+e.g.  in FLTK an <TT>Fl_Gl_Window</TT> has a single handle method that can be overriden
+while in Motif several callback functions must be provided for the drawing widget
+including  exposure, resize and input.
+
+<P>
+NOTE.  If ``Foo'' is some interface derived from X  such as Motif or the Athena widget set
+then the functions in <TT>vgui_X/vgui_X_utils</TT> may be useful for converting between XEvents and 
+<TT>vgui_event</TT>s.
+
+<P>
+Once a <TT>vgui_event</TT> has been constructed it should be sent to the non-virtual <TT>vgui_adaptor</TT>
+function <TT>::dispatch</TT>.
+<LI><TT>::make_current</TT>: Override the <TT>vgui_adaptor</TT> function <TT>::make_current</TT>.
+
+<P>
+<LI><TT>::swap_buffers</TT>: Override the <TT>vgui_adaptor</TT> function <TT>::swap_buffers</TT>.
+
+<P>
+<LI><TT>::update</TT>: Override the <TT>vgui_adaptor::update</TT> method so that it looks like:
+
+<P>
+<FONT SIZE="-2">
+<BR>
+<IMG
+ WIDTH="577" HEIGHT="155" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.gif"
+ ALT="\begin{verbawf}void vgui\_Foo\_adaptor::update(vgui\_message const &e)
+\{
+if (...
+...u::msg\_redraw)
+foo\_draw();
+else
+vgui\_adaptor::update(e);
+\}
+\end{verbawf}">
+<BR></FONT>
+ 
+foo_draw could either be a member function of Foo's OpenGL widget that needs 
+overriding like  FLTK's <TT>Fl_Gl_Window::draw</TT> method or just a convenient function like 
+<TT>vgui_Xm_adaptor::draw</TT>.
+
+<P>
+<FONT SIZE="-2">
+<BR>
+<IMG
+ WIDTH="470" HEIGHT="455" ALIGN="BOTTOM" BORDER="0"
+ SRC="img9.gif"
+ ALT="\begin{verbawf}void vgui\_Xm\_adaptor::draw()
+\{
+make\_current();
+vgui\_ta...
+...e;
+e.type = vgui\_DRAW;
+dispatch(e);
+swap\_buffers();
+\}
+\}
+\end{verbawf}">
+<BR></FONT> 
+</UL><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html256"
+ HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html253"
+ HREF="node16.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html247"
+ HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html255"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html257"
+ HREF="node18.html">vgui_Foo_window</A>
+<B> Up:</B> <A NAME="tex2html254"
+ HREF="node16.html">Adding a new GUI</A>
+<B> Previous:</B> <A NAME="tex2html248"
+ HREF="node16.html">Adding a new GUI</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Target Junior User</I>
+<BR><I>2000-10-31</I>
+</ADDRESS>
+</BODY>
+</HTML>

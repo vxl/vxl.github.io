@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Using a particular GUI toolkit</TITLE>
+<META NAME="description" CONTENT="Using a particular GUI toolkit">
+<META NAME="keywords" CONTENT="vgui_ref_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="vgui_ref_manual.css">
+<LINK REL="next" HREF="node16.html">
+<LINK REL="previous" HREF="node14.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html230"
+ HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html227"
+ HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html221"
+ HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html229"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html231"
+ HREF="node16.html">Adding a new GUI</A>
+<B> Up:</B> <A NAME="tex2html228"
+ HREF="node13.html">Adaptors</A>
+<B> Previous:</B> <A NAME="tex2html222"
+ HREF="node14.html">Adaptors provided with VGUI</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00420000000000000000">
+Using a particular GUI toolkit</A>
+</H1>
+If you write your code using the pattern provided in VGUI then it will run on any
+supported GUI toolkit.
+ 
+If you wish to run your application using a particular GUI toolkit, Foo say, then
+you will need to satisfy these conditions:
+<UL>
+<LI>There will need to exist a specialisation of vgui for Foo (usually called <TT>vgui_Foo</TT>).
+<LI>You will have to have Foo installed on your machine.
+<LI>You will have to configure Target to know where Foo is installed. 
+</UL>
+If Foo satisfies these conditions then when <TT>vgui_Foo</TT> is compiled, Foo will be registered
+as available for use by your applications.
+ 
+If no preference given on the command line for a GUI toolkit then application will look for
+a suitable GUI toolkit that is registered.  If more than one GUI toolkit is registered then one 
+will be selected at random.  
+
+<P>
+If you wish to specify a GUI toolkit (for example Foo) then you will need to add
+<TT>-factory=Foo</TT> to the end of the command line when you run your application.
+
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Target Junior User</I>
+<BR><I>2000-10-31</I>
+</ADDRESS>
+</BODY>
+</HTML>

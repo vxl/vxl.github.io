@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>vgui_Foo</TITLE>
+<META NAME="description" CONTENT="vgui_Foo">
+<META NAME="keywords" CONTENT="vgui_ref_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="vgui_ref_manual.css">
+<LINK REL="next" HREF="node20.html">
+<LINK REL="previous" HREF="node18.html">
+<LINK REL="up" HREF="node16.html">
+<LINK REL="next" HREF="node20.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html278"
+ HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html275"
+ HREF="node16.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html269"
+ HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html277"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html279"
+ HREF="node20.html">Supporting menu bars</A>
+<B> Up:</B> <A NAME="tex2html276"
+ HREF="node16.html">Adding a new GUI</A>
+<B> Previous:</B> <A NAME="tex2html270"
+ HREF="node18.html">vgui_Foo_window</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00433000000000000000">
+vgui_Foo</A>
+</H2>
+ 
+There may be some setup for the widget system that should take place in this class in
+the  vgui::init_impl function.  The only other features to worry about are
+providing the singleton methods/data
+
+<P>
+from <TT>vgui_Xm.h</TT>
+
+<P>
+<FONT SIZE="-2">
+<BR>
+<IMG
+ WIDTH="345" HEIGHT="201" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.gif"
+ ALT="\begin{verbawf}class vgui\_Xm : public vgui
+\{
+public:
+static vgui\_Xm* instance();
+protected:
+vgui\_Xm();
+static vgui\_Xm* instance\_;
+\};
+\end{verbawf}">
+<BR></FONT> 
+
+<P>
+from <TT>vgui_Xm.C</TT>
+
+<P>
+<FONT SIZE="-2">
+<BR>
+<IMG
+ WIDTH="688" HEIGHT="248" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.gif"
+ ALT="\begin{verbawf}vgui\_Xm* vgui\_Xm::instance\_ = 0;
+static vgui\_Xm* vgui\_Xm\...
+...ance\_ == 0)
+instance\_ = new vgui\_Xm;
+return instance\_;
+\}
+\end{verbawf}">
+<BR></FONT> 
+
+<P>
+The line containing vgui_Xm_instantiation causes the (sole) instance of vgui_Xm to be
+created and due to the ctor  vgui::vgui being called, vgui_Xm is then registered with
+VGUI  under the name given in the virtual function <TT>::name</TT>
+e.g.  <TT>string vgui_Fl::name() const { return "fltk"; } </TT>
+
+<P>
+The other important function to override is <TT>vgui::run_impl</TT>
+which basically calls the main event loop for the interface e.g.
+
+<P>
+<FONT SIZE="-2">
+<BR>
+<IMG
+ WIDTH="346" HEIGHT="201" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.gif"
+ ALT="\begin{verbawf}void vgui\_Xm::run\_impl()
+\{
+XtAppMainLoop(app\_context);
+\}
+void vgui\_Fl::run=\_impl()
+\{
+Fl::run();
+\}
+\end{verbawf}">
+<BR></FONT>
+ 
+The other functions to override are the factory methods returning vgui_window subclasses
+of the correct type. e.g.
+
+<P>
+<FONT SIZE="-2">
+<BR>
+<IMG
+ WIDTH="927" HEIGHT="86" ALIGN="BOTTOM" BORDER="0"
+ SRC="img13.gif"
+ ALT="\begin{verbawf}vgui\_window* vgui\_Fl::produce\_window\_impl(int width, int heig...
+...itle)
+\{
+return new vgui\_Fl\_window(width, height, title);
+\}
+\end{verbawf}">
+<BR></FONT>
+
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Target Junior User</I>
+<BR><I>2000-10-31</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Image Processing</TITLE>
+<META NAME="description" CONTENT="Image Processing">
+<META NAME="keywords" CONTENT="newxcv">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="newxcv.css">
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="up" HREF="newxcv.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html119"
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html116"
+ HREF="newxcv.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html110"
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html118"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html120"
+ HREF="node9.html">Segmentation</A>
+<B> Up:</B> <A NAME="tex2html117"
+ HREF="newxcv.html">No Title</A>
+<B> Previous:</B> <A NAME="tex2html111"
+ HREF="node7.html">Display</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00060000000000000000">
+Image Processing</A>
+</H1>
+
+<P>
+These are image operations where the input is an image, and the output is
+an image, e.g. image enhancement. The operations can be linear, such as
+Gaussian smoothing, or non-linear, such as morphology.  
+
+<P>
+<P>
+Selecting an operation from the Image Processing menu performs that operation
+on the current active pane.  The result of the operation is an image
+which is placed at the end of the stack of images.
+
+<P>
+Load an image (the basement ones are good for the following).
+
+<P>
+Try any operation under ``Image-processing''.  Note that these operations
+are actually creating a new image that can be further processed.  This new
+image may be saved to disk using the <B>File 
+</B>
+<!-- MATH: $\rightarrow\$ -->
+<IMG
+ WIDTH="30" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.gif"
+ ALT="$\rightarrow\ $">
+menu item.
+
+<P>
+To get back to the original image, use PageUp and PageDown.  If images appear to 
+look completely black, they may just be very dark.
+
+<P>
+<UL>
+<LI><B>Enhance Lens</B>
+<BR>
+In the following example the enhance lens is used so that the original
+and processed ROI can be compared.
+
+<P>
+From the original image, select <B>Display 
+</B>
+<!-- MATH: $\rightarrow\$ -->
+<IMG
+ WIDTH="30" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.gif"
+ ALT="$\rightarrow\ $">
+and select the image corresponding to the latest image processing.  Holding
+down the left mouse button on the image will now superimpose the results
+of the operation on a small portion of the original image.
+To switch of the enhance lens select <B>Display 
+</B>
+<!-- MATH: $\rightarrow\$ -->
+<IMG
+ WIDTH="30" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.gif"
+ ALT="$\rightarrow\ $">
+again.
+
+<P>
+<LI><B>Region of Interest</B>
+<BR>
+As image processing can take a long time, use a "region of interest" (ROI) to 
+quickly preview the results of an operation.  Most operations are designed so 
+that they can operate on a ROI in the original image.  This is useful if you 
+want to apply a time-consuming operation to a large image--you can first test it on a
+small ROI, and then when the parameters are correct, apply it to the whole
+image.  To set the ROI use the menu item <B>Display 
+</B>
+<!-- MATH: $\rightarrow\$ -->
+<IMG
+ WIDTH="30" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.gif"
+ ALT="$\rightarrow\ $">.
+</UL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html119"
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html116"
+ HREF="newxcv.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html110"
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html118"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html120"
+ HREF="node9.html">Segmentation</A>
+<B> Up:</B> <A NAME="tex2html117"
+ HREF="newxcv.html">No Title</A>
+<B> Previous:</B> <A NAME="tex2html111"
+ HREF="node7.html">Display</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Karen McGaul</I>
+<BR><I>2000-10-27</I>
+</ADDRESS>
+</BODY>
+</HTML>

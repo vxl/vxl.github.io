@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Adding zoom</TITLE>
+<META NAME="description" CONTENT="Adding zoom">
+<META NAME="keywords" CONTENT="vgui_ref_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="vgui_ref_manual.css">
+<LINK REL="next" HREF="node6.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="node3.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html111"
+ HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html108"
+ HREF="node3.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html102"
+ HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html110"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html112"
+ HREF="node6.html">Multiple panes</A>
+<B> Up:</B> <A NAME="tex2html109"
+ HREF="node3.html">Tableaux</A>
+<B> Previous:</B> <A NAME="tex2html103"
+ HREF="node4.html">Example</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00320000000000000000">
+Adding zoom</A>
+</H1>
+ 
+To add zooming and panning to the image, we do not need to modify the
+<TT>image_tableau</TT>.  We create a new tableau which has the
+<TT>image_tableau</TT> as a child, and modifies the GL state before
+passing the draw request event down to the image.
+ 
+<FONT SIZE="-2">
+<BR>
+<IMG
+ WIDTH="634" HEIGHT="524" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.gif"
+ ALT="\begin{verbawf}class zoomer\_tableau : public tableau
+\{
+vgui_slot child_tabl...
+...st &e)
+\{
+if (e is a draw event)
+draw();
+return true;
+\}
+\};
+\end{verbawf}">
+<BR></FONT>
+
+<P>
+Now we have a zooming image, but the image tableau never needed to know...
+The maintainer of the image tableau can concentrate on the thorny issues of
+making <TT>glDrawPixels</TT> fast on Windows machines, overcoming
+compiler bugs, and generally writing a high-quality image display routine.
+ 
+<BR><HR>
+<ADDRESS>
+<I>Target Junior User</I>
+<BR><I>2000-10-31</I>
+</ADDRESS>
+</BODY>
+</HTML>

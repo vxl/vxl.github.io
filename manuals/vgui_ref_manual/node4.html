@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example</TITLE>
+<META NAME="description" CONTENT="Example">
+<META NAME="keywords" CONTENT="vgui_ref_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="vgui_ref_manual.css">
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="up" HREF="node3.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html100"
+ HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html97"
+ HREF="node3.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html91"
+ HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html99"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html101"
+ HREF="node5.html">Adding zoom</A>
+<B> Up:</B> <A NAME="tex2html98"
+ HREF="node3.html">Tableaux</A>
+<B> Previous:</B> <A NAME="tex2html92"
+ HREF="node3.html">Tableaux</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00310000000000000000">
+Example</A>
+</H1>
+
+<P>
+As an example of a concrete task that will illustrate the use and power of
+the system, consider the simple case of displaying a 2D image.  A tableau
+that displays an image looks something like:
+ 
+<FONT SIZE="-2">
+<BR>
+<IMG
+ WIDTH="474" HEIGHT="478" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.gif"
+ ALT="\begin{verbawf}class image\_tableau
+\{
+// image data
+char* image\_data;
+int...
+...st &e)
+\{
+if (e is a draw event)
+draw();
+return true;
+\}
+\};
+\end{verbawf}">
+<BR></FONT>
+ 
+In fact, the draw method will probably be significantly more complex, in
+order to get maximum efficiency, overcome certain GL weirdnesses, and so
+on, but the basic code is there.
+
+<P>
+This interface is abstracted in the obvious manner:
+
+<P>
+<FONT SIZE="-2">
+<BR>
+<IMG
+ WIDTH="601" HEIGHT="110" ALIGN="BOTTOM" BORDER="0"
+ SRC="img4.gif"
+ ALT="\begin{verbawf}class tableau
+\{
+public:
+virtual bool handle_event(vgui_event const&) = 0;
+\};
+\end{verbawf}">
+<BR></FONT>
+
+<P>
+The key observation is that the tableau assumes that when its draw method
+is called, the OpenGL system is set up so that the tableau's window is
+current, the camera is in a sensible position and so on.  It is the job of
+the parent window, in which the tableau is placed, to ensure that this
+applies, but as we shall see, with this responsibility also comes power...
+
+<BR><HR>
+<ADDRESS>
+<I>Target Junior User</I>
+<BR><I>2000-10-31</I>
+</ADDRESS>
+</BODY>
+</HTML>

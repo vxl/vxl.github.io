@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Segmentation</TITLE>
+<META NAME="description" CONTENT="Segmentation">
+<META NAME="keywords" CONTENT="newxcv">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="newxcv.css">
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node8.html">
+<LINK REL="up" HREF="newxcv.html">
+<LINK REL="next" HREF="node10.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html130"
+ HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html127"
+ HREF="newxcv.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html121"
+ HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html129"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html131"
+ HREF="node10.html">Modifying Geometric Objects</A>
+<B> Up:</B> <A NAME="tex2html128"
+ HREF="newxcv.html">No Title</A>
+<B> Previous:</B> <A NAME="tex2html122"
+ HREF="node8.html">Image Processing</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00070000000000000000">
+Segmentation</A>
+</H1>
+
+<P>
+This is the detection of features in images (such as corners, edges <IMG
+ WIDTH="27" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.gif"
+ ALT="$\ldots$">).
+Here we consider examples of <EM>local</EM> feature detection.  
+
+<P>
+On the <B>Segmentation</B> menu, try the following menu items:
+
+<P>
+<DL COMPACT>
+<DT>1.
+<DD><B>Corner Detection</B> <BR>
+Select the ``Harris Corner Detector'' on the Segmentation menu,
+and set ``Maximum corner count'' <B>= 50</B> -- this restricts display to
+only the 50 most salient corners. Select OK to apply the corner detector.
+<P>
+Read in the basement00 image, and select a ROI which includes
+the front left column (e.g. top left around (50, 160), size about 
+<!-- MATH: $150 \times
+250$ -->
+<IMG
+ WIDTH="84" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.gif"
+ ALT="$150 \times
+250$">
+). Apply the corner detector. 
+
+<P>
+<DT>2.
+<DD><B>Edge Detection</B> <BR>
+Select ``Canny: Oxford'' on the Segmentation menu.  
+Apply the
+operator -- this includes both edge detection (convolving with the
+derivative of a Gaussian, and Non Maximum Suppression) and edge
+linking using hysteresis. The edges are displayed in green. Note that
+the linked edges are selected (shown in yellow) as the cursor moves close
+to them. Now fit lines to the edges by selecting ``Dectect lines: Oxford''.
+
+<P>
+</DL>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS">&#160;</A>
+<UL>
+<LI><A NAME="tex2html132"
+ HREF="node10.html">Modifying Geometric Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+<ADDRESS>
+<I>Karen McGaul</I>
+<BR><I>2000-10-27</I>
+</ADDRESS>
+</BODY>
+</HTML>
