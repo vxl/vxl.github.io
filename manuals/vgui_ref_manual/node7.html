@@ -56,7 +56,7 @@ all the work of the tableau is done in the handle_impl function.
 The reasoning here is that a tableau should generally be in the same
 state when drawing as when handling other events.  For example, a scribble
 program which plots points under the mouse should draw the points in
-the same coordinate system as it recieved them.   If draw and handle
+the same coordinate system as it received them.   If draw and handle
 were different functions, the implementer would have to ensure that
 the state-handling code was identical in both cases.
 
@@ -73,14 +73,7 @@ example, this might be written
 <IMG
  WIDTH="773" HEIGHT="617" ALIGN="BOTTOM" BORDER="0"
  SRC="img7.gif"
- ALT="\begin{verbawf}class zoomer\_tableau : public tableau
-\{
-vgui_slot child_tabl...
-...r parent whether the child used the event
-return eaten;
-\}
-\};
-\end{verbawf}">
+ ALT="class zoomer_tableau : public tableau { ... };">
 <BR></FONT>
 
 <P>

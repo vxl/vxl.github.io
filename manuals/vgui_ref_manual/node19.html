@@ -64,15 +64,7 @@ from <TT>vgui_Xm.h</TT>
 <IMG
  WIDTH="345" HEIGHT="201" ALIGN="BOTTOM" BORDER="0"
  SRC="img10.gif"
- ALT="\begin{verbawf}class vgui\_Xm : public vgui
-\{
-public:
-static vgui\_Xm* instance();
-protected:
-vgui\_Xm();
-static vgui\_Xm* instance\_;
-\};
-\end{verbawf}">
+ ALT="class vgui_Xm : public vgui { ... static vgui_Xm* instance_; };">
 <BR></FONT> 
 
 <P>
@@ -84,13 +76,7 @@ from <TT>vgui_Xm.C</TT>
 <IMG
  WIDTH="688" HEIGHT="248" ALIGN="BOTTOM" BORDER="0"
  SRC="img11.gif"
- ALT="\begin{verbawf}vgui\_Xm* vgui\_Xm::instance\_ = 0;
-static vgui\_Xm* vgui\_Xm\...
-...ance\_ == 0)
-instance\_ = new vgui\_Xm;
-return instance\_;
-\}
-\end{verbawf}">
+ ALT="vgui\_Xm* vgui\_Xm::instance\_ = 0;... instance\_ = new vgui\_Xm; return instance\_; \}">
 <BR></FONT> 
 
 <P>
@@ -109,15 +95,7 @@ which basically calls the main event loop for the interface e.g.
 <IMG
  WIDTH="346" HEIGHT="201" ALIGN="BOTTOM" BORDER="0"
  SRC="img12.gif"
- ALT="\begin{verbawf}void vgui\_Xm::run\_impl()
-\{
-XtAppMainLoop(app\_context);
-\}
-void vgui\_Fl::run=\_impl()
-\{
-Fl::run();
-\}
-\end{verbawf}">
+ ALT="void vgui\_Xm::run\_impl() { ... }">
 <BR></FONT>
  
 The other functions to override are the factory methods returning vgui_window subclasses
@@ -129,12 +107,7 @@ of the correct type. e.g.
 <IMG
  WIDTH="927" HEIGHT="86" ALIGN="BOTTOM" BORDER="0"
  SRC="img13.gif"
- ALT="\begin{verbawf}vgui\_window* vgui\_Fl::produce\_window\_impl(int width, int heig...
-...itle)
-\{
-return new vgui\_Fl\_window(width, height, title);
-\}
-\end{verbawf}">
+ ALT="vgui_window* vgui_Fl::produce_window_impl()...  { return new vgui_Fl_window(width, height, title); }">
 <BR></FONT>
 
 <P>

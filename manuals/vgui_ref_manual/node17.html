@@ -63,7 +63,7 @@ area into <TT>vgui_event</TT>s. The most important functions to provide are :
 <P>
 <UL>
 <LI>a function or functions dealing with mapping events from Foo's event system into <TT>vgui_event</TT>s
-e.g.  in FLTK an <TT>Fl_Gl_Window</TT> has a single handle method that can be overriden
+e.g.  in FLTK an <TT>Fl_Gl_Window</TT> has a single handle method that can be overridden
 while in Motif several callback functions must be provided for the drawing widget
 including  exposure, resize and input.
 
@@ -89,15 +89,7 @@ function <TT>::dispatch</TT>.
 <IMG
  WIDTH="577" HEIGHT="155" ALIGN="BOTTOM" BORDER="0"
  SRC="img8.gif"
- ALT="\begin{verbawf}void vgui\_Foo\_adaptor::update(vgui\_message const &e)
-\{
-if (...
-...u::msg\_redraw)
-foo\_draw();
-else
-vgui\_adaptor::update(e);
-\}
-\end{verbawf}">
+ ALT="void vgui_Foo_adaptor::update(vgui_message const &e) { ...">
 <BR></FONT>
  
 foo_draw could either be a member function of Foo's OpenGL widget that needs 
@@ -110,17 +102,7 @@ overriding like  FLTK's <TT>Fl_Gl_Window::draw</TT> method or just a convenient 
 <IMG
  WIDTH="470" HEIGHT="455" ALIGN="BOTTOM" BORDER="0"
  SRC="img9.gif"
- ALT="\begin{verbawf}void vgui\_Xm\_adaptor::draw()
-\{
-make\_current();
-vgui\_ta...
-...e;
-e.type = vgui\_DRAW;
-dispatch(e);
-swap\_buffers();
-\}
-\}
-\end{verbawf}">
+ ALT="void vgui_Xm_adaptor::draw() { ...">
 <BR></FONT> 
 </UL><HR>
 <!--Navigation Panel-->

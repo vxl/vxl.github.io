@@ -61,19 +61,7 @@ that displays an image looks something like:
 <IMG
  WIDTH="474" HEIGHT="478" ALIGN="BOTTOM" BORDER="0"
  SRC="img3.gif"
- ALT="\begin{verbawf}class image\_tableau
-\{
-// image data
-char* image\_data;
-int...
-...st &e)
-\{
-if (e is a draw event)
-draw();
-return true;
-\}
-\};
-\end{verbawf}">
+ ALT="class image_tableau { ... };">
 <BR></FONT>
  
 In fact, the draw method will probably be significantly more complex, in
@@ -89,12 +77,7 @@ This interface is abstracted in the obvious manner:
 <IMG
  WIDTH="601" HEIGHT="110" ALIGN="BOTTOM" BORDER="0"
  SRC="img4.gif"
- ALT="\begin{verbawf}class tableau
-\{
-public:
-virtual bool handle_event(vgui_event const&) = 0;
-\};
-\end{verbawf}">
+ ALT="class tableau { ... };">
 <BR></FONT>
 
 <P>
