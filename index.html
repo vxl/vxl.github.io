@@ -29,22 +29,22 @@
 <h2><a name="intro">Introduction: What is VXL?</a></h2>
 
 VXL (the Vision-<i>something</i>-Libraries) is a collection of C++ libraries designed for computer
-vision research.  It was created from <a href="http://www.esat.kuleuven.ac.be/~targetjr/">
+vision research and implementation.  It was created from <a href="http://www.esat.kuleuven.ac.be/~targetjr/">
 TargetJr</a> and the <a href="http://www.aai.com/AAI/IUE/IUE.html">Image Understanding Environment</a>
 (IUE) with the aim of making a lighter, faster and more consistent system. VXL is written in ANSI/ISO
 C++ and is designed to be portable over many platforms.
 
 The core libraries in VXL are:
 <ul>
-<li><b>vnl (numerics)</b>: Numerical containers and algorithms, in particular vnl provides
-    matrix and vector classes with operations for manipulating them, such as matrix decompositions.</li>
+<li><b>vnl (numerics)</b>: Numerical containers and algorithms. e.g. matrices,
+  vectors, decompositions, optimisers.</li>
 <li><b>vil (imaging)</b>: Loading, saving and manipulating images in many common file formats,
     including very large images.</li>
 <li><b>vgl (geometry)</b>: Geometry for points, curves and other elementary objects in 1, 2 or 3 dimensions.</li>
 <li><b>vsl (streaming I/O)</b>: Platform independent binary I/O functionality.</li>
-<li><b>vbl (basic templates)</b>: A collection of useful templated C++ classes and functions
-    that would have been in the STL if we had designed it. For example smart pointers,
-    2D and 3D arrays, sparse 2D and 3D arrays.</li>
+<li><b>vbl (basic templates)</b>: Useful templated C++ classes and functions in
+  STL style. e.g. smart pointers,
+  2d and 3d arrays, sparse arrays.</li>
 <li><b>vul (utilities)</b>: Useful non-numeric bit of code, e.g. for file,
     directory, and url handling, command-line parsing, using strings, timing, etc.</li>
 </ul>
@@ -119,7 +119,7 @@ the release and development versions of VXL.
 <ul>
   <li>The <a href="http://paine.wiau.man.ac.uk/pub/doc_vxl/books/contrib/mul/book.html">MUL
       book</a> is an overview of libraries concerned with probability modelling,
-      classification, and registered images.</li>
+      classification, and 3d and registered images.</li>
 </ul>
 <hr>
 
@@ -134,22 +134,30 @@ the release and development versions of VXL.
 
 <h2><a name="download">Download and install</a></h2>
 
-You can either download the latest official release (VXL 1.0 beta2) or
-the latest development version of VXL.  If you are only interested in
-using VXL as a collection of libraries then this is the recommended
-version:
 <ul>
 <li><a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/vxl/vxl/core/vxl_copyright.h?rev=HEAD">VXL
   License</a>
-<li><a href="http://sourceforge.net/projects/vxl/">Download VXL 1.0 beta2</a>
-<li><a href="releases/install-beta.html">Installing beta version</a>
 </ul>
 
-If you wish you may download the latest development version of VXL
-(you will definitely need this version if you are interested in
-contributing to VXL).  The latest version of VXL is available from
-SourceForge and can be downloaded using CVS (Concurrent Versions
-System).  You will also need to download <a href="http://www.cmake.org/">CMake</a>
+You should download the latest version. However, you can also get the latest official release
+VXL 1.0 beta2 - which is a bit old now.
+<table>
+  <tr>
+    <td>
+      <ul>
+        <li><a href="http://sourceforge.net/projects/vxl/">Download VXL 1.0 beta2</a>&nbsp;&nbsp;</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li><a href="releases/install-beta.html">Installing beta version</a>
+        </li>
+      </ul>
+    </td>
+  </tr>
+</table>
+  The latest version of VXL is available from
+SourceForge and can be downloaded using CVS.  You will also need to download <a href="http://www.cmake.org/">CMake</a>
 (this is a tool for generating makefiles or Microsoft project files
 that is used by the latest version of VXL).
 <ul>
@@ -157,10 +165,20 @@ that is used by the latest version of VXL).
     you may wish to use <a href="http://sources.redhat.com/cygwin/">Cygwin</a> or
     <a href="http://www.wincvs.org">WinCVS</a> which provide a nice GUI for CVS.
 <li><a href="http://www.cmake.org/">CMake homepage</a>
-<li><a href="http://sourceforge.net/cvs/?group_id=24293">Download latest development version of VXL</a>.
+<li>(<a href="#sf_cvs_note"><font color="#FF0000">Note</font></a>)&nbsp; <a href="http://sourceforge.net/cvs/?group_id=24293">Download latest development version of VXL</a>.
     (To download the whole of vxl use &quot;vxl&quot; for <I>modulename</I>.)
 <li><a href="releases/install-latest.html">Installing latest VXL</a>
 </ul>
+
+<blockquote>
+<a name="sf_cvs_note"></a><font color="#FF0000">Note</font>: Due to recent
+increase in demand, SourceForge is only <a href="http://sourceforge.net/docman/display_doc.php?docid=2352&amp;group_id=1#cvs">responding
+to a small fraction</a> of anonymous cvs requests, and then only with a
+version that is up to 24 hours out of date. Perseverance and timing help: Keep
+on trying until you succeed, or wait until the US is asleep (I find 9am GMT
+works well.) SF claim that everything will be back to normal soon.
+</blockquote>
+
 
 <p>
 The following links may be helpful if you work under Windows.
@@ -187,8 +205,7 @@ are welcome; just follow the <a href="submit-build.html">instructions for submit
 
 <h3><a name="bugs">Reporting bugs to the mailing list</a></h3>
 
-If you think you have found a bug, or if you have an installation or build problem
-which is not covered on this page (see below), please submit a bug
+If you think you have found a bug, or if you have an installation or build problem, please submit a bug
 report on the <a href="http://lists.sourceforge.net/lists/listinfo/vxl-users">vxl-users
 mailing list</a>. Also supply the following information unless you know for certain it is not relevant:
 <ul>
