@@ -37,10 +37,11 @@ libraries are the same on all compilers.  This means that all standard headers i
 preceeded with the letters vcl_, so for example instead of including <code>&#60;vector&#62;</code> you would include
 <code>&#60;vcl_vector.h&#62;</code> and would use <code>vcl_vector<></code> rather than <code>std::vector<></code> in your
 code.
-<li><b>vnl (numerical algorithms)</b>: Numerical containers and algorithms, in particular vnl provides
+<li><b>vnl (numerics)</b>: Numerical containers and algorithms, in particular vnl provides
 matrix and vector classes with operations for manipulating them, such as matrix decompositions.
 <li><b>vil (imaging)</b>: Loading, saving and manipulating images in many common file formats, including very large images.
-<li><b>vgl (geometry)</b>: Geometry for points, curves and other objects in 1, 2 or 3 dimensions.
+<li><b>vgl (geometry)</b>: Geometry for points, curves and other elementary objects in 1, 2 or 3 dimensions.
+<li><b>vsl (streaming I/O)</b>: Platform independent binary I/O functionality.
 <li><b>vbl (basic templates)</b>: A collection of useful templated C++ classes and functions
   that would have been in the STL if we had designed it. For example smart pointers,
   2D and 3D arrays, sparse 2D and 3D arrays.
@@ -49,11 +50,13 @@ matrix and vector classes with operations for manipulating them, such as matrix 
 </ul>
 
 To prevent too much interdependency between libraries, there are strict rules on which libraries may use each other
-with vcl on the top level and vbl, vnl, vil, vul and vgl depending on it.  Since vbl, vnl, vil and vgl are on the same
-level it means that they cannot refer to each other.   Functions that would logically belong in vgl say, but depend
-on functions from vnl would be placed in the library vgl_algo.  The libraries vgl_algo, vil_algo and vnl_algo are 
-on the third level.  Finally there is a level of libraries with 4 letter names (v**l) which may depend on any of the
-3 letter core libraries.  For a more detailed description of the libraries and the layering scheme see 
+with vcl on the top level and vnl, vil, vgl, vsl, vbl and vul depending on it.  Since vnl, vil, vgl, vsl, vbl and
+vul are on the same level it means that they cannot refer to each other.
+Functions that would logically belong in vgl say, but depend on functions from vnl would be placed in the library
+vgl_algo.  The libraries vgl_algo, vil_algo and vnl_algo are on the third level.
+Finally there is a level of libraries with 4 letter names (v**l) which may depend on any of the
+3 letter core libraries, and possibly on each other.
+For a more detailed description of the libraries and the layering scheme see 
 <a href="http://www.isbe.man.ac.uk/public_vxl_doc/books/vxl/book.html">the VXL book</a>.
 
 <a name = "docs">
@@ -66,7 +69,7 @@ There are two main references for information on the whole of VXL:
 It has a detailed description of every
 class and function in VXL which is auto-generated from the code using doxygen.
 An alternative lay-out with essentially identical content can be found
-<a href="http://www.esat.kuleuven.ac.be/~targetjr/vxl/">here.
+<a href="http://www.esat.kuleuven.ac.be/~targetjr/vxl/">here</a>.
 
 <li><a href="http://www.isbe.man.ac.uk/public_vxl_doc/books/vxl/book.html">VXL book</a>
 - this is a single reference for all high-level documentation on VXL. It currently documents
