@@ -151,20 +151,11 @@ SourceForge.&nbsp;</p>
 <ul>
 <li><a href="http://www.gnu.org/software/cvs/cvs.html">CVS homepage</a>. If you are using a Windows platform
     you may wish to use <a href="http://sources.redhat.com/cygwin/">Cygwin</a> or
-    <a href="http://www.wincvs.org">WinCVS</a> which provide a nice GUI for CVS.
-<li>(<a href="#sf_cvs_note"><font color="#FF0000">Note</font></a>)&nbsp; <a href="http://sourceforge.net/cvs/?group_id=24293">Download latest development version of VXL</a>.
+  <a href="http://www.tortoisecvs.org/">TortoiseCVS</a> which provide a nice GUI for CVS.
+<li><a href="http://sourceforge.net/cvs/?group_id=24293">Download latest development version of VXL</a>.
     (To download the whole of vxl use &quot;vxl&quot; for <I>modulename</I>.)
 <li><a href="releases/install-latest.html">Installing latest development version of VXL</a>
 </ul>
-
-<blockquote>
-<a name="sf_cvs_note"></a><font color="#FF0000">Note</font>: Due to recent
-increase in demand, SourceForge is only <a href="http://sourceforge.net/docman/display_doc.php?docid=2352&amp;group_id=1#cvs">responding
-to a small fraction</a> of anonymous cvs requests, and then only with a
-version that is up to 24 hours out of date. Perseverance and timing help: Keep
-on trying until you succeed, or wait until the US is asleep (I find 9am GMT
-works well.) SF claim that everything will be back to normal soon.
-</blockquote>
 
 
 <p>
@@ -198,7 +189,8 @@ report on the <a href="http://lists.sourceforge.net/lists/listinfo/vxl-users">vx
 mailing list</a>. Also supply the following information unless you know for certain it is not relevant:
 <ul>
 <li> Exactly what you did and exactly what goes wrong. Be verbose. We need to know this in order to help.
-     If you have problems configuring VXL, include the options you gave to configure and the output it
+     If you have problems CMake-ing VXL, include the options you gave to CMake,
+  the CMake version number and the output it
      produced. If you have problems compiling VXL, include the command the makefiles issued, as well as
      the entire error message.
 <li> Compiler and <i>compiler version number</i>. For gcc, this means we want the output of the
@@ -207,6 +199,7 @@ mailing list</a>. Also supply the following information unless you know for cert
 <li> Operating system (e.g. linux/solaris/irix) and architecture (e.g. i386/sparc/mips). If this
      means nothing to you, give some indication of the sort of machine (e.g. does it have "Indy"
      or "AEGIS" or "Ultra" or "Cray" or "HAL" etc written on it?).
+<li> VXL's release version number, or the date you got it from CVS.
 </ul>
 <hr>
 
