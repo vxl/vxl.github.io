@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Submitting a VXL build</title>
+  </head>
+
+  <body bgcolor=white>
+
+<a href="http://vxl.sourceforge.net/" border=0><img ALT="VXL" src="../logo1-quant.gif" align=right border=0></a>
+    <h1>Submitting a build to the dashboard</h1>
+<br clear=all>
+<hr>
+<b>Contents:</b>
+<a href="#setup">[Setup]</a>&nbsp;&nbsp;
+<a href="#unix">[Unix]</a>&nbsp;&nbsp;
+<a href="#windows">[Windows]</a>&nbsp;&nbsp;
+<hr>
+
+<a name = "setup">
+<h2>Setup</h2>
+
+<ol>
+<li> Obtain and install <a href="http://public.kitware.com/Dart/">Dart</a> from KitWare. Call the installation directory $DART.
+<li> Checkout the VXL source tree into $VXLSRC. Checking out as anonymous is fine. Due to Dart implementation details, each build will need it's own source tree.
+<li> Create the binary directory $VXLBIN.
+<li> Run the initial CMake:
+      <pre>cd $VXLBIN && cmake -DDART_ROOT:PATH=$DART $VXLSRC</pre>
+</ol>
+
+You will need to have Tcl installed your machine, since Dart is
+written in Tcl. Make sure the cache $VXLBIN/CMakeCache.txt has an
+entry for TCL_SH.
+
+<a name="unix">
+<h2>Building on Unix</h2>
+
+<ol>
+<li> Update Dart via cvs:
+       <pre>cd $DART && cvs update -Pd</pre>
+<li> Clean the binary directory:
+       <pre>cd $VXLBIN && make clean</pre>
+     or, even cleaner,
+       <pre>rm -rf $VXLBIN/* && cd $VXLBIN && cmake -DDART_ROOT:PATH=$DART $VXLSRC</pre>
+<li> Build.
+       <pre>make Nightly</pre>
+</ol>
+
+<a name="windows">
+<h2>Building on Windows</h2>
+
+<ol>
+<li> Update Dart.
+<li> Build:
+<pre>
+cd $VXLBIN
+tclsh $DART/Source/Client/DashboardManager.tcl DartConfiguration.tcl Nightly Start Update Build Test Submit
+</pre>
+</ol>
+
+    <hr>
+    <address><a href="mailto:amithaperera@users.sourceforge.net">amithaperera@users.sourceforge.net</a></address>
+  </body>
+</html>
