@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!--Converted with LaTeX2HTML 98.1 release (February 19th, 1998)
+originally by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Adding a pop-up menu</TITLE>
+<META NAME="description" CONTENT="Adding a pop-up menu">
+<META NAME="keywords" CONTENT="vgui_users_guide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="vgui_users_guide.css">
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="up" HREF="node8.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html147"
+ HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/local/share/latex2html/icons.gif/next_motif.gif"></A> 
+<A NAME="tex2html144"
+ HREF="node8.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/local/share/latex2html/icons.gif/up_motif.gif"></A> 
+<A NAME="tex2html138"
+ HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/local/share/latex2html/icons.gif/previous_motif.gif"></A> 
+<A NAME="tex2html146"
+ HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/local/share/latex2html/icons.gif/contents_motif.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html148"
+ HREF="node11.html">Adding a dialog box</A>
+<B> Up:</B> <A NAME="tex2html145"
+ HREF="node8.html">Menus and dialog boxes</A>
+<B> Previous:</B> <A NAME="tex2html139"
+ HREF="node9.html">Adding a menubar</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00420000000000000000">
+Adding a pop-up menu</A>
+</H1>
+<P>
+<FONT SIZE="-2">A pop-up menu is also specified by a <TT>vgui_menu</TT>.  In this next example we take the
+same <TT>vgui_menu</TT> we used to specify the menubar, but this time we add it to a
+pop-up menu.
+</FONT>
+<P>
+<FONT SIZE="-2"><IMG
+ WIDTH="694" HEIGHT="831" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.gif"
+ ALT="\begin{center}\vbox{\input{popup-example}
+}\end{center}">
+</FONT>
+<P>
+<FONT SIZE="-2">Click the right mouse button anywhere on the image to get the pop-up menu to appear. 
+The implementation of pop-up menus in VGUI is very simple: you can only attach a menu 
+to a tableau and the default method to get it to ``pop up'' is a right mouse click.
+</FONT>
+<P>
+<FONT SIZE="-2">Other items in the pop-up menu that we didn't specifiy are the default items for an 
+image tableau.  You would see these items in a pop-up menu if you right clicked on any
+of the previous examples.  If you wish to replace the default pop-up menu (instead of 
+adding to it) then instead of <TT>include_in_popup</TT>, use the function <TT>add_popup</TT>.
+</FONT>
+<P>
+<BR><HR>
+<ADDRESS>
+<I>Target Junior User</I>
+<BR><I>2000-10-31</I>
+</ADDRESS>
+</BODY>
+</HTML>
