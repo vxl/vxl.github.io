@@ -24,7 +24,7 @@
 <li> Checkout the VXL source tree into $VXLSRC. Checking out as anonymous is fine. Due to Dart implementation details, each build will need it's own source tree.
 <li> Create the binary directory $VXLBIN.
 <li> Run the initial CMake:
-      <pre>cd $VXLBIN && cmake -DDART_ROOT:PATH=$DART $VXLSRC</pre>
+      <pre>cd $VXLBIN &amp;&amp; cmake -DDART_ROOT:PATH=$DART $VXLSRC</pre>
 </ol>
 
 You will need to have Tcl installed your machine, since Dart is
@@ -36,14 +36,16 @@ entry for TCL_SH.
 
 <ol>
 <li> Update Dart via cvs:
-       <pre>cd $DART && cvs update -Pd</pre>
+       <pre>cd $DART &amp;&amp; cvs update -Pd</pre>
 <li> Clean the binary directory:
-       <pre>cd $VXLBIN && make clean</pre>
+       <pre>cd $VXLBIN &amp;&amp; make clean</pre>
      or, even cleaner,
-       <pre>rm -rf $VXLBIN/* && cd $VXLBIN && cmake -DDART_ROOT:PATH=$DART $VXLSRC</pre>
+       <pre>rm -rf $VXLBIN/* &amp;&amp; cd $VXLBIN &amp;&amp; cmake -DDART_ROOT:PATH=$DART $VXLSRC</pre>
 <li> Build.
        <pre>tclsh $DART/Source/Client/DashboardManager.tcl DartConfiguration.tcl Nightly Start Update Configure Build Test Submit</pre>
 </ol>
+
+</a>
 
 <a name="windows">
 <h2>Building on Windows</h2>
@@ -58,6 +60,9 @@ tclsh $DART/Source/Client/DashboardManager.tcl DartConfiguration.tcl Nightly Sta
 </ol>
 
     <hr>
-    <address><a href="mailto:vxl-maintainers@lists.sourceforge.net">vxl-maintainers@lists.sourceforge.net</a></address>
-  </body>
+    <address>
+
+    <font color="#0000ff">vxl-maintainers at
+    lists dot sourceforge dot net</font>
+    </address>    </body>
 </html>
