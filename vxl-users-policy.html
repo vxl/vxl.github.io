@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>vxl-users Mailing List Policy and Frequently Asked Questions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII"><style type="text/css">
+      DT {font-size: 120%; font-weight: bold; margin-top:1em;}
+    </style>
+
+  </head>
+
+<body>
+  <a href="http://vxl.sourceforge.net/"><span style="position: absolute; left: 1005; top: 16"><img ALT="VXL Logo" src="logo1-quant.gif" align="right" border="0"
+     width="128" height="48"></span></a>
+  
+  <h1>Introduction</h1>
+  
+ <p>
+  If you been referred to this page, in answer to a email you posted on <code>vxl-users</code>,
+  then please read the whole page carefully. It should tell you where to find an answer, or
+  explain how to rewrite your email so that your question can be usefully answered.</p>
+  
+  <p>If you are new to
+  VXL and are looking for some basic help on posting to <code>vxl-users</code>, then we
+  hope that this answers your questions. Please do ask your
+  questions on the<a href="http://lists.sourceforge.net/lists/listinfo/vxl-users">
+  <code>vxl-users</code> mailing list</a>, taking account of the <code>vxl-users</code> list
+  policy below.</p>
+
+  <hr>
+  
+  <h1><code>vxl-users</code> Mailing List Policy</h1>
+<dl>
+    
+  <dt><code>vxl-users</code> is staffed by volunteers</dt>
+  <dd><code>vxl-users</code> is frequented by other users of VXL, including the authors and maintainers of VXL.
+  All of these people are volunteers, and none of them are paid to help you solve your problem.
+  The advice in this policy is designed to make it easier for those
+  with problems to get useful answers from these volunteers.</dd>
+    
+  
+  
+  <dt>Please try to solve your problem yourself before posting</dt>
+  <dd><p>
+          Please avoid asking questions that can trivially be answered by searching the documentation. For example, &quot;How do I warp an image?&quot; can be answered by typing in<tt>warp image</tt> into the <a href="http://www.isbe.man.ac.uk/search_vxl.html">
+  VXL documentation search engine</a>.</p>
+  <p>
+          &quot;How do I use<code>vil_image_view</code>?&quot; can be answered by reading the<a href="http://paine.wiau.man.ac.uk/pub/doc_vxl/books/core/book_7.html">
+  vil chapter in the VXL book</a>, and the
+  <a href="http://paine.wiau.man.ac.uk/pub/doc_vxl/core/vil/html/classvil__image__view.html">
+  class documentation</a>. Please also check the <a href="vxl-users-faq.html"><code>vxl-users</code> FAQ</a>.</p>
+  <p>In general, if you can't be bothered to spend time on solving your own problem, we are not likely to
+  waste time helping you.</p></dd>
+
+  <dt>Please do not use HTML email</dt>
+  <dd>Some members of <code>vxl-users</code> do not use HTML-friendly email readers. Since you are
+  asking for their help, please post in raw text, otherwise they may well ignore your email.</dd>
+  
+  <dt>Non-member posts are vetted</dt>
+  <dd>You do not have to be a member of <code>vxl-users</code> to post to it. However, non-member posts are
+  vetted by the list administrators, to screen out SPAM. It may take a few days for such
+  email to be posted, and occasionally they may be accidentally rejected. If you want to
+  avoid delay, or guarantee you message gets posted, please
+  <a href="http://lists.sourceforge.net/lists/listinfo/vxl-users">join the list as a
+  member</a>.</dd>
+  
+  <dt>Please avoid general computing questions</dt>
+  <dd><code>vxl-users</code> is aimed at VXL-specific problems. If you have a general computing or
+  programming problem, please ask a competent local programmer. We may not take the
+  time to answer questions such as
+    <blockquote>I have successfully built VXL but when I try to use it within my
+       own programs, I get a &quot;<code>include file not found</code>&quot;, &quot;<code>unresolved
+       symbol</code>&quot;, etc.
+    </blockquote>
+  as they can usually be easily fixed by a programmer familiar with your environment.
+  If you are a competent programmer, and you think there is a real problem, please do post an email
+  with all the relevant information.</dd>
+
+  <dt>Please tell us if your problem is solved</dt>
+  <dd>If your problem is solved, please tell the whole list. This avoids anyone working unnecessarily on
+  your problem. Please do not post lots of problems in succession, before telling us that your
+  earlier ones are fixed. Solving one problem, may make the rest go away. On top of that, the list members
+  are human and appreciate the occasional bit of thanks.</dd>
+
+  <dt>How to structure a problem or bug report</dt>
+  <dd>Please phrase your questions as precisely as possible. If in doubt, be verbose.
+  &quot;I can't compile VXL&mdash;please help&quot; is not going to get a (useful) answer.
+  
+  <dl>
+  <dt>Always tell us the:</dt>
+  <dd><ul>
+    <li>The compiler name and version.</li>
+    <li>The OS name and version.</li>
+    <li>The VXL version number, or date you got it from CVS.</li>
+ </ul></dd>
+  
+  <dt>If you have a problem while running CMake, tell us:</dt>
+  <dd><ul>
+  <li>CMake version number.</li>
+  <li>Any modifications you made to the default settings.</li>
+  <li>The full error&mdash;use cut&amp;paste.</li>
+  </ul></dd>
+  
+  <dt>If you get a compiler or linker error while building VXL, tell us:</dt>
+  <dd><ul>
+  <li>The compiler or linker command line issued by make, or MS developer studio.</li>
+ <li>The compiler or linker command line issued by make, or MS developer studio.</li>
+  <li>The full error and context&mdash;use cut&amp;paste.</li>
+  </ul></dd>
+
+<dt>If you get a test program error while running it, tell us:</dt>
+<dd><ul>
+<li>The test you were running.</li>
+<li>Any special compiler options your used (e.g. optimisations).</li>
+<li>The full error and context, and all of the test's output leading up to that&mdash;use cut&amp;paste.</li>
+</ul></dd>
+
+
+<dt>If you get a compiler or linker error while trying to use VXL with your own code, tell us:</dt>
+<dd><ul>
+<li>The simplest piece of your code that invokes the error - use cut and paste.</li>
+<li>The compiler or linker command line issued by make, or MS developer studio&mdash;use cut&amp;paste.</li>
+<li>The full error&mdash;use cut&amp;paste.</li>
+</ul></dd>
+
+
+<dt>If your own program uses VXL, and you have a run-time problem, tell us:</dt>
+<dd><ul>
+<li>The simplest piece of your code that invokes the error.</li>
+<li>Instrument your program, outputting any relevant variables to the console&mdash;use cut&amp;paste.</li>
+</ul></dd>
+
+<dt>Any other relevant evidence.</dt>
+
+</dl></dd>
+</dl>    
+
+<hr>
+
+<hr>
+    <address>
+<font color="#0000ff">vxl-maintainers at
+    lists dot sourceforge dot net</font>
+</address>
+
+
+  </body>
+</html>
