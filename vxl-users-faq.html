@@ -52,7 +52,7 @@
   &quot;<code>cannot open
   vcl.lib</code>&quot;. What's wrong?&nbsp;</p>
       </blockquote>
-      <p>    The CMake "Shared Library" feature doesn't work with MSVC. You have to use static libraries. This is mostly
+      <p>    VXL does not support the CMake "Shared Library" feature on MSVC. You have to use static libraries. This is mostly
   due to MSVC's requirements to have either a complete list of every exportable identifier or a decoration of every
   identifier in the code. We are too lazy (or appalled at this "feature") to try to fix this. If you absolutely need
   DLLs you can build your code using
