@@ -33,8 +33,7 @@ old make system.) Create a different directory $VXLBIN, one per platform,
 and run CMake from within that directory.
 </p>
 
-<p>
-<b>With Visual Studio,</b>
+<h4>With Visual Studio</h4>
 run CMakeSetup and enter $VXLSRC and $VXLBIN
 into the appropriate text fields. This will generate $VXLBIN/allvxl.dsw.  All 
 VXL projects are included in this workspace and you should
@@ -42,25 +41,54 @@ be able to build them in the normal way for Visual Studio.
 </p>
 
 <p>
-<b>With Unix:</b>
-<br>
-&nbsp;&nbsp;  cd $VXLBIN
-<br>
+<h4>With Unix (including Cygwin)</h4>
+<pre>
+  cd $VXLBIN
+</pre>
 and then
-<br>
-&nbsp;&nbsp;  ccmake $VXLSRC  &nbsp;&nbsp;&nbsp;&nbsp;(Curses UI)
-<br>
+<pre>
+  ccmake $VXLSRC      (Curses UI)
+</pre>
 or
-<br>
-&nbsp;&nbsp;  cmake $VXLSRC  &nbsp;&nbsp;&nbsp;&nbsp;(command line)
-</p>
+<pre>
+  cmake $VXLSRC       (command line)
+</pre>
 
 <p>
-This will generate the makefiles within $VXLBIN. You can now do a
+This will generate the makefiles within $VXLBIN. You can now run
 "make" to build everything, or else go to a project of interest and
 run "make"--the dependent libraries should be automatically
 built.
 </p>
+
+<p>
+<b>Solaris.</b>
+If you are using Solaris you should build with this option
+<pre>
+  cmake -DSOLARIS:STRING=1 $VXLSRC
+</pre>
+CMake does not automatically detect that that you are using Solaris.
+Some CMakeListsLink.txt files (vxl/vil/CMakeListsLink.txt for one) in
+VXL use the SOLARIS variable to control the use of the socket library.
+</p>
+
+<p>
+<b>Cygwin.</b>
+If you are using Cygwin and have installed the Cygwin OpenGL package,
+you probably want to build with this option
+<pre>
+  cmake -DX11_INCLUDE_PATH:PATH=IGNORE $VXLSRC
+</pre>
+This prevents CMake from using the X11 headers and libraries.  The
+OpenGL package puts its header files in /usr/include/GL/ and the
+XFree86 package puts some header files in /usr/X11R6/include/GL/.  If
+you configure to use header files from /usr/X11R6/include then the
+XFree86 GL/*.h files will be used instead of the OpenGL package GL/*.h
+files.  These two sets of header files are not compatible.  Using the
+wrong ones will lead to linking problems involving mismatched suffixes
+like @4, @8, and @12.
+</p>
+
 
 <hr>
 <a name = "cmakecache">
