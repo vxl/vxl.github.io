@@ -42,7 +42,7 @@ entry for TCL_SH.
      or, even cleaner,
        <pre>rm -rf $VXLBIN/* && cd $VXLBIN && cmake -DDART_ROOT:PATH=$DART $VXLSRC</pre>
 <li> Build.
-       <pre>make Nightly</pre>
+       <pre>tclsh $DART/Source/Client/DashboardManager.tcl DartConfiguration.tcl Nightly Start Update Configure Build Test Submit</pre>
 </ol>
 
 <a name="windows">
@@ -53,11 +53,11 @@ entry for TCL_SH.
 <li> Build:
 <pre>
 cd $VXLBIN
-tclsh $DART/Source/Client/DashboardManager.tcl DartConfiguration.tcl Nightly Start Update Build Test Submit
+tclsh $DART/Source/Client/DashboardManager.tcl DartConfiguration.tcl Nightly Start Update Configure Build Test Submit
 </pre>
 </ol>
 
     <hr>
-    <address><a href="mailto:amithaperera@users.sourceforge.net">amithaperera@users.sourceforge.net</a></address>
+    <address><a href="mailto:vxl-maintainers@lists.sourceforge.net">vxl-maintainers@lists.sourceforge.net</a></address>
   </body>
 </html>

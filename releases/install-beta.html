@@ -1,215 +1,68 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html>
   <head>
-    <title>Install VXL 1.0 beta release</title>
+    <title>Install VXL 1.0 beta2 release</title>
   </head>
 
   <body bgcolor=white>
   <a href="http://vxl.sourceforge.net/" border="0"><img ALT="VXL" src="../logo1-quant.gif" align=right border=0 width="128" height="48"></a>
-  <h1>Installing VXL 1.0 beta release</h1>
+  <h1>Installing VXL 1.0 beta2 release</h1>
   <br clear=all>
 
 <hr>
-<b>Contents:</b>
-<a href="#unix-build">[UNIX build]</a>&nbsp;&nbsp;
-<a href="#unix-problems">[UNIX problems]</a>&nbsp;&nbsp;
-<a href="#redhat">[RedHat7.0 problems]</a>&nbsp;&nbsp;
-<a href="#windows-build">[Windows build]</a>&nbsp;&nbsp;
-<a href="#windows-problems">[Windows problems]</a>&nbsp;&nbsp;
-<a href="#known-bugs">[Known bugs]</a>&nbsp;&nbsp;
-<hr>
 
 <a name = "unix-build">
-<h2> How to build VXL for UNIX:</h2>
-Change current directory into the directory called <b>vxl-1.0-beta</b> (it
-is created by untarring the distribution file). Set the
-environment variables <b>IUEROOT</b> and <b>IUELOCALROOT</b> to the
-current directory (full path, please. using "." won't work).
-Add <b>$IUEROOT/Scripts/Perl</b> and <b>$IUEROOT/Scripts/Shell</b> to
-your <b>PATH</b> environment variable. Set variables <b>CC</b> and <b>CXX</b>
-to the C and C++ compiler you want to use. For gcc/egcs
-these are probably 'gcc' and 'g++'. For other compilers, the
-combination 'cc' and 'CC' often works. For SGI CC, version 7.2.x, use the
-combination 'cc -n32' and 'CC -n32'. Now configure the package
-by typing
-<p><b><ul>
-./configure
-</ul></b>
-If that worked, <b>read and follow</b> the instructions given at
-the end. There is a plethora of configure options used for
-specifying third party libraries such as TIFF, JPEG, OpenGL
-and gtk. Use <b>./configure --help</b> for a complete and bloated list.
-For example, OpenGL is specified using --with-opengl=/blah
-which assumes the libraries live in /blah/lib and the header files
-in /blah/include. Use --with-opengl-libraries and --with-opengl-includes
-if you need more control.<br>
-For example, the following should work on a Sun Ultra:
-<p><b><ul>
-./configure --cache-file=/dev/null --with-x=/usr/openwin --with-opengl=/usr/openwin
-</ul></b>
-The following works on my RedHat 6.2 GNU/Linux machine (But I had to install Hermes
-and gtkgl first. If in doubt, just leave them out.):
-<p><b><ul>
-./configure \<br>
-  --cache-file=/dev/null \<br>
-  --with-opengl=/usr/X11R6 \<br>
-  --with-glut=/usr/X11R6 \<br>
-  --with-hermes=/usr \<br>
-  --with-jpeg=/usr \<br>
-  --with-tiff=/usr \<br>
-  --with-png=/usr \<br>
-  --with-zlib=/usr \<br>
-  --with-gtk=/usr \<br>
-  --with-gtkglarea=/usr<br> 
-</ul></b>
-You should now be able to build the libraries by typing
-<p><b><ul>
-make
-</ul></b>
-If any of this doesn't work, and your problem is not described on this
-page, report it as a bug.</a>
+<h1> How to build VXL</h1>
 
-<a name = "unix-problems">
-<h2> Common UNIX installation problems:</h2>
-<ul>
+<p>
+The most common build system used for VXL is <a
+href="http://www.cmake.org/">CMake</a>. You should first download and
+install CMake. VXL requires CMake version 1.4.3 or higher.
+</p>
 
-<b><li> When I run 'make', I get the error message: <br>
-xxx/target/config/params.mk:279: *** missing separator
-</li></b><br>
-Did you run 'configure' prior to 'make'? You have to run configure first to
-let the makefiles learn stuff about your system. If you did not run configure, do so now. <br>
-If you ran configure, did you read and follow the instructions
-given at the end? If not, do so and try again. <br>
-If you did, report it as a bug.
-<br><br>
+<p>
+Extract the VXL source into the directory <b>vxl-1.0-beta2</b>. Create a
+separate output directory <b>bin</b> parallel to the source directory:
+<pre>
+   .../.../... ---+--- vxl-1.0-beta2 ---+--- vxl
+                  |                     |
+                  |                     +--- vcl
+                  |                     ...
+                  |
+                  +--- bin
+</pre>
+Let us call the former $VXLSRC and the latter $VXLBIN.
+</p>
 
+<p>
+Change current directory to $VXLBIN and run CMake, specifying $VXLSRC
+as the source directory.
+<dl>
+<dt><b>Unix and Cygwin:</b>
+  <dd>Run
+    <pre>
+      ccmake $VXLSRC
+   </pre>
+<dt><b>Windows:</b>
+  <dd>Run CMakeSetup and specify the source and binary directories as $VXLSRC and $VXLBIN, respectively.
+</dl>
+Repeatedly select "Configure" ("C" on Unix) until the entries stop
+changing and you get the chance to generate the makefiles ("OK" on
+Windows, and "G" on Unix).
+</p>
 
-<b>
-<li> When I run 'make', I get the error message: <br>
-*** configure.in and/or aclocal.m4 is newer than configure.<br>
-*** you should probably run autoconf and then reconfigure.<br>
-*** not building.<br>
-make: *** [configure] Error 1<br>
-</li></b><br>
-Run <b>'autoconf'</b>, or do <b>'touch ./configure'</b> and try again.
-<br><br>
-
-
-<b><li> I get the error message: <br>
-> > cc1plus: Invalid option `-Wno-unknown-pragmas' <br>
-</li></b><br>
-Which version of gcc are you using? Do
-<br> <b> gcc -v </b> and <b> g++ -v </b> <br>
-If the version number is 2.7.2 or similar, you're stuffed. <br>
-If the version number is egcs-2.90.xx, it's not so bad, but still bad. <br>
-Get a more recent compiler, at least egcs-2.91.xx or gcc-2.95.2. <br>
-gcc is free : <a href="http://gcc.gnu.org/">http://gcc.gnu.org/</a>.
-<br><br>
-
-<b><li> It still doesn't work, what's wrong? <br>
-</li></b><br>
-Dunno. Report your problem as a bug.
-
-</ul>
-
-<a name = "redhat">
-<h2> Problems specific to RedHat 7.0 and gcc 2.96 </h2>
-Version 2.96 of gcc (which comes with the RedHat 7.0 distribution) is
-<b>unsupported</b> by the gcc development team and VXL does not officially
-support it either. All complaints about this should be addressed to RedHat.
-<br>
-
-The repository version of VXL does compile with the current (10 December 2000) 
-CVS gcc and the 3.0 pre-release branch of gcc (they can both be obtained from
-the gcc website). The unofficial advice I give is to do one of
-<ul>
-<li> downgrade to RedHat 6.2
-<li> download CVS gcc and check out VXL from the Leuven CVS repository.
-<li> wait for the release of gcc 3.0 (this will be supported in VXL).
-</ul>
-
-However, with a bit of luck it is possible to compile most of VXL using 2.96
-on RedHat 7.0 (Thanks to Brendan McCane for providing this feedback. More
-feedback would be welcome):
-Firstly, VXL 1.0 beta will treat 2.96 as version 2.95, so don't be alarmed
-over this. Secondly, you may have problems compiling the GLUT part of vgui
-due to a compiler bug. No solution to this is known at the moment, but one
-can circumvent the problem by deleting those directories which use GLUT,
-namely <b>vxl/vgui/impl/glut</b> and <b>vxl/vgui/examples/fsm</b>.
-Thirdly, it may be necessary to manually edit <b>$IUEROOT/config/Linux2-gcc-2.95.mk</b>
-to make it work with gtkgl (look for HAS_GTKGLAREA and make sure it is sensible,
-by comparing it with the rest of the file).
+<p>
+In the CMake interface, you can choose which parts of the VXL tree to
+build. The default is to build everything except vgui and its
+dependents. Building vgui requires the presence of OpenGL and
+GLU. Often, these are in a platform specific area of the machine, and
+hence cannot be detected by CMake. If you have these on your system,
+and wish to build vgui, set BUILD_VGUI to "ON" and make sure the
+appropriate entries in the CMake cache are valid.
+</p>
 
 <hr>
-
-</a>
-
-<a name = "windows-build">
-<h2> How to build VXL for Windows:</h2>
-(taken from awf's mailing list posting) <br>
-You need to set the environment variable "IUEROOT" to the base of
-your vxl tree.  For example, if the directory called vcl is in
-<p>
-D:\mydir\vxl-1.0\vxl\vcl
-</p>
-then IUEROOT should be set to
-<p>
-D:\mydir\vxl-1.0
-</p>
-To set it (Win 2000, NT is some similar sequence),
-right-click on My Computer,
-select "Properties",
-select the "Advanced" tab
-click the "Environment Variables" button
-click the "New"  button under "User Variables for ..."
-And enter
-<p>
-  Variable: IUEROOT<br>
-  Value: D:\mydir\vxl-1.0<br>
-</p>
-Finally, OK and close, and restart Visual Studio.<br>
-<br>
-Then opening the workspace d:\mydir\vxl-1.0\vxl\vxl.dsw
-and compiling should build you an exe.
-
-To test, run the vplayer executable and load an AVI which
-your mediaplayer can read.  It should display the first image.
-(In beta1, that's all it should do - play works sometimes).</a>
-
-<a name = "windows-problems">
-<h2> Common Windows installation problems:</h2>
-None that I know of yet. Report it as a bug.
-<br><br>
-
-<hr>
-
-</a>
-
-<a name = "known-bugs">
-<h2> Known problems and bugs:</h2>
-These will be addressed before the release of VXL 1.0 proper.
-<ul>
-<li> <b>Unresolved symbol '_' in libvcl.so</b> <br>
-Some solaris system assemblers cannot cope with very long symbol names.
-If your machine is a solaris machine, switch to the GNU assembler.
-Else, report the problem as a bug.
-<br><br>
-
-<li> <b> 'make' fails and complains about blah-blah bindir blah-blah </b> <br>
-A makefile bug: <b>"mkdir bin/SunOS5-gcc-2.95"</b> fails to make a directory unless
-directory <b>bin</b> already exists. Manually create the directory $IUEROOT/bin and
-try again.
-<br><br>
-
-<li> <b>xcv doesn't link due to missing libmvl.so</b> <br>
-This is an error in $IUEROOT/vxl/makefile. Change directory to package $IUEROOT/oxl
-and run make there first. Then try compiling xcv again.
-<br><br>
-
-</ul>
-
-<hr>
-</a><a href="mailto:vxl-users@lists.sourceforge.net">vxl-users@lists.sourceforge.net</a>
+</a><a href="mailto:vxl-maintainers@lists.sourceforge.net">vxl-maintainers@lists.sourceforge.net</a>
 
   </body>
 </html>

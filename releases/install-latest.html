@@ -17,10 +17,10 @@
 
 <hr>
 <a name = "cmake">
-<h3>Get and install CMake</h3>
+<h1>Get and install CMake</h1>
 
 If you haven't already downloaded CMake then you will need to do this first. The CMake website is at 
-<a href="http://public.kitware.com/CMake/">http://public.kitware.com/CMake/</a>.
+<a href="http://www.cmake.org/">http://www.cmake.org/</a>.
 VXL is designed to work with the latest release of CMake, as shown on the CMake website.
 
 <hr>
@@ -33,15 +33,17 @@ old make system.) Create a different directory $VXLBIN, one per platform,
 and run CMake from within that directory.
 </p>
 
-<h4>With Visual Studio</h4>
-run CMakeSetup and enter $VXLSRC and $VXLBIN
-into the appropriate text fields. This will generate $VXLBIN/allvxl.dsw.  All 
-VXL projects are included in this workspace and you should
-be able to build them in the normal way for Visual Studio.
-</p>
+<h2>With Visual Studio 6 and .NET</h2>
 
 <p>
+Run CMakeSetup and enter $VXLSRC and $VXLBIN into the appropriate text
+fields. This will generate $VXLBIN/allvxl.dsw or $VXLBIN/allvxl.sln.
+All VXL projects are included in this workspace and you should be able
+to build them in the normal way for Visual Studio.
+</p>
+
 <h4>With Unix (including Cygwin)</h4>
+<p>
 <pre>
   cd $VXLBIN
 </pre>
@@ -51,8 +53,9 @@ and then
 </pre>
 or
 <pre>
-  cmake $VXLSRC       (command line)
+  cmake -i $VXLSRC       (command line)
 </pre>
+</p>
 
 <p>
 This will generate the makefiles within $VXLBIN. You can now run
@@ -62,22 +65,11 @@ built.
 </p>
 
 <p>
-<b>Solaris.</b>
-If you are using Solaris you should build with this option
-<pre>
-  cmake -DSOLARIS:STRING=1 $VXLSRC
-</pre>
-CMake does not automatically detect that that you are using Solaris.
-Some CMakeListsLink.txt files (vxl/vil/CMakeListsLink.txt for one) in
-VXL use the SOLARIS variable to control the use of the socket library.
-</p>
-
-<p>
 <b>Cygwin.</b>
 If you are using Cygwin and have installed the Cygwin OpenGL package,
 you probably want to build with this option
 <pre>
-  cmake -DX11_INCLUDE_PATH:PATH=IGNORE $VXLSRC
+  cmake -i -DX11_INCLUDE_PATH:PATH=IGNORE $VXLSRC
 </pre>
 This prevents CMake from using the X11 headers and libraries.  The
 OpenGL package puts its header files in /usr/include/GL/ and the
@@ -92,7 +84,7 @@ like @4, @8, and @12.
 
 <hr>
 <a name = "cmakecache">
-<h3>The CMakeCache.txt</h3>
+<h2>The CMakeCache.txt</h2>
 
 <p>
 The build system is configured by setting "cache" values, which are
@@ -111,7 +103,7 @@ file, e.g. for the location of JPEG, TIFF, etc.
 
 <hr>
 <a name = "in-place">
-<h3>Doing an in-place build</h3>
+<h2>Doing an in-place build</h2>
 
 If you don't make a new directory for $VXLBIN, but instead use
 $VXLBIN=$VXLSRC, you will get an in-place build. The major
