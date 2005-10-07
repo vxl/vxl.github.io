@@ -1,12 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html>
   <head>
-    <title>Install VXL 1.0.0 release</title>
+    <title>Install VXL 1.3.0 release</title>
   </head>
 
   <body bgcolor=white>
   <a href="http://vxl.sourceforge.net/" border="0"><img ALT="VXL" src="../logo1-quant.gif" align=right border=0 width="128" height="48"></a>
-  <h1>Installing the VXL 1.0.0 release</h1>
+  <h1>Installing the VXL 1.3.0 release</h1>
   <br clear=all>
 
 <hr>
@@ -24,7 +24,7 @@ install CMake. VXL requires CMake version 1.8.3 or higher.
 </p>
 
   <p>
-Extract the VXL source into the directory <b>vxl-1.0.0</b>. Create a
+Extract the VXL source into the directory <b>vxl-1.3.0</b>. Create a
 separate output directory <b>bin</b> parallel to the source directory:
 <pre>
    .../.../... ---+--- vxl-1.0.0 ---+--- vxl
@@ -51,7 +51,8 @@ as the source directory.
     </pre>
 <dt><b>Windows:</b>
   <dd>Run CMakeSetup and specify the source and binary directories as <code>$VXLSRC</code> and
-    <code>$VXLBIN</code>, respectively.
+      <code>$VXLBIN</code>, respectively. In the box on the upper right, choose the build system 
+      you use.
 </dl>
 Repeatedly select "Configure" ("C" on Unix) until the entries stop
 changing and you get the chance to generate the makefiles ("OK" on
@@ -64,7 +65,9 @@ dependents. Building vgui requires the presence of OpenGL and
 GLU. Often, these are in a platform specific area of the machine, and
 hence cannot be detected by CMake. If you have these on your system,
 and wish to build vgui, set BUILD_VGUI to "ON" and make sure the
-appropriate entries in the CMake cache are valid.
+appropriate entries in the CMake cache are valid. With Windows, the
+required libraries (MFC and OpenGL) are shipped with the operating
+system, so you should be able to build vgui without any issues.
 </p>
 
 
