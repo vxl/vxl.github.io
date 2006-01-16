@@ -55,29 +55,33 @@
       <p>    VXL does not support the CMake "Shared Library" feature on MSVC. You have to use static libraries. This is mostly
   due to MSVC's requirements to have either a complete list of every exportable identifier or a decoration of every
   identifier in the code. We are too lazy (or appalled at this "feature") to try to fix this. If you absolutely need
-  DLLs you can build your code using
-  Cygwin, which can produce shared libraries in a "normal" manner. Alternatively, if you only want to export a small
+  DLLs you can build your code using Cygwin, which can produce shared libraries in a "normal" manner. Alternatively, if you only want to export a small
   number of classes or functions, then you can manually list them. See the MSVC tool documentation for further
-  details.</p></li>
+  details.</p> <hr></li>
   
-  
+
     <li>
       <blockquote>
-  <p>I have successfully built VXL, but when I try to write my own program to use it, I get errors like &quot;<code>include file not found</code>&quot;, or &quot;<code>unresolved symbol</code>&quot;. What&#039;s wrong?
+  <p>I have successfully built VXL, but when I try to write my own program to use it, I get errors like &quot;<code>include file not found</code>&quot;, 
+  or &quot;<code>unresolved symbol</code>&quot; , or &quot;<code>unresolved external symbol</code>&quot; . What&#039;s wrong?
           </p>
       </blockquote>
       <p>Your makefile or IDE settings have not been correctly set up to include VXL .h files, or link
-      against VXL libraries. Details can be found in the &quot;Build Systems&quot; appendix of the
+      against VXL or system libraries. Details can be found in the &quot;Build Systems&quot; appendix of the
       <a href="http://paine.wiau.man.ac.uk/pub/doc_vxl/books/core/book.html">VXL Book</a>. If you
-      still have problems, show the appendix to a competent local programmer, and ask for their advice.</p></li> 
+      still have problems, show the appendix to a competent local programmer, and ask for their advice.</p>
+    <hr></li> 
       
-      
+
+  
     <li>
       <blockquote>
   <p>No-one has answered my question on vxl-users. It is really important that I get an answer.</p>
       </blockquote>
       <p>Your questions may be very poorly posed, and none of the other members of vxl-users, can answer it.
-      If you still haven't had a reply after a week, please read the <a href="vxl-users-policy.html"> vxl-users list policy</a>, and repost your email after taking account of the advice in the policy.</p></li>       
+      If you still haven't had a reply after a week, please read the <a href="vxl-users-policy.html"> vxl-users list policy</a>,
+      and repost your email after taking account of the advice in the policy.</p>
+      </li>       
       
   </ol>
 
