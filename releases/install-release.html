@@ -1,62 +1,70 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>Install VXL 1.5.1 release</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Install VXL 1.6 release</title>
   </head>
 
-  <body bgcolor=white>
-  <a href="http://vxl.sourceforge.net/" border="0"><img ALT="VXL" src="../logo1-quant.gif" align=right border=0 width="128" height="48"></a>
-  <h1>Installing the VXL 1.5.1 release</h1>
-  <br clear=all>
+<body bgcolor="white">
+
+<p>
+<a href="http://vxl.sourceforge.net/"><img alt="VXL" src="http://vxl.cvs.sourceforge.net/vxl/www/logo1-quant.gif" align="right" border="0" width="128" height="48"></a>
+</p>
+
+<h1>Installing the VXL 1.6 release</h1>
 
 <hr>
 
-<a name = "unix-build">
-
-<h2>
-Configuration
-</h2></a>
+<h2><a name="unix-build">Configuration</a></h2>
 
 <p>
-The most common build system used for VXL is  <a
+The most common build system used for VXL is <a
 href="http://www.cmake.org/">CMake</a>. You should first download and
 install CMake. VXL requires CMake version 2.2 or higher.
 </p>
 
-  <p>
-Extract the VXL source into the directory <b>vxl-1.5.1</b>. Create a
+<p>
+Extract the VXL source into the directory <b>vxl-1.6</b>. Create a
 separate output directory <b>bin</b> parallel to the source directory:
+</p>
 <pre>
-   .../.../... ---+--- vxl-1.5.1 ---+--- vxl
+   .../.../... ---+--- vxl-1.6 ---+--- vxl
                   |                     |
                   |                     +--- vcl
                   |                     ...
                   |
                   +--- bin
 </pre>
+
+<p>
 Let us call the former <code>$VXLSRC</code> and the latter <code>$VXLBIN</code>.
+</p>
 
 <p>
 Change current directory to <code>$VXLBIN</code> and run CMake, specifying <code>$VXLSRC</code>
 as the source directory.
+</p>
 <dl>
-<dt><b>Unix and Cygwin:</b>
+<dt><b>Unix and Cygwin:</b></dt>
   <dd>Run the Curses based front-end
     <pre>
       ccmake $VXLSRC
     </pre>
-   or the command line front-end
+    or the command line front-end
     <pre>
       cmake -i $VXLSRC
     </pre>
-<dt><b>Windows:</b>
+  </dd>
+<dt><b>Windows:</b></dt>
   <dd>Run CMakeSetup and specify the source and binary directories as <code>$VXLSRC</code> and
-      <code>$VXLBIN</code>, respectively. In the box on the upper right, choose the build system 
-      you use.
+      <code>$VXLBIN</code>, respectively. In the box on the upper right, choose the build system you use.
+  </dd>
 </dl>
+<p>
 Repeatedly select "Configure" ("C" on Unix) until the entries stop
 changing and you get the chance to generate the makefiles ("OK" on
 Windows, and "G" on Unix).
+</p>
 
 <p>
 In the CMake interface, you can choose which parts of the VXL tree to
@@ -70,80 +78,48 @@ required libraries (MFC and OpenGL) are shipped with the operating
 system, so you should be able to build vgui without any issues.
 </p>
 
-
-
 <h2>Build</h2>
-
-
 
 <p>
 Now you can build the libraries.
 </p>
-
 <dl>
-<dt><b>Unix or Cygwin:</b>
+<dt><b>Unix or Cygwin:</b></dt>
+  <dd>Run make
+    <pre>
+      make
+    </pre>
+  </dd>
+<dt><b>Windows and MSVC:</b></dt>
+  <dd>Build VXL by loading the <code>$VXLBIN\vxl.dsw</code> into Developer Studio and
+      building the ALL_BUILD target. This project is a little larger than Developer
+      Studio can sometimes cope with, so you can do a full build from the command line:
+    <pre>
+      vcvars32.bat
+      msdev vxl.dsw /MAKE "ALL_BUILD - Win32 Debug"
+    </pre>
+    Or the speedier release version
+    <pre>
+      msdev vxl.dsw /MAKE "ALL_BUILD - Win32 Release"
+    </pre>
+  </dd>
 </dl>
-  <blockquote>
+
+<h2>Test</h2>
 
 <p>
-Run make
+You can run the test suite using the <code>ctest</code> program that came with CMake
 </p>
-
-    <blockquote>
-
-<p>
-<code>make</code>
-</p>
-
-    </blockquote>
-  </blockquote>
-<dl>
-<dt><b>Windows and MSVC:</b>
-</dl>
-  <blockquote>
-
-<p>
-Build VXL by loading the <code>$VXLBIN\vxl.dsw</code> into Developer Studio and
-building the ALL_BUILD target. This project is a little larger than Developer
-Studio can sometimes cope with, so you can do a full build from the command line:
-</p>
-
-    <blockquote>
-
-<p>
-<code>vcvars32.bat<br>
-msdev vxl.dsw /MAKE "ALL_BUILD - Win32 Debug"</code>
-</p>
-
-    </blockquote>
-
-<p>
-Or the speedier release version
-</p>
-
-    <blockquote>
-
-<p>
-<code>msdev vxl.dsw /MAKE &quot;ALL_BUILD - Win32 Release&quot;</code>
-</p>
-
-    </blockquote>
-  </blockquote>
-
-  <h2>Test
-</h2>
-
-  <p>You can run the test suite using the <code>ctest</code> program that came
-  with CMake
-</p>
-
 <hr>
 
 <h2><a name="docs">Documentation</a></h2>
 
 <h3>Documentation on the whole of VXL</h3>
 
+<p>
 There are two main references for information on the whole of VXL:
+</p>
+
 <ul>
 <li><a href="http://paine.wiau.man.ac.uk/pub/doc_vxl/index.html">VXL package documentation</a>
 - this documents the latest snapshot of VXL.
@@ -155,22 +131,26 @@ class and function in VXL.
 the CVS snapshot of VXL.
 </ul>
 
+<p>
 The <a href="http://www.isbe.man.ac.uk/search_vxl.html">documentation search</a>
 page is useful for quickly finding documentation. You can also <a href="http://paine.wiau.man.ac.uk/pub/doc_vxl/doc_vxl.tar.gz"> download</a> the
 entire snapshot documentation.
+</p>
 
 <h3>VXL guides</h3>
 
+<p>
 These are short guides to specific areas in VXL:
+</p>
 <ul>
 <li><b>xcv</b> is an application built to demonstrate the functionality of the VXL libraries.
   <ul>
-  <li>There is a <a href="../manuals/xcv/newxcv.html">guide to using xcv</A>
-      (also available <a href="../manuals/xcv.ps.gz">in postscript format</a>).
-  <li>Download <a href="../manuals/xcv.zip">xcv for Windows</a>,
-      <a href="../manuals/xcv-SunOS5.bin.gz">xcv for solaris</a>.
-      and <a href="../manuals/xcv-linux.bin.gz">xcv for linux</a>
-  <li>Here is some <a href ="../manuals/xcvdata.tar.gz">example data</a>
+  <li>There is a <a href="http://vxl.cvs.sourceforge.net/vxl/www/manuals/xcv/newxcv.html">guide to using xcv</A>
+      (also available <a href="http://vxl.cvs.sourceforge.net/vxl/www/manuals/xcv.ps.gz">in postscript format</a>).
+  <li>Download <a href="http://vxl.cvs.sourceforge.net/vxl/www/manuals/xcv.zip">xcv for Windows</a>,
+      <a href="http://vxl.cvs.sourceforge.net/vxl/www/manuals/xcv-SunOS5.bin.gz">xcv for solaris</a>.
+      and <a href="http://vxl.cvs.sourceforge.net/vxl/www/manuals/xcv-linux.bin.gz">xcv for linux</a>
+  <li>Here is some <a href ="http://vxl.cvs.sourceforge.net/vxl/www/manuals/xcvdata.tar.gz">example data</a>
       suitable for use with xcv.
   </ul>
 <br>
@@ -178,18 +158,20 @@ These are short guides to specific areas in VXL:
 <li><b>vgui</b> is the VXL graphical user interface library.
   <ul>
   <li>For a simple introduction to using VGUI there is the
-      <a href="../manuals/vgui_users_guide/index.html">VGUI users guide</a>
-      (also <a href="../manuals/vgui_users_guide.ps.gz">in postscript format</a>).
-       Here is the <a href ="../manuals/examples-tutorial.tar.gz">
+      <a href="http://vxl.cvs.sourceforge.net/vxl/www/manuals/vgui_users_guide/index.html">VGUI users guide</a>
+      (also <a href="http://vxl.cvs.sourceforge.net/vxl/www/manuals/vgui_users_guide.ps.gz">in postscript format</a>).
+       Here is the <a href ="http://vxl.cvs.sourceforge.net/vxl/www/manuals/examples-tutorial.tar.gz">
        example code</a> used in the guide.
-  <li>The <a href="../manuals/vgui_ref_manual/index.html">VGUI
-      reference manual</a> (also <a href="../manuals/vgui_ref_manual.ps.gz">in
+  <li>The <a href="http://vxl.cvs.sourceforge.net/vxl/www/manuals/vgui_ref_manual/index.html">VGUI
+      reference manual</a> (also <a href="http://vxl.cvs.sourceforge.net/vxl/www/manuals/vgui_ref_manual.ps.gz">in
       postscript format</a>) is designed for developers of VGUI.
   </ul>
 </ul>
 
+<p>
 xcv and vgui have not changed a lot since the last release of VXL so these guides should be useful for both
 the release and development versions of VXL.
+</p>
 <ul>
   <li>The <a href="http://paine.wiau.man.ac.uk/pub/doc_vxl/books/contrib/mul/book.html">MUL
       book</a> is an overview of libraries concerned with probability modelling,
@@ -199,29 +181,34 @@ the release and development versions of VXL.
 
 <h2>Problems and where to get help</h2>
 
-<p>Have a look through the <a href="http://vxl.sourceforge.net/build-faq.html"> Build
-FAQ</a>.</p>
+<p>
+Have a look through the <a href="http://vxl.sourceforge.net/build-faq.html">Build FAQ</a>.
+</p>
 
+<p>
 If you think you have found a bug, or if you have an installation or build problem, please submit a bug
 report on the <a href="http://lists.sourceforge.net/lists/listinfo/vxl-users">vxl-users
 mailing list</a>. Also supply the following information unless you know for certain it is not relevant:
+</p>
 <ul>
 <li> Exactly what you did and exactly what goes wrong. Be verbose. We need to know this in order to help.
      If you have problems configuring VXL, include the options you gave to configure and the output it
      produced. If you have problems compiling VXL, include the command the makefiles issued, as well as
      the entire error message.
 <li> Compiler and <i>compiler version number</i>. For gcc, this means we want the output of the
-     two shell commands &quot;<code>gcc -v</code>&quot; and &quot;<code>g++ -v</code>&quot; (yes, both, please - they have been known to differ). For other
-     compilers try <code>-V</code>, <code>-ver</code>, <code> -version</code> or read the manual.&nbsp;
+     two shell commands &quot;<code>gcc -v</code>&quot; and &quot;<code>g++ -v</code>&quot;
+     (yes, both, please - they have been known to differ). For other
+     compilers try <code>-V</code>, <code>-ver</code>, <code> -version</code> or read the manual.
 <li> Operating system (e.g. linux/solaris/irix) and architecture (e.g. i386/sparc/mips).
 </ul>
 
 <hr>
-    <address>
-<font color="#0000ff">vxl-maintainers at
-    lists dot sourceforge dot net</font>
+<address>
+<font color="blue">vxl-maintainers at lists dot sourceforge dot net</font>
 </address>
+<p>
+<a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
+</p>
 
-
-  </body>
+</body>
 </html>
