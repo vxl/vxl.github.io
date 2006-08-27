@@ -1,37 +1,40 @@
-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>Installing current VXL</title>
+    <title>Installing latest VXL</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <style type="text/css">
+      body { color: black ; background-color: white }
+    </style>
   </head>
 
-  <body bgcolor=white>
-<a href="http://vxl.sourceforge.net/" border=0><img ALT="VXL" src="../logo1-quant.gif" align=right border=0></a>
-    <h1>Installing the latest version of VXL</h1>
-<br clear=all>
-<hr>
+<body>
+    <h1>Installing the latest version of <a href="http://vxl.sourceforge.net/"><img alt="VXL" src="../logo1-quant.gif" border="0" width="128" height="48"/></a></h1>
+<hr/>
+
 <b>Contents:</b>
 <a href="#cmake">[Installing CMake]</a>&nbsp;&nbsp;
 <a href="#compile">[Compiling with CMake]</a>&nbsp;&nbsp;
 <a href="#cmakecache">[CMakeCache.txt]</a>&nbsp;&nbsp;
 <a href="#in-place">[In-place builds]</a>&nbsp;&nbsp;
 
-<hr>
-<a name = "cmake">
-<h1>Get and install CMake</h1></a> 
+<hr/>
+
+<h2><a name="cmake">Get and install CMake</a></h2>
 
 If you haven't already downloaded CMake then you will first need to get this first from the <a href="http://www.cmake.org/">CMake website</a>.
 VXL is designed to work with the latest release of CMake, as shown on the CMake website.
 
-<hr>
-<a name = "compile">
-<h3>Compiling with CMake</h3></a>
+<hr/>
+
+<h2><a name="compile">Compiling with CMake</a></h2>
 
 <p>
 Use $VXLSRC to refer to the vxl source tree. Create a different directory $VXLBIN, one per platform,
 and run CMake from within that directory.
 </p>
 
-<h2>With Visual Studio 6 and .NET</h2>
+<h3>With Visual Studio 6 and .NET</h3>
 
 <p>
 Run CMakeSetup and enter $VXLSRC and $VXLBIN into the appropriate text
@@ -40,19 +43,12 @@ All VXL projects are included in this workspace and you should be able
 to build them in the normal way for Visual Studio.
 </p>
 
-<h4>With Unix (including Cygwin)</h4>
-<p>
-<pre>
-  cd $VXLBIN
-</pre>
-and then
-<pre>
-  ccmake $VXLSRC      (Curses UI)
-</pre>
-or
-<pre>
-  cmake -i $VXLSRC       (command line)
-</pre>
+<h3>With Unix (including Cygwin)</h3>
+
+<pre>    cd $VXLBIN</pre>
+and then<pre>    ccmake $VXLSRC      (Curses UI)</pre>
+or<pre>    cmake -i $VXLSRC       (command line)</pre>
+
 
 <p>
 This will generate the makefiles within $VXLBIN. You can now run
@@ -61,13 +57,12 @@ run "make"--the dependent libraries should be automatically
 built.
 </p>
 
-<p>
-<b>Cygwin.</b>
+<h4>Cygwin.</h4>
+
 If you are using Cygwin and have installed the Cygwin OpenGL package,
-you probably want to build with this option
-<pre>
-  cmake -i -DX11_INCLUDE_PATH:PATH=IGNORE $VXLSRC
-</pre>
+you probably want to build with this option <pre>    cmake -i -DX11_INCLUDE_PATH:PATH=IGNORE $VXLSRC</pre>
+
+<p>
 This prevents CMake from using the X11 headers and libraries.  The
 OpenGL package puts its header files in /usr/include/GL/ and the
 XFree86 package puts some header files in /usr/X11R6/include/GL/.  If
@@ -76,11 +71,12 @@ XFree86 GL/*.h files will be used instead of the OpenGL package GL/*.h
 files.  These two sets of header files are not compatible.  Using the
 wrong ones will lead to linking problems involving mismatched suffixes
 like @4, @8, and @12.
+</p>
 
 
-<hr>
-<a name = "cmakecache">
-<h2>The CMakeCache.txt</h2></a>
+<hr/>
+
+<h2><a name="cmakecache">The CMakeCache.txt</a></h2>
 
 <p>
 The build system is configured by setting "cache" values, which are
@@ -97,12 +93,23 @@ values in there, so it is worth having a look at the settings in that
 file, e.g. for the location of JPEG, TIFF, etc.
 </p>
 
-<hr>
-<a name = "in-place">
-<h2>Doing an in-place build</h2>
+<hr/>
+
+<h2><a name="in-place">Doing an in-place build</a></h2>
 
 If you don't make a new directory for $VXLBIN, but instead use
 $VXLBIN=$VXLSRC, you will get an in-place build. The major
 disadvantage is that you cannot have different build options, since
 the build options are given in the CMakeCache.txt and there is only
 one of those per build tree.
+
+<hr/>
+  <address>
+   <a href="http://validator.w3.org/check?uri=referer"><img src="../valid-html401.png" height="31" width="88" align="right" border="0" alt="Valid HTML 4.01 Transitional"/></a>
+   <font color="blue">vxl-maintainers&nbsp;at&nbsp;lists&nbsp;dot&nbsp;sourceforge&nbsp;dot&nbsp;net</font>
+  <br/>
+   Hosted by <a href="http://sourceforge.net/"><img src="../sflogo.png" alt="SourceForge Logo" align="middle" border="0"/></a>
+  </address>
+
+  </body>
+</html>

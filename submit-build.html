@@ -1,68 +1,63 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <title>Submitting a VXL build</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <style type="text/css">
+      body { color: black ; background-color: white }
+    </style>
   </head>
 
-  <body bgcolor=white>
+  <body>
 
-<a href="http://vxl.sourceforge.net/" border=0><img ALT="VXL" src="../logo1-quant.gif" align=right border=0></a>
-    <h1>Submitting a build to the dashboard</h1>
-<br clear=all>
-<hr>
+    <h1>Submitting a <a href="http://vxl.sourceforge.net/"><img alt="VXL" src="logo1-quant.gif" border="0"/></a> build to the dashboard</h1>
+<hr/>
 <b>Contents:</b>
 <a href="#setup">[Setup]</a>&nbsp;&nbsp;
 <a href="#unix">[Unix]</a>&nbsp;&nbsp;
 <a href="#windows">[Windows]</a>&nbsp;&nbsp;
-<hr>
+<hr/>
 
-<a name = "setup">
-<h2>Setup</h2>
+
+<h2><a name="setup">Setup</a></h2>
 
 <ol>
-<li> Obtain and install <a href="http://public.kitware.com/Dart/">Dart</a> from KitWare. Call the installation directory $DART.
-<li> Checkout the VXL source tree into $VXLSRC. Checking out as anonymous is fine. Due to Dart implementation details, each build will need it's own source tree.
-<li> Create the binary directory $VXLBIN.
-<li> Run the initial CMake:
-      <pre>cd $VXLBIN &amp;&amp; cmake -DDART_ROOT:PATH=$DART $VXLSRC</pre>
+<li> Obtain and install <a href="http://public.kitware.com/Dart/">Dart</a> from KitWare. Call the installation directory $DART. </li>
+<li> Checkout the VXL source tree into $VXLSRC. Checking out as anonymous is fine. Due to Dart implementation details, each build will need it's own source tree. </li>
+<li> Create the binary directory $VXLBIN. </li>
+<li> Run the initial CMake: <pre>   cd $VXLBIN &amp;&amp; cmake -DDART_ROOT:PATH=$DART $VXLSRC</pre> </li>
 </ol>
 
 You will need to have Tcl installed your machine, since Dart is
 written in Tcl. Make sure the cache $VXLBIN/CMakeCache.txt has an
 entry for TCL_SH.
 
-<a name="unix">
-<h2>Building on Unix</h2>
+
+<h2><a name="unix">Building on Unix</a></h2>
 
 <ol>
-<li> Update Dart via cvs:
-       <pre>cd $DART &amp;&amp; cvs update -Pd</pre>
-<li> Clean the binary directory:
-       <pre>cd $VXLBIN &amp;&amp; make clean</pre>
-     or, even cleaner,
-       <pre>rm -rf $VXLBIN/* &amp;&amp; cd $VXLBIN &amp;&amp; cmake -DDART_ROOT:PATH=$DART $VXLSRC</pre>
-<li> Build.
-       <pre>tclsh $DART/Source/Client/DashboardManager.tcl DartConfiguration.tcl Nightly Start Update Configure Build Test Submit</pre>
+<li> Update Dart via cvs: <pre>   cd $DART &amp;&amp; cvs update -Pd</pre> </li>
+<li> Clean the binary directory: <pre>   cd $VXLBIN &amp;&amp; make clean</pre>
+     or, even cleaner, <pre>   rm -rf $VXLBIN/* &amp;&amp; cd $VXLBIN &amp;&amp; cmake -DDART_ROOT:PATH=$DART $VXLSRC</pre> </li>
+<li> Build.  <pre>   tclsh $DART/Source/Client/DashboardManager.tcl DartConfiguration.tcl Nightly Start Update Configure Build Test Submit</pre> </li>
 </ol>
 
-</a>
 
-<a name="windows">
-<h2>Building on Windows</h2>
+<h2><a name="windows">Building on Windows</a></h2>
 
 <ol>
-<li> Update Dart.
-<li> Build:
-<pre>
-cd $VXLBIN
-tclsh $DART/Source/Client/DashboardManager.tcl DartConfiguration.tcl Nightly Start Update Configure Build Test Submit
-</pre>
+<li> Update Dart. </li>
+<li> Build: <pre>   cd $VXLBIN
+   tclsh $DART/Source/Client/DashboardManager.tcl DartConfiguration.tcl Nightly Start Update Configure Build Test Submit</pre> </li>
 </ol>
 
-    <hr>
-    <address>
+<hr/>
+  <address>
+   <a href="http://validator.w3.org/check?uri=referer"><img src="valid-html401.png" height="31" width="88" align="right" border="0" alt="Valid HTML 4.01 Transitional"/></a>
+   <font color="blue">vxl-maintainers&nbsp;at&nbsp;lists&nbsp;dot&nbsp;sourceforge&nbsp;dot&nbsp;net</font>
+  <br/>
+   Hosted by <a href="http://sourceforge.net/"><img src="sflogo.png" alt="SourceForge Logo" align="middle" border="0"/></a>
+  </address>
 
-    <font color="#0000ff">vxl-maintainers at
-    lists dot sourceforge dot net</font>
-    </address>    </body>
+  </body>
 </html>
