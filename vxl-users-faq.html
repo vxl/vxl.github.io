@@ -12,9 +12,9 @@
 
   <body>
   
-  <h1><a href="http://vxl.sourceforge.net/"><img alt="VXL" src="logo1-quant.gif" border="0" width="128" height="48"/></a>-users Frequently Asked Questions</h1>
+  <h1><a href="http://vxl.sourceforge.net/"><img alt="VXL" src="logo1-quant.gif" border="0" width="128" height="48"></a>-users Frequently Asked Questions</h1>
 
-<hr/>
+<hr>
 
   <ol>
     <li>
@@ -27,11 +27,11 @@
       <code>/MP</code> and <code>/MD</code> much match exactly,
       in VXL's build and your program's build. These flags are set in Visual Studio under
       Settings-&gt;C/C++-&gt;Code Generation-&gt;Use run-time library.
-      <br/>
+      <br>
       The easiest way to link against these projects, we've found, is to use CMake for your project too.
       CMake will then make sure the flags match, or else will give you an error or warning.</p>
 
-<hr/>
+<hr>
 
     </li>
 
@@ -44,7 +44,7 @@
   so that it can understand the environment it is in. So having lots of <code>NOTFOUND</code> entries is quite normal. There is
   no need to worry unless CMake displays a warning or error message while it runs.</p>
 
-<hr/>
+<hr>
 
     </li>
 
@@ -59,7 +59,7 @@
   number of classes or functions, then you can manually list them. See the MSVC tool documentation for further
   details.</p>
 
-<hr/>
+<hr>
 
     </li>
 
@@ -73,7 +73,19 @@
       <a href="http://public.kitware.com/vxl/doc/release/books/core/book.html">VXL Book</a>. If you
       still have problems, show the appendix to a competent local programmer, and ask for their advice.</p>
 
-<hr/>
+<hr>
+
+    </li>
+
+    <li>
+      <p class="question">I'm trying to compile the whole of VXL and I get compiler or linker errors in $VXL_SRC/XXX/YYY mentioning library ZZZ</p>
+      <p class="answer">In many cases the code in question will be trying to use a system provided library ZZZ.
+      You can tell VXL to not use that library by looking in your CMakeCache.txt file for references to ZZZ
+      (e.g. <code>ZZZ_LIBRARY</code> or <code>ZZZ_INCLUDE_PATH</code>) and setting them to <code>IGNORE</code>.
+      Alternative you can disable the building of some parts of VXL (e.g. all of YYY) by looking in your
+      CMakeCache.txt file for references to <code>BUILD_YYY</code>, and setting them to <code>OFF</code>.</p>
+      
+<hr>
 
     </li>
 
@@ -83,18 +95,18 @@
       If you still haven't had a reply after a week, please read the <a href="vxl-users-policy.html">vxl-users list policy</a>,
       and repost your email after taking account of the advice in the policy.</p>
 
-<hr/>
+<hr>
 
-      </li>
+    </li>
 
   </ol>
 
-<hr/>
+<hr>
   <address>
-   <a href="http://validator.w3.org/check?uri=referer"><img src="valid-html401.png" height="31" width="88" align="right" border="0" alt="Valid HTML 4.01 Transitional"/></a>
+   <a href="http://validator.w3.org/check?uri=referer"><img src="valid-html401.png" height="31" width="88" align="right" border="0" alt="Valid HTML 4.01 Transitional"></a>
    <font color="blue">vxl-maintainers&nbsp;at&nbsp;lists&nbsp;dot&nbsp;sourceforge&nbsp;dot&nbsp;net</font>
-  <br/>
-   Hosted by <a href="http://sourceforge.net/"><img src="sflogo.png" alt="SourceForge Logo" align="middle" border="0"/></a>
+  <br>
+   Hosted by <a href="http://sourceforge.net/"><img src="sflogo.png" alt="SourceForge Logo" align="middle" border="0"></a>
   </address>
 
   </body>
