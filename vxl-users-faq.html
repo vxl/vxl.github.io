@@ -36,13 +36,17 @@
     </li>
 
     <li>
-      <p class="question">I followed the VXL installation documentation, but found that some of the entries in the
-        <code>
-        CMakeCache.txt</code> file say that CMake could not find programs, paths, etc. Is this a problem?</p>
-      <p class="answer">No. VXL needs very little to build correctly (only a C/C++ compiler at worst), however it can make use of
-  various system provided libraries, rather than build its own versions. CMake also looks for lots of system tools
-  so that it can understand the environment it is in. So having lots of <code>NOTFOUND</code> entries is quite normal. There is
-  no need to worry unless CMake displays a warning or error message while it runs.</p>
+      <p class="question">I followed the VXL installation documentation, but
+    found that the configuration output and/or entries in the
+    <code>CMakeCache.txt</code> file say that CMake could not find programs,
+    paths, etc. Is this a problem?</p>
+      <p class="answer">No. VXL needs very little to build correctly (only a
+    C/C++ compiler at worst), however it can make use of various system
+    provided libraries, rather than build its own versions. CMake also looks
+    for lots of system tools so that it can understand the environment it is
+    in. So having lots of <code>NOTFOUND</code> entries, or "<code>Could NOT
+    find</code>" reports is quite normal. There is no need to worry unless
+    CMake displays a warning or error message while it runs.</p>
 
 <hr>
 
