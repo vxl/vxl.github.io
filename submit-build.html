@@ -24,7 +24,12 @@ Follow the instructions below to contribute a submission to the
 
 <li> Check out the vxl testing scripts:
      <pre>
-     $ svn co https://svn.code.sf.net/p/vxl/svn/trunk/config/cmake/ctest-scripts vxl-scripts
+     $ mkdir vxl-scripts
+     $ cd vxl-scripts
+     $ git init
+     $ git remote add -t dashboard origin http://git.code.sf.net/p/vxl/git
+     $ git pull
+     $ cd ..
      $ ls vxl-scripts
      dash_example.cmake  vxl_common.cmake</pre>
 
