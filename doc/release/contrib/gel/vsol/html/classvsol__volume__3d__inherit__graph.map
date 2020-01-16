@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvsol__orient__box__3d.html" title="An oriented bounding box for 3d spatial objects." alt="" coords="45,305,184,329"/>
+<area shape="rect" href="$classvsol__polyhedron.html" title="vsol_polyhedron" alt="" coords="208,305,328,329"/>
+<area shape="rect" href="$classvsol__spatial__object__3d.html" title="vsol_spatial_object_3d" alt="" coords="112,156,269,180"/>
+<area shape="rect" href="$classvsol__spatial__object.html" title="vsol_spatial_object" alt="" coords="123,81,259,105"/>
+<area shape="rect" href="core_vul.tag$classvul__timestamp.html" title="vul_timestamp" alt="" coords="5,7,115,31"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="139,7,243,31"/>
+<area shape="rect" href="$classvsol__flags__id.html" title="vsol_flags_id" alt="" coords="267,7,365,31"/>
+<area shape="rect" href="$classvsol__tetrahedron.html" title="vsol_tetrahedron" alt="" coords="207,380,329,404"/>
+</map>

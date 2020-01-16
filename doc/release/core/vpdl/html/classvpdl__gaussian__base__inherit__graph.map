@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvpdl__gaussian.html" title="A Gaussian with variance independent in each dimension." alt="" coords="5,156,157,180"/>
+<area shape="rect" href="$classvpdl__gaussian__indep.html" title="A Gaussian with variance independent in each dimension." alt="" coords="181,156,373,180"/>
+<area shape="rect" href="$classvpdl__gaussian__sphere.html" title="A Gaussian with (hyper&#45;)spherical covariance." alt="" coords="397,156,597,180"/>
+<area shape="rect" href="$classvpdl__distribution.html" title="The base class for all probability distributions." alt="" coords="196,7,359,31"/>
+</map>

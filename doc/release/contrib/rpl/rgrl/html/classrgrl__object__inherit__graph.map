@@ -1,0 +1,50 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__converge__status.html" title="Represent the registration status." alt="" coords="321,29,468,53"/>
+<area shape="rect" href="$classrgrl__convergence__tester.html" title="rgrl_convergence_tester" alt="" coords="313,101,476,125"/>
+<area shape="rect" href="$classrgrl__data__manager.html" title="rgrl_data_manager" alt="" coords="328,173,461,197"/>
+<area shape="rect" href="$classrgrl__estimator.html" title="Interface for the transform estimators." alt="" coords="343,221,447,245"/>
+<area shape="rect" href="$classrgrl__evaluator.html" title="rgrl_evaluator" alt="" coords="344,317,445,341"/>
+<area shape="rect" href="$classrgrl__feature.html" title="Represents a feature (&quot;data point&quot;) used by the registration algorithms." alt="" coords="349,389,440,413"/>
+<area shape="rect" href="$classrgrl__feature__based__registration.html" title="Feature&#45;based registration." alt="" coords="292,557,497,581"/>
+<area shape="rect" href="$classrgrl__feature__set.html" title="Base class to represent and provide access in several ways to a set of registration features..." alt="" coords="337,605,452,629"/>
+<area shape="rect" href="$classrgrl__initializer.html" title="Interface for initial estimate generators." alt="" coords="345,725,444,749"/>
+<area shape="rect" href="$classrgrl__invariant.html" title="Represent a feature associated with a set of invariant properties." alt="" coords="345,773,444,797"/>
+<area shape="rect" href="$classrgrl__invariant__match.html" title="rgrl_invariant_match" alt="" coords="324,821,465,845"/>
+<area shape="rect" href="$classrgrl__invariant__set.html" title="Represent a feature associated with a set of invariant properties." alt="" coords="333,869,456,893"/>
+<area shape="rect" href="$classrgrl__mask.html" title="base class of roi which is a pure virtual class." alt="" coords="355,917,435,941"/>
+<area shape="rect" href="$classrgrl__match__set.html" title="For each feature in the &quot;from&quot; set, there is a set of features in the &quot;to&quot; set." alt="" coords="340,965,449,989"/>
+<area shape="rect" href="$classrgrl__matcher.html" title="Interface for the routines that compute matches." alt="" coords="347,1013,443,1037"/>
+<area shape="rect" href="$classrgrl__scale.html" title="Represents error scale estimates." alt="" coords="355,1061,435,1085"/>
+<area shape="rect" href="$classrgrl__scale__estimator__unwgted.html" title="Interface for unweighted scale estimator." alt="" coords="295,1109,495,1133"/>
+<area shape="rect" href="$classrgrl__scale__estimator__wgted.html" title="Interface for weighted scale estimator." alt="" coords="303,1157,487,1181"/>
+<area shape="rect" href="$classrgrl__spline.html" title="A tensor&#45;product B&#45;spline in 4D can be written in." alt="" coords="353,1205,436,1229"/>
+<area shape="rect" href="$classrgrl__transformation.html" title="A base class that represents a transformation." alt="" coords="328,1253,461,1277"/>
+<area shape="rect" href="$classrgrl__view.html" title="Represents a &quot;view&quot; of the registration problem." alt="" coords="357,1301,432,1325"/>
+<area shape="rect" href="$classrgrl__weighter.html" title="Compute the weights based on the scales and matches." alt="" coords="345,1349,444,1373"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,845,109,869"/>
+<area shape="rect" href="$classrgrl__converge__status__nas.html" title="Represent the registration status." alt="" coords="581,5,755,29"/>
+<area shape="rect" href="$classrgrl__convergence__on__median__error.html" title="Determine convergence based on the median geometric error." alt="" coords="552,53,784,77"/>
+<area shape="rect" href="$classrgrl__convergence__on__weighted__error.html" title="Determine convergence based on the weighted average of geometric errors." alt="" coords="547,101,789,125"/>
+<area shape="rect" href="$classrgrl__linear__estimator.html" title="Interface for linear transform estimators." alt="" coords="596,149,740,173"/>
+<area shape="rect" href="$classrgrl__nonlinear__estimator.html" title="Interface for non&#45;linear transform estimators." alt="" coords="585,197,751,221"/>
+<area shape="rect" href="$classrgrl__evaluator__ssd.html" title="rgrl_evaluator_ssd" alt="" coords="603,245,733,269"/>
+<area shape="rect" href="$classrgrl__feature__face__pt.html" title="rgrl_feature_face_pt" alt="" coords="597,293,739,317"/>
+<area shape="rect" href="$classrgrl__feature__landmark.html" title="Represents a landmark feature." alt="" coords="592,341,744,365"/>
+<area shape="rect" href="$classrgrl__feature__point.html" title="Represent a point in space." alt="" coords="605,389,731,413"/>
+<area shape="rect" href="$classrgrl__feature__trace__pt.html" title="Represent a point along a trace (of a vessel, neuron, etc.)." alt="" coords="596,437,740,461"/>
+<area shape="rect" href="$classrgrl__feature__set__bins.html" title="A set of features grouped only by N&#45;d location." alt="" coords="579,485,757,509"/>
+<area shape="rect" href="$classrgrl__feature__set__bins__2d.html" title="A set of features grouped only by N&#45;d location." alt="" coords="584,533,752,557"/>
+<area shape="rect" href="$classrgrl__feature__set__location.html" title="A set of features grouped only by N&#45;d location." alt="" coords="568,581,768,605"/>
+<area shape="rect" href="$classrgrl__feature__set__location__masked.html" title="Represents a set of point features, valid in the masked region." alt="" coords="557,629,779,653"/>
+<area shape="rect" href="$classrgrl__initializer__inv__indexing.html" title="Generate the set of initial estimates using invariant indexing." alt="" coords="579,677,757,701"/>
+<area shape="rect" href="$classrgrl__initializer__prior.html" title="Generate initial estimates based on a single prior transformation." alt="" coords="601,725,735,749"/>
+<area shape="rect" href="$classrgrl__initializer__ran__sam.html" title="Generate the initial estimate using random sampling." alt="" coords="588,773,748,797"/>
+<area shape="rect" href="$classrgrl__initializer__reader.html" title="Generate initial estimates based on a single prior transformation." alt="" coords="595,821,741,845"/>
+<area shape="rect" href="$classrgrl__invariant__single__landmark.html" title="Represent a 2D bifurcation landmark associated with a set of invariant properties." alt="" coords="567,869,769,893"/>
+<area shape="rect" href="$classrgrl__mask__2d__image.html" title="this is a wrapper on the binary mask image. The image is define for the x&#45;y plane." alt="" coords="595,917,741,941"/>
+<area shape="rect" href="$classrgrl__mask__3d__image.html" title="rgrl_mask_3d_image" alt="" coords="595,965,741,989"/>
+<area shape="rect" href="$classrgrl__mask__box.html" title="this is a wrapper on the box." alt="" coords="613,1013,723,1037"/>
+<area shape="rect" href="$classrgrl__mask__oriented__box.html" title="this is a wrapper on an oriented box." alt="" coords="587,1061,749,1085"/>
+<area shape="rect" href="$classrgrl__mask__sphere.html" title="This is a wrapper on the circular region or sphere." alt="" coords="604,1109,732,1133"/>
+<area shape="rect" href="$classrgrl__matcher__fixed.html" title="Returns a set of pre&#45;computed matches for the current view." alt="" coords="603,1157,733,1181"/>
+</map>

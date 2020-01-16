@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbundler__sfm__add__next__images.html" title="Takes in the current reconstruction and an image, and adds the image to the reconstruction." alt="" coords="5,5,213,29"/>
+<area shape="rect" href="$classbundler__sfm__impl__add__next__images.html" title="The default implementation of the add next image stage." alt="" coords="263,5,500,29"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbbgm__mean__viewer.html" title="A mean viewer." alt="" coords="5,156,147,180"/>
+<area shape="rect" href="$classbbgm__variance__viewer.html" title="A variance viewer." alt="" coords="171,156,328,180"/>
+<area shape="rect" href="$classbbgm__weight__viewer.html" title="A weight viewer." alt="" coords="352,156,499,180"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="197,7,301,31"/>
+</map>

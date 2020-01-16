@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbsta__mg__weighted__updater.html" title="A mixture of Gaussians weighted statistical updater." alt="" coords="5,156,269,180"/>
+<area shape="rect" href="$classbsta__mg__window__updater.html" title="A mixture of Gaussians statistical updater." alt="" coords="293,156,549,180"/>
+<area shape="rect" href="$classbsta__mg__adaptive__updater.html" title="A mixture of Gaussians adaptive updater." alt="" coords="148,7,409,31"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbsta__distribution.html" title="bsta_distribution\&lt; dist_::math_type, dist_::dimension \&gt;" alt="" coords="5,29,349,53"/>
+<area shape="rect" href="$classbsta__mixture.html" title="A mixture of distributions." alt="" coords="423,5,572,29"/>
+<area shape="rect" href="$classbsta__mixture__fixed.html" title="A mixture of distributions with a fixed size of s components." alt="" coords="397,53,597,77"/>
+</map>

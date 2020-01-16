@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classAffineMetric.html" title="AffineMetric" alt="" coords="5,81,99,105"/>
+<area shape="rect" href="$classSimilarityMetric.html" title="SimilarityMetric" alt="" coords="123,81,235,105"/>
+<area shape="rect" href="$classHomgNorm2D.html" title="HomgNorm2D" alt="" coords="125,156,232,180"/>
+</map>

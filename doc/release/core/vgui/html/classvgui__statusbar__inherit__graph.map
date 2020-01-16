@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgui__gtk2__statusbar.html" title="The GTK implementation of vgui_statusbar." alt="" coords="168,5,309,29"/>
+<area shape="rect" href="$classvgui__gtk__statusbar.html" title="The GTK implementation of vgui_statusbar." alt="" coords="172,53,305,77"/>
+<area shape="rect" href="$classvgui__mfc__statusbar.html" title="The MFC implementation of vgui_statusbar." alt="" coords="169,101,308,125"/>
+<area shape="rect" href="$classvgui__qt__statusbar.html" title="QT implementation of vgui_statusbar." alt="" coords="175,149,303,173"/>
+<area shape="rect" href="$classvgui__win32__statusbar.html" title="vgui_win32_statusbar" alt="" coords="163,197,315,221"/>
+<area shape="rect" href="$classvgui__wx__statusbar.html" title="wxWidgets implementation of vgui_statusbar." alt="" coords="172,245,305,269"/>
+</map>

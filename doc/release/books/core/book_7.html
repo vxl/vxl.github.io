@@ -1,0 +1,1717 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 7. vil: Imaging</title>
+
+<meta name="description" content="VXL: 7. vil: Imaging">
+<meta name="keywords" content="VXL: 7. vil: Imaging">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="vil"></a>
+<a name="SEC66"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_6.html#SEC65" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC67" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 7. vil: Imaging </h1>
+
+
+  <blockquote><p>  <strong>Chapter summary</strong>:
+Load images using <code>vil_load</code>.  Access them using a <code>vil_image_view&lt;T&gt;</code>.
+  </p></blockquote>
+
+<p>The v<em>x</em>l image library has evolved from the TargetJr and Manchester Image
+libraries.
+As with its predecessors, its primary goals is to provide flexible access
+to all 2D images, including those too large to fit in
+the address space of a single program or process, and very powerful and
+fast access to images in memory.  In fact, both cases need similar
+treatment: even in-core images are assumed to be sufficiently large (say a
+megabyte) that special care must be taken to avoid unnecessary copying of
+their data.  In both cases, the normal requirements of efficiency and
+ease-of-use apply.  The system must allow:
+</p><ul>
+<li> Beginners to have easy access to an image type.  This image type
+should also be the default image type for an programmer writing
+image processing code.  This image type must be very efficient to use.
+
+</li><li> Fast access to images on disk, at no more than a 10% speed penalty
+for operations on images in memory.
+
+</li><li> Fast loading of subsets of the image data.  To look at a
+small portion of a 10000 by 10000 pixel satellite image, one should
+not have to load the entire 300 megabytes into memory.
+
+</li><li> Efficient memory management, both automatic and programmer-mediated.
+Automatic management is vital during program development, when the code is
+changing quickly.  On the other hand, release builds need the kind of
+optimisations that only a human can apply.
+</li></ul>
+
+<p>This vil library is the second VXL image library, and is sometimes referred
+to as vil2.  The original v<em>x</em>l image library vil1 is deprecated.
+</p>
+<p>You can read more about the design philosophy in <code>$VXLSRC/core/vil/notes.html</code>
+</p>
+<hr size="6">
+<a name="SEC67"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC66" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC68" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.1 Loading and saving </h2>
+
+<p>Let's look at an example of vil in use.  This program makes an image from a
+disk file, copies it into memory, and prints the pixel at
+100,100.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vxl_config.h&gt;
+#include &lt;vil/vil_rgb.h&gt;
+#include &lt;vil/vil_load.h&gt;
+#include &lt;vil/vil_image_view.h&gt;
+
+int main()
+{
+  vil_image_view&lt;vil_rgb&lt;vxl_byte&gt; &gt; img;
+  img = vil_load(&quot;foo.ppm&quot;);
+  vcl_cerr &lt;&lt; &quot;Pixel 100,100 = &quot; &lt;&lt; img(100,100) &lt;&lt; vcl_endl;
+}
+</pre></td></tr></table>
+<p>The first interesting line declares img to be an image. vil_image_view
+is the basic image type.  It represents an image in memory about
+whose structure, size and pixel type we know everything.
+Hence we need to specify the pixel type at this point.
+</p>
+<p>Now let's skip to the end to explain the pixel access method.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  img(100,100)
+</pre></td></tr></table><p>This looks up the pixel at position 100,100 and returns its value.  The
+pixel type was defined on the first line to be an rgb of bytes, and
+that is what will be displayed.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">[255 128 128]
+</pre></td></tr></table><p>Where it matters (such as when loading
+an image in from disk) it is assumed that the image origin is at the
+top left of the image.
+</p>
+<p>Finally lets look at the middle line.  This consists of two parts.
+The <code>vil_load</code> function does a lot of work behind the scenes
+to determine what the image type is, and then load that image into
+memory.  The second part is the assignment which has several special properties.
+</p><ul>
+<li> It does not copy the actual image data.  A <code>vil_image_view</code> object
+is really a view of some underlying data.  The view understands where the
+real image data is in memory and how to interpret it.  When you copy
+a view, you merely copy this interpretation information, not the actual
+image data.  This is important, because often images are very big, and
+copying is expensive.  The underlying image is managed with smart pointers
+so when the last view to the underlying data is destroyed, the image data
+will be too.
+
+</li><li> It can do cheap conversions between different views of the same image.
+<code>vil_load</code> by default loads the image as 3 planes, with the pixel
+type as <code>vxl_byte</code>.  It is trivial to reconfigure a <code>vil_image_view</code>
+so that it views the same image data as one plane of rgb pixels.  The
+assignment will automatically do any cheap conversion necessary.  You may
+ask then, how is that we know that the pixel type can be viewed as RGB of bytes?
+Here, we simply know that our image foo.ppm is this type.  In general you can
+either find out what the pixel type is before you load the image, or
+you can force it to whatever pixel type you want.  The latter may involve
+a relatively expensive pixel by pixel conversion, so this will not happen
+automatically.
+</li></ul>
+
+
+<hr size="6">
+<a name="SEC68"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC67" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC69" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC67" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 7.1.1 Loading and saving: The threshold program </h3>
+
+<p>Anyway, the usual next step in demonstrating an image handling library is
+to show thresholding, so let's have a look.  This program loads an image
+into memory, forcing it to RGB byte format, and creates a new image where
+all pixels greater than a threshold value are set to 0.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vxl_config.h&gt;
+#include &lt;vil/vil_rgb.h&gt;
+#include &lt;vil/vil_load.h&gt;
+#include &lt;vil/vil_save.h&gt;
+#include &lt;vil/vil_image_view.h&gt;
+#include &lt;vil/vil_convert.h&gt;
+
+int main(int argc, char **argv)
+{
+  vil_image_view&lt;vil_rgb&lt;vxl_byte&gt; &gt; img;
+  img = vil_convert_to_component_order(
+          vil_convert_to_n_planes(3,
+                                  vil_convert_cast(vxl_byte(),
+                                                   vil_load(argv[1]))));
+
+  for (unsigned j = 0; j &lt; img.nj(); ++j)
+    for (unsigned i = 0; i &lt; img.ni(); ++i)
+      if (img(i,j).r &lt; 200 &amp;&amp; img(i,j).g &lt; 200 &amp;&amp; img(i,j).b &lt; 200)
+        img(i,j) = vil_rgb&lt;vxl_byte&gt;(0,0,0);
+
+  vil_save(img, argv[2]);
+  return 0;
+}
+</pre></td></tr></table>
+<p>The call to <code>vil_save</code> sends the modified image in <var>img</var> to disk.
+The choice of file format is determined automatically from the extension of
+the filename.  If one wants more control, a string can be appended to specify the
+format, e.g.
+<a name="IDX19"></a>
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  vil_save(buf, argv[2], &quot;jpeg&quot;);
+</pre></td></tr></table><p>Of course, if your user has chosen a name such as &quot;foo.ppm&quot;,
+you'll have a oddly named image.
+</p>
+
+<hr size="6">
+<a name="SEC69"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC68" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC70" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.2 Copying an image </h2>
+
+<p>You should know by now that copying <code>vil_image_view</code> objects does not
+duplicate the data they point to.  This allows images to be passed into and
+out of functions efficiently.  It also means that modifying the data in one
+<code>vil_image_view</code> might change that in another.  Take this example
+</p><table><tr><td>&nbsp;</td><td><pre class="example">...
+vil_image_view&lt;float&gt; a( vil_convert_cast(float(), vil_load(&quot;x&quot;)) );
+vil_image_view&lt;float&gt; b = a;
+b(100,100) = 12;
+...
+</pre></td></tr></table><p>After the assignment in line 3, both <var>a(100,100)</var> and <var>b(100,100)</var>
+are set to the value 12.  On the other hand, if we had used
+<code>vil_copy_deep</code>, thus:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">...
+vil_image_view&lt;float&gt; a( vil_convert_cast(float(), vil_load(&quot;x&quot;)) );
+vil_copy_deep(a, b);
+b(100,100) = 12;
+...
+</pre></td></tr></table><p>or
+</p><table><tr><td>&nbsp;</td><td><pre class="example">...
+vil_image_view&lt;float&gt; a( vil_load(&quot;x&quot;) );
+vil_image_view&lt;float&gt; b( vil_copy_deep(a) );
+b(100,100) = 12;
+...
+</pre></td></tr></table><p>then <var>a</var> is unchanged after the assignment to <var>b(100,100)</var>.
+Note again that the actual copying is done in <code>vil_copy_deep</code>; when the
+return value is assigned to <var>b</var>, there is an efficient view copy.
+</p>
+
+<hr size="6">
+<a name="SEC70"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC69" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC71" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.3 Image resources </h2>
+
+
+<p>Broadly there are two sorts of image one is interested in
+</p><ul class="toc">
+<li> images in memory, about which everything is known and
+all parts of which can be accessed directly.
+</li><li> external images (eg in files) which can only be accessed
+indirectly, or images about which we may currently be missing information
+(eg pixel type.)
+</li></ul>
+
+<p>As we have seen the first sort of images are represented
+by a <code>vil_image_view&lt;T&gt;</code> on the data in memory.
+For some very large images it is not
+possible or desirable to load them into memory.  In this case it is
+useful to be able to load in a sub-section of the image,
+manipulate it, and possible write it out again.  Alternatively
+you may want to pass an image about, and process it without
+knowing its pixel type. vil supports these second sort of images
+using <code>vil_image_resource</code>.  You cannot create an image
+resource object directly, instead you use a creation function
+which returns a smart pointer to the base class
+<code>vil_image_resource_sptr</code>.  When manipulating
+<code>vil_image_resource</code>s it will almost entirely be in terms of
+<code>vil_image_resource_sptr</code>s.
+There are several types of
+image resource, with different creation functions:
+</p>
+<ul>
+<li> Representing an image in a file: e.g. <code>vil_pnm_image</code>,
+<code>vil_jpeg_image</code>.  These are created using
+<code>vil_load_image_resource()</code>,
+and <code>vil_new_image_resource()</code>.
+
+</li><li> <code>vil_memory_image</code>: Representing an image in memory
+ This is created using
+<code>vil_new_image_resource()</code>.  Alternatively if you want to
+wrap an existing view up as a vil_image_resource you can call
+<code>vil_new_image_resource_of_view()</code>
+
+</li><li> Representing a filtered version of an
+image in a file (without loading in memory): e.g.
+<code>vil_crop_image_resource</code> and
+<code>vil_decimate_image_resource</code>.  These
+are created using the equivalent functions: <code>vil_crop()</code>,
+<code>vil_decimate()</code>, etc.
+
+</li><li> Representing the outcome of an image
+processing algorithm (see next section) e.g.
+<code>vil_convolve_1d_resource</code>.
+These are created using the equivalent
+functions e.g. <code>vil_convolve_1d()</code>.
+
+</li></ul>
+
+<p>To actually get some image pixels you call the resource's
+<code>get_view()</code> or <code>get_copy_view()</code> method.
+For example, the <code>vil_load()</code> function works by creating
+a <code>vil_image_resource</code>, and then calling <code>get_view()</code>
+for the whole image.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vil_image_view_base_sptr vil_load(char const* file)
+{
+  vil_image_resource_sptr data = vil_load_image_resource(file);
+  if (!data) return 0;
+  return data -&gt; get_view();
+}
+</pre></td></tr></table>
+<p>To set image pixels, you call the resource's <code>put_view()</code>.
+</p>
+
+<hr size="6">
+<a name="SEC71"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC70" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC72" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC70" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 7.3.1 A rule of thumb. </h3>
+
+<blockquote><p>When developing an image processing algorithm,
+first write your algorithm in terms of a function for <code>vil_image_view&lt;T&gt;</code>.
+Then, if you need it, write the vil_image_resource_sptr version, using
+the <code>vil_image_view&lt;T&gt;</code> version to do the actual pixel manipulation.
+</p></blockquote>
+
+<p><code>vil_image_view&lt;T&gt;</code> is designed for playing with actual pixel values.
+<code>vil_image_resource</code> derivatives are designed to handle all the other stuff
+associated with images, e.g. choosing pixel types at runtime,
+splitting an image into blocks so that it fits in memory,
+dealing with the arbitrary and complex hassles of image IO.
+</p>
+
+<hr size="6">
+<a name="SEC72"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC71" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC73" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC70" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 7.3.2 Using <code>vil_memory_image</code> to ignore pixel type. </h3>
+
+<p><a name="vil_005fmemory_005fimage"></a>
+</p>
+<p>As explained above, you should be using <code>vil_image_view&lt;T&gt;</code> to
+actually manipulate your pixels.  However, in some parts of your
+code, you may want to pass images around without having to decide
+the pixel type at compile time.  This is a role for a
+<code>vil_image_resource</code> derivative, in particular the
+<code>vil_memory_image</code>.  You can wrap an existing
+<code>vil_image_view&lt;T&gt;</code> in a <code>vil_memory_image</code> by calling
+<code>vil_new_image_resource_of_view()</code>.  Reference counting keeps track
+of the underlying data in memory, so you can let the original
+view go out of scope without loss.
+</p>
+<p>It may be tempting to use the <code>vil_image_view_base_sptr</code> for this
+purpose instead.  That type is only intended for internal use by vil, and
+it will almost certainly not behave as you want.
+</p>
+<p>The <code>vil_image_resource</code> API has been designed to allow efficient
+access to <code>vil_memory_image</code>.  In the example
+below, if the image resource passed in is really a
+<code>vil_memory_image</code>, the <code>get_view()</code> returns a view
+to the underlying data, so no unneeded data copying happens.
+Similarly, a call to <code>put_view()</code>, can return almost immediately,
+checking only to confirm that the view is still pointing to
+the same underlying data.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">void display_view(vil_image_resource_sptr &amp;ir)
+{
+  switch (ir-&gt;pixel_format())
+  {
+   case VIL_PIXEL_FORMAT_BYTE: {
+    vil_image_view&lt;vxl_byte&gt; v1 = ir-&gt;get_view();
+    display_byte(v1); }
+   case ...
+  }
+}
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="SEC73"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC72" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC74" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.4 Planes, components and stepping. </h2>
+
+
+<p><code>vil_image_view</code>
+uses a pointer arithmetic style of indexing.
+The image data is assumed to be a regularly arranged set of
+pixels in memory.  The view keeps a pointer to the pixel
+at the origin.  It also keeps the pointer difference to
+get to the next pixel to the right, the next pixel down,
+and the same pixel in the next plane.
+</p>
+<p>In a general image representation a 2d image
+consists of multiple planes each containing multiple rasters (rows)
+each containing multiple pixels, and each pixel contains multiple
+components.  The planes and the components are used for the same
+purpose, to represent different spectral or functional values (e.g. the
+red, green and blue channels of an RGB image.) In vil it is usually
+assumed that an image cannot have both multiple planes and multiple
+components per pixel.  This allows
+<code>vil_image_view</code> to view the same a colour image data
+as either a 3 plane image or a 1 plane RGB image.  You can do this
+explicitly by calling <code>vil_view_as_planes()</code> or
+<code>vil_view_as_rgb()</code>. So the following example will print the
+same value twice.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">// Assume that x.png is an rgb byte image.
+vil_image_view&lt;vil_rgb&lt;vxl_byte&gt; &gt; im = vil_load(&quot;x.png&quot;);
+vil_image_view&lt;vxl_byte&gt; im2 = vil_view_as_planes(im);
+vcl_cout &lt;&lt; (int) (im(3,4).r) &lt;&lt; vcl_endl;
+vcl_cout &lt;&lt; (int) (im(3,4,0)) &lt;&lt; vcl_endl;
+</pre></td></tr></table>
+<p><code>vil_view_as_planes()</code> and <code>vil_view_as_rgb()</code> are
+actually redundant, and simple assingment will do. In the above
+example the conversion can be achieved by
+<code>vil_image_view&lt;vxl_byte&gt; im2 = im</code>
+</p>
+<p>You should bear in mind that the component-wise and plane-wise
+representations are not equal.  The
+multi-plane representation
+is more general than the RGB multi-component one.  If
+the underlying data is actually stored RRRR..GGGG..BBBB..
+then it is not possible to view that image as a single
+plane of RGB pixels.  For this reason, a lot of vil prefers
+to view an image as multi-plane single-component.  In particular,
+the vil_image_resource derivatives in vil, will treat
+all images as multi-plane, scalar component images, whether the
+underlying data is RGBRGBRGB... or RRRR..GGGG..BBBB..  This means
+if you have switch statement to deal with pixel
+types in an normal image resource, you need not worry about any
+types other than than the following
+</p><ul>
+<li> bool
+</li><li> vxl_byte, vxl_sbyte
+</li><li> vxl_int_16, vxl_uint_16
+</li><li> vxl_int_32, vxl_uint_32
+</li><li> float, double
+</li><li> vcl_complex&lt;float&gt;, vcl_complex&lt;double&gt;
+</li></ul>
+
+<a name="IDX20"></a>
+<p>Similarly to the planes to components conversion
+it is possible to perform a whole range of other manipulations.  These
+include <code>vil_transpose()</code>, <code>vil_flip_ud()</code>,
+<code>vil_decimate()</code>, <code>vil_crop()</code>.
+One further advantage of the arithmetic indexing scheme is that
+it becomes easy to create a 2d slice view of a 3d image.
+</p>
+
+<hr size="6">
+<a name="SEC74"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC73" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC75" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.5 Algorithms and Image Processing </h2>
+
+<p>Several image processing functions can be found in the algo
+subdirectory of vil.  Lets look at an example of finding the image
+gradient using a Sobel filter.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vxl_config.h&gt; // for vxl_byte
+#include &lt;vil/vil_image_view.h&gt;
+#include &lt;vil/vil_print.h&gt;
+#include &lt;vil/algo/vil_sobel_3x3.h&gt;
+
+int main()
+{
+  unsigned ni=8;
+  unsigned nj=15;
+  unsigned nplanes=1;
+  vil_image_view&lt;vxl_byte&gt; image(ni,nj,nplanes);
+
+  for (unsigned p=0;p&lt;nplanes;++p)
+    for (unsigned j=0;j&lt;nj;++j)
+      for (unsigned i=0;i&lt;ni;++i)
+        image(i,j,p) = vxl_byte(i+10*j+100*p);
+
+  vcl_cout&lt;&lt;&quot;Original image:&quot;&lt;&lt;vcl_endl;
+  vil_print_all(vcl_cout,image);
+
+  // Objects to hold gradients
+  vil_image_view&lt;float&gt; grad_i,grad_j;
+
+  vil_sobel_3x3(image,grad_i,grad_j);
+
+  vcl_cout&lt;&lt;vcl_endl
+          &lt;&lt;&quot;Sobel I Gradient:&quot;&lt;&lt;vcl_endl;
+  vil_print_all(vcl_cout,grad_i);
+
+  vcl_cout&lt;&lt;vcl_endl
+          &lt;&lt;&quot;Sobel J Gradient:&quot;&lt;&lt;vcl_endl;
+  vil_print_all(vcl_cout,grad_j);
+
+  return 0;
+}
+</pre></td></tr></table>
+<p>There are also algorithms to perform image arithmetic,
+smoothing, general 1D and 2D
+convolution, morphological operations, interpolation,
+and much more.
+</p>
+
+<hr size="6">
+<a name="SEC75"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC74" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC76" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.6 Converting from using the old vil1 to vil. </h2>
+
+<p>This section explores the major differences between using the old vil1
+and using vil, and some of the implications for converting existing code.
+</p>
+<p>The first and most obvious difference is that whilst there is a broad equivalent to
+<code>vil1_image</code>, and its descendants, this class tree has been split in two.  The abstract
+<code>vil1_image</code> is now replaced with a smart pointer to a <code>vil_image_resource</code>.
+The concrete <code>vil1_memory_image_of&lt;T&gt;</code> is now a <code>vil_image_view&lt;T&gt;</code>.
+Whereas previously, you might have written code in terms of <code>vil1_image</code>, it now
+usually makes sense to write most image manipulations in terms of
+<code>vil_image_view&lt;T&gt;</code>s.  With the old <code>vil1_image</code>, you either had to
+do a <code>get_section</code> and operate on raw memory, or do a messy switch statement to cast
+it to its underlying <code>vil_memory_image_of&lt;T&gt;</code> type, or do an expensive
+<code>vil1_view_as()</code> conversion.
+Now with vil, the <code>vil_image_view&lt;T&gt;</code> provides a powerful view directly onto
+your image in memory.
+</p>
+<p>The <code>vil_image_view</code> provides such facilities
+as compile-time type safety and switchable bounds checking.  It also acts as a
+sort of canonicaliser.  A wide range of actual memory layouts can all be treated
+identically and transparently while working through the <code>vil_image_view</code>.
+Previously, in vil1, the image loader often needed read an unblocked resource and to have several filters placed
+on top of it to do such things as re-order the raster rows and re-order the
+component order. vil doesn't do this, but instead uses the vil_image_view to provide
+a canonical view of whatever deranged image format your loader finds most efficient to
+use.
+</p>
+<p>The second important change is that vil provides full support for planes.  In many cases
+accessing different image planes is directly equivalent to accessing different components.
+Indeed, it is often preferable to view an image as a multi-planar rather than multi-component.
+If your algorithms assume a single plane, it is however trivial to provide a wrapper function
+which takes a multi-planar image and passes one plane at a time to your algorithm.  This
+can be done with virtually no loss in efficiency, and indeed is how some of the code in
+<code>vil/algo</code> is written.
+</p>
+<p>To help convert existing code there is a script (<code>core/vil/scripts/vil1tovil.pl</code>)
+It converts as much code as it can.  However, it can really only deal with file and identifier
+name changes.  There are large structural differences between vil1 and vil, with many of the
+equivalent functions taking different parameters.  The output of the conversion script
+can best be seen as a hint on which types and classes to use and which functions to call.
+You will almost certainly need to make extensive further edits to your code to get it
+to compile again.
+</p>
+<p>If you do not want to convert any code, but would rather use an interface to convert
+between vil1 and vil types at runtime, then take a look at <code>&lt;vil1/vil1_vil.h&gt;</code>
+which has a function for converting between <code>vil1_memory_image_of</code> and <code>vil_image_view</code>, and
+a class that wraps a <code>vil1_image</code>, and exports a <code>vil_image_resource</code> interface.
+</p>
+
+<hr size="6">
+<a name="SEC76"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC75" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC77" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.7 Frequently Asked Questions </h2>
+
+
+<dl compact="compact">
+<dt> Question 1</dt>
+<dd>
+<blockquote><p>I'm trying to load a DICOM image, but it doesn't work. <code>vil_load.cxx</code>
+prints an error message that mentions lots of image type but not <code>.dcm</code>.
+What's wrong?
+</p></blockquote>
+
+<p>The DICOM loader in VXL is not built by default,
+because it is large and only medical image people want it.
+</p>
+<p>You will need to rerun CMake and find Cache value called
+VXL_BUILD_DICOM.  Turn it on, and rebuild -- it won't need to rebuild
+everything.
+</p>
+</dd>
+<dt> Question 2</dt>
+<dd>
+<blockquote><p>I'm having problems trying to use vil_image_view_base_sptr to process a
+loaded image without worrying about what type the pixels are.
+</p></blockquote>
+
+<p>The designers of vil recommend against using <code>vil_image_view_base_sptr</code>
+explicitly -- it is unlikely to behave the way any user might want or
+expect. vil never processes pixels independently of their type, and
+<code>vil_image_view_base_sptr</code> is just a smart polymorphic pointer to a
+concrete <code>vil_image_view&lt;T&gt;</code> with some actual pixel type <code>T</code>.
+If you want to convert a loaded image into pixels of a particular type,
+use one of the <code>vil_convert</code> functions
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  vil_image_view&lt;vxl_byte&gt; view =
+    vil_convert_stretch_range (vxl_byte(), vil_load(my_filename));
+</pre></td></tr></table>
+<p>If you want to store an image in memory without worrying about its pixel
+type, <code>See <a href="#vil_005fmemory_005fimage">vil_memory_image</a>.</code>
+</p>
+</dd>
+<dt> Question 3</dt>
+<dd>
+<blockquote><p>What co-ordinate system does vil use?
+</p></blockquote>
+
+<p>Mostly vil does not assume that the <code>i</code> and <code>j</code> co-ordinates have any explicit
+meaning. Instead, any external meaning to the <code>i</code> and <code>j</code> directions is
+provided externally by the user. The choice of the letters <code>i</code> and <code>j</code> was an
+explicit decision to discourage any assuption of a Cartesian reference frame.
+</p>
+<p>However there are a few places where further assumptions need to be made.
+When loading an image, the file format generally provides an explicit mapping
+to up/down and left/right. In such cases, vil assumes that <code>image(0,0)</code> is the
+top-left-most pixel in the image, that increasing <code>i</code> moves right, and that
+increasing <code>j</code> moves down. A similar assumption is used by <code>vil_rotate</code> to provide
+a direction to the rotation angle.
+</p>
+<p>If you need an explicit world co-ordinate frame, within which you can embed an image,
+then take a look at the vimt library in <code>vxl/contrib/mul/vimt</code>. That provides
+an world-to-image co-ordinates transform, that can be efficiently manipulated to
+provide transforms up to projective complexity.
+</p>
+</dd>
+</dl>
+
+
+<hr size="6">
+<a name="SEC77"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC76" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC78" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.8 Optimising Image Processing Algorithms (Advanced Topic) </h2>
+
+<p>The design of <code>vil_image_view</code> (being more flexible than the design of vil1,)
+and the state of modern optimising compilers (not as good as they
+could be,) means that naive use of vil images may not be as fast as it
+should be.
+</p>
+<p>The following example shows the original implementation of
+the image fill method.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">template&lt;class T&gt;
+void vil_image_view&lt;T&gt;::fill(T value)
+{
+  for (unsigned p=0;p&lt;nplanes_;++p)
+    for (unsigned j=0;j&lt;nj_;++j)
+      for (unsigned i=0;i&lt;ni_;++i)
+        (*this)(i,j,p)= value;
+}
+</pre></td></tr></table><p>This implementation has the advantage of being simple, and easy to test.
+</p>
+<p>In an ideal world the compiler would realise that it doesn't
+have to recalculate the location of each pixel each step, but instead keep
+a running pointer to the current pixel location. (Of course, in
+an ideal world we would be programming using natural language and
+a microphone.)
+We can make this optimisation explicit.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">template&lt;class T&gt;
+void vil_image_view&lt;T&gt;::fill(T value)
+{
+  T* plane = top_left_;
+  for (unsigned p=0; p&lt;nplanes_; ++p, plane+=planestep_)
+  {
+    T* row = plane;
+    for (unsigned j=0; j&lt;nj_; ++j, row+=jstep_)
+    {
+      T* p = row;
+      for (unsigned i=0; i&lt;ni_; ++i, p+=istep_) *p = value;
+    }
+  }
+}
+</pre></td></tr></table><p>This can halve the run time on some compilers.
+</p>
+<p>The most important rule in code optimisation is to observe how the code
+behaves in real life, and concentrate your efforts on where the code
+spends most of its time.  In our example, this means the inner most loop
+Now, it turns out that in many cases, <code>istep_==1</code>, because of the
+default image layout in memory.  Because of this common case it would
+be worth having the compiler generate machine-code for the inner-most
+loop in this special case.  We can do this by explicitly testing for
+such a special case.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">template&lt;class T&gt;
+void vil_image_view&lt;T&gt;::fill(T value)
+{
+  T* plane = top_left_;
+
+  if (istep_==1)
+  {
+    for (unsigned p=0;p&lt;nplanes_;++p,plane += planestep_)
+    {
+      T* row = plane-1;
+      for (unsigned j=0;j&lt;nj_;++j,row += jstep_)
+      {
+        int i = ni_ ;
+        while (i&gt;=0) { row[i--]=value; }
+      }
+    }
+    return;
+  }
+
+  for (unsigned p=0;p&lt;nplanes_;++p,plane += planestep_)
+  {
+    T* row = plane;
+    for (unsigned j=0;j&lt;nj_;++j,row += jstep_)
+    {
+      T* p = row;
+      for (unsigned i=0;i&lt;ni_;++i,p+=istep_) *p = value;
+    }
+  }
+}
+</pre></td></tr></table>
+<p>There are two other optimisations going on here.  The first is that
+we are using the pointer indexing operator <code>[]</code>.  Most compilers
+treat <code>while (++i&lt;n) { *(ptr++)=v; } </code> differently from
+<code>while (++i&lt;n) { ptr[i]=v; } </code>, with the latter often
+being significantly faster.  This is especially true when <code>ptr</code>
+is a pointer to a character sized type.
+The other optimisation makes use of the fact that it is faster to count down to
+0 than count up to n.  This is because it is faster to test against a constant, 0,
+than against a variable.  Sometimes a compiler figures this out itself,
+but by no means always.  One useful refinement that may be possible is to
+decrement the index counter right at the end of the loop.  This allows the
+compiler to avoid issuing a separate test instruction, since this sort
+of test is automatically performed by the processor after a decrement
+or other arithmetic operation.
+</p>
+<p>Since we are performing the same operation on every pixel independent
+of its absolute or relative position, there is one further optimisation
+that can be performed.  In many cases an image will be stored as a
+contiguous block of memory.  If this is the case, it may make sense
+just to operate on this block of memory as a single dimensional array.
+In the case of fill, this may even allow a compiler to issue
+a specialised single machine instruction which performs the whole
+fill very very fast.  This gives us our final implementation.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">template&lt;class T&gt;
+void vil_image_view&lt;T&gt;::fill(T value)
+{
+  T* plane = top_left_;
+
+  if (is_contiguous())
+  {
+    vil_image_view&lt;T&gt;::iterator it = begin();
+    vil_image_view&lt;T&gt;::const_iterator end_it = end();
+    while (it!=end_it) { *it = value; ++it; }
+    return;
+  }
+
+  if (istep_==1)
+  {
+    for (unsigned p=0;p&lt;nplanes_;++p,plane += planestep_)
+    {
+      T* row = plane-1;
+      for (unsigned j=0;j&lt;nj_;++j,row += jstep_)
+      {
+        int i = ni_;
+        while (i&gt;=0) { row[--i]=value; }
+      }
+    }
+    return;
+  }
+
+  for (unsigned p=0; p&lt;nplanes_; ++p, plane+=planestep_)
+  {
+    T* row = plane;
+    for (unsigned j=0; j&lt;nj_; ++j, row+=jstep_)
+    {
+      T* p = row;
+      for (unsigned i=0; i&lt;ni_; ++i, p+=istep_) *p = value;
+    }
+  }
+}
+</pre></td></tr></table>
+<p>This optimised version was between two and ten times faster than the original
+depending on the compiler, image structure, and pixel type.
+</p>
+<p>It should always be born in mind that there is a trade-off in testing for
+special cases.  Each test takes time, and this slows the function down
+for the non-special cases.  Limit yourself to only testing for very common
+cases that have very significant potential speed improvements.
+</p>
+<p>Finally as with all optimisation - be rigorous in comparing the actual
+times for your original and optimised code.  Run enough experiments to
+measure the statistical spread to see if your improvements are significant.
+It is quite common for compiler or processor
+quirks to make your optimised code slower than the original.
+</p>
+
+<hr size="6">
+<a name="SEC78"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC77" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC79" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.9 Blocked Images (Advanced Topic) </h2>
+
+<hr size="6">
+<a name="SEC79"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC78" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC80" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC78" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 7.9.1 Basics </h3>
+
+<p>It is possible to encounter images that are much larger than available
+memory. For example, a commercial satellite image can easily exceed several
+gigabytes in size. The situation is even more dire in the case of
+ultra high resolution video where up to 16K X 16K pixel resolutions are
+feasible at two bytes per pixel. It is clearly not practical to handle
+these images as an in-memory <code>vil_image_view</code>. The use of a
+<code>vil_image_resource</code> to supply small views of the image at a time
+is essential, however the overhead in extracting small views from a
+large image file can be substantial.
+</p>
+<p>Consider the example of displaying a small image region near the
+center of the image where the view is zoomed in so that one
+pixel in the image is mapped to one pixel on the screen. The size of
+this image patch might be 2K X 1K pixels.  In order for the image
+resource to supply this set of pixels it is necessary to seek past a
+gigabyte or more of file-resident data to the middle of the image
+and then pull out the several megabytes of pixels needed to construct
+the view for display. If the user then wants to pan over a few hundred
+pixels to view something just off the screen, a full seek and file
+read must be repeated. Under these circumstances, image viewing
+performance will be overwhelmingly dominated by disk io bandwidth and
+seek times.
+</p>
+<p>To mitigate the overhead of disk access, the image can be organized as
+a set of contiguous rectangular blocks of pixels. Blocks may be
+randomly scattered within the file, but each block is a contiguous set
+of pixels. This way, a view can be assembled by seeking to each block
+in the view and then reading the block efficiently. Typical block size
+is 512 X 512 or 1024 X 1024 pixels, so that only a few blocks are
+needed to display regions of interest at full zoom. To gain even more
+efficiency, the blocks can be managed in a cache so the most of the
+pixels being displayed on the screen are already in memory.  As the
+user pans to a new location, those blocks that are now off the screen
+are replaced by new blocks needed to fill in the new region. Thus, the
+number of blocks that have to actually be read from the file is
+significantly reduced.
+</p>
+<p>The blocked image resource interface has the following virtual methods
+in addition to those already defined in the base resource class:
+</p>
+<p>The block size used to store and retrive pixels.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">unsigned size_block_i() const
+unsigned size_block_j() const
+</pre></td></tr></table>
+<p>The number of blocks in column and row to contain the image.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">unsigned n_block_i() const
+unsigned n_block_j() const
+</pre></td></tr></table>
+<p>Retrieving blocks from the resource. Note that a block is a <code>vil_image_view</code>
+and thus ready for use in processing and visualization operations.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">vil_image_view_base_sptr
+get_block( unsigned  block_index_i, unsigned  block_index_j ) const
+
+bool
+get_blocks(unsigned start_block_i, unsigned end_block_i,
+           unsigned  start_block_j, unsigned end_block_j,
+           vcl_vector&lt; vcl_vector&lt; vil_image_view_base_sptr &gt; &gt;&amp; blocks ) const
+</pre></td></tr></table><p>This blocking structure is used internally to implement the basic
+method
+</p><table><tr><td>&nbsp;</td><td><pre class="example">get_copy_view(unsigned i0, unsigned n_i, unsigned j0, unsigned n_j)
+</pre></td></tr></table><p>It is possible that <code>i0, n_i</code>
+and <code>j0, n_j</code> are not evenly divisible by <code>size_block_i</code> and
+<code>size_block_j</code>, respectively. In this case the blocks are trimmed
+to extract pixels belonging to the specified image view bounds.
+In the case of retrieving views near the boundary of the full
+image, e.g., <code>n_i=ni(), n_j=nj()</code>, blocks may lie partially
+outside the underlying image.  In this case the pixel values in the
+block locations lying outside the full image bounds are undefined.
+</p>
+<p>Similar methods are defined for inserting blocked data into the image resource.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">bool put_block(unsigned  block_index_i, unsigned  block_index_j,
+               vil_image_view_base const&amp; view)
+
+bool
+put_blocks(unsigned start_block_i, unsigned end_block_i,
+           unsigned  start_block_j, unsigned end_block_j,
+           vcl_vector&lt; vcl_vector&lt; vil_image_view_base_sptr &gt; &gt; const&amp; blocks)
+</pre></td></tr></table><p>These methods are used internally to support the virtual
+</p><table><tr><td>&nbsp;</td><td><pre class="example">put_view(vil_image_view_base const&amp; im, unsigned i0, unsigned j0)
+</pre></td></tr></table><p> method.  Note that current vil file-based resources do not support reading and
+writing on the same open resource. Therefore, a block-oriented image
+processing algorithm will have an input resource from which blocks are
+retrieved and an output resource where processed blocks are
+inserted.
+</p>
+<hr size="6">
+<a name="SEC80"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC79" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC81" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC78" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 7.9.2 The Facade and Cached Resource </h3>
+
+<p>Many of the advantages of blocking can be realized even if the
+underlying image resource is not intrinsically blocked. The
+<code>vil_blocked_image_facade</code> wraps around any image resource and
+provides the <code>vil_blocked_image_resource</code> class interface. That
+is, the facade is a sub-class of
+<code>vil_blocked_image_resource</code>. Internally, reading and writing
+facade block data is implemented using the usual get and put view methods. In
+this case the block view dimensions are those defined by the facade
+blocking geometry.
+</p>
+<p>One might wonder how this simulation of a blocked image structure
+provides any gain in efficiency for pixel access, since the process
+relies on an unblocked file format. A significant gain in performance
+can be gained by the addition of a cache. The
+<code>vil_cached_image_resource</code> is a sub-class of
+<code>vil_blocked_image_resource</code> and provides an in-memory store for
+most recently retrieved blocks. The size of the cache (in number of
+blocks) is specified in the constructor:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vil_cached_image_resource(vil_blocked_image_resource_sptr bir,
+                           const unsigned cache_size)
+</pre></td></tr></table><p>The cache is implemented as a priority queue based on the &quot;age&quot; of a
+block. The blocks in the queue are given a timestamp as they enter the
+queue. If a block is retrieved from the cache, then the timestamp is
+reset to the current time. Otherwise, blocks age as new blocks are
+entered into the cache.  When the cache is full, the oldest block is
+discarded to make room for a new block.  Note that the queue does not
+participate in writing blocks to a resource.
+</p>
+<hr size="6">
+<a name="SEC81"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC80" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC82" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC78" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 7.9.3 Using Blocked File Formats </h3>
+
+<p>A blocking capability of a resource can be determined by examining the
+properties of the resource using the method
+</p><table><tr><td>&nbsp;</td><td><pre class="example">bool get_property(char const* tag, void* property_value = 0) const
+</pre></td></tr></table><p>Two properties are defined for blocked resources:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vil_property_size_block_i &quot;size_block_i&quot;
+vil_property_size_block_j &quot;size_block_j&quot;
+</pre></td></tr></table><p>To test if a resource supports blocking one can examine the appropriate properties of the resource:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vil_image_resource_sptr imgr = vil_load_image_resource(&quot;my_filename&quot;);
+...
+unsigned sbi=0, sbj=0;
+bool is_blocked =
+  imgr-&gt;get_property(vil_property_size_block_i, &amp;sbi) &amp;&amp;
+  imgr-&gt;get_property(vil_property_size_block_j, &amp;sbj);
+...
+</pre></td></tr></table><p>If the resource is blocked then <code>is_blocked</code> will be true and the
+variables, <code>sbi, sbj</code>, contain the blocking structure for the
+resource.
+</p>
+<p>The following example shows how to convert an image resource resource to a blocked file resource.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vil_image_resource_sptr imgr = vil_load_image_resource(&quot;my_filename&quot;);
+unsigned size_block_i = 256, size_block_j = 256;
+vil_blocked_image_resource_sptr bimgr =
+        vil_new_blocked_image_resource(&quot;my_blocked_filename&quot;,
+                                       imgr-&gt;ni(), imgr-&gt;nj(), imgr-&gt;nplanes(),
+                                       imgr-&gt;pixel_format(),
+                                       size_block_i, size_block_j, &quot;tiff&quot;);
+if (!vil_copy_deep(imgr, bimgr))
+{ //report trouble
+ ...
+}
+...
+</pre></td></tr></table><p>The new resource, <code>bimgr</code>, will store pixels in square, 256 X
+256, blocks. <code>vil_copy_deep</code> automatically splits the input
+resource into strips if the image is too large to fit in
+memory. However, to insure proper handing of block boundaries it is
+better to wrap the input resource in a facade with the same blocking
+structure as the output. That is,
+</p><table><tr><td>&nbsp;</td><td><pre class="example">...
+vil_blocked_image_resource_sptr facr =
+    vil_new_blocked_image_facade(imgr,sbi, sbj);
+
+if (!vil_copy_deep(facr, bimgr))
+{ //report trouble
+ ...
+}
+...
+</pre></td></tr></table><p>Currently, the <code>tiff</code> file format and The National
+Image Transmission Format (<code>nitf</code>) image format provide a
+<code>vil_blocked_image_resource</code>, however the <code>nitf</code> format does not yet support writing. (NOTE THAT TIFF ONLY SUPPORTS BLOCK DIMENSIONS THAT ARE MULTIPLES OF 16.)
+</p>
+
+<hr size="6">
+<a name="SEC82"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC81" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC83" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.10 Pyramid Images (Advanced Topic) </h2>
+
+<hr size="6">
+<a name="SEC83"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC82" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC84" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC82" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 7.10.1 What are Pyramid Images? </h3>
+
+<p>As in the previous section on blocked images, the motivation for
+constructing a pyramid image is to manage large images without having
+to keep the entire image in memory. Satellite images can easily exceed
+all available random access memory so it is impossible to display an
+overview of the image.  The blocked image strategy solves the problem
+of panning through a large image, but it does not solve the problem of
+zooming between different levels of detail. Even with blocking, the
+display of a complete overview requires that the entire image must be
+in memory.
+</p>
+<p>The zooming problem can be solved by constructing a
+<code>vil_pyramid_image_resource</code>. This resource maintains a number of
+file-based copies of an image at different resolution scales. The
+original image is called the base image. Each reduced resolution image
+resource is called a level of the pyramid. Most typically, the levels
+of the pyramid differ by a factor of two in scale in each
+dimension. The limit of the size of a pyramid as the number of levels
+approaches infinity is 1 + 1/4 + .. =1+1/3.  Thus, the worst case is
+33% extra storage to represent all levels of detail.
+</p>
+<p>It is not necessary to have a fixed scale difference between adjacent
+levels of the <code>vil_pyramid_image_resource</code>. When a user requests
+a <code>vil_image_view</code> at a particular scale, a view from the closest
+scale in the pyramid is generated. The interface for getting a view
+from a pyramid image is illustrated in the following code example.
+In this example, the pyramid is stored as a set of image files in a directory.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vil/vil_load.h&gt;
+#include &lt;vil/vil_pyramid_image_resource.h&gt;
+...
+{
+...
+ vil_pyramid_image_resource_sptr pir =
+                        vil_load_pyramid_resource(&quot;pyramid_dir&quot;);
+ float actual_scale;
+ vil_image_view&lt;unsigned short&gt; level_view =
+                        pir-&gt;get_copy_view(0.25f, actual_scale);
+ ...
+}
+</pre></td></tr></table><p>This example shows the basic use of a pyramid resource where a level
+view 1/4 the scale of the base image is being retrieved. If the
+pyramid doesn't contain a level with a scale factor of exactly 0.25,
+the closest scale is returned and the scale of the closest level is
+returned in <code>actual_scale</code>. The level view only requires 1/16 the
+number of pixels of the base image and can likely be held entirely in
+memory. However, the user of the view has to keep in mind that the
+image has been scaled down and must manipulate it appropriately.
+</p>
+<p>For example, in rendering an image to the screen, the screen display
+scale factor must be compared to the level scale in order to determine
+the correct rendering scale. Suppose for example that a display screen
+has 1000 x 1000 elements and the base image of the pyramid is 15,000
+by 15,000 pixels. The required rendering scale factor for the base
+image is 1/15. Suppose that the closest scale level in the
+pyramid is 1/16. The resulting level view is then rendered at a scale factor of
+16/15 in order to fill the screen. Note however that only one million
+pixels are being processed instead of 225 million.
+</p>
+<hr size="6">
+<a name="SEC84"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC83" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC85" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC82" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 7.10.2 Subsampling the base image </h3>
+
+<p>Level images are formed by subsampling the original base image. In
+order to do this subsampling properly, it is necessary to observe the
+limitations imposed by the Nyquist sampling theorem. The sample rate
+must be greater than twice the highest spatial frequency in the
+image. Otherwise aliasing will occur, which appears as interference
+bands in the down-sampled image. The Nyquist sampling rate constraint
+can be achieved by spatially smoothing the image using a low pass
+filter. The filter is designed to remove spatial frequencies that
+exceed one half the sampling rate corresponding to the scale of the
+pyramid level.
+</p>
+<p>For example, if the base image is being sampled at a scale of 0.5
+(every second pixel in each image dimension) then the image must be
+pre-smoothed to remove spatial frequencies greater than 1/pixel. A
+simple filter for achieving this requirement is to form the average of
+the 2x2 pixel neighborhood in the base image corresponding to each
+pixel in the downsampled image. This smoothing does not remove all the
+higher spatial frequencies but they are significantly attenuated.
+Another common approach is to apply a Gaussian low pass smoothing
+kernel recursively to each level. Gaussian suppression of higher
+spatial frequencies is superior to block averaging. The Gaussian is
+cheap to compute since it is separable and can be formed by applying
+two 1-d convolutions.
+</p>
+<p>The <code>vil_pyramid_image_resource</code> class provides the simple 2x2
+averaging method for generating pyramid levels that are a factor of
+two apart in scale. The user can apply more sophisticated sampling
+schemes but this method is adequate for display purposes. Each level
+is generated accordingly by applying the static method
+<code>vil_pyramid_image_resource::decimate</code>.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vil/vil_load.h&gt;
+#include &lt;vil/vil_pyramid_image_resource.h&gt;
+...
+{
+...
+  vil_image_resource_sptr image;
+
+// generate an image at 1/2 the scale
+
+ image =
+   vil_pyramid_image_resource::decimate(base_image, &quot;level_filename&quot;, &quot;tiff&quot;);
+
+// the base_image resource was generated previously
+...
+}
+</pre></td></tr></table><p>In the current implementation of the decimate method, the pyramid
+levels are generated as blocked images and so a resource file format
+that can support blocking must be used.  This choice is primarily a
+matter of decimation processing efficiency and to manage level images
+that are still too large to fit in memory.  In the example, the &quot;tiff&quot;
+file format is chosen since rectangular block structure is supported.
+If the input image is blocked then its native block structure is used.
+Otherwise a default blocking (256 x 256) structure is used.
+</p>
+<hr size="6">
+<a name="SEC85"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC84" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC86" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC82" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 7.10.3 Storing the pyramid resource </h3>
+
+<p>It is necessary to have a file format that can store the multiple
+images required for the different resolution levels. The most obvious
+approach is to store the images as separate files in a directory.
+This format is called <code>vil_pyramid_image_list</code> and is designated
+by the <code>vil_file_format::tag()</code>, &quot;pyil&quot;. There is no
+restriction on the format of the level files but applications of the
+pyramid are generally more efficient if the base image and the level
+files are blocked.
+</p>
+<p>A second option for storing image pyramids is the
+<code>vil_tiff_pyramid_resource</code> with
+<code>vil_file_format::tag()</code>,&quot;ptif&quot;. In this case, all the pyramid
+levels are saved in a single tiff file.  There is no assumed order to
+the image headers in the file.  The pyramid level scales are sorted by
+the resource to provide the required interface.  The following example
+shows creating an output resource of each type and inserting the level
+image resources into each pyramid.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vil/vil_new.h&gt;
+#include &lt;vil/vil_image_resource.h&gt;
+#include &lt;vil/vil_pyramid_image_resource.h&gt;
+...
+{
+// a list of image resources representing the pyramid levels
+
+    vcl_vector&lt;vil_image_resource_sptr&gt; rescs;
+...
+
+// Generate a set of resources at multiple scales
+...
+
+// Construct a new multiple file pyramid resource
+
+vil_pyramid_image_resource_sptr pyr_image_list =
+        vil_new_pyramid_image_resource(&quot;pyramid_directory&quot;, &quot;pyil&quot;);
+
+// Construct a new single file tiff pyramid resource
+
+vil_pyramid_image_resource_sptr pyr_tiff =
+        vil_new_pyramid_image_resource(&quot;pyramid.tif&quot;, &quot;ptif&quot;);
+
+// Store image_resources into the pyramids
+
+  for ( vcl_vector&lt;vil_image_resource_sptr&gt;::iterator rit = rescs.begin();
+        rit != rescs.end();  ++rit)
+  {
+    pry_image_list.put_resource(*rit);
+    pry_tiff.put_resource(*rit);
+  }
+...
+}
+</pre></td></tr></table>
+<p>Two methods are provided in <code>vil_new</code> that generate pyramid
+images in either the image list or tiff format,
+<code>vil_new_pyramid_image_list_from_base</code> and
+<code>vil_new_pyramid_image_from_base</code>. The following example demonstrates
+the use of each pyramid builder.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">{
+#include &lt;vil/vil_new.h&gt;
+#include &lt;vil/vil_image_resource.h&gt;
+#include &lt;vil/vil_pyramid_image_resource.h&gt;
+...
+
+vil_image_resource_sptr base_image;
+
+// base_image is loaded or constructed
+...
+
+ unsigned number_of_levels = 7;
+ bool copy_base = true;
+// Generate a pyramid as an image_list (files in a directory)
+ vil_pyramid_image_resource_sptr pyril =
+     vil_new_pyramid_image_list_from_base(&quot;pyramid_directory_path&quot;,
+                                          base_image,
+                                          number_of_levels,
+                                          copy_base,
+                                          &quot;tiff&quot;,
+                                          &quot;R&quot;);
+
+// Generate a pyramid as a multi-image tiff file
+ vil_pyramid_image_resource_sptr pytif =
+    vil_new_pyramid_image_from_base(&quot;pyramid_file.tif&quot;
+                                    base_image,
+                                    number_of_levels,
+                                    &quot;ptif&quot;,
+                                    &quot;temporary_dir_path&quot;);
+...
+}
+
+</pre></td></tr></table>
+<p>In the image list pyramid the user can specify the format of the level
+image resource files. In the example the tiff format is specified. The
+last argument specifies the base name of the pyramid files, e.g., R0,
+R1, ... Rn-1, in the example. The variable <code>copy_base</code> indicates
+whether or not the base image is already in the directory. If not,
+then <code>base_image</code> is copied as a blocked image resource with
+default blocking (256 x 256). If a different blocking structure is
+desired, the base image can be wrapped in a
+<code>vil_blocked_image_facade</code> resource with the new blocking structure.
+</p>
+<p>For the tiff-based pyramid it is necessary to provide a temporary
+directory to generate pyramid levels prior to inserting them into the
+single tiff file. Since the pyramid level images can still be too
+large for memory, they are constructed as file-based resources.
+</p>
+<hr size="6">
+<a name="SEC86"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC85" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC87" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.11 NITF image reading </h2>
+
+<p>The National Imagery Transmission Format (NITF) is a highly flexible
+and complex format for exchanging digital imagery and its support
+data. Our NITF implementation includes a framework for defining the
+&quot;tagged record extensions&quot; and &quot;data extension segments&quot; needed by
+your application. A framework example, along with the capabilities and
+current limitations, is summarized here.
+</p>
+<p>The following code demonstrates how to define a tagged record extension:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">vil_nitf2_tagged_record_definition::define(&quot;HISTOA&quot;, &quot;Softcopy History&quot;)
+  .field(&quot;SYSTYPE&quot;,    &quot;System Type&quot;,                     NITF_STR(20))
+  .field(&quot;PC&quot;,         &quot;Prior Compression&quot;,               NITF_STR(12))
+  .field(&quot;PE&quot;,         &quot;Prior Enhancements&quot;,
+     NITF_ENUM(4, vil_nitf2_enum_values()
+      .value(&quot;EH08&quot;,   &quot;Enhanced 8bpp&quot;)
+                    ...
+      .value(&quot;DGHC&quot;,   &quot;Digitized hardcopy&quot;)
+      .value(&quot;UNKP&quot;,   &quot;Unknown&quot;)
+      .value(&quot;NONE&quot;,   &quot;None&quot;)))
+  .field(&quot;REMAP_FLAG&quot;, &quot;System Specific Remap&quot;,           NITF_INT(1))
+  .field(&quot;LUT_ID&quot;,     &quot;Data Mapping ID from ESD&quot;,        NITF_INT(2))
+  .field(&quot;NEVENTS&quot;,    &quot;Number of Processing Events&quot;,     NITF_INT(2))
+  .repeat(&quot;NEVENTS&quot;, vil_nitf2_fields_definitions()
+     .field(&quot;PDATE&quot;,   &quot;Processing Date and Time&quot;,        NITF_DAT(14))
+     .field(&quot;PSITE&quot;,   &quot;Processing Site&quot;,                 NITF_STR(10))
+     .field(&quot;PAS&quot;,     &quot;Softcopy Processing Application&quot;, NITF_STR(10))
+     .field(&quot;NIPCOM&quot;,  &quot;Number of Image Proc. Comments&quot;,  NITF_INT(1))
+     .repeat(&quot;NIPCOM&quot;, vil_nitf2_field_definitions()
+        .field(&quot;IPCOM&quot;, &quot;Image Processing Comment&quot;,       NITF_STR(80)))
+     .field(&quot;IBPP&quot;,     &quot;Image Bit Depth (actual) &quot;,      NITF_INT(2))
+                                                                    ...)
+</pre></td></tr></table>
+<p>This code enables the contents of record extension &quot;HIST0A&quot; to be
+parsed; without it, the unrecognized record would be
+skipped. Repeating field values, such as &quot;IPCOM&quot;, above, are
+represented as vectors. Conditional and variable-length fields are
+also supported, and C++ functors are used to evaluate expressions
+involving tags that specify the length or repetition of other tags.
+</p>
+<p>Currently the library can only read, but not write, NITF 2.0 and 2.1
+files, and includes the following capabilities:
+</p>
+<ul>
+<li> Files larger than 2GB are supported by building with flag
+USE_LFS turned on
+</li><li> All four NITF uncompressed data layouts are supported (IMODE=S,
+B, P, or R)
+</li><li> Most NITF image data types, including 8-, 16-, 32- and 64-bit
+signed and unsigned integers, single- and double-precision floating
+point numbers, and boolean data are supported. Support for
+complex float data is implemented but not tested.
+</li><li> Multiple images per file are supported, as are an arbitrary
+number of bands per image.
+</li><li> Blocked images (NBPR &gt; 1 or MBPC &gt; 1) are supported.
+</li><li> Images with look-up tables (LUTs) will read correctly, but
+client applications must query the image header for the LUT and apply
+it to the image data.
+</li><li> JPEG-2000-compressed imagery is supported via a plug-in, as
+described in the next section.
+</li></ul>
+
+<p>The following capabilities are not yet implemented:
+</p><ul>
+<li> writing NITF files
+</li><li> parsing graphic segments
+</li><li> parsing text segments
+</li><li> bounds checking of numeric field values
+</li><li> additional structured field formatters (e.g., some geocoordinate formats)
+</li><li> other compression schemes (e.g., original JPEG, bi-level
+compression, vector quantization)
+</li></ul>
+
+<hr size="6">
+<a name="SEC87"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC86" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC88" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.12 JPEG 2000 Support </h2>
+
+<p>VIL can be configured to support the reading of JPEG 2000 image files
+as well as NITF 2.1 images that are JPEG 2000 compressed.  This
+section describes how to set up this capability.
+</p>
+<hr size="6">
+<a name="SEC88"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC87" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC89" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC87" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 7.12.1 Install the library </h3>
+
+<p>The decompression is handled by a third party library, ECW JPEG 2000
+SDK, developed by ER Mapper. The library can be downloaded from
+www.ermapper.com, and is currently available under three different
+licensing schemes:
+</p>
+<ul>
+<li> a &quot;free use&quot; license (even for commercial applications) with
+the restriction that the compression code supports streams of length
+500 MB or less (a moot restriction for VIL, which does not yet support
+file writing);
+</li><li> a GPL-like &quot;public use&quot; license with no limitations on
+reading and writing;
+</li><li> a &quot;commercial use&quot; license for commercial applications that
+require the ability to write JPEG 2000 streams longer than 500 MB.
+</li></ul>
+
+<p>The VXL wrappers around this library were developed using version 3.1
+beta of this SDK and have also been tested using version 3.3 RC2, the
+latest version available on 4 April 2006.
+</p>
+<p>ER Mapper provides ECW JPEG 2000 SDK with a variety of build systems.
+As described in the next section, VXL has been configured to use the
+most common one which yields separate NCSEcw and NCSUtil libraries.
+Most of the testing has taken place using the dynamically linked
+versions of these libraries, but the static versions should work too.
+</p>
+<hr size="6">
+<a name="SEC89"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC88" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC87" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 7.12.2 Configure VXL to use it </h3>
+
+<p>Once you have installed and built the ECW JPEG 2000 SDK, you must
+configure VXL to find it. Specify these three CMAKE variables:
+</p>
+<ul>
+<li> ECW_INCLUDE_DIR: ECW SDK include directory
+</li><li> ECW_ncsecw_LIBRARY: NCSEcw library pathname
+</li><li> ECW_ncsutil_LIBRARY: NCSEcw library pathname
+</li></ul>
+
+<p>When CMAKE creates your build files it will automatically add the
+appropriate source files and pre-processor definitions.  Once VIL
+is built, test the JPEG 2000 decompression capability using the
+test program &quot;test_file_format_read&quot; in project &quot;vil_test_all&quot;.
+If things are set up correctly, the test program will report
+that these two tests passed:
+</p>
+<ul>
+<li> JPEG 2000 [j2k,jpc]
+</li><li> NITF 2.1 [nitf] (JPEG 2000 compressed)
+</li></ul>
+
+<p>Note that if you use the dynamically linked version of the ECW JPEG
+2000 SDK, your PATH environment variable must contain the /lib
+directory that contains NCSEcw and NCSUtil.
+</p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC66" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

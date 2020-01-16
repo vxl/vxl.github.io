@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgui__wrapper__tableau.html" title="Base class tableau for tableau who want only a single child." alt="" coords="51,156,203,180"/>
+<area shape="rect" href="$classvgui__tableau.html" title="Base class for all tableaux in vgui." alt="" coords="77,81,176,105"/>
+<area shape="rect" href="$classvgui__parent__child__link__data.html" title="Cache of parents of a tableau (makes posting redraws more efficient)." alt="" coords="33,7,220,31"/>
+</map>

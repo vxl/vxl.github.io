@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmcal__general__ca.html" title="Class to perform general Component Analysis." alt="" coords="5,81,128,105"/>
+<area shape="rect" href="$classmcal__pca.html" title="Class to perform Principle Component Analysis." alt="" coords="152,81,229,105"/>
+<area shape="rect" href="$classmcal__trivial__ca.html" title="Generates set of axis aligned modes for non&#45;zero element." alt="" coords="253,81,363,105"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvsl__b__ostream.html" title="A binary output adaptor for any vcl_ostream." alt="" coords="7,5,116,29"/>
+<area shape="rect" href="$classvsl__b__ofstream.html" title="An adapter for a vcl_ofstream to make it suitable for binary IO." alt="" coords="165,5,280,29"/>
+</map>

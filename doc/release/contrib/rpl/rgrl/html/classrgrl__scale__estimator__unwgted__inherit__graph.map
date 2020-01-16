@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__scale__estimator.html" title="Interface for scale estimator that can estimate with and without weights." alt="" coords="96,231,237,255"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="125,81,208,105"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="115,7,219,31"/>
+<area shape="rect" href="$classrgrl__scale__est__closest.html" title="Unweighted scale estimator using closest of the match points." alt="" coords="5,305,160,329"/>
+<area shape="rect" href="$classrgrl__scale__est__null.html" title="A null scale estimator that has no effect on the weights." alt="" coords="184,305,317,329"/>
+</map>

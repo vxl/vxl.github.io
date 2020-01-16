@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,53,109,77"/>
+<area shape="rect" href="$classgmvl__connection.html" title="gmvl_connection" alt="" coords="159,29,279,53"/>
+<area shape="rect" href="$classgmvl__node.html" title="Types of node:" alt="" coords="176,77,261,101"/>
+<area shape="rect" href="$classgmvl__corner__node.html" title="gmvl_corner_node" alt="" coords="335,5,465,29"/>
+<area shape="rect" href="$classgmvl__image__node.html" title="gmvl_image_node" alt="" coords="335,53,465,77"/>
+<area shape="rect" href="$classgmvl__tag__node.html" title="gmvl_tag_node" alt="" coords="344,101,456,125"/>
+<area shape="rect" href="$classgmvl__topology__node.html" title="gmvl_topology_node" alt="" coords="328,149,472,173"/>
+</map>

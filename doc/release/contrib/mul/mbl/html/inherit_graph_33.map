@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmbl__log__output__base.html" title="Base class for destinations of a logging event." alt="" coords="5,29,155,53"/>
+<area shape="rect" href="$classmbl__log__output__file.html" title="Outputs log messages to a named file." alt="" coords="216,5,352,29"/>
+<area shape="rect" href="$classmbl__log__output__stream.html" title="Outputs log messages to an existing stream (e.g. vcl_cerr)." alt="" coords="204,53,364,77"/>
+</map>

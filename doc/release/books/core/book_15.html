@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: A. Filenames and structure</title>
+
+<meta name="description" content="VXL: A. Filenames and structure">
+<meta name="keywords" content="VXL: A. Filenames and structure">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="structure"></a>
+<a name="SEC192"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_14.html#SEC191" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC193" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_14.html#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_16.html#SEC196" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="appendix"> A. Filenames and structure </h1>
+
+
+<hr size="6">
+<a name="SEC193"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC192" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC194" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC192" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC192" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_16.html#SEC196" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> A.1 Basic structure </h2>
+
+<p>The directory structure of v<em>x</em>l is below
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  $VXLSRC/vcl
+          core/vnl
+              /vul
+              /vbl
+              /vil
+              /vgl
+              /vsl
+             &hellip;
+          v3p/netlib
+             /jpeg
+             &hellip;
+          config/cmake
+          contrib/
+</pre></td></tr></table>
+<dl compact="compact">
+<dt> <samp>`vcl'</samp></dt>
+<dd><p>is the C++ compatibility layer (see section <a href="book_3.html#SEC26">vcl: C++ compatibility</a>).
+</p>
+</dd>
+<dt> <samp>`core'</samp></dt>
+<dd><p>contains the core v<em>x</em>l libraries.
+</p>
+</dd>
+<dt> <samp>`v3p'</samp></dt>
+<dd><p>(v-third-party) contains code that is available elsewhere and is used
+in implementing v<em>x</em>l. <code>v3p/netlib</code> contains cleaned-up C
+versions of the high-quality Fortran code. <code>v3p/jpeg</code> and others
+contain image file format code used by vil. In theory, you don't need
+any of the v3p libraries if you have locally installed versions. In
+practice, you need <code>v3p/netlib</code> but not the others.  the
+</p>
+</dd>
+<dt> <samp>`config/cmake'</samp></dt>
+<dd><p>contains the configuration files used by the CMake build system
+(see <a href="book_16.html#CMake">CMake</a>).
+</p>
+</dd>
+</dl>
+
+<p><a name="struct_005fother_005fpackages"></a>
+</p><hr size="6">
+<a name="SEC194"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC193" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC195" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC192" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC192" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_16.html#SEC196" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> A.2 Other packages </h2>
+
+<p>On the repository and some v<em>x</em>l distributions, you will find several other
+packages in the <samp>`contrib'</samp> directory.
+</p>
+<a name="IDX21"></a>
+<a name="IDX22"></a>
+<a name="IDX23"></a>
+<a name="IDX24"></a>
+<a name="IDX25"></a>
+<a name="IDX26"></a>
+<a name="IDX27"></a>
+
+<dl compact="compact">
+<dt> <samp>`gel'</samp></dt>
+<dd><p>Published libraries from General Electric Global Research.
+</p></dd>
+<dt> <samp>`oxl'</samp></dt>
+<dd><p>Published libraries from the Robots Research
+Group at Oxford University.
+</p></dd>
+<dt> <samp>`mul'</samp></dt>
+<dd><p>Published libraries from Imaging Science and Biomedical Engineering
+at the University of Manchester.
+</p></dd>
+<dt> <samp>`rpl'</samp></dt>
+<dd><p>Published libraries from Rensselaer Polytechnic
+Institute
+</p></dd>
+<dt> <samp>`brl'</samp></dt>
+<dd><p>Published libraries from Brown University
+</p></dd>
+<dt> <samp>`tbl'</samp></dt>
+<dd><p>A set of image processing libraries.
+</p></dd>
+<dt> <samp>`oul'</samp></dt>
+<dd><p>Published libraries from Otago University
+</p></dd>
+<dt> <samp>`conversions'</samp></dt>
+<dd><p>A set of routines for converting between various v<em>x</em>l and non-v<em>x</em>l types.
+</p></dd>
+</dl>
+
+<p>These modules are presented as useful code, with even less guarantees
+than v<em>x</em>l (which is not to suggest that we guarantee anything about
+v<em>x</em>l).  In particular they may not work as advertised. They may not
+be documented. If you find them useful, and think they deserve full
+v<em>x</em>l-status please contact the library's author to see about having
+the code tidied up and promoted to v<em>x</em>l.
+</p>
+<p>You can find any overview documentation about these modules from the
+<a href="http://vxl.sourceforge.net/">vxl homepage</a> by following the
+&quot;documentation&quot; link.
+</p>
+<hr size="6">
+<a name="SEC195"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC194" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_16.html#SEC196" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC192" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC192" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_16.html#SEC196" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> A.3 Subversion (svn) Repository </h2>
+
+<p>The VXL repository is provided by SourceForge--Thanks guys! The
+instructions for downloading v<em>x</em>l are documented at
+<a href="http://vxl.sourceforge.net/#download">http://vxl.sourceforge.net/#download</a>.
+</p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC192" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_16.html#SEC196" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

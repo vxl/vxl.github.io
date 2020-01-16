@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvsl__binary__loader__base.html" title="Base class for vsl_binary_loader objects." alt="" coords="7,29,169,53"/>
+<area shape="rect" href="$classvsl__binary__loader.html" title="Class to load objects by baseclass pointer." alt="" coords="283,5,496,29"/>
+<area shape="rect" href="$classvsl__clipon__binary__loader.html" title="Class to load objects by baseclass pointer using `clipon&#39; classes." alt="" coords="219,53,560,77"/>
+</map>

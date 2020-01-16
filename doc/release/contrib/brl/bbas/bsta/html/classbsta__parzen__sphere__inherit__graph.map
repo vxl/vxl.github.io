@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbsta__sample__set.html" title="A class to hold samples, the window width parameter, weights for each sample, assignments of each sam..." alt="" coords="15,231,183,255"/>
+<area shape="rect" href="$classbsta__parzen.html" title="A Parzen distribution." alt="" coords="29,81,168,105"/>
+<area shape="rect" href="$classbsta__distribution.html" title="A base class for probability distributions." alt="" coords="17,7,180,31"/>
+</map>

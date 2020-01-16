@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmsm__aligner.html" title="Base for functions which calculate and apply 2D transformations." alt="" coords="5,53,104,77"/>
+<area shape="rect" href="$classmsm__similarity__aligner.html" title="Calculate and apply 2D similarity transformations." alt="" coords="157,5,315,29"/>
+<area shape="rect" href="$classmsm__translation__aligner.html" title="Calculate and apply 2D translations." alt="" coords="153,53,319,77"/>
+<area shape="rect" href="$classmsm__zoom__aligner.html" title="Calculate and apply translation + scale transform." alt="" coords="167,101,305,125"/>
+</map>

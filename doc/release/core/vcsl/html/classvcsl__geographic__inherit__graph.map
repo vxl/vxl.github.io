@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvcsl__geocentric.html" title="A specific geographic coordinate system." alt="" coords="5,305,120,329"/>
+<area shape="rect" href="$classvcsl__geodetic.html" title="3D coordinate system intended to represent a location relative to the earth." alt="" coords="144,305,248,329"/>
+<area shape="rect" href="$classvcsl__lambertian.html" title="Lambert Conformal Conic Projection." alt="" coords="272,305,387,329"/>
+<area shape="rect" href="$classvcsl__utm.html" title="Universal Transverse Mercator projection." alt="" coords="411,305,485,329"/>
+<area shape="rect" href="$classvcsl__spatial.html" title="A spatial coordinate system." alt="" coords="217,156,308,180"/>
+<area shape="rect" href="$classvcsl__coordinate__system.html" title="Abstract coordinate system." alt="" coords="180,81,345,105"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="211,7,315,31"/>
+</map>

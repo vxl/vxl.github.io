@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,77,109,101"/>
+<area shape="rect" href="$classbbgm__feature__image__base.html" title="base class for images of features." alt="" coords="157,5,341,29"/>
+<area shape="rect" href="$classbbgm__image__base.html" title="base class for images of distributions." alt="" coords="183,53,316,77"/>
+<area shape="rect" href="$classbbgm__view__maker__base.html" title="base class for objects that extract the mean from an image of distribution." alt="" coords="165,101,333,125"/>
+<area shape="rect" href="$classbbgm__viewer.html" title="base class for viewers." alt="" coords="199,221,300,245"/>
+<area shape="rect" href="$classbbgm__feature__image.html" title="bbgm_feature_image\&lt; f_type_ \&gt;" alt="" coords="612,5,825,29"/>
+<area shape="rect" href="$classbbgm__image__of.html" title="An image of distributions." alt="" coords="639,53,799,77"/>
+<area shape="rect" href="$classbbgm__view__maker.html" title="base class for objects that extract the mean from an image of distribution." alt="" coords="537,101,900,125"/>
+<area shape="rect" href="$classbbgm__view__maker_3_01dist__type_00_01func__type_00_01typename_01vpdt__enable__if_3_01vpdt_2b68bbc1bbc831a73a6dee53ac226d86.html" title="base class for objects that extract the mean from an image of distribution." alt="" coords="389,149,1048,173"/>
+<area shape="rect" href="$classbbgm__mean__viewer.html" title="A mean viewer." alt="" coords="648,197,789,221"/>
+<area shape="rect" href="$classbbgm__variance__viewer.html" title="A variance viewer." alt="" coords="640,245,797,269"/>
+<area shape="rect" href="$classbbgm__weight__viewer.html" title="A weight viewer." alt="" coords="645,293,792,317"/>
+</map>

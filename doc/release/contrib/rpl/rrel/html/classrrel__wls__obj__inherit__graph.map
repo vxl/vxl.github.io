@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrrel__m__est__obj.html" title="Generic implementation for standard M&#45;estimators." alt="" coords="159,156,268,180"/>
+<area shape="rect" href="$classrrel__objective.html" title="An objective function to be minimised." alt="" coords="163,7,264,31"/>
+<area shape="rect" href="$classrrel__cauchy__obj.html" title="Cauchy robust loss function." alt="" coords="5,231,120,255"/>
+<area shape="rect" href="$classrrel__trunc__quad__obj.html" title="Truncated quadratic robust loss function." alt="" coords="144,231,283,255"/>
+<area shape="rect" href="$classrrel__tukey__obj.html" title="Beaton&#45;Tukey biweight." alt="" coords="307,231,411,255"/>
+</map>

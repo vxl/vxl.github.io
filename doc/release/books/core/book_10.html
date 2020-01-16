@@ -1,0 +1,2312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 10. vgui: Graphical User Interface</title>
+
+<meta name="description" content="VXL: 10. vgui: Graphical User Interface">
+<meta name="keywords" content="VXL: 10. vgui: Graphical User Interface">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="vgui"></a>
+<a name="SEC112"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_9.html#SEC111" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC113" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_9.html#SEC102" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 10. vgui: Graphical User Interface </h1>
+
+
+  <blockquote><p>  <strong>Chapter summary</strong>:
+<code>vgui</code> is a user interface library for computer vision applications
+<code>vgui</code> supports the following general functions:
+</p><ul>
+<li> Menus
+</li><li> Displaying Images
+</li><li> Displaying/Creating Geometric Features
+</li></ul>
+
+<p>The <code>vgui</code> design is based on the OpenGL graphics library, and is
+intended to be platform independent and adaptable to a wide range of
+GUI toolkits.  The central <code>vgui</code> class is the <code>tableau</code>
+which is a region (or regions) of the screen for carrying out display
+and event processing. Various tableaux can be assembled and layered to
+create a complex GUI application. At the same time, each tableau is
+relatively simple and can often be used independently in a small
+application such a popup image displayer.
+</p>
+<p>This chapter is concerned with basic vgui programming and does not
+consider the issues associated with adapting vgui to a new window system
+and GUI toolkit. The examples are demonstrated using the mfc implementation of
+<code>vgui</code>.
+</p>
+</blockquote>
+
+<hr size="6">
+<a name="SEC113"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC112" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC114" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 10.1 A First Example </h2>
+
+<p>A simple example will be useful to illustrate some of the basics of vgui.
+The appearance of an image displayer is shown in Figure 1.
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <img src="./image-tableau-with-status.jpg" alt="image-tableau-with-status">
+    <caption align="bottom">
+  <div align=left><strong>Figure 1:</strong>
+  A <code>vgui</code> image display application.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+<p>The program, <code>basic01_display_image.cxx</code> that produced this
+display is provided in the examples directory of the <code>vgui</code>
+library, <code>vgui/examples/</code>. The code is reproduced below.
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_image_tableau.h&gt;
+#include &lt;vgui/vgui_viewer2D_tableau.h&gt;
+#include &lt;vgui/vgui_shell_tableau.h&gt;
+int main(int argc, char **argv)
+{
+  vgui::init(argc, argv);
+  if (argc &lt;= 1)
+  {
+    vcl_cerr &lt;&lt; &quot;Please give an image filename on the command line\n&quot;;
+    return 0;
+  }
+
+  // Load image (given in the first command line param)
+  // into an image tableau.
+  vgui_image_tableau_new image(argv[1]);
+
+  // Put the image tableau inside a 2D viewer tableau (for zoom, etc).
+  vgui_viewer2D_tableau_new viewer(image);
+
+  // Put a shell tableau at the top of our tableau tree.
+  vgui_shell_tableau_new shell(viewer);
+
+  // Create a window, add the tableau and show it on screen.
+  return vgui::run(shell, image-&gt;width(), image-&gt;height());
+}
+</pre></td></tr></table>
+</td></tr></table>
+<p>It will be useful to go through this example carefully since it brings
+out some of the important characteristics of programming with tableaux.
+</p><ul class="toc">
+<li> <code>vgui::init(argc, argv)</code>:
+The class <code>vgui</code> is the base management class for the GUI toolkits
+and handles overall operations. In this example, the desired toolkit is
+being potentially selected by arguments on the command line.  Normally,
+the kit is not specified by the user but is the first element in a
+registry of toolkits. For example, on windows, the mfc toolkit is
+used by default. Currently <code>vgui</code> supports the following toolkits:
+<ul class="toc">
+<li> OpenGL Utility Toolkit (GLUT) - http://www.xmission.com/~nate/opengl.html
+</li><li> Qt Toolkit - http://doc.trolltech.com
+</li><li> Gnu Toolkit (Gtk) - http://www.gtk.org
+</li><li> Microsoft Foundation Classes (MFC) - http://msdn.microsoft.com/library
+</li></ul>
+
+</li><li> <code>vgui_image_tableau_new image(argv[1])</code>:
+The <code>vgui_image_tableau</code> is a very basic tableau that mainly handles the
+display of pixels on the screen and can provide properties of the image
+being displayed.  We see a somewhat strange construction in the term
+<code>vgui_image_tableau_new</code>.  The idea is that all the tableaux
+support smart pointers (see vbl/vbl_smart_ptr.h). However it is
+desirable to be able to cast up and down the tableaux class
+hierarchies. The machinery needed to do this is maintained by the
+<code>xxx_new</code> form of construction, rather than calling the tableau
+constructor directly. This mechanism will be discussed later in the
+context of building a new sub-tableau.
+
+<p>An equivalent, and perhaps clearer, form is:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vgui_image_tableau_sptr image = vgui_image_tableau_new(argv[1]);
+</pre></td></tr></table><p>The constructor reads the image file specified by
+<code>argv[1]</code> and then inserts it into the image tableau, image.
+</p>
+<p>If an image is already available, then the construction can be
+carried out as follows:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vil_image img;
+... // get the image somehow
+vgui_image_tableau_sptr image = vgui_image_tableau_new(img);
+</pre></td></tr></table>
+<p>If the <code>image_tableau</code> already exists, then one can change the image
+being displayed:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vil_image img1, img2;
+... //get the images somehow
+//construct the image_tableau with img1
+vgui_image_tableau_sptr image = vgui_image_tableau_new(img1);
+//change the image to img2.
+image-&gt;set_image(img2);
+</pre></td></tr></table>
+</li><li> <code>vgui_viewer2D_tableau_new viewer(image)</code>:
+Next, the <code>vgui_image_tableau</code>, <code>image</code>, is added to a
+<code>vgui_viewer2D_tableau</code>.  The viewer is responsible for
+manipulating the pan and zoom states of the tableaux being viewed,
+i.e, those <em>below</em> the viewer in the tableaux hierarchy.  In our
+simple example, only the image tableau is under the control of the
+viewer.  Again, an alternative form for the construction is:
+<table><tr><td>&nbsp;</td><td><pre class="example">vgui_viewer2D_tableau_sptr viewer = vgui_viewer2D_tableau_new(image);
+</pre></td></tr></table><p>The viewer responds to a variety of events such as key presses, mouse
+motion and mouse clicks. See <a href="#events">events</a>. The current implementation has the
+following menu of event processing:
+</p><table>
+<tr><td><p> (CTRL + left mouse) </p></td><td><p> <code>zoom in</code>
+</p></td></tr>
+<tr><td><p> (CTRL + middle mouse)</p></td><td><p> <code>pan</code>
+</p></td></tr>
+<tr><td><p> (CTRL + right mouse) </p></td><td><p> <code>zoom out</code>
+</p></td></tr>
+<tr><td><p> (CTRL + 'c') </p></td><td><p> <code>center</code>
+</p></td></tr>
+<tr><td><p> (CTRL + 'x') </p></td><td><p> <code>resize</code>
+</p></td></tr>
+<tr><td><p> (CTRL + '-') </p></td><td><p> <code>lower zoom factor</code>
+</p></td></tr>
+<tr><td><p> (CTRL + '=') </p></td><td><p> <code>raise zoom factor</code>
+</p></td></tr>
+<tr><td><p> ('n') </p></td><td><p> <code>toggle aliasing</code>
+</p></td></tr>
+<tr><td><p> ('z') </p></td><td><p> <code>toggle zoom type</code>
+</p></td></tr>
+<tr><td><p> ('d') </p></td><td><p> <code>sweep zoom</code>
+</p></td></tr>
+</table>
+
+<p>Run the <code>basic01_display_image</code> example and try the various event
+actions. Note that, on windows, a middle mouse is often hard to come
+by since the middle mouse button does not produce a middle mouse button
+event by default on Windows.  If you are not getting middle mouse button
+events then look at Start-&gt;Settings-&gt;Control Panel-&gt;Mouse.  Check on
+the &quot;Button Actions&quot; tab that your middle mouse button is set to &quot;Middle&quot;
+Alternatively, the use of scroll bars can substitute for panning by
+middle button mouse movement.
+</p>
+</li><li> <code>vgui_shell_tableau_new shell(viewer)</code>:
+The shell tableau is a composite of three tableaux, including the
+viewer tableau just described.  The second tableau is called
+<code>vgui_clear_tableau</code> and clears the display area on each draw
+operation. Without this clear function, the image display will include
+old renderings of the image in the background.
+
+<p>The third tableau is a <code>vgui_tview_launcher_tableau</code> which
+prepares and displays a graph illustrating the tableau layout. This
+graph can be displayed using the 'G' key-press event. The tableau
+graph for this example is shown in Figure 2.  Extra annotations have
+been added for illustration.  This graph is useful for debugging
+complex tableau configurations. If the mouse is clicked above a node in
+the graph, information about the tableau will be streamed to vcl_cout.
+</p>
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <p><img src="./tableau-hierarchy-annotated.jpg" alt="tableau-hierarchy-annotated">
+    <caption align="bottom">
+  <div align=left><strong>Figure 2:</strong>
+  The nested tableaux form a tree structure.  This structure can be displayed by
+the <code>vgui_tview_launcher_tableau</code> which is part of the composite
+<code>vgui_shell_tableau</code>. The edges in the graph are represented by instances
+of the class <code>vgui_parent_child_link</code>.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  
+</p>
+</li><li> <code>vgui::run(shell, image-&gt;width(), image-&gt;height())</code>:
+This last expression causes the shell tableau hierarchy to be
+displayed on the screen and to continuously process events.  The
+window size is determined by the last two arguments.  Note that
+the borders of the window are included in these values so, for
+small images, the margin widths can be significant and the entire image
+is not visible when the window is displayed.
+</li></ul>
+
+<p>In programming with tableaux, it is often necessary to retrieve a
+particular tableau in a hierarchy such as the shell &rarr; viewer
+&rarr; image stack in the example. This access is provided by the method,
+<code>vgui_tableau_sptr::vertical_cast(vgui_tableau_sptr const&amp; tab)</code>.
+The following code fragment will illustrate its use:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vgui_image_tableau_sptr get_image_tab(vgui_tableau_sptr const&amp; tab)
+{
+  vgui_image_tableau_sptr i_tab;
+  if (tab)
+    itab.vertical_cast(vgui_find_below_by_type_name(tab,
+                       vcl_string(&quot;vgui_image_tableau&quot;)));
+  return i_tab;
+}
+</pre></td></tr></table><p>If the input tableau, <code>tab</code>, is above an image tableau in the
+hierarchy then this routine will return it, otherwise the returned
+tableau will be null. One can also keep smart pointers to each tableau
+as members in an application class, which provides convenient access.
+</p>
+
+<hr size="6">
+<a name="SEC114"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC113" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC115" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 10.2 Tableaux des Tableaux </h2>
+
+<hr size="6">
+<a name="SEC115"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC114" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC116" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC114" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.2.1 The Grid </h3>
+
+<p>In many computer vision applications, it is useful to be able to display
+multiple images in the same window.  The <code>vgui_grid_tableau</code> is
+designed for this purpose.  The each element of the grid holds a sub-hierarchy
+of tableaux.
+A simple example of multiple panes is provided by
+<code>vgui/examples/basic01a_multiple_panes.cxx</code>, reproduced below.
+The result of executing this program with two image paths supplied
+on the command line is shown in Figure 3.
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vcl_algorithm.h&gt;
+#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_image_tableau.h&gt;
+#include &lt;vgui/vgui_viewer2D_tableau.h&gt;
+#include &lt;vgui/vgui_shell_tableau.h&gt;
+#include &lt;vgui/vgui_grid_tableau.h&gt;
+int main(int argc, char **argv)
+{
+  vgui::init(argc, argv);
+  if (argc &lt;= 2)
+  {
+    vcl_cerr &lt;&lt; &quot;Please give two image filenames on the command line\n&quot;;
+    return 0;
+  }
+  // Load two images(given in the first two command line args)
+  // and construct separate image tableaux
+  vgui_image_tableau_new image_tab1(argv[1]);
+  vgui_image_tableau_new image_tab2(argv[2]);
+
+  //Put the image tableaux into viewers
+  vgui_viewer2D_tableau_new viewer1(image_tab1);
+  vgui_viewer2D_tableau_new viewer2(image_tab2);
+
+  //Put the viewers into a grid
+  vgui_grid_tableau_sptr grid = new vgui_grid_tableau(2,1);
+  grid-&gt;add_at(viewer1, 0,0);
+  grid-&gt;add_at(viewer2, 1,0);
+  // Put the grid into a shell tableau at the top the hierarchy
+  vgui_shell_tableau_new shell(grid);
+
+  // Create a window, add the tableau and show it on screen.
+  int width = image_tab1-&gt;width() + image_tab2-&gt;width();
+  int height = vcl_max( image_tab1-&gt;height(), image_tab2-&gt;height() );
+  return vgui::run(shell, width, height);
+}
+</pre></td></tr></table>
+</td></tr></table>    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <p><img src="./multiple-panes.jpg" alt="multiple-panes">
+    <caption align="bottom">
+  <div align=left><strong>Figure 3:</strong>
+  The <code>vgui_grid_tableau</code> supports the display of multiple panes.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  The use of tableaux is very similar to the first example, except that two
+image tableaux and two viewer2D tableaux are constructed. A 2x1
+<code>vgui_vgrid_tableau</code> is constructed and the viewers are inserted in the
+left and right panes. Note that the order of the indices in the method,
+<code>vgui_grid_tableau::add_at(unsigned col, unsigned row)</code> is transposed from
+the order normally used for matrices, i.e. rows then columns.
+constructed.
+</p>
+<p>In the case of multiple panes, it becomes an issue as to which pane is
+considered active.  That is, suppose we wanted to replace the image in a pane
+selected by the user. How does the user indicate what pane is to be updated?
+A simple approach would be to have the user input the column and row of the
+grid cell to be updated using a menu (we will discuss menus in a later section).
+There are several additional grid methods that help define the grid cell that
+is to be operated on.
+</p><ul class="toc">
+<li> <code>void get_active_position(unsigned* col_pos,unsigned* row_pos)</code>:
+This method returns the column and row of the cell which is under the mouse cursor.
+</li><li> <code>void get_last_selected_position(unsigned* col_pos,unsigned* row_pos)</code>:
+This method returns the column and row of the last cell where the left mouse key was clicked.
+</li></ul>
+<p>An application can then use these selections to operate on the desired pane.
+For example, if a user wants to load and image from a file into a particular
+pane, they would click on the desired pane and then push the load-image menu.
+The menu callback routine would use the last_selected_position method to
+identify the appropriate <code>vgui_image_tableau</code>.
+</p>
+<p>The grid tableau responds to other events as follows:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">Modifier   Key                        Result
+            =        Add a column to the grid
+            -        Remove a column from the grid
+ CNTL       =        Add a row to the grid
+ CNTL       -        Remove a row from the grid
+          PAGEUP     Page the grid tablaux forward in the active cell
+          PAGEDOWN   Page the grid tablaux backward in the active cell
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC116"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC115" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC117" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC114" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.2.2 The Deck </h3>
+
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <p><img src="./deck-tableau.jpg" alt="deck-tableau">
+    <caption align="bottom">
+  <div align=left><strong>Figure 4:</strong>
+  The <code>vgui_deck_tableau</code> supports the display of a stack of child tableaux.
+A typical application is to be able to page through a sequence of images.
+Only the tableau root on the top of the stack responds to events, such as pan and zoom.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  Another useful capability is to stack displays in a pane.  Then the application
+can &quot;page&quot; through the displays.  Only the tableau hierarchy on the &quot;top&quot;
+of the deck responds to events, such as zooming and panning controls.  The
+creation of a deck is illustrated by the example,
+<code>vgui/examples/basic01b_deck.cxx</code>.  The concept of a deck is shown in Figure 4.
+The example code is:
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vnl/vnl_math.h&gt;
+#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_image_tableau.h&gt;
+#include &lt;vgui/vgui_viewer2D_tableau.h&gt;
+#include &lt;vgui/vgui_shell_tableau.h&gt;
+#include &lt;vgui/vgui_deck_tableau.h&gt;
+
+int main(int argc, char **argv)
+{
+  vgui::init(argc, argv);
+  if (argc &lt;= 2)
+  {
+    vcl_cerr &lt;&lt; &quot;Please give two image filenames on the command line\n&quot;;
+    return 0;
+  }
+  // Load two images(given in the first two command line args)
+  // and construct separate image tableaux
+  vgui_image_tableau_new image_tab1(argv[1]);
+  vgui_image_tableau_new image_tab2(argv[2]);
+
+  //Put the image tableaux into a deck
+  vgui_deck_tableau_sptr deck = vgui_deck_tableau_new();
+  deck-&gt;add(image_tab1);
+  deck-&gt;add(image_tab2);
+
+  vgui_viewer2D_tableau_new viewer(deck);
+
+  // Put the deck into a shell tableau at the top the hierarchy
+  vgui_shell_tableau_new shell(viewer);
+
+  // Create a window, add the tableau and show it on screen.
+  int width = vnl_math_max(image_tab1-&gt;width(), image_tab2-&gt;width());
+  int height = vnl_math_max(image_tab1-&gt;height(), image_tab2-&gt;height());
+
+  //Add 50 to account for window borders
+  return vgui::run(shell, width+50, height+50);
+}
+</pre></td></tr></table>
+</td></tr></table><p>The deck tableau responds to <code>vgui_PAGE_UP</code> and <code>vgui_PAGE_DOWN</code>
+events, which advance or backup the deck sequence.
+</p>
+<hr size="6">
+<a name="SEC117"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC116" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC118" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 10.3 Displaying Geometry </h2>
+
+<hr size="6">
+<a name="SEC118"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC117" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC119" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC117" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.3.1 Displaying 2-d Features </h3>
+
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <p><img src="./display-2d-annotated.jpg" alt="display-2d-annotated">
+    <caption align="bottom">
+  <div align=left><strong>Figure 5:</strong>
+  Geometry overlaid on the image is shown on the right.
+The tableau graph for this example is shown on the left.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  <a name="easy2D"></a>
+<code>vgui</code> supports the <em>subject-view</em> programming pattern.  That
+is, there is a clear separation between a class object, such as a line
+segment, and its <em>view</em> which is the manner in which it is
+rendered on the screen. Indeed, one can have many different views for
+a given object. The same line can be displayed with
+different line widths or colors, or even in an entirely different form
+such as a point in an image of Hough space, (rho, theta).
+Note, this subject-view approach is perversely called document-view in MFC.
+</p>
+<p>The following example illustrates the ability of vgui to display
+geometric figures, and its result is shown in Figure 5.
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_image_tableau.h&gt;
+#include &lt;vgui/vgui_easy2D_tableau.h&gt;
+#include &lt;vgui/vgui_viewer2D_tableau.h&gt;
+#include &lt;vgui/vgui_shell_tableau.h&gt;
+
+int main(int argc, char **argv)
+{
+  vgui::init(argc, argv);
+  if (argc &lt;= 1)
+  {
+    vcl_cerr &lt;&lt; &quot;Please give an image filename on the command line\n&quot;;
+    return 0;
+  }
+
+  // Load an image into an image.tableau
+  vgui_image_tableau_new image(argv[1]);
+
+  // Put the image.tableau into a easy2D tableau
+  vgui_easy2D_tableau_new easy2D(image);
+
+  // Add a point, line, and infinite line
+  easy2D-&gt;set_foreground(0,1,0);
+  easy2D-&gt;set_point_radius(5);
+  easy2D-&gt;add_point(10, 20);
+
+  easy2D-&gt;set_foreground(0,0,1);
+  easy2D-&gt;set_line_width(2);
+  easy2D-&gt;add_line(100,100,200,400);
+
+  easy2D-&gt;set_foreground(0,1,0);
+  easy2D-&gt;set_line_width(2);
+  easy2D-&gt;add_infinite_line(1,1,-100);
+
+  // Put the easy2D tableau into a viewer2D tableau:
+  vgui_viewer2D_tableau_new viewer(easy2D);
+  vgui_shell_tableau_new shell(viewer);
+
+  // Create a window, add the tableau and show it on screen:
+  return vgui::run(shell, image-&gt;width(), image-&gt;height());
+}
+</pre></td></tr></table>
+</td></tr></table><p>The first new code we encounter in the example is:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  vgui_easy2D_tableau_new easy2D(image);
+</pre></td></tr></table><p>or equivalently,
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  vgui_easy2D_tableau_sptr easy2D = vgui_easy2D_tableau_new(image);
+</pre></td></tr></table>
+<p>The <code>vgui_easy2D_tableau</code> is responsible for rendering 2-d
+geometric shapes on top of its child, a <code>vgui_image_tableau</code>.
+The commands for inserting various geometric elements are of the form
+<code>add_xxx(...)</code>.  <code>vgui_easy2D_tableau</code> assumes an
+elemental form of geometric specification, where the points and lines
+are directly specified by their parameters. The definitions for each add
+method used in the example are:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">vgui_soview2D_point* add_point(float x, float y)
+vgui_soview2D_lineseg* add_line(float x0, float y0, float x1, float y1)
+vgui_soview2D_infinite_line* add_infinite_line(float a, float b, float c)
+</pre></td></tr></table>
+<p>The point is defined by its location.  The line segment is specified by the endpoints.
+The infinite line is specified by its line coefficients:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ax + by +c = 0.
+</p>
+<p>The appearance (or <em>style</em>) of the display is controlled by the following style specifiers:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">void set_foreground(float r, float g, float b)
+void set_line_width(float w)
+void set_point_radius(float r)
+</pre></td></tr></table>
+<p>The term <em>foreground</em> refers to the color of the displayed
+geometry. The style of each element added to <code>vgui_easy2D</code> after
+the <code>set_foreground</code>, <code>set_line_width</code>, and <code>set_point_radius</code>
+commands is assigned according to their specification until a new style command
+is issued.
+</p>
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <p><img src="./soview-hierarchy.jpg" alt="soview-hierarchy">
+    <caption align="bottom">
+  <div align=left><strong>Figure 6:</strong>
+  The hierarchy for 2-d soviews. <code>vgui</code> also has some support for 3-d rendering.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+<p>A particular view of a geometric entity is specified by the class,
+<code>vgui_soview</code> which has the hierarchy shown in Figure 6. The
+constructor for a <code>vgui_soview</code> extracts the necessary
+information from the object to specify OpenGL rendering commands.  The
+commands then add to the OpenGL display list to be rendered. While the
+current set is adequate for a wide range of computer vision programming,
+more advanced users will want to create their own <code>vgui_soview</code>
+subclass to provide convenient display interfaces for their objects, or to
+achieve special viewing capabilities.
+</p>
+<hr size="6">
+<a name="SEC119"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC118" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC120" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC117" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.3.2 Interactive Drawing of 2-d Features </h3>
+
+<p>It is often necessary to create geometric features such as a box to
+define a region of interest for image processing or a line for sampling
+pixels to provide an intensity plot. The following example shows how to
+create an interactive tool for drawing lines and circles. Interactive drawing
+consists of a tight loop of mouse position tracking and rendering so
+that the feature point tracks the mouse movements. This loop is called
+rubber-banding, since the feature seems to stretch and pull as the
+mouse moves. The rubberband loop is usually terminated by an event,
+such as a left mouse click.  An example of a rubberband application is
+provided in <code>vgui/examples/basic10a_rubberband.cxx</code>. For this
+example, a left mouse click starts rubber-banding the feature and
+another left click terminates the rubber-banding and inserts the
+feature into the <code>vgui_easy2D_tableau</code>.
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_menu.h&gt;
+#include &lt;vgui/vgui_image_tableau.h&gt;
+#include &lt;vgui/vgui_easy2D_tableau.h&gt;
+#include &lt;vgui/vgui_rubberband_tableau.h&gt;
+#include &lt;vgui/vgui_viewer2D_tableau.h&gt;
+#include &lt;vgui/vgui_shell_tableau.h&gt;
+
+//global pointer to the rubberband tableau
+static vgui_rubberband_tableau_sptr rubber = 0;
+
+//the menu callback functions
+static void create_line()
+{
+  rubber-&gt;rubberband_line();
+}
+static void create_circle()
+{
+  rubber-&gt;rubberband_circle();
+}
+
+// Create the edit menu
+vgui_menu create_menus()
+{
+  vgui_menu edit;
+  edit.add(&quot;CreateLine&quot;,create_line,(vgui_key)'l',vgui_CTRL);
+  edit.add(&quot;CreateCircle&quot;,create_circle,(vgui_key)'k',vgui_CTRL);
+  vgui_menu bar;
+  bar.add(&quot;Edit&quot;,edit);
+  return bar;
+}
+
+int main(int argc, char ** argv)
+{
+  vgui::init(argc,argv);
+  if (argc &lt;= 1)
+  {
+    vcl_cerr &lt;&lt; &quot;Please give an image filename on the command line\n&quot;;
+    return 0;
+  }
+  // Make the tableau hierarchy.
+  vgui_image_tableau_new image(argv[1]);
+  vgui_easy2D_tableau_new easy(image);
+  vgui_rubberband_easy2D_client* r_client =
+    new vgui_rubberband_easy2D_client(easy);
+  rubber = vgui_rubberband_tableau_new(r_client);
+  vgui_composite_tableau_new comp(easy, rubber);
+  vgui_viewer2D_tableau_new viewer(comp);
+  vgui_shell_tableau_new shell(viewer);
+
+  // Create and run the window
+  return vgui::run(shell, 512, 512, create_menus());
+}
+</pre></td></tr></table>
+</td></tr></table><p>This example introduces several new coding aspects to discuss.
+</p><ul class="toc">
+<li> <code>vgui_rubberband_tableau_new(new vgui_rubberband_easy2D_client(easy))</code>:
+The tight loop between mouse tracking and drawing requires a means for rendering
+the feature as its parameters are continuously adjusted by the mouse. The
+application could use OpenGL commands directly, but it is much simpler to use
+the drawing commands provided by the <code>vgui_easy2D_tableau</code> that was
+described earlier. See <a href="#easy2D">easy2D</a>.
+
+<p>In order to link the rubberbanding and the drawing it is necessary to
+specify a class called the <code>vgui_rubber_band_client</code>. The client is
+assumed to be capable of drawing all the shapes that can be rubberbanded by
+the rubberband tableau.  A sub-class called <code>vgui_rubberband_easy2D_client</code>
+is defined in the <code>vgui_rubberband_tableau.h</code> header file and handles all
+the currently rubberbandable shapes.
+</p></li><li> <code>vgui_composite_tableau_new comp(easy, rubber)</code>:
+The rubberband tableau and its drawing client are included together in a
+composite tableau which forms the complete rubberband drawing capability.
+</li></ul>
+
+<hr size="6">
+<a name="SEC120"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC119" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC121" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC117" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.3.3 Rendering 3-d Features </h3>
+
+<p>The 3-d display capabilities in vgui are not well-developed.
+Currently one can only display 3-d points and lines. The 3-d viewer
+does provide a &quot;trackball&quot; mode of interaction in viewing the 3-d
+geometry. An example of the <code>vgui</code> 3-d display is shown in Figure
+7.
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <img src="./threeD-example.jpg" alt="threeD-example">
+    <caption align="bottom">
+  <div align=left><strong>Figure 7:</strong>
+  vgui's 3-d display.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+<hr size="6">
+<a name="SEC121"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC120" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC122" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 10.4 Menus </h2>
+
+<hr size="6">
+<a name="SEC122"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC121" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC123" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC121" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.4.1 Basic Menus </h3>
+
+<p><code>vgui</code> supports basic menu capabilities such as menu bars and popup menus
+as illustrated in the following example, <code>vgui/examples/basic05_menubar.cxx</code>:
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_menu.h&gt;
+#include &lt;vgui/vgui_image_tableau.h&gt;
+#include &lt;vgui/vgui_viewer2D_tableau.h&gt;
+#include &lt;vgui/vgui_shell_tableau.h&gt;
+
+// Set up a dummy callback function for the menu to call (for
+// simplicity all menu items will call this function):
+static void dummy()
+{
+  vcl_cerr &lt;&lt; &quot;Dummy function called\n&quot;;
+}
+
+// Create a vgui menu:
+vgui_menu create_menus()
+{
+  vgui_menu file;
+  file.add(&quot;Open&quot;,dummy,(vgui_key)'O',vgui_CTRL);
+  file.add(&quot;Quit&quot;,dummy,(vgui_key)'R',vgui_SHIFT);
+
+  vgui_menu image;
+  image.add(&quot;Center image&quot;,dummy);
+  image.add(&quot;Show histogram&quot;,dummy);
+
+  vgui_menu bar;
+  bar.add(&quot;File&quot;,file);
+  bar.add(&quot;Image&quot;,image);
+
+  return bar;
+}
+
+int main(int argc, char ** argv)
+{
+  vgui::init(argc,argv);
+  if (argc &lt;= 1)
+ {
+    vcl_cerr &lt;&lt; &quot;Please give an image filename on the command line\n&quot;;
+    return 0;
+ }
+
+  // Make our tableau hierarchy.
+  vgui_image_tableau_new image(argv[1]);
+  vgui_viewer2D_tableau_new viewer(image);
+  vgui_shell_tableau_new shell(viewer);
+
+  // Create a window, but this time we also pass in a vgui_menu.
+  return vgui::run(shell, 512, 512, create_menus());
+}
+</pre></td></tr></table>
+</td></tr></table><p>The appearance of this program is shown in Figure 8.
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <img src="./menu-example.jpg" alt="menu-example">
+    <caption align="bottom">
+  <div align=left><strong>Figure 8:</strong>
+  A <code>vgui</code> example involving menus.  The menu bar on the top has sub-menus
+as indicated in the figure. In the example, all the menu choices call the same
+dummy function.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+<p>By now, most of this code should follow a familiar pattern. The new
+element is the function <code>vgui_menu create_menus()</code>. The menu
+structure is assembled hierarchically where the top-level menus have
+sub-menus which can have, sub-menus etc. The basic menu construction pattern
+is illustrated by the line:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  file.add(&quot;Open&quot;,dummy,(vgui_key)'O',vgui_CTRL);
+</pre></td></tr></table>
+<p>The first argument <code>&quot;Open&quot;</code> is a string representing the
+label of the menu item in the menu. The second argument is the
+name of the function to be called when the menu is selected.  The last
+two arguments define a key-press configuration that will select the
+menu item without clicking on it with the mouse. In this case, the
+function <code>dummy()</code> is called by pressing the key combination,
+<code>CTRL + 'o'</code>.
+</p>
+<hr size="6">
+<a name="SEC123"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC122" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC124" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC121" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.4.2 Pop-up Menus </h3>
+
+<p>The appearance of a <code>vgui</code> pop-up menu is shown in Figure 9.  A pop-up
+menu is launched by pressing the right mouse button over the active application
+window. Typically the role of the pop-up menu is to present operations that are
+relevant to the context present when the right button is pressed.  For example,
+if we are displaying an image, there would be image display or image processing
+operations presented in the menu.  Another mode might dominate when the tableau
+contains only geometric features. In that case, the menu items might present
+geometric operations such as translation or rotation.
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <img src="./popupmenu-example.jpg" alt="popupmenu-example">
+    <caption align="bottom">
+  <div align=left><strong>Figure 9:</strong>
+  A <code>vgui</code> pop-up menu example. The menu shown was launched by pressing the
+right mouse key.  A pop-up menu can have sub-menus, as shown in the figure.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  This display was created by the example <code>vgui/examples/basic06_popup.cxx</code>:
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_window.h&gt;
+#include &lt;vgui/vgui_adaptor.h&gt;
+#include &lt;vgui/vgui_menu.h&gt;
+#include &lt;vgui/vgui_image_tableau.h&gt;
+#include &lt;vgui/vgui_viewer2D_tableau.h&gt;
+#include &lt;vgui/vgui_shell_tableau.h&gt;
+// Set up a dummy callback function for the menu to call (for
+// simplicity all menu items will call this function):
+static void dummy()
+{
+  vcl_cerr &lt;&lt; &quot;Dummy function called\n&quot;;
+}
+
+// Create a vgui_menu:
+vgui_menu create_menus()
+{
+  vgui_menu file;
+  file.add(&quot;Open&quot;, dummy);
+  file.add(&quot;Quit&quot;, dummy);
+
+  vgui_menu image;
+  image.add(&quot;Center image&quot;, dummy);
+  image.add(&quot;Show histogram&quot;, dummy);
+
+  vgui_menu bar;
+  bar.add(&quot;File&quot;,file);
+  bar.add(&quot;Image&quot;,image);
+
+  return bar;
+}
+</pre></td></tr></table>
+</td></tr></table>
+<table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">int main(int argc, char ** argv)
+{
+  vgui::init(argc,argv);
+  if (argc &lt;= 1)
+  {
+    vcl_cerr &lt;&lt; &quot;Please give an image filename on the command line\n&quot;;
+    return 0;
+  }
+  // Load an image into an image tableau:
+  vgui_image_tableau_new image(argv[1]);
+  vgui_viewer2D_tableau_new viewer(image);
+  vgui_shell_tableau_new shell(viewer);
+
+  // Create a window and add the tableau:
+  vgui_window *win = vgui::produce_window(512, 512);
+  win-&gt;get_adaptor()-&gt;set_tableau(shell);
+
+  // Add our menu items to the base pop-up
+  // (this menu appears when the user clicks
+  //  the right mouse button on the tableau)
+  win-&gt;get_adaptor()-&gt;include_in_popup(create_menus());
+  win-&gt;get_adaptor()-&gt;bind_popups();
+  win-&gt;show();
+  return vgui::run();
+}
+</pre></td></tr></table>
+</td></tr></table><p>This example contains a few new elements that should be discussed.
+</p><ul class="toc">
+<li> <code>vgui_window *win = vgui::produce_window(512, 512)</code>:
+In this case the widow is created before the display is launched. In
+the previous examples, the window was created at the time of launch
+using the <code>vgui::run(..)</code> command.  Here the window is initialized
+to size 512x512 display resolution elements.
+
+</li><li> <code>win-&gt;get_adaptor()-&gt;include_in_popup(create_menus())</code>:
+This line introduces the class, <code>vgui_adaptor</code>.  The idea of the
+adaptor is to provide a uniform interface for events across all
+toolkits. The adaptor also dispatches draw requests to the tableau
+hierarchy. A key role for the adaptor is to attach itself to a tableau
+using the method, <code>vgui_adaptor::set_tableau</code>.  Then events
+received by the adaptor can then be passed down the tableau
+hierarchy. In the example, the <code>vgui_shell_tableau</code> is the root
+of the tableau hierarchy, and the adaptor is attached to the shell.
+
+<p>Each tableau in the hierarchy can add to the pop-up menu. In this
+example the specified menu is being included at the top-most level,
+i.e. the adaptor. It is also possible to define pop-up menu entries in each
+tableau in the hierarchy. To see an example of adding items to the pop-up
+menu by a tableau lower in the hierarchy, take a look at
+<code>vgui_clear_tableau::add_popup(..)</code>.
+</p>
+</li><li> <code>win-&gt;get_adaptor()-&gt;bind_popups()</code>:
+This command binds the appropriate button and modifier to launch the
+pop-up menu. This method depends on the particular toolkit and is
+defined by the adaptor sub-class in the <code>vgui/impl/</code> sub-directory for
+the toolkit being invoked.
+
+</li><li> <code>win-&gt;show()</code>:
+This code causes the window to be exposed on the screen.
+
+</li><li> <code>vgui::run()</code>:
+This command tells the window to process all events until it is terminated.
+Unlike the previous examples, the window has been constructed in
+advance of the run command.
+</li></ul>
+
+<hr size="6">
+<a name="SEC124"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC123" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC125" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 10.5 Dialog Menus </h2>
+
+<p>It is often necessary to obtain values for parameters, such as edge
+detection thresholds or scales before applying the operation to an
+image. Also it is frequently necessary to obtain a file path string in
+order to read data such as image. These functions are satisfied by the
+<em>dialog menu</em>. An example of a dialog is shown in Figure 10, which
+corresponds to <code>vgui/examples/basic07_dialog.cxx</code>.
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <img src="./dialog-example.jpg" alt="dialog-example">
+    <caption align="bottom">
+  <div align=left><strong>Figure 10:</strong>
+  The dialog menu appears when a menu item is pressed that calls a function
+containing a dialog.  The dialog displays names and values as well as boolean
+check boxes. The state of the boxes and values can be changed and when the
+dialog is dispatched, the altered values are bound to the variables in the
+dialog specification. In this simple example, the latest values are output
+to <code>vcl_cerr</code>.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  The following example illustrates these points.
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vbl/vbl_bool_ostream.h&gt;
+#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_menu.h&gt;
+#include &lt;vgui/vgui_dialog.h&gt;
+#include &lt;vgui/vgui_image_tableau.h&gt;
+#include &lt;vgui/vgui_viewer2D_tableau.h&gt;
+#include &lt;vgui/vgui_shell_tableau.h&gt;
+// Make a vgui_dialog:
+static void test_dialog()
+{
+  static int int_value = 2;
+  static long long_value = 3;
+  static float float_value = 3.1f;
+  static double double_value = 4.2;
+  static vcl_string string_value = &quot;dialog test&quot;;
+  static bool bool_value = true;
+  static vcl_string file_value = &quot;/tmp/myfile.txt&quot;;
+  static vcl_string regexp = &quot;*.txt&quot;;
+  static vcl_string color_value = &quot;blue&quot;;
+
+  static int choice_value = 1;
+  vcl_vector&lt;vcl_string&gt; labels;
+  labels.push_back(vcl_string(&quot;fltk&quot;));
+  labels.push_back(vcl_string(&quot;motif&quot;));
+  labels.push_back(vcl_string(&quot;gtk&quot;));
+  labels.push_back(vcl_string(&quot;glut&quot;));
+  labels.push_back(vcl_string(&quot;glX&quot;));
+
+  vgui_dialog mydialog(&quot;My dialog&quot;);
+  mydialog.field(&quot;int value&quot;, int_value);
+  mydialog.field(&quot;long value&quot;, long_value);
+  mydialog.field(&quot;float value&quot;, float_value);
+  mydialog.field(&quot;double value&quot;, double_value);
+  mydialog.field(&quot;string value&quot;, string_value);
+  mydialog.checkbox(&quot;bool value&quot;, bool_value);
+  mydialog.choice(&quot;choice value&quot;, labels, choice_value);
+  mydialog.inline_file(&quot;file browser&quot;, regexp, file_value);
+  mydialog.inline_color(&quot;color value&quot;, color_value);
+
+  if (mydialog.ask())
+  {
+    vcl_cerr &lt;&lt; &quot;int_value : &quot; &lt;&lt; int_value &lt;&lt; vcl_endl
+             &lt;&lt; &quot;long_value : &quot; &lt;&lt; long_value &lt;&lt; vcl_endl
+             &lt;&lt; &quot;float_value : &quot; &lt;&lt; float_value &lt;&lt; vcl_endl
+             &lt;&lt; &quot;double_value : &quot; &lt;&lt; double_value &lt;&lt; vcl_endl
+             &lt;&lt; &quot;string_value : &quot; &lt;&lt; string_value &lt;&lt; vcl_endl
+             &lt;&lt; &quot;bool_value : &quot;
+             &lt;&lt; vbl_bool_ostream::true_false(bool_value) &lt;&lt; vcl_endl
+             &lt;&lt; &quot;choice_value : &quot; &lt;&lt; choice_value &lt;&lt; ' '
+             &lt;&lt; labels[choice_value] &lt;&lt; vcl_endl
+             &lt;&lt; &quot;file_value: &quot; &lt;&lt; file_value &lt;&lt; vcl_endl
+             &lt;&lt; &quot;color_value: &quot; &lt;&lt; color_value &lt;&lt; vcl_endl;
+  }
+}
+</pre></td></tr></table>
+</td></tr></table><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">static void test_dialog2()
+{
+  vgui_dialog mydialog(&quot;My dialog2&quot;);
+  vgui_image_tableau_new image(&quot;c:/house11_small.jpg&quot;);
+  vgui_viewer2D_tableau_new viewer(image);
+  mydialog.inline_tableau(viewer, 512, 512);
+
+  mydialog.message(&quot;A picture&quot;);
+
+  vcl_string button_txt(&quot;close&quot;);
+  mydialog.set_ok_button(button_txt.c_str());
+  mydialog.set_cancel_button(0);
+  mydialog.ask();
+}
+
+// Create a vgui.menu with an item which shows the dialog box:
+vgui_menu create_menus()
+{
+  vgui_menu test;
+  test.add(&quot;Dialog&quot;, test_dialog);
+  test.add(&quot;Dialog2&quot;, test_dialog2);
+
+  vgui_menu bar;
+  bar.add(&quot;Test&quot;,test);
+
+  return bar;
+}
+</pre></td></tr></table>
+</td></tr></table><p>A dialog pops up when the associated menu item is selected. The dialog interface
+is reasonably self-explanatory, but it will be useful to discuss some of the main
+elements.
+</p><ul class="toc">
+<li> <code>static int choice_value = 1</code>:
+It is desirable to have the values in the dialog persist from one
+invocation to the next. This persistence is enabled through the use of
+static variables.  Also note that the indexing of the choices starts
+at 1, i.e., &quot;fltk&quot; is the first element of the choice list. The
+appearance of the choice sub dialog is shown in Figure 11 a).
+</li><li> <code>mydialog.inline_file(&quot;file browser&quot;, regexp, file_value)</code>:
+This file browser dialog element is used extensively in applications.
+The interface is:
+<code>void inline_file(char const* label,vcl_string&amp; regexp,vcl_string&amp; filepath)</code>
+
+<p>The argument <code>label</code> is the displayed name of the dialog slot
+attached to the file browser. The string <code>regexp</code> defines a
+filter on the file extensions so that only a class of files will
+appear in the browser. For example, if only JPEG images are to
+be selected the argument assignment would be, <code>static vcl_string
+regexp = &quot;*.jpg&quot;</code>.  The third argument is the result and returns
+the path to the selected file.
+</p>
+</li><li> <code>if (mydialog.ask())</code>:
+This function pops up the dialog and waits for the <code>ok</code> or
+<code>cancel</code> button to be pushed. If <code>ok</code> is pushed then the
+function returns <em>true</em>, and the dialog values can be processed
+by the users application.
+
+</li><li> <code>mydialog.inline_tableau(viewer, 512, 512)</code>:
+Dialogs can contain an embedded hierarchy of tableaux. In this example
+an image viewer with pan and zoom capability is included in the
+dialog as shown in Figure 12.  Any tableau can be inserted, such as
+<code>vgui_easy2D_tableau</code>, and its capability could be used to
+display geometric objects.
+</li></ul>
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <p><img src="./choice-color.jpg" alt="choice-color">
+    <caption align="bottom">
+  <div align=left><strong>Figure 11:</strong>
+   a) The choice option enables a selection from a set of alternative values.
+ b) The color option enables a selection from a pallet of colors.
+    </div>
+  </caption>
+      </td></tr></table></p>
+      <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <img src="./dialog2-example.jpg" alt="dialog2-example">
+    <caption align="bottom">
+  <div align=left><strong>Figure 12:</strong>
+  Dialogs can also contain embedded images or geometric figures.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+<hr size="6">
+<a name="SEC125"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC124" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC126" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 10.6 Event Processing </h2>
+
+<p><a name="events"></a>
+As applications become more sophisticated, the programmer will need to be able
+to process events in a manner appropriate to customized interactive tasks.
+The <code>vgui</code> design has a simple interface for handling events as is
+illustrated by <code>vgui/examples/basic09_mouse_position</code>.
+The code for this example:
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_image_tableau.h&gt;
+#include &lt;vgui/vgui_viewer2D_tableau.h&gt;
+#include &lt;vgui/vgui_shell_tableau.h&gt;
+//------------------------------------------------------------
+// A tableau that displays the mouse position
+// when left mouse button is pressed.
+struct example_tableau : public vgui_image_tableau
+{
+  example_tableau(char const* f) : vgui_image_tableau(f){ }
+
+  ~example_tableau() { }
+
+  bool handle(vgui_event const&amp; e)
+  {
+    if (e.type == vgui_BUTTON_DOWN &amp;&amp;
+        e.button == vgui_LEFT &amp;&amp; e.modifier == 0)
+    {
+      vcl_cout &lt;&lt; &quot;selecting at &quot; &lt;&lt; e.wx &lt;&lt; ' ' &lt;&lt; e.wy &lt;&lt; vcl_endl;
+      return true; // event has been used
+    }
+
+    //  We are not interested in other events,
+    //  so pass event to base class:
+    return vgui_image_tableau::handle(e);
+  }
+};
+//-------------------------------------------------------------
+// Make a smart-pointer constructor for our tableau.
+struct example_tableau_new : public vgui_image_tableau_sptr
+{
+  example_tableau_new(char const* f) : vgui_image_tableau_sptr(
+    new example_tableau(f)) { }
+};
+</pre></td></tr></table>
+</td></tr></table><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">//-------------------------------------------------------------
+//The first command line argument is expected
+// to be an image filename.
+int main(int argc,char **argv)
+{
+  vgui::init(argc, argv);
+  if (argc &lt;= 1)
+  {
+    vcl_cerr &lt;&lt; &quot;Please give an image filename\n&quot;;
+    return 0;
+  }
+
+  // Load an image into my tableau
+  // (derived from vgui_image_tableau)
+  vgui_tableau_sptr my_tab = example_tableau_new(argv[1]);
+
+  vgui_viewer2D_tableau_new viewer(my_tab);
+  vgui_shell_tableau_new shell(viewer);
+
+  // Start event loop, using easy method.
+  return vgui::run(shell, 512, 512);
+}
+</pre></td></tr></table>
+</td></tr></table><p>This example contains a number of new concepts that are important to
+building custom applications. The example illustrates how to go about
+creating a new tableau, which is a subclass of an existing tableau.
+</p><ul class="toc">
+<li> <code>struct example_tableau : public vgui_image_tableau</code>:
+The new tableau is a child of the <code>vgui_image_tableau</code>. The tableau is
+being defined as a <code>struct</code>, however it could also be a class.
+
+</li><li> <code>struct example_tableau_new : public vgui_image_tableau_sptr</code>:
+vgui makes use of smart pointers extensively to prevent memory leaks.
+The smart pointer maintains a reference count so that an object (or
+struct) can be deleted when the reference count goes to zero, i.e., no
+one is referencing a pointer to the object. A drawback to the smart pointer
+approach is that inheritance is not maintained, that is, the smart pointer of a
+child of a class is not a sub-class of the smart pointer of the class.
+<code>vgui</code> has implemented a solution to this problem by creating a
+hierarchy of smart pointers that match the tableau hierarchy.
+
+</li><li> <code>bool handle(vgui_event const&amp; e)</code>:
+The base class for all tableaux, <code>vgui_tableau</code> defines the
+virtual method, <em>handle</em>, which is called as events are passed
+down the tableau hierarchy. The event is initially captured by the
+<code>vgui_adaptor</code> which then passes it to its base tableau. If there
+is no handle method defined for a tableau, then the event is processed
+by its parents.
+
+</li><li> <code>return vgui_image_tableau::handle(e)</code>:
+After a particular handle method has processed an event it, can mark
+it as used (<em>true</em>) or unused (<em>false</em>). If an event is
+considered used by a tableau then it is eliminated and not presented
+to any other tableau.  If the event is unused, then it is further dispatched
+to child tableaux or returned to the parent.
+
+</li><li> <code>if (e.type == vgui_BUTTON_DOWN..)</code>:
+<code>vgui</code> represents a spectrum of event types, which are summarized at this point for convenient reference.
+</li></ul>
+
+<p>It is often required to include the definition of a tableau smart
+pointer in other class implementations. When a new tableau is created
+it is convenient to define the smart pointer in a
+<samp>`xxx_tableau_sptr.h'</samp> file as follows:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vgui/vgui_tableau_sptr.h&gt;
+
+class xxx_tableau;
+typedef vgui_tableau_sptr_t&lt;xxx_tableau&gt; xxx_tableau_sptr;
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC126"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC125" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC127" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC125" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.6.1 <code>vgui</code> Events </h3>
+
+<p>The general types of events handled by <code>vgui</code> are:
+</p><ul>
+<li> drawing
+</li><li> mouse button down
+</li><li> mouse button up
+</li><li> mouse motion
+</li><li> key press (and key modifiers)
+</li><li> timers
+</li></ul>
+<p>The following is a partial list of the event enum symbols defined in
+<code>vgui_event.h</code>. Not all of the events enumerated in
+<code>vgui_event</code> are described here. Some of them seem to be
+vestigial and not exploited in code. A few comments will be added where
+the event function is not obvious.
+</p><ul class="toc">
+<li> <code>vgui_BUTTON_DOWN=vgui_MOUSE_DOWN=vgui_MOUSE_PRESS</code>
+</li><li> <code>vgui_BUTTON_UP=vgui_MOUSE_UP=vgui_MOUSE_RELEASE</code>
+</li><li> <code>vgui_DRAW</code>, <code>vgui_DRAW_OVERLAY</code> and <code>vgui_RESHAPE</code>
+These events cause the OpenGL display list to be re-rendered.  The
+draw events are generated by the virtual tableau methods,
+<code>vgui_tableau::post_redraw()</code> and
+<code>vgui_tableau::post_overlay_redraw()</code>. When a tableau creates or
+modifies some displayable features, it is necessary to post the redraw
+event to stimulate the OpenGL display list to be re-rendered.  At
+present, the use of overlay_redraw events is not extensive in
+<code>vgui</code>.  The design idea was that one may not want to redraw the entire
+display list. In the current implementation, all these events are treated
+by redrawing the display list.
+</li><li> <code>vgui_ENTER</code> and <code>vgui_LEAVE</code>
+These events are triggered when the mouse enters/leaves the window.
+</li><li> <code>vgui_HSCROLL</code> and <code>vgui_VSCROLL</code>
+When a window has specified the addition of scroll bars,
+these events are emitted when the scroll bars are moved.
+</li><li> <code>vgui_KEY_PRESS=vgui_KEY_DOWN</code>
+</li><li> <code>vgui_KEY_RELEASE=vgui_KEY_UP</code>
+</li><li> <code>vgui_MOTION</code>
+This event occurs whenever the mouse is in motion over the window.
+</li><li> <code>vgui_TIMER</code>
+<code>vgui</code> allows users to set a timer and then have an event issued when
+the time interval is completed. The timer is set by the
+<code>vgui_adaptor::post_timer(..)</code> method. For example, the code
+<code>e.origin-&gt;post_timer(100.0)</code> retrieves the <code>vgui_adaptor</code> and
+issues a timer post of 100 milliseconds.
+</li><li> <code>vgui_DESTROY</code>
+This event is caused by issuing a vgui_adaptor::post_destroy() command.
+The purpose is to allow exit processing to be carried out before the application quits.
+</li></ul>
+
+<hr size="6">
+<a name="SEC127"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC126" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC128" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC125" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.6.2 <code>vgui</code> Buttons, Keys and Modifiers </h3>
+
+<p>The following table defines the <code>vgui</code> enum symbols for buttons, keys
+and modifiers:
+</p>
+<table>
+<tr><td><p> ===== Buttons ===== </p></td><td><p> &nbsp;</p></td></tr>
+<tr><td><p> <code>vgui_LEFT</code> </p></td><td><p> left mouse button
+</p></td></tr>
+<tr><td><p> <code>vgui_MIDDLE</code> </p></td><td><p> middle mouse button
+</p></td></tr>
+<tr><td><p> <code>vgui_RIGHT</code> </p></td><td><p> right mouse button
+</p></td></tr>
+<tr><td><p> ===== Keys ===== </p></td><td><p> &nbsp;</p></td></tr>
+<tr><td><p> <code>vgui_ESC</code> </p></td><td><p> ascii 27
+</p></td></tr>
+<tr><td><p> <code>vgui_TAB</code> </p></td><td><p> <samp>`\t'</samp>
+</p></td></tr>
+<tr><td><p> <code>vgui_RETURN</code> </p></td><td><p> <samp>`\r'</samp>
+</p></td></tr>
+<tr><td><p> <code>vgui_NEWLINE</code> </p></td><td><p> <samp>`\n'</samp>
+</p></td></tr>
+<tr><td><p> <code>vgui_F1 </code> </p></td><td><p> 0x100 + 1
+</p></td></tr>
+<tr><td><p> <code>vgui_F2 </code> </p></td><td><p> 0x100 + 2
+</p></td></tr>
+<tr><td><p> <code>vgui_F3 </code> </p></td><td><p> 0x100 + 3
+</p></td></tr>
+<tr><td><p> <code>vgui_F4 </code> </p></td><td><p> 0x100 + 4
+</p></td></tr>
+<tr><td><p> <code>vgui_F5 </code> </p></td><td><p> 0x100 + 5
+</p></td></tr>
+<tr><td><p> <code>vgui_F6 </code> </p></td><td><p> 0x100 + 6
+</p></td></tr>
+<tr><td><p> <code>vgui_F7 </code> </p></td><td><p> 0x100 + 7
+</p></td></tr>
+<tr><td><p> <code>vgui_F9 </code> </p></td><td><p> 0x100 + 8
+</p></td></tr>
+<tr><td><p> <code>vgui_F10 </code> </p></td><td><p> 0x100 + 9
+</p></td></tr>
+<tr><td><p> <code>vgui_F11 </code> </p></td><td><p> 0x100 + 10
+</p></td></tr>
+<tr><td><p> <code>vgui_F12 </code> </p></td><td><p> 0x100 + 11
+</p></td></tr>
+<tr><td><p> <code>vgui_CURSOR_LEFT </code> </p></td><td><p> 0x100 + 12
+</p></td></tr>
+<tr><td><p> <code>vgui_CURSOR_UP </code> </p></td><td><p> 0x100 + 13
+</p></td></tr>
+<tr><td><p> <code>vgui_CURSOR_RIGHT </code> </p></td><td><p> 0x100 + 14
+</p></td></tr>
+<tr><td><p> <code>vgui_CURSOR_DOWN </code> </p></td><td><p> 0x100 + 15
+</p></td></tr>
+<tr><td><p> <code>vgui_PAGE_UP </code> </p></td><td><p> 0x100 + 16
+</p></td></tr>
+<tr><td><p> <code>vgui_PAGE_DOWN </code> </p></td><td><p> 0x100 + 17
+</p></td></tr>
+<tr><td><p> <code>vgui_HOME </code> </p></td><td><p> 0x100 + 18
+</p></td></tr>
+<tr><td><p> <code>vgui_END </code> </p></td><td><p> 0x100 + 19
+</p></td></tr>
+<tr><td><p> <code>vgui_DELETE </code> </p></td><td><p> 0x100 + 20
+</p></td></tr>
+<tr><td><p> <code>vgui_INSERT </code> </p></td><td><p> 0x100 + 21
+</p></td></tr>
+<tr><td><p> ===== Modifiers ===== </p></td><td><p> &nbsp;</p></td></tr>
+<tr><td><p> <code>vgui_NULL</code> </p></td><td><p> 0x0
+</p></td></tr>
+<tr><td><p> <code>vgui_CTRL</code> </p></td><td><p> 0x1
+</p></td></tr>
+<tr><td><p> <code>vgui_SHIFT</code> </p></td><td><p> 0x2
+</p></td></tr>
+<tr><td><p> <code>vgui_META</code> </p></td><td><p> 0x4
+</p></td></tr>
+<tr><td><p> <code>vgui_ALT</code> </p></td><td><p> 0x8
+</p></td></tr>
+</table>
+
+<p>When a key press event is dispatched it carries information that
+specifies the key and modifier structure. This code fragment
+illustrates the use of modified keys:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">bool handle(vgui_event const&amp; e)
+{
+  vgui_key k = e.key;
+  vgui_modifier m = e.modifier;
+  if (m &amp; vgui_CTRL)
+    if (k == 's')
+    {
+      // Do something appropriate for CTRL + 's'
+      ...
+    }
+  return true;
+}
+</pre></td></tr></table><p>The bit corresponding to the modifier is tested to see if further
+action switched by the actual key is warranted.  Note that the key in
+a <code>vgui_event</code> is always lower case. This eliminates the
+ambiguity that might arise in the use of the SHIFT key and upper case
+vs lower case characters.  The following table will illustrate the
+effect of various modifier combinations.
+</p>
+<table>
+<tr><td><p> key press </p></td><td><p> modifier </p></td><td><p> key </p></td><td><p> ascii character
+</p></td></tr>
+<tr><td><p> ======= </p></td><td><p> ======= </p></td><td><p> ======= </p></td><td><p> =======
+</p></td></tr>
+<tr><td><p> <code>a</code> </p></td><td><p> <code>vgui_NULL</code> </p></td><td><p> <samp>`a'</samp> </p></td><td><p> <samp>`a'</samp>
+</p></td></tr>
+<tr><td><p> <code>CTRL+a</code> </p></td><td><p> <code>vgui_CTRL</code> </p></td><td><p> <samp>`a'</samp> </p></td><td><p> <samp>`^a'</samp>
+</p></td></tr>
+<tr><td><p> <code>SHIFT+a</code> </p></td><td><p> <code>vgui_SHIFT</code> </p></td><td><p> <samp>`a'</samp> </p></td><td><p> <samp>`A'</samp>
+</p></td></tr>
+<tr><td><p> <code>/</code> </p></td><td><p> <code>vgui_NULL</code> </p></td><td><p> <samp>`/'</samp> </p></td><td><p> <samp>`/'</samp>
+</p></td></tr>
+<tr><td><p> <code>?</code> </p></td><td><p> <code>vgui_SHIFT</code> </p></td><td><p> <samp>`/'</samp> </p></td><td><p> <samp>`?'</samp>
+</p></td></tr>
+</table>
+
+<p>If one wants to work directly with the actual ascii character pressed, then
+use <code>e.ascii_char</code>.
+</p>
+<hr size="6">
+<a name="SEC128"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC127" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC129" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC125" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.6.3 Event Condition </h3>
+
+<p>A convenient class, <code>vgui_event_condition</code> is defined to
+represent the occurrence of a particular event configuration. Its use
+is best illustrated by an example:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">bool my_tableau::handle(vgui_event const&amp; e)
+{
+   vgui_event_condition g0(vgui_LEFT, vgui_CTRL, false);
+   if (g0(e))
+      vcl_cout &lt;&lt; &quot;saw a left mouse button release with CTRL pressed event\n&quot;;
+
+   // pass the event back to the parent tableau
+   return vgui_my_parent_tableau::handle(e);
+}
+</pre></td></tr></table><p>In this case a test for the indicated event condition is constructed
+and can be used to filter events passing into a tableau's handle
+method. The event condition class
+provides a compact and tidy way of expressing complex logic on
+modifiers, keys and buttons.
+</p>
+<hr size="6">
+<a name="SEC129"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC128" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC130" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC125" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.6.4 Mouse Position </h3>
+
+<p>An event passes back the position of the mouse when the event
+occurred. As was illustrated in the <code>basic09_mouse_position</code>
+example. However this position is in the coordinate system of the
+display window.  Most computer vision applications require positions
+referenced to the coordinate system of the image being displayed, and
+expressed in pixels.  The class <code>vgui_projection_inspector</code>
+provides methods for transforming between the window and image
+coordinate systems.
+</p>
+<p>The transformation is illustrated by this code fragment:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">// Get X,Y mouse position to display on status bar
+// in image coordinates
+bool my_image_tableau::handle(vgui_event const&amp; e)
+{
+  if (e.type == vgui_MOTION &amp;&amp; !button_down)
+  {
+    float pointx, pointy;
+    vgui_projection_inspector p_insp;
+    p_insp.window_to_image_coordinates(e.wx, e.wy, pointx, pointy);
+    int intx = (int)vcl_floor(pointx), inty = (int)vcl_floor(pointy);
+    vgui::out &lt;&lt; '(' &lt;&lt; intx &lt;&lt; ' ' &lt;&lt; inty &lt;&lt; &quot;)\n&quot;;
+  }
+  return vgui_image_tableau::handle(e);
+}
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="SEC130"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC129" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC131" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 10.7 Building an Application </h2>
+
+<p>The essential elements to create a GUI application have been presented.
+In this section, a typical design for a main program and associated GUI management classes will be described.
+</p>
+<hr size="6">
+<a name="SEC131"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC130" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC132" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC130" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.7.1 The Manager </h3>
+
+<p>There is a tendency to pile a lot of menu callbacks and menu
+constructors into the main program.  It is easy and convenient, but
+this approach doesn't stand up to evolution of the program over
+time. The main program quickly becomes hopelessly cluttered with a tangle of
+processing code, menu callbacks and tableau specifications.
+</p>
+<p>A much better approach is to separate the methods used to process
+callbacks and event handling into a singleton class called the
+<em>manager</em>.  The manager can be a sub-class of the top-level
+tableau and thus provide custom processing of events by defining its
+own <code>::handle</code> method.  The methods on the manager provide the
+implementation for the menu callbacks.
+</p>
+<p>It is also better to separate the menu construction class from the
+main program, since menus also tend to grow in number and complexity
+as the application evolves.
+</p>
+<p>The following example will illustrate these design principles. The manager class looks like:
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vil/vil_image.h&gt;
+#include &lt;vgui/vgui_image_tableau_sptr.h&gt;
+#include &lt;vgui/vgui_wrapper_tableau.h&gt;
+
+class basic_manager : public vgui_wrapper_tableau
+{
+ public:
+  ~basic_manager();
+  static basic_manager *instance();
+  void quit();
+  void load_image();
+  void init();
+  virtual bool handle(vgui_event const&amp;);
+
+ private:
+  basic_manager();
+  vil_image img_;
+  vgui_image_tableau_sptr itab_;
+  static basic_manager *instance_;
+};
+</pre></td></tr></table>
+</td></tr></table><p>Some elements of the class design require explanation:
+</p><ul class="toc">
+<li> <code>static basic_manager *instance()</code>:
+This method returns a
+unique single instance of the <code>basic_manager</code> class. This design
+is called a <em>singleton</em> pattern and is used when the class must
+maintain a unique consistent state across applications accessing the
+class. This requirement frequently arises in event handling where
+global access to the same event process is required. In our example,
+All events are funneled through the same <code>basic_manager</code> instance.
+
+</li><li> <code>basic_manager()</code>:
+The constructor for this class is made private because the only way
+the class should be invoked is through the <code>::instance</code> method.
+
+</li><li> <code>virtual bool handle(vgui_event const&amp;)</code>:
+Since the manager is a sub-class of a <code>vgui_wrapper_tableau</code> it
+inherits the <code>::handle</code> method.  This inheritance enables the
+manager to implement its own event processing and then pass unused
+events onto the manager's tableau children.
+
+</li><li> <code>vgui_image_tableau_sptr itab_ </code>:
+To provide convenient access, one can cache pointers to intermediate tableaux.
+
+</li><li> <code>void load_image()</code>:
+A typical menu callback method. This manager can be accessed by many
+different applications that need to load an image. Thus, the image GUI
+management code doesn't have to be continually rewritten.
+</li></ul>
+
+<p>The implementation of the <code>basic_manager</code> class is as follows:
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vcl_cstdlib.h&gt; // for vcl_exit()
+#include &lt;vcl_iostream.h&gt;
+#include &lt;vil/vil_load.h&gt;
+#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_dialog.h&gt;
+#include &lt;vgui/vgui_viewer2D_tableau.h&gt;
+#include &lt;vgui/vgui_shell_tableau.h&gt;
+#include &lt;vgui/vgui_image_tableau.h&gt;
+#include &quot;basic_manager.h&quot;
+
+//static basic_manager instance
+basic_manager* basic_manager::instance_ = 0;
+
+//insure only one instance is created
+basic_manager *basic_manager::instance()
+{
+  if (!instance_)
+  {
+    instance_ = new basic_manager();
+    instance_-&gt;init();
+   }
+  return basic_manager::instance_;
+}
+
+// constructor/destructor
+basic_manager::basic_manager():vgui_wrapper_tableau(){}
+
+basic_manager::~basic_manager(){}
+
+void basic_manager::init()
+{
+  itab_ = vgui_image_tableau_new();//keep the image tableau handy
+  vgui_viewer2D_tableau_sptr viewer = vgui_viewer2D_tableau_new(itab_);
+  vgui_shell_tableau_sptr shell = vgui_shell_tableau_new(viewer);
+  this-&gt;add_child(shell);
+}
+</pre></td></tr></table>
+</td></tr></table>
+<p>Most of this code should be clear.  One subtle point is the method
+<code>void basic_manager::init()</code>.
+When the instance of <code>basic_manager</code> is created, the parent class,
+<code>vgui_wrapper_tableau</code>, is constructed using its default constructor.
+After it comes into existence, the rest of the tableau hierarchy can be inserted
+as a child of <code>basic_manager</code>.
+With this approach, there is no assumption required about the order of constructors.
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">//the event handler
+bool basic_manager::handle(vgui_event const&amp; e)
+{
+  if (e.key == 'b')
+    vgui::out &lt;&lt; &quot;I saw a 'b'\n&quot;;
+  //pass the event to the shell
+  return this-&gt;child.handle(e);
+}
+
+void basic_manager::quit()
+{
+  vcl_exit(1);
+}
+
+void basic_manager::load_image()
+{
+  vgui_dialog load_image_dlg(&quot;Load image file&quot;);
+  static vcl_string image_filename = &quot;&quot;;
+  static vcl_string ext = &quot;*.*&quot;;
+  load_image_dlg.file(&quot;Image Filename:&quot;, ext, image_filename);
+  if (!load_image_dlg.ask())
+    return;
+  img_ = vil_load(image_filename.c_str());
+  itab_-&gt;set_image(img_);
+}
+</pre></td></tr></table>
+</td></tr></table>
+<p>The manager has a simple basic handle method that looks for the letter
+<samp>`b'</samp>. All events are then passed to the child (shell) tableau for
+further processing. This routine could return <code>true</code> on the
+detection of the <samp>`b'</samp> event if it were desired not to have any of
+the child tableaux react.
+</p>
+<p>The methods to support menu callbacks are implemented in the manager.
+For example, <code>basic_manager::load_image()</code> illustrates the use of
+a dialog which pops up when the &quot;Load Image&quot; menu is selected.
+</p>
+<hr size="6">
+<a name="SEC132"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC131" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC133" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC130" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.7.2 The Menus </h3>
+
+<p>A menu class is defined to package up the static callback functions required
+in the <code>vgui_menu</code> assembly.  The <code>basic_menu</code> class is:
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">//basic_menus.h
+class basic_menus
+{
+ public:
+  static void quit_callback();
+  static void load_image_callback();
+  static vgui_menu get_menu();
+ private:
+  basic_menus(){};
+};
+//basic_menus.cxx
+#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_key.h&gt;
+#include &lt;vgui/vgui_modifier.h&gt;
+#include &lt;vgui/vgui_menu.h&gt;
+#include &quot;basic_manager.h&quot;
+#include &quot;basic_menus.h&quot;
+
+//Static menu callback functions
+
+void basic_menus::quit_callback()
+{
+  basic_manager::instance()-&gt;quit();
+}
+
+void basic_menus::load_image_callback()
+{
+  basic_manager::instance()-&gt;load_image();
+}
+
+//basic_menus definitions
+vgui_menu basic_menus::get_menu()
+{
+  vgui_menu menubar;
+  vgui_menu menufile;
+
+  //file menu entries
+  menufile.add( &quot;Quit&quot;, quit_callback,(vgui_key)'q', vgui_CTRL);
+  menufile.add( &quot;Load Image&quot;, load_image_callback, (vgui_key)'l', vgui_CTRL);
+
+  //main menu bar
+  menubar.add( &quot;File&quot;, menufile);
+  return menubar;
+}
+</pre></td></tr></table>
+</td></tr></table><p>Note that the menu callback functions are paired with methods on the manager.
+These menus can be exported to other GUI libraries so that the same menu
+functionality can be re-used. However, keep in mind that under Windows special
+measures must be taken to export static items.
+</p>
+<hr size="6">
+<a name="SEC133"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC132" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC134" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC130" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 10.7.3 The Main Program </h3>
+
+<p>The main program for the basic_manager application is:
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">#include &lt;vgui/vgui.h&gt;
+#include &lt;vgui/vgui_adaptor.h&gt;
+#include &lt;vgui/vgui_window.h&gt;
+#include &lt;vgui/vgui_command.h&gt;
+#include &lt;vgui/vgui_shell_tableau.h&gt;
+#include &lt;vgui/internals/vgui_accelerate.h&gt;
+#include &quot;basic_menus.h&quot;
+#include &quot;basic_manager.h&quot;
+
+int main(int argc, char** argv)
+{
+  vgui::init(argc, argv);
+  vgui_menu menubar = basic_menus::get_menu();
+  unsigned w = 512, h = 512;
+  vcl_string title = &quot;REALLY BASIC&quot;;
+  vgui_window* win = vgui::produce_window(w, h, menubar, title);
+  basic_manager* bas = basic_manager::instance();
+  win-&gt;get_adaptor()-&gt;set_tableau(bas);
+  win-&gt;set_statusbar(true);
+  win-&gt;enable_vscrollbar(true);
+  win-&gt;enable_hscrollbar(true);
+  win-&gt;show();
+  return vgui::run();
+}
+</pre></td></tr></table>
+</td></tr></table><p>Note that the basic manager instance is attached to the adaptor in
+order to receive events, by the expression,
+<code>win-&gt;get_adaptor()-&gt;set_tableau(bas)</code>. Note that the main
+program is now very simple and will stay uncluttered as the
+application grows.
+</p>
+<p>Several new features have been included in the construction of this window:
+</p><ul>
+<li> a title which appears at the top left of the window
+</li><li> a status bar, which displays messages at the bottom of the application
+ window.
+</li><li> horizontal and vertical scroll bars for panning the tableaux below a
+<code>vgui_viewer2D_tableau</code>.
+</li></ul>
+
+<hr size="6">
+<a name="SEC134"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC133" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC135" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 10.8 Summary of <code>vgui</code> Tableaux </h2>
+
+<p>The following is a summary of the tableau defined in <code>vgui</code>.
+</p><table>
+<tr><td><p> <code>active_tableau</code> </p></td><td><p> This tableau (or rather a tableau derived from it) can appear visible or invisible, and active or inactive by calling <code>toggle_active</code> and <code>toggle_visible</code>.
+</p>
+</td></tr>
+<tr><td><p> <code>blackbox_tableau</code> </p></td><td><p> A tableau for event record and playback.
+</p>
+</td></tr>
+<tr><td><p> <code>blender_tableau</code> </p></td><td><p> To use this tableau make a <code>vgui_image_tableau</code> containing one of the images to blend and a <code>vgui_blender_tableau</code> containing the other. Put them both in a <code>vgui_composite_tableau</code>.  Set alpha to be less than one to see the blended image.
+</p>
+</td></tr>
+<tr><td><p> <code>clear_tableau</code> </p></td><td><p> A tableau that performs OpenGL clearing upon receipt of a <code>vgui_DRAW</code> event. It has no child tableau.
+</p>
+</td></tr>
+<tr><td><p> <code>composite_tableau</code> </p></td><td><p> The <code>vgui_composite_tableau</code> class can have any number of children, indexed from 0 upwards.  The draw action of <code>vgui_composite_tableau</code> is to draw each of its children, in order, into the current context.  Events reaching the <code>vgui_composite_tableau</code> are passed on to each child in turn, till it is handled, so that child 0, the first added, is the &quot;top&quot; tableau.
+</p>
+</td></tr>
+<tr><td><p> <code>deck_tableau</code> </p></td><td><p> For holding an ordered collection of child tableaux, only one of which is passed all events that the <code>vgui_deck_tableau</code> receives. The effect is a flick-book of tableaux where the currently active tableau can be changed using PageUp and PageDown.
+</p>
+</td></tr>
+<tr><td><p> <code>displaylist2D_tableau</code> </p></td><td><p> Display of two-dimensional geometric objects - a builder tableau usually sub-classed.
+</p>
+</td></tr>
+<tr><td><p> <code>displaylist3D_tableau</code> </p></td><td><p> Display of three-dimensional geometric objects - a builder tableau usually sub-classed.
+</p>
+</td></tr>
+<tr><td><p> <code>drag_tableau</code> </p></td><td><p> A drag event occurs when the user moves the mouse with one of the mouse buttons pressed down.  In <code>vgui</code> there is no <code>vgui_DRAG</code> event (there is only <code>vgui_MOTION</code> for when the mouse is moving).  So if you want to capture drag events you may find this tableau handy.
+</p>
+</td></tr>
+<tr><td><p> <code>easy2D_tableau</code> </p></td><td><p> Easy interface for displaying two-dimensional geometric objects (see <code>vgui_soview2D</code>) such as lines, points, circles, etc. can be added using add, or <code>add_point</code>, <code>add_line</code>, <code>add_circle</code>, etc.
+</p>
+</td></tr>
+<tr><td><p> <code>easy3D_tableau</code> </p></td><td><p> Easy interface for displaying three-dimensional objects (see vgui_soview3D) can be added using add, or <code>add_point</code>, <code>add_line</code>, etc.
+</p>
+</td></tr>
+<tr><td><p> <code>enhance_tableau</code> </p></td><td><p> Magnify/display another tableau in a region around the mouse pointer. Useful for a roaming image-processing sub-window.
+</p>
+</td></tr>
+<tr><td><p> <code>function_tableau</code> </p></td><td><p> Allows a user to insert custom functions that are called when events such as draw, mouse up, motion .. etc occur.
+</p>
+</td></tr>
+<tr><td><p> <code>grid_tableau</code> </p></td><td><p> A tableau that renders its child tableaux as a rectangular grid.
+</p>
+</td></tr>
+<tr><td><p> <code>image_tableau</code> </p></td><td><p> A tableau that renders the given image using an <code>image_renderer</code>.
+</p>
+</td></tr>
+<tr><td><p> <code>listmanager2D_tableau</code> </p></td><td><p> A tableau that manages a set of <code>vgui_displaylist2D_tableau</code> children.
+</p>
+</td></tr>
+<tr><td><p> <code>loader_tableau</code> </p></td><td><p> A tableau which (optionally) loads given values for the projection and modelview matrices before passing control to its child. This is typically used to initialize GL before rendering a scene.
+</p>
+</td></tr>
+<tr><td><p> <code>poly_tableau</code> </p></td><td><p> A tableau which renders its children in sub-rectangles of its viewport. The <code>grid_tableau</code> is a sub-class of <code>poly_tableau</code>.
+</p>
+</td></tr>
+<tr><td><p> <code>quit_tableau</code> </p></td><td><p> A tableau which quits the application on receiving <samp>`q'</samp> or ESC.
+</p>
+</td></tr>
+<tr><td><p> <code>roi_tableau</code> </p></td><td><p> A tableau which makes an ROI of an image act like a whole image.
+</p>
+</td></tr>
+<tr><td><p> <code>rubberband_tableau</code> </p></td><td><p> A tableau for interactive drawing of lines, circles, boxes, etc.
+</p>
+</td></tr>
+<tr><td><p> <code>satellite_tableau</code> </p></td><td><p> Turns a non-tableau into a multi-tableau, or puts one tableau into two parts of the hierarchy simultaneously. Example: We are displaying two images, each in its own zoomer and we'd like to have a tableau which takes mouse events from one image and draws a line on the other; introduces a &quot;crossover&quot; in the tree which is difficult to handle without <code>vgui_satellite_tableau</code>.
+</p>
+</td></tr>
+<tr><td><p> <code>shell_tableau</code> </p></td><td><p> A shell tableau is a handy collection of things one often wants at the very top of one's tableau hierarchy. It is essentially an acetate with N utility tableaux at the bottom.
+</p>
+</td></tr>
+<tr><td><p> <code>text_tableau</code> </p></td><td><p> A tableau for rendering text. Each piece of text is associated with an integer handle through which it can be retrieved, moved about, changed or removed. This tableau will not display any text unless you have compiled with GLUT.
+</p>
+</td></tr>
+<tr><td><p> <code>tview_launcher_tableau</code> </p></td><td><p> A tableau that pops up tableau tree (tview) on <samp>`G'</samp>.
+</p>
+</td></tr>
+<tr><td><p> <code>tview_tableau</code> </p></td><td><p> Displays a tableau tree.
+</p>
+</td></tr>
+<tr><td><p> <code>viewer2D_tableau</code> </p></td><td><p> A tableau for zooming and panning 2-d renderings.
+</p>
+</td></tr>
+<tr><td><p> <code>viewer3D_tableau</code> </p></td><td><p> A tableau for manipulating 3-d rendered scenes (not completed).
+</p>
+</td></tr>
+<tr><td><p> <code>wrapper_tableau</code> </p></td><td><p> A base class tableau which insures only a single child. Useful as a base class for managers.
+</p>
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="SEC135"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC134" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC112" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 10.9 Advanced Topic: Image Display Range </h2>
+
+<p>Prior to Jan 2005, image display in <code>vgui_image_tableau</code> was
+limited to 256 (<code>vxl_byte</code>) levels per pixel component. Images
+with pixel data types having a larger dynamic range were clamped to
+the range of [0 255]. The <code>vgui_image_tableau</code> interface now has the method,
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">void set_mapping(vgui_range_map_params_sptr const&amp; rmp)
+</pre></td></tr></table>
+</td></tr></table><p>which defines how images with a dynamic range larger than one byte are to be
+displayed. If the pointer <code>rmp</code> is null, then the previous vgui display
+process is carried out as the default, otherwise range mapping is invoked.
+</p>
+<p>For example if the image has <code>unsigned short</code> pixels, the
+intensity can be anything in the range [0 65535]. To generate a
+meaningful display, a range, [min max], is specified such that all
+pixel intensities less or equal to min are mapped to 0 and all pixel
+intensities greater or equal to max are mapped to 255.  Intensities
+inside the range are mapped to the [1 254] remaining display levels according
+to a gamma or inversion function, as will be described below.
+</p>
+<p>The parameters of the mapping are:
+</p><table>
+<tr><td><p> <code>n_components_</code> </p></td><td><p> The number of components in the image. A grey level image has one component, a typical RGB image has 3 components.
+</p></td></tr>
+<tr><td><p> <code>min_L_</code> </p></td><td><p> The minimum range value (luminance) for a grey level image.
+</p></td></tr>
+<tr><td><p> <code>max_L_</code> </p></td><td><p> The maximum range value for a grey level image.
+</p></td></tr>
+<tr><td><p> <code>gamma_L_</code> </p></td><td><p> The gamma factor in the exponential mapping of image intensity.
+</p></td></tr>
+<tr><td><p> <code>invert_</code> </p></td><td><p> If true, then the image display is inverted to form a negative image.
+</p></td></tr>
+<tr><td><p> <code>min_R_</code> </p></td><td><p> The minimum range value for the red channel in a color image.
+</p></td></tr>
+<tr><td><p> <code>max_R_</code> </p></td><td><p> The maximum range value for the red channel in a color image.
+</p></td></tr>
+<tr><td><p> <code>gamma_R_</code> </p></td><td><p> The gamma for red channel mapping.
+</p></td></tr>
+<tr><td><p> <code>min_G_</code> </p></td><td><p> The minimum range value for the green channel in a color image.
+</p></td></tr>
+<tr><td><p> <code>max_G_</code> </p></td><td><p> The maximum range value for the green channel in a color image.
+</p></td></tr>
+<tr><td><p> <code>gamma_G_</code> </p></td><td><p> The gamma for green channel mapping.
+</p></td></tr>
+<tr><td><p> <code>min_B_</code> </p></td><td><p> The minimum range value for the blue channel in a color image.
+</p></td></tr>
+<tr><td><p> <code>max_B_</code> </p></td><td><p> The maximum range value for the blue channel in a color image.
+</p></td></tr>
+<tr><td><p> <code>gamma_B_</code> </p></td><td><p> The gamma for green channel mapping.
+</p></td></tr>
+<tr><td><p> <code>use_glPixelMap_</code> </p></td><td><p> If <code>true</code> the range map is processed by hardware when available.
+</p></td></tr>
+<tr><td><p> <code>cache_mapped_pix_</code>
+</p></td><td><p> Under panning and zooming operations, it is not necessary to re-map the
+pixel intensities.  The range mapped display can be cached to avoid mapping
+computation by setting <code>cache_mapped_pix_</code> to <code>true</code>.
+</p></td></tr>
+</table>
+
+<p>The <code>gamma</code> function is defined as
+</p><table><tr><td>&nbsp;</td><td><pre class="example">                          1
+        Ig         I     ---
+       -----  =  (----) gamma
+       Imax       Imax
+</pre></td></tr></table><p>Assume that the pixel intensity has been mapped to the range [0 1.0],
+e.g., I/Imax.  The normalized intensity is raised to the power
+1/gamma. The rationale for this definition is that a typical CRT
+display monitor has a non-linear response with exponential factor
+gamma.  This correction compensates for the monitor response and
+achieves an overall linear intensity display.
+</p>
+<p>In typical operation, the user will interactively adjust the min max
+values in a loop that displays the mapped image until a satisfactory
+display is produced.  The loop should re-instantiate the parameter block
+on each iteration since the update is triggered by a change in the
+value of the <code>rmp</code> pointer.  For example,
+</p><table><tr><td>&nbsp;</td><td><table class="cartouche" border="1"><tr><td>
+<pre class="example">vgui_image_tableau_sptr itab = vgui_image_tableau_new();
+...
+//set an image on itab
+...
+//set up a mapping parameter block
+unsigned short min_val = 10000, max_val = 40000;
+float gamma = 1.0;
+bool invert = false;
+bool use_glPixelMap = true;
+bool cache_buffer = true;
+
+vgui_range_map_params_sptr rmp =
+   new vgui_range_map_params(min_val,max_val, gamma,
+                             invert, use_glPixelMap, cache_buffer);
+//start range mapping
+itab-&gt;set_mapping(rmp)
+itab-&gt;post_redraw();
+
+//change the range
+rmp-&gt;min_val_ = 15000;
+itab-&gt;post_redraw();
+
+//the image display will be updated with the new range min value
+</pre></td></tr></table>
+</td></tr></table>
+<p>An example of mapping is shown in Figure 13. An example of the inversion mapping for a color image is shown in Figure 14.
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <img src="./range-display.png" alt="range-display">
+    <caption align="bottom">
+  <div align=left><strong>Figure 13:</strong>
+  A display of an x-ray image with 16 bit unsigned short pixels. An inline tableau
+is used to adjust the range by moving the bars via mouse interaction.  The image
+contrast is displayed simultaneously with the mouse motion.  A histogram is also
+displayed to guide the user.  Note the mouse position / image intensity display
+at the lower left indicates the pixel value in the proper units and range.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <p><img src="./lena.png" alt="lena">
+    <caption align="bottom">
+  <div align=left><strong>Figure 14:</strong>
+  The use of range mapping to invert the image color channels. Note again that the
+mouse position /pixel intensity display provides the appropriate values
+corresponding to the original image, not the displayed image.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC112" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

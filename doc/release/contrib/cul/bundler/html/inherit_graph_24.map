@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbundler__tracks__match.html" title="An abstract functor that takes in a pair of images to be matched, finds all corresponding features be..." alt="" coords="7,5,159,29"/>
+<area shape="rect" href="$classbundler__tracks__impl__match__ann.html" title="A functor that takes in a pair of images to be matched, finds all corresponding features between the ..." alt="" coords="209,5,423,29"/>
+</map>

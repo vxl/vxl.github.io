@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classimesh__mesh.html" title="A simple mesh." alt="" coords="7,5,103,29"/>
+<area shape="rect" href="$classimesh__pca__mesh.html" title="Principal Component Analysis on a set of mesh vertices." alt="" coords="153,5,279,29"/>
+</map>

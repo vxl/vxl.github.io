@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmsdi__marked__images.html" title="Base for iterator which returns images+points." alt="" coords="5,53,157,77"/>
+<area shape="rect" href="$classmsdi__array__of__marked__images.html" title="Iterator for images and points stored in external arrays." alt="" coords="211,5,419,29"/>
+<area shape="rect" href="$classmsdi__marked__images__from__files.html" title="Iterator for images and points stored in files." alt="" coords="207,53,423,77"/>
+<area shape="rect" href="$classmsdi__reflected__marked__images.html" title="Adaptor which generates reflected versions of images/points." alt="" coords="209,101,420,125"/>
+</map>

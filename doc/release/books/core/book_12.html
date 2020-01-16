@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 12. vpdl: Probability Distributions (Experimental)</title>
+
+<meta name="description" content="VXL: 12. vpdl: Probability Distributions (Experimental)">
+<meta name="keywords" content="VXL: 12. vpdl: Probability Distributions (Experimental)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="vpdl"></a>
+<a name="SEC157"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_11.html#SEC156" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC158" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_11.html#SEC136" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_13.html#SEC167" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 12. vpdl: Probability Distributions (Experimental) </h1>
+
+
+  <blockquote><p>  <strong>Chapter summary</strong>:
+<code>vpdl</code> is a library of probability distributions.
+</p>
+<p>This library contains data structures to represent univariate and
+multivariate probability distributions and provides algorithms to operate on them.
+This includes estimating a distribution from data points and
+sampling from a distribution.
+<code>vpdl</code> is built on top of <code>vnl</code> and <code>vnl_algo</code>.
+  </p></blockquote>
+
+<p><code>vpdl</code> is comprised of two programming paradigms:
+generic programming and polymorphic inheritance.
+The generic programming part is in its own sub-library called <code>vpdt</code>.
+<code>vpdt</code> is a template library (like STL).
+There is no compiled library for <code>vpdt</code>,
+only a collection of header files in subdirectory <code>vpdl/vpdt</code>.
+<code>vpdt</code> works with <code>vnl</code> types,
+but in many cases can generalize to other types.
+The goal of <code>vpdt</code> is to provide generic implementations that are both time and
+memory efficient when types are known at compile time.
+</p>
+<p>The rest of <code>vpdl</code> uses a polymorphic design and provides greater run time
+flexibility and easy of use. It is limited to distributions over scalar,
+<code>vnl_vector</code>, and <code>vnl_vector_fixed</code> types.
+</p>
+
+<hr size="6">
+<a name="SEC158"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC157" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC159" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC157" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC157" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_13.html#SEC167" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.1 History </h2>
+
+<p><code>vpdl</code> is the combination of two different design patterns
+for probability distributions.
+It was formed from the merger of three contrib libraries:
+<code>mul/vpdfl</code>, <code>mul/pdf1d</code>, and <code>brl/bbas/bsta</code>.
+</p>
+<p>Created by Manchester, <code>vpdfl</code> provided a polymorphic hierarchy
+(using virtual functions) for multivariate distributions based on
+<code>vnl_vector</code> and <code>vnl_matrix types</code>.
+For univariate distributions, <code>pdf1d</code> mirrored the design of <code>vpdfl</code>,
+but used scalar types (i.e. <code>double</code>).
+These libraries were very flexible at run time.
+Both distribution type and, in the case of <code>vpdfl</code>,
+dimension could be selected at run time.
+</p>
+<p>Created by Brown, <code>bsta</code> provided a generic programming hierarchy
+(using templates) for both univariate and multivariate distributions.
+Template parameters specified scalar type (<code>float</code> or <code>double</code>)
+and dimension.
+Templates allowed the same code base to use scalars in the univariate case and
+<code>vnl_vector_fixed</code> and <code>vnl_matrix_fixed</code> in the multivariate case.
+The goal of <code>bsta</code> was to be very efficient.
+Many optimizations are possible by assuming types and
+dimension are known at compile time.
+</p>
+<p><code>vpdl</code> was designed as a core library
+to meet the needs of both original designs.
+The main library generalizes Manchester's polymorphic design with
+a templated distribution library.
+This creates polymorphic inheritance hierarchy
+for each choice to template parameters.
+The templates allow hierarchies based on scalar,
+<code>vnl_vector</code>, and <code>vnl_vector_fixed</code> types.
+When possible, the implementations of <code>vpdl</code> distributions are wrappers
+around corresponding <code>vpdt</code> distributions.
+The <code>vpdt</code> distributions provide even more generalized implementations but
+without virtual functions or inheritance.
+</p>
+<hr size="6">
+<a name="SEC159"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC158" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC160" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC157" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC157" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_13.html#SEC167" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.2 Polymorphic Distributions </h2>
+
+<p>Each polymorphic distribution is derived (directly or indirectly) from
+a common templated base class called <code>vpdl_distribution&lt;T,n&gt;</code>.
+Template parameter <code>T</code> specifies the scalar numeric type
+(<code>float</code> or <code>double</code>) and <code>n</code> specifies the dimension.
+In particular:
+</p><ul>
+<li> <code>n==0</code> uses <code>vnl_vector&lt;T&gt;</code> and <code>vnl_matrix&lt;T&gt;</code>
+      (dimension specified at run time)
+</li><li> <code>n==1</code> uses <code>T</code> (scalar computations)
+</li><li> <code>n&gt;1</code> uses <code>vnl_vector_fixed&lt;T,n&gt;</code> and
+      <code>vnl_matrix_fixed&lt;T,n,n&gt;</code> (fixed dimension of <code>n</code>)
+</li></ul>
+
+<p>The distribution class is an abstract base class.
+The most important functions it defines are:
+</p><dl compact="compact">
+<dt> <code>virtual T density (const vector &amp;pt) const=0;</code></dt>
+<dd><p>Evaluate the unnormalized density at a point. 
+</p>
+</dd>
+<dt> <code>virtual T norm_const () const=0;</code></dt>
+<dd><p>The normalization constant for the density. 
+</p>
+</dd>
+<dt> <code>virtual T prob_density (const vector &amp;pt) const;</code></dt>
+<dd><p>Evaluate the probability density at a point.
+Defaults to <code>density(pt) * norm_const()</code>.
+</p></dd>
+</dl>
+
+<p>These functions allow the density of the distribution to be evaluated 
+independently from the normalization constant.
+This is important because the normalization constant is sometimes 
+expensive to compute and not required for some calculations.
+Furthermore, the normalization constant is independent of the evaluation point
+so it can be computed once in advance and reused.
+Alternatively, the function <code>prob_density</code> returns the normalized density directly.
+</p>
+<p>The type <code>vector</code> is a typedef defined in the class that selects the
+appropriate vector class depending on <code>T</code> and <code>n</code>.
+Similarly, the type <code>matrix</code> is defined to the appropriate matrix type.
+</p>
+<p>Several other functions are defined on the distribution base class including:
+<code>gradient_density</code>, <code>cumulative_prob</code>, <code>compute_mean</code>,
+and <code>compute_covar</code>.
+All of these functions provide a polymorphic interface to probability distributions.
+However, in most cases, the <code>vpdl</code> classes are simply light wrappers around
+generic <code>vpdt</code> implementations that do the real work. 
+</p>
+<p>One additional component of the polymorphic wrappers is a class hierarchy.
+In <code>vpdt</code>, the distribution classes need not have any inheritance relations,
+but in <code>vpdl</code> the currently implemented distributions are arranged into 
+the following class hierarchy.  Each top level class below is derived directly 
+from <code>vpdl_distribution</code> (template arguments are omitted). 
+</p>
+<ul>
+<li> <code>vpdl_gaussian_base</code> - a base class for all Gaussian varieties.
+<ul>
+<li> <code>vpdl_gaussian</code>  - a general Gaussian with full covariance.
+</li><li> <code>vpdl_gaussian_indep</code>  - a Gaussian with independent (i.e. diagonal) covariance.
+</li><li> <code>vpdl_gaussian_sphere</code>  - a Gaussian with spherical (i.e. scaled identity) covariance.
+</li></ul>
+</li><li> <code>vpdl_muli_cmp_dist</code> - a base class for all multi-component distributions
+<ul>
+<li> <code>vpdl_kernel_base</code>  - a base class for kernel density distributions.
+<ul>
+<li> <code>vpdl_kernel_fbw_base</code> - a base class for fixed bandwidth  kernel densities
+<ul>
+<li> <code>vpdl_kernel_gaussian_sfbw</code> - a fixed bandwidth spherical Gaussian kernel distribution
+</li></ul>
+</li><li> <code>vpdl_kernel_vbw_base</code> - a base class for variable bandwidth kernel densities
+</li></ul>
+</li><li> <code>vpdl_mixture</code>  - a mixture distribution (linear combination of arbitrary distributions).
+</li><li> <code>vpdl_mixture_of</code>  - a mixture distribution where each component has the same type
+(but may have different parameters).
+</li></ul>
+</li></ul>
+
+<hr size="6">
+<a name="SEC160"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC159" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC161" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC157" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC157" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_13.html#SEC167" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.3 Generic Probability (<code>vpdt</code>) </h2>
+
+<p>The subdirectory <code>vpdl/vpdt</code> contains the
+generic programming components of this library.
+<code>vpdt</code> is a self-sufficient template library
+that does not depended on the rest of <code>vpdl</code>.
+However, there is nothing to stop <code>vpdl</code> distribution classes from being
+used as <code>vpdt</code> distribution types as long as they meet the requirements.
+Whenever possible, <code>vpdl</code> distributions should be wrappers around
+a generic <code>vpdt</code> implementation.
+This strategy allows the code to be used both in generic and polymorphic designs.
+</p>
+<p>Generic programming uses <em>concepts</em>
+to implement compile time type polymorphism rather than inheritance
+to implement run time object-oriented polymorphism.
+Concepts are sets of requirements that a data type must meet.
+To satisfy a concept a class must define the required typedefs,
+static constants, member functions, or related global functions.
+Classes that satisfy a concept need not be related by inheritance.
+The Standard Template Library (STL) is built upon the definition of concepts.
+In STL, some concepts (like Iterators) are general enough
+to include built-in types (like pointers).
+In <code>vpdt</code>, there are also some basic concepts
+which can be satisfied by built-in types.
+However, the most useful concepts (like Distributions)
+are a bit more specific and require a class implementation.
+</p>
+<hr size="6">
+<a name="SEC161"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC160" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC166" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC157" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC160" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_13.html#SEC167" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 12.3.1 Basic Concepts </h3>
+
+<p>A collection of more basic concepts will form the building blocks of the probability distribution concept. The relevant concepts are:
+</p><ul>
+<li> Scalar
+</li><li> Field
+</li><li> Vector
+</li><li> Matrix
+</li></ul>
+
+<p><code>vnl</code> data structures satisfiy these concepts and are used in practice.
+However, other representations could be used
+if the appropriate functions are provided.
+These concepts are all interrelated by various function requirements.
+The type that meets the Field concept is considered the primary type.
+For each Field type there should be a unique associated
+Scalar, Vector, and Matrix type
+The <code>vpdt_field_traits&lt;F&gt;</code> struct defines these types for each <code>F</code>.
+<code>vpdt_field_traits&lt;F&gt;</code> needs to be specialized for each Field type.
+This traits struct defines the following typedefs:
+</p><dl compact="compact">
+<dt> <code>vpdt_field_traits&lt;F&gt;::dimension</code></dt>
+<dd><p>This is actually a <code>static const unsigned int</code> and indicates the
+fixed dimension of the Field type
+</p>
+</dd>
+<dt> <code>vpdt_field_traits&lt;F&gt;::scalar_type</code></dt>
+<dd><p>The Scalar type associated with the Field type
+</p>
+</dd>
+<dt> <code>vpdt_field_traits&lt;F&gt;::field_type</code></dt>
+<dd><p>The Field type itself (<code>F==field_type</code>).
+Redundant, but provided for consistency.
+</p>
+</dd>
+<dt> <code>vpdt_field_traits&lt;F&gt;::vector_type</code></dt>
+<dd><p>The Vector type associated with the Field type
+</p>
+</dd>
+<dt> <code>vpdt_field_traits&lt;F&gt;::matrix_type</code></dt>
+<dd><p>The Matrix type associated with the Field type
+</p></dd>
+</dl>
+
+<p>In the special case of univariate distributions,
+all four of these types become equal, and <code>dimension==1</code>.
+There is also a special typedef <code>vpdt_field_traits&lt;F&gt;::type_is_scalar</code>
+defined to <code>void</code> that only exists if <code>F</code> is scalar.
+Similarly, <code>vpdt_field_traits&lt;F&gt;::type_is_vector</code> is defined to
+<code>void</code> only if <code>F</code> is non-scalar.
+The existence of these special types is used to disambiguate some
+template specializations, and to provide faster implementations
+for the scalar case.
+</p>
+<a name="SEC162"></a>
+<h3 class="subheading"> Scalar </h3>
+
+<p>A probability distribution is defined over some scalar field.
+The Scalar concept represents this value at each point in space.
+It is satisfied by floating point types.
+For now this is likely to be limited to <code>double</code> or <code>float</code>.
+Scalars must support all built in arithmetic operators (+, -, *, /, etc.)
+as well as all standard cmath functions like
+<code>sqrt</code>, <code>exp</code>, and <code>log</code>.
+If the type does not support these functions directly,
+it must be able to implicitly cast itself to and from a type that does.
+</p>
+<a name="SEC163"></a>
+<h3 class="subheading"> Field </h3>
+
+<p>Each point in a probability space is represented by the Field concept.
+When used in <code>vpdl</code> distributions the Field is satisfied by either
+a scalar, a <code>vnl_vector</code>, or a <code>vnl_vector_fixed</code>.
+The Field has an associated Scalar and dimension.
+For dimension <code>n</code>, a Field contains <code>n</code> values of its Scalar type.
+A Field actually has two measure of dimension:
+a fixed (compile time) dimension and a variable (run time) dimension.
+These dimensions may or may not be equal.
+Field types with data allocated on the stack
+will have size specified at compile time.
+The fixed dimension and variable dimension will both equal this fixed size.
+Field types with data allocated on the heap
+will have a fixed dimension of zero and a variable dimension equal to
+the number of currently allocated Scalar objects.
+</p>
+<p>A Field type will be equal to its Scalar type
+in the case of univariate distributions.
+Since Scalar types are usually built-in C++ types,
+they can not be required to implement any member functions.
+Instead, they are required to implement a set of overloaded global functions
+to perform the required set of actions.
+For the standard types used in <code>vpdl</code>,
+these functions are implemented in <code>vpdl/vpdt/vpdt_access.h</code>.
+For some types that satisfy the concept these functions are trivial or even empty.
+In the table below the Field type is denoted <code>field</code> and
+its corresponding Scalar type is <code>scalar</code>.
+</p>
+<dl compact="compact">
+<dt> <code>unsigned int vpdt_size(const field&amp;)</code></dt>
+<dd><p>Access the run time size (i.e. dimension)
+</p>
+</dd>
+<dt> <code>void vpdt_set_size(field&amp;, unsigned int)</code></dt>
+<dd><p>Change the run time size for heap-based structures, otherwise do nothing.
+</p>
+</dd>
+<dt> <code>void vpdt_fill(field&amp;, const scalar&amp;)</code></dt>
+<dd><p>Fill all dimensions of the field with the scalar value
+</p>
+</dd>
+<dt> <code>const scalar&amp; vpdt_index(const field&amp;, unsigned int)</code></dt>
+<dd><p>Access a scalar element reference (const) by index
+</p>
+</dd>
+<dt> <code>scalar&amp; vpdt_index(field&amp;, unsigned int)</code></dt>
+<dd><p>Access a scalar element reference (non-const) by index
+</p></dd>
+</dl>
+
+<p>The Field type should also support the subtraction operator on two Field types.
+The return type for the difference of two Field types is a Vector type.
+</p>
+<a name="SEC164"></a>
+<h3 class="subheading"> Vector </h3>
+
+<p>The Vector concept represents the difference between two Field values.
+In the case of the default <code>vnl</code> types,
+the Field and Vector types are the same.
+The requirements for the Vector are a superset of
+the requirements for a Field.
+A Vector should support all the operation of Field
+plus several other arithmetic operations:
+</p><ul>
+<li> <code>vector = vector + vector</code> &nbsp;&nbsp;&nbsp;(and equivalent for <code>-</code>)
+</li><li> <code>vector += vector</code> &nbsp;&nbsp;&nbsp;(and equivalent for <code>-=</code>)
+</li><li> <code>field = field + vector</code> &nbsp;&nbsp;&nbsp;(and equivalent for <code>-</code>)
+</li><li> <code>field += vector</code> &nbsp;&nbsp;&nbsp;(and equivalent for <code>-=</code>)
+</li><li> <code>vector = scalar + vector</code> &nbsp;&nbsp;&nbsp;(and equivalent for <code>-</code>)
+</li><li> <code>vector += scalar</code> &nbsp;&nbsp;&nbsp;(and equivalent for <code>-=</code>)
+</li><li> <code>vector = scalar * vector</code>
+</li><li> <code>vector *= scalar</code>
+</li></ul>
+
+<p>Vectors should also define these global functions
+</p><ul>
+<li> <code>scalar dot_product(const vector&amp;, const vector&amp;)</code>
+</li><li> <code>vector element_product(const vector&amp;, const vector&amp;)</code>
+</li><li> <code>matrix outer_product(const vector&amp;, const vector&amp;)</code>
+</li></ul>
+
+<a name="SEC165"></a>
+<h3 class="subheading"> Matrix </h3>
+
+<p>The Matrix concept actually refers to a square matrix.
+It is used for second order statistics (like covariance).
+Since it is square, the matrix also has a single (fixed or variable) dimension
+like the Field and Vector.
+It requires all the same <code>vpdt_access.h</code> functions except
+the signature of the <code>vpdt_index</code> function now has two indices
+</p><ul>
+<li> <code>const scalar&amp; vpdt_index(const matrix&amp;, unsigned int, unsigned int)</code>
+</li><li> <code>scalar&amp; vpdt_index(matrix&amp;, unsigned int, unsigned int)</code>
+</li></ul>
+<p>A few arithmetic operations are also needed:
+</p><ul>
+<li> <code>matrix = matrix + matrix</code> &nbsp;&nbsp;&nbsp;(and equivalent for <code>-</code>)
+</li><li> <code>matrix += matrix</code> &nbsp;&nbsp;&nbsp;(and equivalent for <code>-=</code>)
+</li><li> <code>matrix = scalar + matrix</code> &nbsp;&nbsp;&nbsp;(and equivalent for <code>-</code>)
+</li><li> <code>matrix += scalar</code> &nbsp;&nbsp;&nbsp;(and equivalent for <code>-=</code>)
+</li><li> <code>matrix = scalar * matrix</code>
+</li><li> <code>matrix *= scalar</code>
+</li></ul>
+
+
+<hr size="6">
+<a name="SEC166"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC161" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_13.html#SEC167" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC157" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC160" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_13.html#SEC167" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 12.3.2 Distribution Concept </h3>
+
+<p>The Distribution concept is the central concept in <code>vpdt</code>.
+The Distribution is a probability distribution class that is analogous
+to <code>vpdl_distribution&lt;T,n&gt;</code>.
+In fact, <code>vpdl_distribution&lt;T,n&gt;</code> and all its subclasses satisfy
+the Distribution concept.
+The Distribution requires a subset of the functions that are
+declared virtual on <code>vpdl_distribution&lt;T,n&gt;</code>.
+The following example lays out the required API that
+a Distribution is required to have.
+In this example, it is assumed that a consistent set of basic types
+have been defined such that <code>T</code> satisfies Scalar,
+<code>F</code> satisfies Field, <code>V</code> satisfies Vector,
+and <code>M</code> satisfies Matrix.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">class vpdt_distribution
+{
+ public:
+  //: The field type
+  typedef F field_type;
+
+
+  //: Return the variable (run time) dimension
+  unsigned int dimension() const;
+
+  //: Evaluate the unnormalized density at a point
+  // This must be multiplied by norm_const() to integrate to 1
+  T density(const F&amp; pt) const;
+
+  //: Compute the gradient of the density function, returned in \a g
+  // The return value of the function is the density itself
+  T gradient_density(const F&amp; pt, V&amp; g) const;
+
+  //: Compute the normalization constant (independent of sample point).
+  T norm_const() const;
+
+  //: Evaluate the cumulative distribution function at a point
+  // This is the integral of the density function from negative infinity
+  // (in all dimensions) to the point in question
+  T cumulative_prob(const F&amp; pt) const;
+
+  //: Compute the mean of the distribution.
+  void compute_mean(F&amp; m) const;
+
+  //: Compute the covariance matrix of the distribution.
+  void compute_covar(M&amp; c) const;
+};
+</pre></td></tr></table>
+<p>The other member functions that are defined in <code>vpdl_distribution&lt;T,n&gt;</code>
+are not needed for a <code>vpdt</code> Distribution because they can be
+implemented in terms of the required functions.
+These extra functions are provided as global functions instead.
+For example, <code>T vpdt_prob_density(const dist&amp; d, const F&amp; pt)</code> is a function
+that returns <code>d.density(pt) * d.norm_const()</code>.
+These functions can be overloaded when a more efficient implementation
+exists for a particular distribution class.
+For example, the default <code>vpdt_log_density</code> function applied to a
+Gaussian distribution would compute the log of an exponential.
+An overload of <code>vpdt_log_density</code> for Gaussians can eliminate this
+extra unnecessary step.
+</p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC157" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_13.html#SEC167" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

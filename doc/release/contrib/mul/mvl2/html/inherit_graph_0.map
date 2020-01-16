@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmvl2__video__reader.html" title="A base class for cameras/virtual cameras." alt="" coords="7,29,140,53"/>
+<area shape="rect" href="$classmvl2__video__from__avi.html" title="A class to get video input from avi file." alt="" coords="211,5,357,29"/>
+<area shape="rect" href="$classmvl2__video__from__sequence.html" title="A class to get video input from avi file." alt="" coords="191,53,377,77"/>
+</map>

@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__file__format.html" title="Base class for image formats." alt="" coords="37,341,141,365"/>
+<area shape="rect" href="$classvil__bmp__file__format.html" title="Loader for BMP files." alt="" coords="253,293,392,317"/>
+<area shape="rect" href="$classvil__dicom__file__format.html" title="Loader for DICOM files." alt="" coords="249,341,396,365"/>
+<area shape="rect" href="$classvil__iris__file__format.html" title="Loader for RGB files (sgi iris)." alt="" coords="257,389,388,413"/>
+<area shape="rect" href="$classvil__j2k__file__format.html" title="vil_j2k_file_format" alt="" coords="257,437,388,461"/>
+<area shape="rect" href="$classvil__jpeg__file__format.html" title="Loader for JPEG files." alt="" coords="253,485,392,509"/>
+<area shape="rect" href="$classvil__mit__file__format.html" title="Loader for MIT files." alt="" coords="257,533,388,557"/>
+<area shape="rect" href="$classvil__nitf2__file__format.html" title="vil_nitf2_file_format" alt="" coords="253,581,392,605"/>
+<area shape="rect" href="$classvil__openjpeg__j2k__file__format.html" title="vil_openjpeg_j2k_file_format" alt="" coords="227,677,419,701"/>
+<area shape="rect" href="$classvil__openjpeg__jp2__file__format.html" title="vil_openjpeg_jp2_file_format" alt="" coords="227,629,419,653"/>
+<area shape="rect" href="$classvil__png__file__format.html" title="Portable network graphics, http://www.cdrom.com/pub/png." alt="" coords="256,5,389,29"/>
+<area shape="rect" href="$classvil__pnm__file__format.html" title="Loader for PPM,PGM,PBM files." alt="" coords="253,53,392,77"/>
+<area shape="rect" href="$classvil__pyramid__image__list__format.html" title="vil_pyramid_image_list_format" alt="" coords="221,101,424,125"/>
+<area shape="rect" href="$classvil__ras__file__format.html" title="Loader for Sun raster files." alt="" coords="257,149,388,173"/>
+<area shape="rect" href="$classvil__tiff__file__format.html" title="Loader for tiff files." alt="" coords="259,197,387,221"/>
+<area shape="rect" href="$classvil__viff__file__format.html" title="Loader for VIFF files, i.e., 1&#45;banded Khoros 1.0 images." alt="" coords="257,245,388,269"/>
+<area shape="rect" href="$classvil__pbm__file__format.html" title="Alias name for pnm; only tag() differs." alt="" coords="472,5,611,29"/>
+<area shape="rect" href="$classvil__pgm__file__format.html" title="Alias name for pnm; only tag() differs." alt="" coords="472,53,611,77"/>
+<area shape="rect" href="$classvil__ppm__file__format.html" title="Alias name for pnm; only tag() differs." alt="" coords="472,101,611,125"/>
+<area shape="rect" href="$classvil__openjpeg__file__format.html" title="Derived class for JPEG2000 imagery using OpenJPEG." alt="" coords="5,653,173,677"/>
+</map>

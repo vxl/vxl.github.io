@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvsol__curve__2d.html" title="vsol_curve_2d" alt="" coords="139,252,248,276"/>
+<area shape="rect" href="$classvsol__spatial__object__2d.html" title="vsol_spatial_object_2d" alt="" coords="112,161,269,185"/>
+<area shape="rect" href="$classvsol__spatial__object.html" title="vsol_spatial_object" alt="" coords="123,84,259,108"/>
+<area shape="rect" href="core_vul.tag$classvul__timestamp.html" title="vul_timestamp" alt="" coords="5,7,115,31"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="139,7,243,31"/>
+<area shape="rect" href="$classvsol__flags__id.html" title="vsol_flags_id" alt="" coords="267,7,365,31"/>
+<area shape="rect" href="core_vgl.tag$classvgl__conic.html" title="vgl_conic\&lt; double \&gt;" alt="" coords="276,252,417,276"/>
+<area shape="rect" href="core_vgl.tag$classvgl__conic.html" title="vgl_conic\&lt; T \&gt;" alt="" coords="293,161,403,185"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="344,183,352,191"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="343,248,351,256"/>
+</map>

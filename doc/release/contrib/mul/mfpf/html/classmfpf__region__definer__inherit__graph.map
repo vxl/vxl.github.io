@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmfpf__region__about__lineseg.html" title="Region centred on a line between two points." alt="" coords="5,81,187,105"/>
+<area shape="rect" href="$classmfpf__region__about__pt.html" title="Region centred on a single point, pose defined by other pts." alt="" coords="211,81,363,105"/>
+</map>

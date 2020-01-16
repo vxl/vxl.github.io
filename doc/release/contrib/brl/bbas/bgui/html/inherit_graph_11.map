@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" href="core_vgui.tag$classvgui__parent__child__link__data.html" title="vgui_parent_child_link_data" alt="" coords="7,101,193,125"/>
+<area shape="rect" href="core_vgui.tag$classvgui__tableau.html" title="vgui_tableau" alt="" coords="243,101,341,125"/>
+<area shape="rect" href="$classbgui__graph__tableau.html" title="bgui_graph_tableau" alt="" coords="408,5,547,29"/>
+<area shape="rect" href="$classbgui__histogram__tableau.html" title="bgui_histogram_tableau" alt="" coords="396,53,559,77"/>
+<area shape="rect" href="$classbgui__picker__tableau.html" title="bgui_picker_tableau" alt="" coords="408,101,547,125"/>
+<area shape="rect" href="core_vgui.tag$classvgui__displaybase__tableau.html" title="vgui_displaybase_tableau" alt="" coords="389,149,565,173"/>
+<area shape="rect" href="core_vgui.tag$classvgui__image__tableau.html" title="vgui_image_tableau" alt="" coords="407,197,548,221"/>
+<area shape="rect" href="core_vgui.tag$classvgui__displaylist2D__tableau.html" title="vgui_displaylist2D_tableau" alt="" coords="615,149,793,173"/>
+<area shape="rect" href="core_vgui.tag$classvgui__easy2D__tableau.html" title="vgui_easy2D_tableau" alt="" coords="844,149,993,173"/>
+<area shape="rect" href="$classbgui__range__adjuster__tableau.html" title="bgui_range_adjuster_tableau" alt="" coords="1044,101,1236,125"/>
+<area shape="rect" href="$classbgui__vsol2D__tableau.html" title="bgui_vsol2D_tableau" alt="" coords="1067,149,1213,173"/>
+<area shape="rect" href="$classbgui__vsol__camera__tableau.html" title="bgui_vsol_camera_tableau" alt="" coords="1049,197,1231,221"/>
+<area shape="rect" href="$classbgui__vtol2D__tableau.html" title="bgui_vtol2D_tableau" alt="" coords="1287,149,1428,173"/>
+<area shape="rect" href="$classbgui__image__tableau.html" title="bgui_image_tableau" alt="" coords="633,197,775,221"/>
+</map>

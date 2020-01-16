@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvpdfl__pdf__base.html" title="Base class for Multi&#45;Variate Probability Density Function classes." alt="" coords="7,77,119,101"/>
+<area shape="rect" href="$classvpdfl__axis__gaussian.html" title="Multi&#45;variate Gaussian PDF, with a diagonal covariance matrix." alt="" coords="169,5,311,29"/>
+<area shape="rect" href="$classvpdfl__gaussian.html" title="Class for multi&#45;variate gaussians with arbitrary axes." alt="" coords="184,53,296,77"/>
+<area shape="rect" href="$classvpdfl__kernel__pdf.html" title="Multi&#45;variate kernel PDF." alt="" coords="180,101,300,125"/>
+<area shape="rect" href="$classvpdfl__mixture.html" title="Represents a mixture model (a set of individual pdfs + weights)." alt="" coords="189,149,291,173"/>
+<area shape="rect" href="$classvpdfl__pc__gaussian.html" title="Multi&#45;variate principal Component Gaussian PDF." alt="" coords="384,53,517,77"/>
+<area shape="rect" href="$classvpdfl__gaussian__kernel__pdf.html" title="Multi&#45;variate spherical gaussian kernel PDF." alt="" coords="360,101,541,125"/>
+</map>

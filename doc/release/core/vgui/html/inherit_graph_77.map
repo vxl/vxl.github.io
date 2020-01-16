@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgui__observable.html" title="Base class for classes that want to broadcast messages to observers." alt="" coords="5,29,125,53"/>
+<area shape="rect" href="$classwxSliderPanel.html" title="A wxPanel with a bank of sliders and text fields." alt="" coords="179,5,285,29"/>
+<area shape="rect" href="$classwxVideoControl.html" title="A control panel for frame&#45;by&#45;frame video navigation." alt="" coords="175,53,289,77"/>
+</map>

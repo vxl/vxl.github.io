@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmbl__data__wrapper.html" title="Base class for objects which can return a set of objects, one at a time." alt="" coords="5,101,168,125"/>
+<area shape="rect" href="$classmbl__data__array__ptr__wrapper.html" title="A wrapper to provide access to objects through C&#45;arrays of pointers." alt="" coords="216,5,440,29"/>
+<area shape="rect" href="$classmbl__data__array__wrapper.html" title="A wrapper to provide access to C&#45;arrays of objects." alt="" coords="228,53,428,77"/>
+<area shape="rect" href="$classmbl__data__wrapper__mixer.html" title="Concatenate together data in two or more mbl_data_wrapper objects." alt="" coords="227,101,429,125"/>
+<area shape="rect" href="$classmbl__file__data__wrapper.html" title="Base class for objects which can return a set of objects, one at a time." alt="" coords="235,149,421,173"/>
+<area shape="rect" href="$classmbl__selected__data__wrapper.html" title="A subset of an existing mbl_data_wrapper." alt="" coords="219,197,437,221"/>
+</map>

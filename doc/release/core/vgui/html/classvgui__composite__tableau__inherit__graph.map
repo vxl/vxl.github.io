@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgui__shell__tableau.html" title="Tableau to go at the top of one&#39;s tableau hierarchy." alt="" coords="32,231,165,255"/>
+<area shape="rect" href="$classvgui__tableau.html" title="Base class for all tableaux in vgui." alt="" coords="49,81,148,105"/>
+<area shape="rect" href="$classvgui__parent__child__link__data.html" title="Cache of parents of a tableau (makes posting redraws more efficient)." alt="" coords="5,7,192,31"/>
+</map>

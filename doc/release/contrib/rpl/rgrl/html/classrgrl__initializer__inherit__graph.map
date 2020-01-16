@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__initializer__inv__indexing.html" title="Generate the set of initial estimates using invariant indexing." alt="" coords="441,5,620,29"/>
+<area shape="rect" href="$classrgrl__initializer__prior.html" title="Generate initial estimates based on a single prior transformation." alt="" coords="464,53,597,77"/>
+<area shape="rect" href="$classrgrl__initializer__ran__sam.html" title="Generate the initial estimate using random sampling." alt="" coords="451,101,611,125"/>
+<area shape="rect" href="$classrgrl__initializer__reader.html" title="Generate initial estimates based on a single prior transformation." alt="" coords="457,149,604,173"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="159,77,241,101"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,77,109,101"/>
+</map>

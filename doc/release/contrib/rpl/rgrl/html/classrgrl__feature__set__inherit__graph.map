@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__feature__set__bins.html" title="A set of features grouped only by N&#45;d location." alt="" coords="476,5,655,29"/>
+<area shape="rect" href="$classrgrl__feature__set__bins__2d.html" title="A set of features grouped only by N&#45;d location." alt="" coords="481,53,649,77"/>
+<area shape="rect" href="$classrgrl__feature__set__location.html" title="A set of features grouped only by N&#45;d location." alt="" coords="465,101,665,125"/>
+<area shape="rect" href="$classrgrl__feature__set__location__masked.html" title="Represents a set of point features, valid in the masked region." alt="" coords="455,149,676,173"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="159,77,241,101"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,77,109,101"/>
+</map>

@@ -1,0 +1,38 @@
+<map id="G" name="G">
+<area shape="rect" href="core_vil.tag$classvil__image__view__base.html" title="vil_image_view_base" alt="" coords="5,749,155,773"/>
+<area shape="rect" href="core_vil.tag$classvil__image__view.html" title="vil_image_view\&lt; double \&gt;" alt="" coords="203,749,379,773"/>
+<area shape="rect" href="$classbrip__kernel.html" title="base class for shiftable 2d kernels." alt="" coords="427,749,515,773"/>
+<area shape="rect" href="$classbrip__gaussian__kernel.html" title="Gaussian derivative kernel base class." alt="" coords="564,749,711,773"/>
+<area shape="rect" href="$classbrip__G__kernel.html" title="simple Gaussian smoothing kernel." alt="" coords="781,5,885,29"/>
+<area shape="rect" href="$classbrip__G__Lhalf__kernel.html" title="Gaussian Left half kernel at the given orientation." alt="" coords="763,53,904,77"/>
+<area shape="rect" href="$classbrip__G__Rhalf__kernel.html" title="Gaussian Right half kernel at the given orientation." alt="" coords="761,101,905,125"/>
+<area shape="rect" href="$classbrip__Gx__kernel.html" title="Gx kernel." alt="" coords="777,149,889,173"/>
+<area shape="rect" href="$classbrip__Gxx__kernel.html" title="Gxx kernel." alt="" coords="775,197,892,221"/>
+<area shape="rect" href="$classbrip__Gxxx__kernel.html" title="Gxxx kernel." alt="" coords="771,245,896,269"/>
+<area shape="rect" href="$classbrip__Gxxy__kernel.html" title="Gxxy kernel." alt="" coords="771,293,896,317"/>
+<area shape="rect" href="$classbrip__Gxy__kernel.html" title="Gxy kernel." alt="" coords="775,341,892,365"/>
+<area shape="rect" href="$classbrip__Gxyy__kernel.html" title="Gxyy kernel." alt="" coords="771,389,896,413"/>
+<area shape="rect" href="$classbrip__Gy__kernel.html" title="Gy kernel." alt="" coords="777,437,889,461"/>
+<area shape="rect" href="$classbrip__Gyy__kernel.html" title="Gyy kernel." alt="" coords="775,485,892,509"/>
+<area shape="rect" href="$classbrip__Gyyy__kernel.html" title="Gyyy kernel." alt="" coords="771,533,896,557"/>
+<area shape="rect" href="$classbrip__h0__G__kernel.html" title="h0_G kernel." alt="" coords="771,581,896,605"/>
+<area shape="rect" href="$classbrip__h0__Gx__kernel.html" title="h0_Gx kernel." alt="" coords="767,629,900,653"/>
+<area shape="rect" href="$classbrip__h0__Gxx__kernel.html" title="h0_Gxx kernel." alt="" coords="764,677,903,701"/>
+<area shape="rect" href="$classbrip__h0__Gxxx__kernel.html" title="h0_Gxxx kernel." alt="" coords="760,725,907,749"/>
+<area shape="rect" href="$classbrip__h0__Gxxy__kernel.html" title="h0_Gxxy kernel." alt="" coords="760,773,907,797"/>
+<area shape="rect" href="$classbrip__h0__Gxy__kernel.html" title="h0_Gxy kernel." alt="" coords="764,821,903,845"/>
+<area shape="rect" href="$classbrip__h0__Gxyy__kernel.html" title="h0_Gxyy kernel." alt="" coords="760,869,907,893"/>
+<area shape="rect" href="$classbrip__h0__Gy__kernel.html" title="h0_Gy kernel." alt="" coords="767,917,900,941"/>
+<area shape="rect" href="$classbrip__h0__Gyy__kernel.html" title="h0_Gyy kernel." alt="" coords="764,965,903,989"/>
+<area shape="rect" href="$classbrip__h0__Gyyy__kernel.html" title="h0_Gyyy kernel." alt="" coords="760,1013,907,1037"/>
+<area shape="rect" href="$classbrip__h1__G__kernel.html" title="h1_G kernel." alt="" coords="771,1061,896,1085"/>
+<area shape="rect" href="$classbrip__h1__Gx__kernel.html" title="h1_Gx kernel." alt="" coords="767,1109,900,1133"/>
+<area shape="rect" href="$classbrip__h1__Gxx__kernel.html" title="h1_Gxx kernel." alt="" coords="764,1157,903,1181"/>
+<area shape="rect" href="$classbrip__h1__Gxxx__kernel.html" title="h1_Gxxx kernel." alt="" coords="760,1205,907,1229"/>
+<area shape="rect" href="$classbrip__h1__Gxxy__kernel.html" title="h1_Gxxy kernel." alt="" coords="760,1253,907,1277"/>
+<area shape="rect" href="$classbrip__h1__Gxy__kernel.html" title="h1_Gxy kernel." alt="" coords="764,1301,903,1325"/>
+<area shape="rect" href="$classbrip__h1__Gxyy__kernel.html" title="h1_Gxyy kernel." alt="" coords="760,1349,907,1373"/>
+<area shape="rect" href="$classbrip__h1__Gy__kernel.html" title="h1_Gy kernel." alt="" coords="767,1397,900,1421"/>
+<area shape="rect" href="$classbrip__h1__Gyy__kernel.html" title="h1_Gyy kernel." alt="" coords="764,1445,903,1469"/>
+<area shape="rect" href="$classbrip__h1__Gyyy__kernel.html" title="h1_Gyyy kernel." alt="" coords="760,1493,907,1517"/>
+</map>

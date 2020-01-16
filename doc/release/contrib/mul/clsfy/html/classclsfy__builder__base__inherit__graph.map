@@ -1,0 +1,15 @@
+<map id="G" name="G">
+<area shape="rect" href="$classclsfy__adaboost__sorted__builder.html" title="Base for classes to build clsfy_classifier_base objects." alt="" coords="200,5,403,29"/>
+<area shape="rect" href="$classclsfy__binary__1d__wrapper__builder.html" title="Wrap a builder_1d in general builder_base derivative." alt="" coords="193,53,409,77"/>
+<area shape="rect" href="$classclsfy__binary__hyperplane__ls__builder.html" title="Build a binary linear classifier using least squares." alt="" coords="187,101,416,125"/>
+<area shape="rect" href="$classclsfy__binary__tree__builder.html" title="Builds clsfy_binary_tree classifiers." alt="" coords="216,149,387,173"/>
+<area shape="rect" href="$classclsfy__direct__boost__builder.html" title="Base for classes to build clsfy_classifier_base objects." alt="" coords="213,197,389,221"/>
+<area shape="rect" href="$classclsfy__knn__builder.html" title="Builds clsfy_k_nearest_neighbour classifiers." alt="" coords="239,245,364,269"/>
+<area shape="rect" href="$classclsfy__null__builder.html" title="Builds clsfy_null_classifier." alt="" coords="240,293,363,317"/>
+<area shape="rect" href="$classclsfy__parzen__builder.html" title="Builds clsfy_rbf_parzen classifiers." alt="" coords="229,341,373,365"/>
+<area shape="rect" href="$classclsfy__random__builder.html" title="Builds clsfy_random_classifier classifiers." alt="" coords="228,389,375,413"/>
+<area shape="rect" href="$classclsfy__random__forest__builder.html" title="Builds clsfy_random_forest classifiers." alt="" coords="207,437,396,461"/>
+<area shape="rect" href="$classclsfy__rbf__svm__smo__1__builder.html" title="Base for classes to build clsfy_classifier_base objects." alt="" coords="203,485,400,509"/>
+<area shape="rect" href="$classclsfy__binary__hyperplane__gmrho__builder.html" title="Builder for linear 2&#45;state classifier." alt="" coords="465,77,721,101"/>
+<area shape="rect" href="$classclsfy__binary__hyperplane__logit__builder.html" title="Linear classifier builder using a logit loss function." alt="" coords="472,125,715,149"/>
+</map>

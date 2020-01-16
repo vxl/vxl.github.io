@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__est__dis__homo2d__lm.html" title="homography2D transform estimator." alt="" coords="661,5,829,29"/>
+<area shape="rect" href="$classrgrl__est__homo2d__lm.html" title="homography2D transform estimator." alt="" coords="673,53,817,77"/>
+<area shape="rect" href="$classrgrl__est__homo2d__proj.html" title="homography2D transform estimator using the new proj function defined in rgrl_est_proj_func." alt="" coords="669,101,821,125"/>
+<area shape="rect" href="$classrgrl__est__homo2d__proj__rad.html" title="homography2D transform estimator using the new proj function defined in rgrl_est_proj_func." alt="" coords="656,149,835,173"/>
+<area shape="rect" href="$classrgrl__est__rigid.html" title="Rigid transform estimator." alt="" coords="696,197,795,221"/>
+<area shape="rect" href="$classrgrl__est__spline.html" title="rgrl_est_spline" alt="" coords="692,245,799,269"/>
+<area shape="rect" href="$classrgrl__estimator.html" title="Interface for the transform estimators." alt="" coords="291,125,395,149"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="159,125,241,149"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,125,109,149"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__blocked__image__facade.html" title="vil_blocked_image_facade" alt="" coords="5,156,184,180"/>
+<area shape="rect" href="$classvil__cached__image__resource.html" title="vil_cached_image_resource" alt="" coords="208,156,397,180"/>
+<area shape="rect" href="$classvil__nitf2__image.html" title="Class for reading NITF 2.1 imagery files." alt="" coords="421,156,533,180"/>
+<area shape="rect" href="$classvil__tiff__image.html" title="Generic image interface for image TIFF image files (could have multiple images)." alt="" coords="557,156,659,180"/>
+<area shape="rect" href="$classvil__image__resource.html" title="Abstract representation of an image source or image destination." alt="" coords="320,7,459,31"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__est__affine.html" title="Affine transform estimator." alt="" coords="668,5,775,29"/>
+<area shape="rect" href="$classrgrl__est__homography2d.html" title="homography2D transform estimator." alt="" coords="640,53,803,77"/>
+<area shape="rect" href="$classrgrl__est__quadratic.html" title="Quadratic transform estimator." alt="" coords="657,101,785,125"/>
+<area shape="rect" href="$classrgrl__est__reduced__quad2d.html" title="2D similarity transform estimator." alt="" coords="635,149,808,173"/>
+<area shape="rect" href="$classrgrl__est__similarity2d.html" title="2D similarity transform estimator." alt="" coords="652,197,791,221"/>
+<area shape="rect" href="$classrgrl__est__translation.html" title="Translation transform estimator." alt="" coords="653,245,789,269"/>
+<area shape="rect" href="$classrgrl__estimator.html" title="Interface for the transform estimators." alt="" coords="291,125,395,149"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="159,125,241,149"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,125,109,149"/>
+</map>

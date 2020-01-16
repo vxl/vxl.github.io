@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvcsl__meter.html" title="Standard unit associated to the length dimension." alt="" coords="5,231,93,255"/>
+<area shape="rect" href="$classvcsl__micron.html" title="Standard unit associated to the length dimension." alt="" coords="117,231,211,255"/>
+<area shape="rect" href="$classvcsl__millimeter.html" title="Standard unit associated to the length dimension." alt="" coords="235,231,344,255"/>
+<area shape="rect" href="$classvcsl__unit.html" title="Abstract unit associated to a dimension." alt="" coords="127,81,201,105"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="112,7,216,31"/>
+</map>

@@ -1,0 +1,24 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__nitf2__field__formatter.html" title="vil_nitf2_field_formatter" alt="" coords="7,221,167,245"/>
+<area shape="rect" href="$classvil__nitf2__typed__field__formatter.html" title="vil_nitf2_typed_field_formatter\&lt; T \&gt;" alt="" coords="315,5,547,29"/>
+<area shape="rect" href="$classvil__nitf2__typed__field__formatter.html" title="vil_nitf2_typed_field_formatter\&lt; char \&gt;" alt="" coords="305,53,556,77"/>
+<area shape="rect" href="$classvil__nitf2__typed__field__formatter.html" title="vil_nitf2_typed_field_formatter\&lt; double \&gt;" alt="" coords="299,101,563,125"/>
+<area shape="rect" href="$classvil__nitf2__typed__field__formatter.html" title="vil_nitf2_typed_field_formatter\&lt; int \&gt;" alt="" coords="312,149,549,173"/>
+<area shape="rect" href="$classvil__nitf2__typed__field__formatter.html" title="vil_nitf2_typed_field_formatter\&lt; vcl_string \&gt;" alt="" coords="291,197,571,221"/>
+<area shape="rect" href="$classvil__nitf2__typed__field__formatter.html" title="vil_nitf2_typed_field_formatter\&lt; vil_nitf2_date_time \&gt;" alt="" coords="264,245,597,269"/>
+<area shape="rect" href="$classvil__nitf2__typed__field__formatter.html" title="vil_nitf2_typed_field_formatter\&lt; vil_nitf2_location * \&gt;" alt="" coords="265,293,596,317"/>
+<area shape="rect" href="$classvil__nitf2__typed__field__formatter.html" title="vil_nitf2_typed_field_formatter\&lt; vil_nitf2_long \&gt;" alt="" coords="280,341,581,365"/>
+<area shape="rect" href="$classvil__nitf2__typed__field__formatter.html" title="vil_nitf2_typed_field_formatter\&lt; vil_nitf2_tagged_record_sequence \&gt;" alt="" coords="217,389,644,413"/>
+<area shape="rect" href="$classvil__nitf2__typed__field__formatter.html" title="vil_nitf2_typed_field_formatter\&lt; void * \&gt;" alt="" coords="303,437,559,461"/>
+<area shape="rect" href="$classvil__nitf2__char__formatter.html" title="vil_nitf2_char_formatter" alt="" coords="756,5,919,29"/>
+<area shape="rect" href="$classvil__nitf2__double__formatter.html" title="vil_nitf2_double_formatter" alt="" coords="749,53,925,77"/>
+<area shape="rect" href="$classvil__nitf2__exponential__formatter.html" title="vil_nitf2_exponential_formatter" alt="" coords="736,101,939,125"/>
+<area shape="rect" href="$classvil__nitf2__integer__formatter.html" title="vil_nitf2_integer_formatter" alt="" coords="749,149,925,173"/>
+<area shape="rect" href="$classvil__nitf2__string__formatter.html" title="vil_nitf2_string_formatter" alt="" coords="753,197,921,221"/>
+<area shape="rect" href="$classvil__nitf2__enum__string__formatter.html" title="vil_nitf2_enum_string_formatter" alt="" coords="1029,197,1240,221"/>
+<area shape="rect" href="$classvil__nitf2__date__time__formatter.html" title="vil_nitf2_date_time_formatter" alt="" coords="740,245,935,269"/>
+<area shape="rect" href="$classvil__nitf2__location__formatter.html" title="vil_nitf2_location_formatter" alt="" coords="747,293,928,317"/>
+<area shape="rect" href="$classvil__nitf2__long__long__formatter.html" title="vil_nitf2_long_long_formatter" alt="" coords="740,341,935,365"/>
+<area shape="rect" href="$classvil__nitf2__tagged__record__sequence__formatter.html" title="vil_nitf2_tagged_record_sequence_formatter" alt="" coords="693,389,981,413"/>
+<area shape="rect" href="$classvil__nitf2__binary__formatter.html" title="vil_nitf2_binary_formatter" alt="" coords="751,437,924,461"/>
+</map>

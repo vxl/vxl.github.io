@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvnl__file__vector.html" title="Templated class to load a vector from a file." alt="" coords="385,5,524,29"/>
+<area shape="rect" href="$classvnl__vector__ref.html" title="vnl_vector using user&#45;supplied storage." alt="" coords="385,53,524,77"/>
+<area shape="rect" href="$classvnl__vector.html" title="vnl_vector\&lt; long \&gt;" alt="" coords="389,101,520,125"/>
+<area shape="rect" title=" \&lt; long \&gt;" alt="" coords="116,129,124,137"/>
+<area shape="rect" title=" \&lt; long \&gt;" alt="" coords="385,113,393,121"/>
+<area shape="rect" href="$classvnl__vector.html" title="vnl_vector\&lt; double \&gt;" alt="" coords="381,149,528,173"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="116,145,124,153"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="377,159,385,167"/>
+<area shape="rect" href="$classvnl__vector.html" title="vnl_vector\&lt; singval_t \&gt;" alt="" coords="376,197,533,221"/>
+<area shape="rect" title=" \&lt; singval_t \&gt;" alt="" coords="77,147,85,155"/>
+<area shape="rect" title=" \&lt; singval_t \&gt;" alt="" coords="372,208,380,216"/>
+<area shape="rect" href="$classvnl__vector.html" title="vnl_vector\&lt; vcl_complex\&lt; double \&gt; \&gt;" alt="" coords="333,245,576,269"/>
+<area shape="rect" title=" \&lt; vcl_complex\&lt; double \&gt; \&gt;" alt="" coords="65,147,73,155"/>
+<area shape="rect" title=" \&lt; vcl_complex\&lt; double \&gt; \&gt;" alt="" coords="329,264,337,272"/>
+</map>

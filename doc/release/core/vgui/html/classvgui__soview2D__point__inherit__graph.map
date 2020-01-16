@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgui__soview2D.html" title="2&#45;dimensional spatial object view." alt="" coords="23,81,135,105"/>
+<area shape="rect" href="$classvgui__soview.html" title="Spatial object view (base class for 2 &amp; 3D geometric objects)." alt="" coords="32,7,125,31"/>
+</map>

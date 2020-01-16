@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvpdfl__axis__gaussian.html" title="Multi&#45;variate Gaussian PDF, with a diagonal covariance matrix." alt="" coords="5,81,147,105"/>
+<area shape="rect" href="$classvpdfl__gaussian.html" title="Class for multi&#45;variate gaussians with arbitrary axes." alt="" coords="171,81,283,105"/>
+<area shape="rect" href="$classvpdfl__kernel__pdf.html" title="Multi&#45;variate kernel PDF." alt="" coords="307,81,427,105"/>
+<area shape="rect" href="$classvpdfl__mixture.html" title="Represents a mixture model (a set of individual pdfs + weights)." alt="" coords="451,81,552,105"/>
+<area shape="rect" href="$classvpdfl__pc__gaussian.html" title="Multi&#45;variate principal Component Gaussian PDF." alt="" coords="139,156,272,180"/>
+<area shape="rect" href="$classvpdfl__gaussian__kernel__pdf.html" title="Multi&#45;variate spherical gaussian kernel PDF." alt="" coords="296,156,477,180"/>
+</map>

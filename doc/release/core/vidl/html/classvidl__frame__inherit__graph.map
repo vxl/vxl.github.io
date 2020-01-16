@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvidl__memory__chunk__frame.html" title="A frame buffer that wraps a vil_memory_chunk." alt="" coords="5,81,189,105"/>
+<area shape="rect" href="$classvidl__shared__frame.html" title="A frame buffer that shares someone else&#39;s data." alt="" coords="213,81,347,105"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbugl__gaussian__point__2d.html" title="bugl_gaussian_point_2d\&lt; double \&gt;" alt="" coords="83,380,309,404"/>
+<area shape="rect" href="$classbugl__uncertainty__point__2d.html" title="bugl_uncertainty_point_2d\&lt; double \&gt;" alt="" coords="5,289,245,313"/>
+<area shape="rect" href="core_vgl.tag$classvgl__point__2d.html" title="vgl_point_2d\&lt; double \&gt;" alt="" coords="65,148,225,172"/>
+<area shape="rect" href="core_vgl.tag$classvgl__point__2d.html" title="vgl_point_2d\&lt; Type \&gt;" alt="" coords="127,7,276,31"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="171,28,179,36"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="139,144,147,152"/>
+<area shape="rect" href="core_vgl.tag$classvgl__point__2d.html" title="vgl_point_2d\&lt; T \&gt;" alt="" coords="191,97,319,121"/>
+<area shape="rect" title=" \&lt; T \&gt;" alt="" coords="205,28,213,36"/>
+<area shape="rect" title=" \&lt; T \&gt;" alt="" coords="244,93,252,101"/>
+<area shape="rect" href="$classbugl__uncertainty__point__2d.html" title="bugl_uncertainty_point_2d\&lt; T \&gt;" alt="" coords="163,199,371,223"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="241,220,249,228"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="140,285,148,293"/>
+<area shape="rect" href="$classbugl__gaussian__point__2d.html" title="bugl_gaussian_point_2d\&lt; T \&gt;" alt="" coords="269,289,467,313"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="339,311,347,319"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="215,376,223,384"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="333,380,437,404"/>
+</map>

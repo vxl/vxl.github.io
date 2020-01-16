@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmfpf__region__definer.html" title="Base for objects which generate regions from sets of points." alt="" coords="7,29,145,53"/>
+<area shape="rect" href="$classmfpf__region__about__lineseg.html" title="Region centred on a line between two points." alt="" coords="196,5,377,29"/>
+<area shape="rect" href="$classmfpf__region__about__pt.html" title="Region centred on a single point, pose defined by other pts." alt="" coords="211,53,363,77"/>
+</map>

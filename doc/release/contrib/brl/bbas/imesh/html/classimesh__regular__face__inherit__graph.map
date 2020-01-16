@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="$classimesh__regular__face.html" title="imesh_regular_face\&lt; 3 \&gt;" alt="" coords="5,97,173,121"/>
+<area shape="rect" title=" \&lt; 3 \&gt;" alt="" coords="180,28,188,36"/>
+<area shape="rect" title=" \&lt; 3 \&gt;" alt="" coords="100,93,108,101"/>
+<area shape="rect" href="$classimesh__regular__face.html" title="imesh_regular_face\&lt; 4 \&gt;" alt="" coords="197,97,365,121"/>
+<area shape="rect" title=" \&lt; 4 \&gt;" alt="" coords="208,28,216,36"/>
+<area shape="rect" title=" \&lt; 4 \&gt;" alt="" coords="267,93,275,101"/>
+<area shape="rect" href="$classimesh__tri.html" title="A triangle face." alt="" coords="52,175,127,199"/>
+<area shape="rect" href="$classimesh__quad.html" title="A quadrilateral face." alt="" coords="235,175,328,199"/>
+</map>

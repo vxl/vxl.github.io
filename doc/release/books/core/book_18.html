@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: D. Adding to vnl_algo</title>
+
+<meta name="description" content="VXL: D. Adding to vnl_algo">
+<meta name="keywords" content="VXL: D. Adding to vnl_algo">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Adding-to-vnl"></a>
+<a name="SEC213"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_17.html#SEC212" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC214" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_17.html#SEC206" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_19.html#SEC217" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="appendix"> D. Adding to vnl_algo </h1>
+
+
+<p>The strategy adopted for converting and wrapping the fortran files is a
+little involved.  Some routines are simple to do, others very tricky.  The
+general procedure is as follows.  These steps are elaborated upon in the
+example below.
+</p><hr size="6">
+<a name="SEC214"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC213" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC215" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC213" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC213" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_19.html#SEC217" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.1 Overview </h2>
+<ol>
+<li> Use GAMS to find the module name, in SLATEC if possible, although
+CMLIB and TOMS routines are also public domain and good.
+
+</li><li> Convert the fortran to C using f2c
+
+</li><li> Add the routine to the Imakefile in the netlib library.
+
+</li><li> Encapsulate the routine in a class in vnl, after determining a
+suitable interface.
+
+</li><li> Read the module documentation and determine the calling sequence.
+
+</li><li> In the calling method, create all necessary workspace arrays and
+temporary variables that the call requires, call the external routine, and
+convert the results into the classes that VXL expects.
+
+</li><li> After the call, interpret the error code, and handle accordingly.
+</li></ol>
+
+<hr size="6">
+<a name="SEC215"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC214" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC216" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC213" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC213" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_19.html#SEC217" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.2 Problems </h2>
+<p>There are a few potential sources of difficulty, mostly in item 5, but in
+general I find that gritting one's teeth and guessing is a surprisingly good
+strategy.  The main points to remember are:
+</p><ol>
+<li> All scalar variables are passed by reference.  This means that you
+need to store all constants in variables and pass their addresses or
+declare the routines as accepting references.  I do the latter for input
+variables, and the former for outputs.
+
+</li><li> Fortran arrays start from 1 rather than 0.  This is actually a
+non-problem, as f2c generates code which interfaces zero-based to one-based
+arrays using the Numerical Recipes trick of decrementing the pointer, but
+is mentioned here for the benefit of fortran programmers.
+
+</li><li> Fortran arrays are stored column-wise rather than row-wise.  Class
+<code>vnl_fortran_copy</code> provides an easy and efficient way to transpose
+matrices before calling.
+</li></ol>
+
+<p>In addition to these fortran specifics, it is important to be aware of the
+sorts of design patterns seen in numerical code.  Many routines are coded
+for maximum generality and efficiency, which can make reading the
+descriptions heavy going.  Common conventions are:
+</p><ul>
+<li> An array is passed with three dimensions: number of rows in the physical
+array, number of rows to use for computation and number of columns.  This
+allows the routines to be used on any submatrix of a larger matrix.
+
+</li><li> Output results overwrite the input matrix.
+
+</li><li> Output results are stored in some compact form, which must be decoded
+before use.  Note however that in many cases routines are supplied to
+perform further computations using the encoded representation for time and
+space efficiency.  The new QR class will demonstrate how to take advantage
+of this.
+
+</li><li> The results of pivoting are generally returned in vectors of
+integers (say <code>ipvt</code>), where <code>ipvt[i]</code> is the position to which
+row/column <code>i</code> has been moved. These permutations which must be
+applied to the results in order to complete the process.
+</li></ul>
+
+<hr size="6">
+<a name="SEC216"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC215" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_19.html#SEC217" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC213" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC213" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_19.html#SEC217" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> D.3 Example conversion - QR decomposition </h2>
+<p>Given the need for an algorithm that is not yet included in the vnl
+package, say a routine to compute the QR decomposition, your first stop is
+the GAMS decision tree.  Class &quot;D&quot; is Linear Algebra, and class &quot;D5&quot; is
+QR decomposition.  The SLATEC implementation is called DQRDC (Double
+precision QR DeComposition).  Download the source, or obtain it from a
+local SLATEC distribution.  Convert it to a C source file and a prototype
+file using
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   f2c -P dqrdc.f
+</pre></td></tr></table><p>and from the prototype file <code>dqrdc.P</code> we find that the function
+prototype is
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   int dqrdc_(doublereal *x, integer *ldx, integer *n, integer *p,
+              doublereal *qraux, integer *jpvt, doublereal *work,
+              integer *job);
+</pre></td></tr></table>
+<p>At this point, the header of the fortran file <code>dqrdc.f</code> is examined in
+order to determine the meaning of the parameters.  Considering parameter
+<code>X</code>, we find
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   X     DOUBLE PRECISION(LDX,P), where LDX .GE. N.
+         X contains the matrix whose decomposition is to be computed.
+</pre></td></tr></table><p>This means that X is a LDX row by P column matrix, and that we require a
+decomposition of the first N rows.  This is a common convention in fortran
+programs which allows computation on subblocks of matrices.  In general, we
+will assume that we wish to work on the full matrix, and therefore that LDX
+= N.  To create the required transformed copy of the matrix, use class
+<code>vnl_fortran_copy</code>:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   vnl_fortran_copy Xtranspose(X);
+</pre></td></tr></table><p>Now, the function may be called as
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   int n = X.rows();
+   int p = X.columns();
+   vnl_vector&lt;int&gt; jpvt(p);
+   jpvt.fill(0); // Mark all columns as pivotable
+   vnl_vector&lt;double&gt; work(p);
+   int do_pivoting = 1;
+   vnl_vector&lt;double&gt; qraux(p);
+   dqrdc_(Xtranspose, &amp;n, &amp;n, &amp;p,
+          qraux.data_block(), jpvt.data_block(), w.data_block(),
+          &amp;do_pivoting);
+</pre></td></tr></table>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC213" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_19.html#SEC217" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

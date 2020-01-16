@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__mask__2d__image.html" title="this is a wrapper on the binary mask image. The image is define for the x&#45;y plane." alt="" coords="431,5,577,29"/>
+<area shape="rect" href="$classrgrl__mask__3d__image.html" title="rgrl_mask_3d_image" alt="" coords="431,53,577,77"/>
+<area shape="rect" href="$classrgrl__mask__box.html" title="this is a wrapper on the box." alt="" coords="449,101,559,125"/>
+<area shape="rect" href="$classrgrl__mask__oriented__box.html" title="this is a wrapper on an oriented box." alt="" coords="423,149,585,173"/>
+<area shape="rect" href="$classrgrl__mask__sphere.html" title="This is a wrapper on the circular region or sphere." alt="" coords="440,197,568,221"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="159,101,241,125"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,101,109,125"/>
+</map>

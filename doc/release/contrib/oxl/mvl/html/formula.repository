@@ -1,0 +1,60 @@
+\form#0:\[ D = \left( \begin{array}{lllllllll} m_{11} m'_{11} & m_{12} m'_{11} & m_{13} m'_{11} & m_{11} m'_{12} & m_{12} m'_{12} & m_{13} m'_{12} & m_{11} m'_{13} & m_{12} m'_{13} & m_{13} m'_{13} \\ \vdots & & & & & & & & \\ m_{n1} m'_{n1} & m_{n2} m'_{n1} & m_{n3} m'_{n1} & m_{n1} m'_{n2} & m_{n2} m'_{n2} & m_{n3} m'_{n2} & m_{n1} m'_{n3} & m_{n2} m'_{n3} & m_{n3} m'_{n3} \end{array} \right) \]
+\form#1:$ D f = 0 $
+\form#2:$f = (F_{11} F_{12} F_{13} F_{21} F_{22} F_{23} F_{31} F_{32} F_{33}) $
+\form#3:$F$
+\form#4:$n$
+\form#5:$n \times 9$
+\form#6:$(m_2^\top F m_1)^2 = 0$
+\form#7:${\tt F}$
+\form#8:$\det ({\tt F} + {\tt F}^\top) = 0$
+\form#9:$H$
+\form#10:$H_i$
+\form#11:$H = H_2^{-1} H_1$
+\form#12:$H ~ [p_1 ~ p_2 ~ p_3 ~ p_4 ] \sim [p'_1 ~ p'_2 ~ p'_3 ~ p'_4 ]$
+\form#13:$p_i$
+\form#14:$p'_i$
+\form#15:$2 n \times 9$
+\form#16:\[ \left(\begin{array}{ccccccccc} 0 & 0 & 0 & x_1 z_1' & y_1 z_1' & z_1 z_1' & -x_1 y_1' & -y_1 y_1' & -z_1 y_1' \cr x_1 z_1' & y_1 z_1' & z_1 z_1' & 0 & 0 & 0 & -x_1 x_1' & -y_1 x_1' & -z_1 x_1' \cr \multicolumn{9}{c}{\cdots} \cr 0 & 0 & 0 & x_n z_n' & y_n z_n' & z_n z_n' & -x_n y_n' & -y_n y_n' & -z_n y_n'\cr x_n z_n' & y_n z_n' & z_n z_n' & 0 & 0 & 0 & -x_n x_n' & -y_n x_n' & -z_n x_n' \end{array}\right) \]
+\form#17:$3 \times 9$
+\form#18:\[ H = \begin{array}{cc} M & m\\ 0 & 1 \end{array} \]
+\form#19:$max(|x|,|y|) <= \mbox{tol} \times |w|$
+\form#20:$\sqrt2$
+\form#21:$\frac{a x + b y + c}{\sqrt{a^2+b^2}}$
+\form#22:$(a,b,c)$
+\form#23:$(x,y,1)$
+\form#24:$(a,b,0)$
+\form#25:$(p,q,r)$
+\form#26:$ap+bq=0$
+\form#27:$px+qy+r=0$
+\form#28:$\bf x$
+\form#29:$\|\tt L \bf x\|$
+\form#30:$\tt L$
+\form#31:$\tt L^\top \tt L$
+\form#32:$|w| <= \mbox{tol} \times min(|x|,|y|)$
+\form#33:$|w| <= \mbox{tol} \times min(|x|,|y|,|z|)$
+\form#34:$i_1 \rightarrow i_2$
+\form#35:$i_2$
+\form#36:$i_1$
+\form#37:$P \vec X = \vec x$
+\form#38:$\vec X^i$
+\form#39:$\vec u^i$
+\form#40:\[ \left( \begin{array}{ccc} \vec X^1 u^1_3 & 0_{4} & -\vec X^1 u^1_1 \cr 0_4 & \vec X^1 u^1_3 & -\vec X^1 u^1_2 \cr \vdots & \vdots & \vdots \cr \vec X^n u^n_3 & 0_{4} & -\vec X^n u^n_1 \cr 0_4 & \vec X^n u^n_3 & -\vec X^n u^n_2 \cr \end{array} \right) \]
+\form#41:$\vec X_i$
+\form#42:$\vec u_i$
+\form#43:$P$
+\form#44:$P \vec X_i \sim \vec u_i$
+\form#45:\[ H \begin{array}{cccc}&&& \\ p_1 & p_2 & p_3 & p_4 \\ &&& \end{array} \sim \begin{array}{cccc}1 & 0 & 0 & 1 \cr 0 & 1 & 0 & 1 \cr 0 & 0 & 1 & 1 \end{array} \]
+\form#46:$(x,y) \rightarrow (x - cx, y - cy, f)$
+\form#47:$S$
+\form#48:$S_{ijk} = T_{pjk} M_{pi}$
+\form#49:$S_{ijk} = T_{ipk} M_{pj}$
+\form#50:$S_{ijk} = T_{ijp} M_{pk}$
+\form#51:$S_{ijk} = M_{ip} T_{pjk}$
+\form#52:$S_{ijk} = M_{jp} T_{ipk}$
+\form#53:$S_{ijk} = M_{kp} T_{ijp}$
+\form#54:${\tt C}_{123}$
+\form#55:${\tt C}_{v} l_v = \hat l_v$
+\form#56:$l_1 = T l_2 l_3$
+\form#57:$\hat T$
+\form#58:$\hat l_1 = \hat T \hat l_2 \hat l_3$
+\form#59:$\hat T = T.\mbox{decondition}(C_1^{-1}, C_2, C_3)$

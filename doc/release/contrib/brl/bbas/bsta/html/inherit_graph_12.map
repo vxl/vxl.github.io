@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbsta__distribution.html" title="A base class for probability distributions." alt="" coords="7,173,169,197"/>
+<area shape="rect" href="$classbsta__gaussian.html" title="A Gaussian distribution." alt="" coords="224,77,376,101"/>
+<area shape="rect" href="$classbsta__parzen.html" title="A Parzen distribution." alt="" coords="231,149,369,173"/>
+<area shape="rect" href="$classbsta__parzen.html" title="bsta_parzen\&lt; T, 1 \&gt;" alt="" coords="231,197,369,221"/>
+<area shape="rect" href="$classbsta__von__mises.html" title="A Von_Mises distribution." alt="" coords="219,245,381,269"/>
+<area shape="rect" href="$classbsta__gaussian__full.html" title="A Gaussian distribution with a full covariance matrix." alt="" coords="443,5,619,29"/>
+<area shape="rect" href="$classbsta__gaussian__indep.html" title="A Gaussian distribution, independent in each dimension." alt="" coords="435,53,627,77"/>
+<area shape="rect" href="$classbsta__gaussian__sphere.html" title="A (hyper&#45;)spherical Gaussian distribution." alt="" coords="431,101,631,125"/>
+<area shape="rect" href="$classbsta__parzen__sphere.html" title="A parzen distribution." alt="" coords="437,149,624,173"/>
+<area shape="rect" href="$classbsta__sample__set.html" title="A class to hold samples, the window width parameter, weights for each sample, assignments of each sam..." alt="" coords="680,149,848,173"/>
+<area shape="rect" href="$classbsta__parzen__sphere_3_01T_00_011_01_4.html" title="specialize to the scalar case, needed due to differences in computing the covariance matrix..." alt="" coords="437,197,624,221"/>
+</map>

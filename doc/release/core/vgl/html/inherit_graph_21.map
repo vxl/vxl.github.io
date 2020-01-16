@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgl__h__matrix__1d__compute.html" title="vgl_h_matrix_1d_compute" alt="" coords="5,53,184,77"/>
+<area shape="rect" href="$classvgl__h__matrix__1d__compute__3point.html" title="Calculate the line projectivity which matches three 1D point correspondences." alt="" coords="240,5,461,29"/>
+<area shape="rect" href="$classvgl__h__matrix__1d__compute__linear.html" title="vgl_h_matrix_1d_compute_linear" alt="" coords="241,53,460,77"/>
+<area shape="rect" href="$classvgl__h__matrix__1d__compute__optimize.html" title="vgl_h_matrix_1d_compute_optimize" alt="" coords="233,101,468,125"/>
+</map>

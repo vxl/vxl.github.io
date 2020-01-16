@@ -1,0 +1,50 @@
+\form#0:$ |ax^2 + bxy + cy^2 + dx + ey +f|^2 $
+\form#1:$ a^2 + 0.5*b^2 + c^2 = 2 $
+\form#2:$S_{21} = S_{12}^t$
+\form#3:$v_1 = \{a,b,c\}^t$
+\form#4:$v_2 = \{d,e,f\}^t$
+\form#5:$ dL/dv_2 = 2 S_{21} v_1 + 2 S_{22} v_2 = 0 $
+\form#6:$ v_2 = -S_{22}^-1 S_{21} v_1 $
+\form#7:$ dL/dv_1 = ( (S_{11} - S_{12} * S_{22}^-1 * S_{21}) - \lambda D ) v_1 = 0 $
+\form#8:$ \lambda v_1 = D^-1 (S_{11} - S_{12} * S_{22}^-1 * S_{21}) v_1 $
+\form#9:$H_i$
+\form#10:$H = H_2^{-1} H_1$
+\form#11:$H$
+\form#12:$H ~ [p_1 ~ p_2 ~ p_3 ~ p_4 ] \sim [p'_1 ~ p'_2 ~ p'_3 ~ p'_4 ]$
+\form#13:$p_i$
+\form#14:$p'_i$
+\form#15:$2 n \times 9$
+\form#16:\[ \left(\begin{array}{ccccccccc} 0 & 0 & 0 & x_1 z_1' & y_1 z_1' & z_1 z_1' & -x_1 y_1' & -y_1 y_1' & -z_1 y_1' \cr x_1 z_1' & y_1 z_1' & z_1 z_1' & 0 & 0 & 0 & -x_1 x_1' & -y_1 x_1' & -z_1 x_1' \cr \multicolumn{9}{c}{\cdots} \cr 0 & 0 & 0 & x_n z_n' & y_n z_n' & z_n z_n' & -x_n y_n' & -y_n y_n' & -z_n y_n'\cr x_n z_n' & y_n z_n' & z_n z_n' & 0 & 0 & 0 & -x_n x_n' & -y_n x_n' & -z_n x_n' \end{array}\right) \]
+\form#17:$3 \times 9$
+\form#18:$H [p_1 p_2 p_3 p_4 ] \sim [p'_1 p'_2 p'_3 p'_4 ]$
+\form#19:$6 n \times 16$
+\form#20:$H [p_1 p_2 p_3 p_4 p_5] \sim [p'_1 p'_2 p'_3 p'_4 p_5']$
+\form#21:$ \frac{a x + b y + c}{\sqrt{a^2+b^2}} $
+\form#22:$(a,b,c)$
+\form#23:$(x,y,1)$
+\form#24:$(a,b,0)$
+\form#25:$(p,q,r)$
+\form#26:$ap+bq=0$
+\form#27:$px+qy+r=0$
+\form#28:\[ d = \frac{(l^\top p)}{p_z\sqrt{l_x^2 + l_y^2}} \]
+\form#29:$\bf x$
+\form#30:$\|\tt L \bf x\|$
+\form#31:$\tt L$
+\form#32:$\tt L^\top \tt L$
+\form#33:$ \frac{a x + b y + c z + d}{\sqrt{a^2+b^2+c^2}} $
+\form#34:$p = [-a*c, -b*c, \sqrt(a^2+b^2)]^T$
+\form#35:$p = [-a*c, -b*c, 1]^T$
+\form#36:$P \vec X = \vec x$
+\form#37:$ax^2 + bxy + cy^2 + dx + ey + f = 0$
+\form#38:$ax^2 + bxy + cy^2 + dxw + eyw + fw^2 = 0$
+\form#39:$z$
+\form#40:$w$
+\form#41:$X^2$
+\form#42:$XY$
+\form#43:$Y^2$
+\form#44:$XW$
+\form#45:$YW$
+\form#46:$W^2$
+\form#47:$W$
+\form#48:$Z$
+\form#49:$ a x + b y + c z + d = 0 $

@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvnl__svd.html" title="Holds the singular value decomposition of a vnl_matrix." alt="" coords="7,5,105,29"/>
+<area shape="rect" href="$structvnl__matrix__inverse.html" title="Calculates inverse of a matrix (wrapper around vnl_svd&lt;double&gt;)." alt="" coords="155,5,320,29"/>
+</map>

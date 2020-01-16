@@ -1,0 +1,15 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvpdl__distribution.html" title="The base class for all probability distributions." alt="" coords="7,156,169,180"/>
+<area shape="rect" href="$classvpdl__gaussian__base.html" title="The abstract base class for Gaussian distributions." alt="" coords="429,96,619,120"/>
+<area shape="rect" href="$classvpdl__multi__cmp__dist.html" title="The base class for all multiple component probability distributions." alt="" coords="429,156,619,180"/>
+<area shape="rect" href="$classvpdl__multi__cmp__dist.html" title="vpdl_multi_cmp_dist\&lt; vpdt_dist_traits\&lt; dist_t \&gt;::scalar_type, vpdt_dist_traits\&lt; dist_t \&gt;::dimension \&gt;" alt="" coords="220,228,828,252"/>
+<area shape="rect" href="$classvpdl__gaussian.html" title="A Gaussian with variance independent in each dimension." alt="" coords="903,5,1055,29"/>
+<area shape="rect" href="$classvpdl__gaussian__indep.html" title="A Gaussian with variance independent in each dimension." alt="" coords="883,53,1075,77"/>
+<area shape="rect" href="$classvpdl__gaussian__sphere.html" title="A Gaussian with (hyper&#45;)spherical covariance." alt="" coords="879,101,1079,125"/>
+<area shape="rect" href="$classvpdl__kernel__base.html" title="A base class for kernel (aka Parzen window) distributions." alt="" coords="893,149,1064,173"/>
+<area shape="rect" href="$classvpdl__mixture.html" title="A mixture of distributions." alt="" coords="907,197,1051,221"/>
+<area shape="rect" href="$classvpdl__kernel__fbw__base.html" title="A base class for fixed bandwidth kernel distributions." alt="" coords="1129,125,1329,149"/>
+<area shape="rect" href="$classvpdl__kernel__vbw__base.html" title="A base class for variable bandwidth kernel distributions." alt="" coords="1128,173,1331,197"/>
+<area shape="rect" href="$classvpdl__kernel__gaussian__sfbw.html" title="A fixed bandwidth spherical Gaussian kernel distribution." alt="" coords="1380,125,1609,149"/>
+<area shape="rect" href="$classvpdl__mixture__of.html" title="A mixture of a fixed type of distributions." alt="" coords="893,245,1064,269"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvcsl__angle__unit.html" title="Abstract unit associated to the angle dimension." alt="" coords="111,156,225,180"/>
+<area shape="rect" href="$classvcsl__length__unit.html" title="Abstract unit associated to the length dimension." alt="" coords="293,156,411,180"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="185,7,289,31"/>
+<area shape="rect" href="$classvcsl__degree.html" title="A unit associated to the angle dimension." alt="" coords="5,231,99,255"/>
+<area shape="rect" href="$classvcsl__radian.html" title="Standard unit associated to the angle dimension." alt="" coords="123,231,213,255"/>
+<area shape="rect" href="$classvcsl__meter.html" title="Standard unit associated to the length dimension." alt="" coords="237,231,325,255"/>
+<area shape="rect" href="$classvcsl__micron.html" title="Standard unit associated to the length dimension." alt="" coords="349,231,443,255"/>
+<area shape="rect" href="$classvcsl__millimeter.html" title="Standard unit associated to the length dimension." alt="" coords="467,231,576,255"/>
+</map>

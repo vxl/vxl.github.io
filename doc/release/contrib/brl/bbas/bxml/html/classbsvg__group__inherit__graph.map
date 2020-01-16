@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbsvg__arrow__head.html" title="tip of the arrow will be at x, y and the length will be l." alt="" coords="5,380,133,404"/>
+<area shape="rect" href="$classbsvg__splice.html" title="draw a splice e.g. for a &quot;pie chart&quot;." alt="" coords="157,380,248,404"/>
+<area shape="rect" href="$classbsvg__element.html" title="bsvg_element" alt="" coords="84,231,188,255"/>
+<area shape="rect" href="$classbxml__element.html" title="An XML element." alt="" coords="84,156,188,180"/>
+<area shape="rect" href="$classbxml__data.html" title="A block of character data found within XML tags." alt="" coords="95,81,177,105"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="84,7,188,31"/>
+</map>

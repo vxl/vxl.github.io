@@ -1,0 +1,1198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 6. vnl: Numerics</title>
+
+<meta name="description" content="VXL: 6. vnl: Numerics">
+<meta name="keywords" content="VXL: 6. vnl: Numerics">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="vnl"></a>
+<a name="SEC47"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_5.html#SEC46" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC49" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 6. vnl: Numerics </h1>
+
+
+  <blockquote><p>  <strong>Chapter summary</strong>:
+C++ <em>can</em> be like Matlab, but faster and more powerful.
+  </p></blockquote>
+
+
+<p>The numerics library, <code>vnl</code> is intended to provide an environment for
+numerical programming which combines the ease of use of packages like
+Mathematica and Matlab with the speed of C and the elegance of C++.
+It provides a C++ interface to the high-quality Fortran routines
+made available in the public domain by numerical analysis researchers.
+</p>
+<p>This release includes classes for
+</p><ul>
+<li> Matrices and vectors.
+The library is based on the old TargetJr/IUE
+classes, which provide the standard operations without excessive overhead.
+
+</li><li>
+Specialized classes for matrices and vectors with particular properties.
+Class <code>vnl_diagonal_matrix</code> provides a fast and convenient diagonal
+matrix, while fixed-size matrices and vectors allow &quot;fast-as-C&quot;
+computations (see <code>vnl_matrix_fixed&lt;T,n,m&gt;</code> and example subclasses
+<code>vnl_double_3x3</code> and <code>vnl_double_3</code>).
+
+</li><li> Matrix decompositions.
+Classes <code>vnl_svd&lt;T&gt;</code>, <code>vnl_symmetric_eigensystem&lt;T&gt; </code>,
+<code>vnl_generalized_eigensystem</code>.
+
+</li><li> Polynomials.
+Class <code>vnl_real_polynomial</code> stores the coefficients
+of a real polynomial, and provides methods of evaluation of the polynomial
+at any <em>x</em>, while class <code>vnl_rpoly_roots</code> provides a root finder.
+
+<p>Class <code>vnl_real_npolynomial</code> also stores the coefficients of a
+real polynomial, but possibly in more than one unknown.
+</p>
+<p>Class <code>vnl_poly</code> is a templated class which allows to work with e.g.
+integer-coefficient (but just single-variable) polynomials.
+</p>
+</li><li> Optimization.
+Classes <code>vnl_levenberg_marquardt</code>, <code>vnl_amoeba</code>,
+<code>vnl_lbfgs</code>, <code>vnl_conjugate_gradient</code> allow optimization of
+user-supplied functions either with <em>or without</em> user-supplied
+derivatives.
+
+</li><li> Standardized homes for commonly used functions and constants.
+Class <code>vnl_math</code> defines constants (<code>pi</code>, <code>e</code>, <code>eps</code>...) and
+simple functions (<code>sqr</code>, <code>abs</code>, <code>rnd</code>...).
+To quote the header &quot;That's right, <code>M_PI</code> is nonstandard!&quot;
+Class <code>numeric_limits</code> is from the ISO standard document,
+and provides a way to access basic limits of a type.  E.g.
+<code>numeric_limits&lt;short&gt;::max()</code> returns the maximum value of a short.
+</li></ul>
+
+<p>Most routines are implemented as wrappers around the high-quality Fortran
+routines which have been developed by the numerical analysis community over
+the last forty years and placed in the public domain.  The central
+repository for these programs is the &quot;netlib&quot; server
+<a href="http://www.netlib.org/">http://www.netlib.org/</a>.  The National Institute
+of Standards and Technology (NIST) provides an excellent search interface
+to this repository in its Guide to Available Mathematical Software (GAMS)
+at <a href="http://gams.nist.gov">http://gams.nist.gov</a>, both as a decision tree and a text search.
+</p>
+<p>For reasons of modularity (see &quot;Layering&quot; in the Introduction Chapter of this
+book) the numerics library is split up into <code>vnl</code> and <code>vnl-algo</code>.
+Matrix and polynomial <em>representations</em> are in <code>vnl</code> while anything
+requiring the &quot;netlib&quot; software is in <code>vnl-algo</code>. The Fortran routines
+themselves are implemented outside <code>vxl</code>, viz. in one of the <code>v3p</code>
+(&quot;3rd party software&quot;) libraries.
+</p>
+<a name="SEC48"></a>
+<h4 class="subsubheading"> Compliance with the ANSI standard C++ library </h4>
+<p>The ANSI standard includes classes
+for 1-dimensional vectors (<code>valarray&lt;T&gt;</code>) and complex numbers (<code>
+complex&lt;T&gt;</code>).  There is no standard for matrices.  The current vnl classes
+are not implemented in terms of <code>valarray</code>, as there is a potential
+performance hit, but in the future they might be.
+</p>
+<hr size="6">
+<a name="SEC49"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC47" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC50" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.1 Example: Basic matrix and vector operations </h2>
+
+<p>This section provides a brief tutorial in using the main components of vnl.
+The main components which vnl supplies are the vector and matrix classes.
+The basic linear algebra operations on matrices and vectors are fully
+supported.  Some very brief examples follow, but for the most part the
+usage of the <code>vnl_vector</code> and <code>vnl_matrix</code> classes is (we hope)
+obvious and intuitive.
+</p>
+<p>Using these is easy, and is often modelled on Matlab.  For example, this
+declares a 3x4 matrix of <code>double</code>:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vnl/vnl_matrix.h&gt;
+int main()
+{
+  vnl_matrix&lt;double&gt; P(3,4);
+  return 0;
+}
+</pre></td></tr></table><p>Operators are overloaded as expected, so if we have another 3x4
+matrix <var>Q</var>, we can add the two like this
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vnl_matrix&lt;double&gt; R = P + Q;
+</pre></td></tr></table><p>The <code>vnl_vector</code> is equally straightforward.  Here we make a 4-element
+vector of doubles, premultiply it by <var>P</var>, and print the result:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vnl_vector&lt;double&gt; X(4);
+vcl_cerr &lt;&lt; P*X;
+</pre></td></tr></table><p>Several more examples are shown in the figure below. </p>
+<a name="IDX18"></a>
+<p>The vnl matrices are indexed from zero, as in C.  This is always a
+difficult decision for C++ matrix libraries, as mathematical matrices use
+indices starting from 1--the top left element of <var>A</var> is generally written
+<var>a_11</var>.  However, efficiently achieving this in C or C++ is a little
+bit tricky, and can confuse some tools like Purify.  In the end, it was
+decided that zero-based indexing was closer to being &quot;not weird&quot;.
+</p>
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <table class="cartouche" border="1"><tr><td>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">  vnl_matrix&lt;double&gt; A(3,3); // 3x3 matrix, elements not initialized
+  vnl_matrix&lt;double&gt; B(3,3, 1.0); // 3x3 matrix, filled with ones.
+  vnl_matrix&lt;double&gt; R(3,4); // Rectangular matrix
+  vcl_cerr &lt;&lt; &quot;A is &quot; &lt;&lt; A.<strong>rows</strong>() &lt;&lt; 'x' &lt;&lt; A.<strong>columns</strong>() &lt;&lt; vcl_endl
+           &lt;&lt; &quot;A has a total of &quot; &lt;&lt; A.<strong>size</strong>() &lt;&lt; &quot; elements&quot; &lt;&lt; vcl_endl;
+  A(0,0) = 2.0; // Set top-left component of A.
+  A(3,3) = 0.0; // *** Error, (3,3) is outside the range of A.
+  A.<strong>set_size</strong>(3,4); // Change size of A, invalidating elements.
+  R.<strong>update</strong>(A, 0, 1); // Copy A into R, starting at (0,1): last 3 cols
+  R.<strong>set_column</strong>(0, B.<strong>get_column</strong>(0)); // Copy 1st col of B into R
+  vcl_cerr &lt;&lt; R.<strong>extract</strong>(3,3, 0,1) // Print last 3 cols
+           &lt;&lt; R.<strong>get_n_columns</strong>(1, 3) const; // Ditto
+
+  A.<strong>fill</strong>(0.0); // Set all elements of A to 0.0
+  A.<strong>fill_diagonal</strong>(1.0); // Set diagonal elements to 1.0
+  A.<strong>set_identity</strong>(); // Set A to identity matrix
+  R = R.<strong>transpose</strong>(); // Make transposed copy, assign to R
+  R.<strong>inplace_transpose</strong>(); // Transpose R without copying.
+  A.<strong>flipud</strong>(); // Reverse order of rows of A
+  A.<strong>fliplr</strong>(); // Reverse columns
+  A.<strong>normalize_rows</strong>();  // Divide each row by its 2-norm
+  A.<strong>scale_row</strong>(0, 2.0); // Multiply row 0 by 2
+  vcl_memset(A.<strong>data_block</strong>(), 0); // Access A's raw storage
+  fill(A.<strong>begin</strong>(), A.<strong>end</strong>(), 0.0); // Fill using STL iterators
+
+  vnl_matrix&lt;double&gt; C = B + 0.1 * A; // Arithmetic
+  C <strong>+=</strong> 2.3;
+  vnl_matrix&lt;double&gt; Csqrt = C.<strong>apply</strong>(sqrt); // Square root all elements
+  <strong>element_product</strong>(Csqrt, Csqrt); // Should be equal to C, modulo roundoff
+
+  vcl_cerr &lt;&lt; A.<strong>fro_norm</strong>() // Print sum of squares of elements
+           &lt;&lt; A.<strong>min_value</strong>(); // Print minimum element
+
+  if (A.<strong>is_zero</strong>(1e-8))
+    vcl_cerr &lt;&lt; &quot;Each element of A is within 1e-8 of zero\n&quot;;
+  if (A.<strong>is_identity</strong>(1e-8)) vcl_cerr &lt;&lt; &quot;(A - I) is_zero to 1e-8\n&quot;;
+
+  A.<strong>read_ascii</strong>(vcl_cin); // Read A from standard input
+
+</pre></td></tr></table></td></tr></table>
+    <caption align="bottom">
+  <div align=left><strong>Figure 4.1:</strong>
+  <p>Matrix basics.  A sample of the defined matrix operations.
+<a name="fig_003amatrixbasics"></a>
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+
+<hr size="6">
+<a name="SEC50"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC49" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC51" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC49" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.1.1 Efficiency: Fixed-size matrices and vectors. </h3>
+
+<p>A C programmer looking at the above examples will immediately grumble about
+the inefficient memory allocation that is being performed.  Let's look into
+the construction of <var>P</var> in more detail.  One can guess that the line
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vnl_matrix&lt;double&gt; P(3,4);
+</pre></td></tr></table><p>might result in a sequence of actions something like the following:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">struct vnl_matrix&lt;double&gt; P;
+P.rows = 3;
+P.columns = 4;
+P.data = new double[P.rows * P.columns];
+</pre></td></tr></table><p>The expensive part of this operation is the call to <var>new</var>, which might
+involve many instructions, and even a bit of operating system activity.
+(Typically a call to <var>new</var> or <var>malloc</var> will cost about as much as a
+2x2 matrix multiply).
+</p>
+<p>If the matrices are small, as in these examples, this cost is
+significant--if they're bigger than about 20x20 it is not so important.
+Always remember, when thinking about efficiency, to consider what else is
+going on in the program.  For example, if a matrix is being read from disk,
+the time taken to read the matrix will be many times greater than a few
+copies.  If you are about to do a matrix multiply (an O(n^3) operation
+after all), an O(n^2) copy or an O(1) <var>new</var> are not going to be hugely
+significant.
+</p>
+<p>However, for small matrices we should try to avoid calls to <var>new</var>, and
+vnl provides some fixed-size matrices and vectors which do so.  The templates
+which define these are called <code>vnl_vector_fixed</code> and
+<code>vnl_matrix_fixed</code>, and the template instances include the size of the
+vector or matrix in their parameters.  A vector of double with fixed length
+4 is defined using
+</p><table><tr><td>&nbsp;</td><td><pre class="example">    vnl_vector_fixed&lt;double, 4&gt;
+</pre></td></tr></table><p>with analogous syntax for matrices.  Thus a more efficient version of the
+above sequence would be
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vnl/vnl_matrix_fixed.h&gt;
+#include &lt;vnl/vnl_vector_fixed.h&gt;
+int main()
+{
+  vnl_matrix_fixed&lt;double,3,4&gt; P;
+  vnl_vector_fixed&lt;double,4&gt; X;
+  vcl_cerr &lt;&lt; P*X;
+  return 0;
+}
+</pre></td></tr></table><p>It's a bit clumsy typing these long names, so it is common to use
+<code>typedef</code> to make shorter ones.  Indeed, a few are supplied with vnl,
+for example <code>vnl_double_3x4</code> (defined, of course, in a header called
+<code>vnl_double_3x4.h</code>).  So a more compact rendition of our
+example is
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vnl/vnl_double_3x4.h&gt;
+#include &lt;vnl/vnl_double_4.h&gt;
+int main()
+{
+  vnl_double_3x4 P;
+  vnl_double_4 X;
+  vcl_cerr &lt;&lt; P*X;
+  return 0;
+}
+</pre></td></tr></table><p>Note again that in this example there will be no noticeable speedup,
+because 99% of the runtime will be spent on the last line, printing the
+vector.
+</p>
+<p>Because some operations such as multiplication have been specially coded
+for the fixed-size classes, they are also made more efficient by knowing
+the sizes in advance.  For example, this snippet
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vnl_double_3x3 R;              // Declare a 3x3 matrix
+vnl_double_3 x(1.0,2.0,3.0);   // Declare a 3-vector using
+                               // local storage
+vnl_double_3 rx = R * x;       // Multiply R by x and place
+                               // the result in rx
+</pre></td></tr></table><p>is expanded by many compilers into an open-coded sequence of 9 multiplies
+and 6 adds.
+</p>
+<hr size="6">
+<a name="SEC51"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC50" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC49" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.1.2 Caveats when using the fixed-size classes </h3>
+
+<p>The fixed-size classes are optimally space efficient;
+<code>sizeof(vnl_vector_fixed&lt;double,4&gt;)</code> and <code>sizeof(double[4])</code>
+are the same.  To achieve this, it is necessary to decouple
+<code>vnl_vector</code> from <code>vnl_vector_fixed</code>, in the sense that
+neither inherits from the other.  This means that you cannot pass a
+<code>vnl_vector_fixed</code> to a function that expects a <code>vnl_vector</code>
+without some conversion.  Luckily, there is a cheap conversion operator
+from <code>vnl_vector_fixed</code> to <code>vnl_vector_ref</code>, which is a
+derived class of <code>vnl_vector</code>.  This conversion operator will be
+applied behind the scenes in most cases, so you often don't have to
+worry about it.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">double norm( vnl_vector&lt;double&gt; const&amp; v );
+...
+vnl_vector_fixed&lt;double,6&gt; fixed_v;
+double n = norm(fixed_v); // this will create a temporary
+                          // vnl_vector_ref&lt;double&gt; const
+                          // to pass to norm
+</pre></td></tr></table><p>The cost of the conversion is on the order of 1 pointer copy (data pointer) and 1
+integer copy (length) for a vector and 1 pointer and 2 integers for a
+matrix.
+</p>
+<p>Unfortunately, this is not the end of the story.  According to the 1998
+ISO C++ standard, user defined conversion operators will not be
+applied when determining candidate template functions.  Therefore, the
+following snippet fails to compile.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">template&lt;typename T&gt;
+T norm( vnl_vector&lt;T&gt; const&amp; v );
+...
+vnl_vector_fixed&lt;double,6&gt; fixed_v;
+// no match for
+//    norm(vnl_vector_fixed&lt;double,6&gt;)
+// User defined conversion operators are not
+// tried since norm is a template.
+double n = norm(fixed_v);
+</pre></td></tr></table><p>For these cases, and other cases where the implicit conversion
+operator cannot be applied, you have to do the conversion explicitly
+using <code>as_ref()</code>.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">template&lt;typename T&gt;
+T norm( vnl_vector&lt;T&gt; const&amp; v );
+...
+vnl_vector_fixed&lt;double,6&gt; fixed_v;
+double n = norm(fixed_v.as_ref()); // calls norm with
+                                   // a vnl_vector_ref&lt;double&gt; const
+</pre></td></tr></table>
+<p>When writing general purpose templated functions that are equally useful for
+both the dynamically allocated <code>vnl_vector</code> and statically
+allocated <code>vnl_vector_fixed</code>, it is often useful to provide a
+simple forwarding wrapper so that the user is spared the inconvenience
+of doing the explicit conversion.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">template&lt;typename T&gt;
+T norm( vnl_vector&lt;T&gt; const&amp; v );  // real function
+template&lt;typename T, unsigned n&gt;
+inline
+T norm( vnl_vector_fixed&lt;T,n&gt; const&amp; v ) { // thin wrapper
+  return norm( v.as_ref() );
+}
+...
+vnl_vector_fixed&lt;double,6&gt; fixed_v;
+double n = norm(fixed_v); // this calls the second norm
+</pre></td></tr></table>
+<p>The final wrinkle with mixing <code>vnl_vector</code> and
+<code>vnl_vector_fixed</code> is that the conversion operators, both the
+implicit and explicit, create temporary <code>vnl_vector_ref</code> objects,
+which, according to the standard, cannot bind to non-const
+references.  Therefore, you cannot pass these to a mutator function
+that modifies the values in your vector.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">void mutator( vnl_vector&lt;double&gt;&amp; v );
+...
+vnl_vector_fixed&lt;double,6&gt; fixed_v;
+mutator(fixed_v); // the temporary object created by the
+                  // conversion is const =&gt; cannot be
+                  // passed to mutator.
+</pre></td></tr></table><p>The only solution to this is to explicitly force the temporary object
+to &quot;give away&quot; its const-ness, using the <code>non_const()</code>
+method in <code>vnl_vector_ref</code>.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">void mutator( vnl_vector&lt;double&gt;&amp; v );
+...
+vnl_vector_fixed&lt;double,6&gt; fixed_v;
+mutator(fixed_v.as_ref().non_const());
+</pre></td></tr></table>
+<p>The discussion above applies equally well to <code>vnl_matrix</code> and
+<code>vnl_matrix_fixed</code>.
+</p>
+<hr size="6">
+<a name="SEC52"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC51" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC53" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.2 Example: Matrix decomposition </h2>
+
+<p>The most frequently asked question about <code>vnl_matrix</code> is &quot;where is
+the <code>inverse</code> method&quot;, and the answer is that the inverse is not
+defined as a method, because there are too many ways of forming it, each
+with different tradeoffs.  If you really don't care to hear about these
+things, you can use the <code>vnl_matrix_inverse</code> class to compute an
+inverse object:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vnl/algo/vnl_matrix_inverse.h&gt;
+int main()
+{
+  vcl_cerr &lt;&lt; vnl_matrix_inverse&lt;double&gt;(A) * B;
+  return 0;
+}
+</pre></td></tr></table>
+<p>If you want more control over how the inverse is taken, then you might want
+to look at <code>vnl_inverse</code> or at one of the decomposition classes.
+</p>
+<p>TODO - order in general-specific, give flop counts, show decomps.
+</p>
+
+<p>The following fragment demonstrates use of the <code>vnl_svd&lt;double&gt;</code> class
+to find the approximation of a 3x3 matrix <code>F</code> by the nearest matrix of
+rank 2
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vnl_double_3x3 rank2_approximate(vnl_double_3x3 const&amp; F)
+{
+  // Compute singular value decomposition of F
+  vnl_svd&lt;double&gt; svd (F);
+  // Set smallest singular value to 0
+  svd.W(2,2) = 0;
+  // Recompose vnl_svd&lt;double&gt; into UWV^T
+  return vnl_double_3x3(svd.recompose());
+}
+</pre></td></tr></table>
+<p>A more extensive example of the use of linear algebra is provided in
+Figure 2, which contains a program to fit a hyperplane to
+points read from standard input.
+</p>
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <table class="cartouche" border="1"><tr><td>
+<table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vnl/vnl_matrix.h&gt;
+#include &lt;vnl/vnl_vector.h&gt;
+#include &lt;vnl/algo/vnl_svd.h&gt;
+#include &lt;vnl/algo/vnl_symmetric_eigensystem.h&gt;
+#include &lt;vcl_iostream.h&gt;
+
+int main()
+{
+  // Read points from stdin
+  vnl_matrix&lt;double&gt; pts;
+  vcl_cin &gt;&gt; pts;
+
+  // Build design matrix D
+  int npts = pts.rows();
+  int dim = pts.columns();
+  vnl_matrix&lt;double&gt; D(npts, dim+1);
+  for (int i = 0; i &lt; npts; ++i)
+  {
+    for (int j = 0; j &lt; dim; ++j)
+      D(i,j) = pts(i,j);
+    D(i,dim) = 1;
+  }
+
+  // 1. Compute using vnl_svd&lt;double&gt;
+  {
+    vnl_svd&lt;double&gt; svd(D);
+    vnl_vector&lt;double&gt; a = svd.nullvector();
+    vcl_cout &lt;&lt; &quot;vnl_svd&lt;double&gt; residual = &quot; &lt;&lt; (D * a).magnitude() &lt;&lt; vcl_endl;
+  }
+
+  // 2. Compute using eigensystem of D'*D
+  {
+    vnl_symmetric_eigensystem&lt;double&gt;  eig(D.transpose() * D);
+    vnl_vector&lt;double&gt; a = eig.get_eigenvector(0);
+    vcl_cout &lt;&lt; &quot;Eig residual = &quot; &lt;&lt; (D * a).magnitude() &lt;&lt; vcl_endl;
+  }
+  return 0;
+}
+</pre></td></tr></table></td></tr></table>
+    <caption align="bottom">
+  <div align=left><strong>Figure 4.2:</strong>
+  <p>Example of linear algebra operations.  Points are read from stdin
+into matrix <code>pts</code>, and a hyperplane fitted using two different methods.
+<a name="fig_003aplanefit"></a>
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+<hr size="6">
+<a name="SEC53"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC52" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC54" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC52" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.2.1 Sparse linear solver </h3>
+
+<p>It is often the case that large linear systems have a sparse
+coefficient matrix, where many of the elements are zero. An algorithm
+for solving such systems is <code>vnl_sparse_lu</code> based on the c library, Sparse
+1.3a, by Kenneth S. Kundert and Alberto Sangiovanni-Vincentelli.
+The algorithm solves the linear problem
+</p><table><tr><td>&nbsp;</td><td><pre class="example">Ax = b
+</pre></td></tr></table><p>by chosing a set of pivots for the matrix, <code>A</code>, and factoring it
+into lower and upper triangular form, i.e., LU decomposition. The
+solution, <code>x</code>, for a given <code>b</code>, is found by forward and back
+substitution.  The class <code>vnl_sparse_lu</code> maintains the factored
+matrix so that solutions for any number of <code>b</code> (right hand side)
+vectors can be found without repeating the pivoting and factorization
+process. The factored matrix is also used to compute <code>|A|</code> as
+well as the solution of <code>A^t x = b</code>. An example of solving a linear
+system using <code>vnl_sparse_lu</code>:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vnl/vnl_vector.h&gt;
+#include &lt;vnl/vnl_sparse_matrix.h&gt;
+#include &lt;vnl/algo/vnl_sparse_lu.h&gt;
+vnl_sparse_matrix&lt;double&gt; S(6,6);
+S(0,0)=0.49; S(0,1)=-0.5;
+S(1,0)=-0.5; S(1,1)=0.99; S(1,2)=-0.5;
+S(2,1)=-0.5; S(2,2)= 0.99;
+S(3,3)=0.99; S(3,4)=-0.5;
+S(4,3)=-0.5; S(4,4)=0.99; S(4,5)=-0.5;
+S(5,4)=-0.5; S(5,5)=0.99;
+vnl_vector&lt;double&gt; b(6,0), x(6);
+b[2]=0.5; b[3]=0.5
+vnl_sparse_lu linear_solver(S, vnl_sparse_lu::estimate_condition);
+linear_solver.solve(b,&amp;x);
+double det = linear_solver.determinant();
+double rcond = linear_solver.rcond();
+double upbnd = linear_solver.max_error_bound();
+//
+//Results
+//
+// x = { 1.1338, 1.11112, 1.06622, 1.06622, 1.11112, 1.1338 }
+// det = 0.0121548
+// rcond = 0.0375578 (reciprocal of the condition number)
+// upbnd =  5.92331e-015 (upper bound on solution error)
+//
+</pre></td></tr></table><p>Note that the algorithm does not require that <code>A</code> is a symmetric
+matrix.  The operation code, <code>estimate_condition</code>, specifies that
+extra computation is carried out so that the condition number of the matrix and
+expected error can be determined. If these quantities are not needed
+then use the operation codes <code>quiet</code> or <code>verbose</code>.
+</p>
+<hr size="6">
+<a name="SEC54"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC53" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC55" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.3 Polynomials </h2>
+
+<p>The <code>vnl_rpoly_roots</code> class in <code>vnl/algo</code> is used to compute
+the roots (or &quot;zeros&quot;) of a real polynomial.  For example, given the
+cubic equation
+</p><table><tr><td>&nbsp;</td><td><pre class="example">     4 x^3 + 3 x^2 - 7 x + 5 = 0
+</pre></td></tr></table><p>we can compute the values of <code>x</code> using <code>vnl_rpoly_roots</code>.
+The first step is to collect the coefficients into a vector, listing
+from the highest power down.  In the above example, we should make the
+vector
+</p><table><tr><td>&nbsp;</td><td><pre class="example">     [4, 3, -7, 5]
+</pre></td></tr></table><p>In C++, this could be written
+</p><table><tr><td>&nbsp;</td><td><pre class="example">     vnl_double_4 poly;
+     poly[0] = 4;
+     poly[1] = 3;
+     poly[2] = -7;
+     poly[3] = 5;
+</pre></td></tr></table><p>Having prepared the polynomial, we compute the roots:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">     vnl_rpoly_roots roots(poly);
+</pre></td></tr></table><p>Now, <code>roots</code> contains the roots, which can be made use of, or simply
+admired.  To facilitate the latter, we shall print them to the console:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">     for (int k = 0; k &lt; 3; ++k) // Cubic polynomial ==&gt; 3 roots
+       vcl_cerr &lt;&lt; roots[k] &lt;&lt; vcl_endl;
+</pre></td></tr></table>
+<p>To get just the real or imaginary parts of the (generally complex) roots,
+convenience methods <code>real(int)</code> and <code>imag(int)</code> are provided.  So
+to print only the real roots, one might use
+</p><table><tr><td>&nbsp;</td><td><pre class="example">     for (int k = 0; k &lt; 3; ++k)
+       if (roots.imag(k) &lt; 1e-8)
+         vcl_cerr &lt;&lt; roots.real(k) &lt;&lt; vcl_endl;
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC55"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC54" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC56" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC54" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.3.1 Implementation </h3>
+
+<p>The implementation is a wrapper for the fortran code in algorithm 493 from
+the ACM Transactions on Mathematical Software.  This is the Jenkins-Traub
+algorithm, described by Numerical Recipes under &quot;Other sure-fire techniques&quot;
+as &quot;practically a standard in black-box polynomial rootfinders&quot;.
+(See M.A. Jenkins, ACM TOMS 1 (1975) pp. 178-189.).
+</p>
+<p>The algorithm fails if poly[0] is zero, so it's often good to try to write
+your problem so that the leading coefficient (i.e. poly[0]) is equal to 1.
+</p>
+
+<hr size="6">
+<a name="SEC56"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC55" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC57" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.4 Nonlinear Optimization </h2>
+
+<p>It is not uncommon in computer vision research to meet problems for which
+there is no known closed-form solution, and a common class of such problems
+are of the form &quot;find <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_1.png"
+ ALT="$x$"></SPAN> , <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="27" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_2.png"
+ ALT="$y$"></SPAN>  and <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_3.png"
+ ALT="$z$"></SPAN> , such that the
+function <SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_4.png"
+ ALT="$f(x,y,z)$"></SPAN>  takes its minimum value&quot;.  For example, fitting a
+line to a set of 2D points {(x_i,y_i) | i=1..n}.  The problem is then
+to find a,b,c to minimize the sum of distances of each point to the line
+(<!-- MATH
+ $a x + b y + c = 0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="104" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_5.png"
+ ALT="$a x + b y + c = 0$"></SPAN> )
+</p><table><tr><td>&nbsp;</td><td><pre class="example">                  n   (a * x[i] + b * y[i] + c)^2
+      f(a,b,c) = sum  ---------------------------
+                 i=1         (a^2 + b^2)
+</pre></td></tr></table><p>In the case of line fitting, a closed-form solution can be found, but in
+many other problems, no such solution is known, and an iterative method
+must be employed.
+</p>
+<p>In those cases, one needs a good, general purpose nonlinear optimization
+routine.  Of course, such a panacea does not exist, so <code>vnl</code> provides
+several from which to choose.  The factor that decides which is best is
+most frequently the amount of knowledge that one has about the form of the
+function.  The more you know, the more quickly you can expect the
+optimization to proceed.  For example, if you can compute the function's
+derivatives, you would expect to achieve better performance.
+</p>
+<hr size="6">
+<a name="SEC57"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC56" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC58" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC56" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.4.1 Choosing a minimizer </h3>
+
+<p>The routines provided in vnl may be arranged roughly in decreasing order of
+generality--and correspondingly, increasing order of speed--as follows:
+</p><ol>
+<li> <code>vnl_amoeba</code>: Nelder-Meade downhill simplex.  The method of
+choice if you know absolutely nothing about your function, but fear the
+worst.  It you think the function might be noisy (i.e. the error surface
+has many small pockets), or you don't trust it to have reasonable
+derivatives, downhill simplex is a good choice.  If you want the code to
+run fast, it's not.
+
+</li><li> <code>vnl_powell</code>: Powell's direction-set method.  Powell's method,
+like simplex, doesn't require that you supply the derivatives of <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_6.png"
+ ALT="$f$"></SPAN> 
+with respect to <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_7.png"
+ ALT="$a$"></SPAN> , <SPAN CLASS="MATH"><IMG
+ WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_8.png"
+ ALT="$b$"></SPAN> , and <SPAN CLASS="MATH"><IMG
+ WIDTH="10" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_9.png"
+ ALT="$c$"></SPAN> , but it does assume they
+are moderately well behaved.
+
+</li><li> <code>vnl_conjugate_gradient</code>: Fletcher-Reeves form of the conjugate
+gradient algorithm.
+
+</li><li> <code>vnl_lbfgs</code>: Limited memory Broyden Fletcher Goldfarb Shannon
+minimisation.  Requires 1st derivatives.  Considered to be the best
+general optimisation algorithm for functions which are well behaved
+(i.e. locally smooth without too many local minima.)
+
+</li><li> <code>vnl_lbfgsb</code>: Limited memory BFGS
+bounded minimisation.  Requires 1st derivatives.  Allows simple box
+inequality constraints.
+
+</li><li> <code>vnl_levenberg_marquardt</code>: The Levenberg-Marquardt algorithm for
+least-squares problems.  This is usually the best method for any function
+which can be expressed as
+<code>f(x) = (f_1 (x))^2 + (f_2(x))^2 + (f_3(x))^2 + \dots</code>
+
+</li></ol>
+
+<p>As an example of the use of the optimization routines, we'll use a common
+test case, the &quot;notorious&quot; Rosenbrock function:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">     f(x, y) = (10*(y - x^2))^2 + (1-x)^2
+</pre></td></tr></table><p>The graph of <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_6.png"
+ ALT="$f$"></SPAN>  is plotted in Figure 2.
+</p>
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <p><img src="./rosenbrock.png" alt="rosenbrock">
+    <caption align="bottom">
+  <div align=left><strong>Figure 2:</strong>
+  The Rosenbrock &quot;banana&quot; function, used as an optimization test
+case.  Optimization starts on one side of the valley, and must find the
+minimum around the corner.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+<hr size="6">
+<a name="SEC58"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC57" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC59" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC56" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.4.2 Function objects, derived from <code>vnl_cost_function</code> </h3>
+
+<p>Running an optimization is a two step process.  The first is to describe
+the function to the program, and the second is to pass that description to
+one of the minimizers.  Functions are described by <em>function objects</em>,
+or &quot;functors&quot;, which are classes which provide a method <code>f(...)</code> which
+takes a vector of parameters as input, and returns the error.  Such
+functors are derived from <code>vnl_cost_function</code>:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">     struct my_rosenbrock_functor : public vnl_cost_function { ... };
+</pre></td></tr></table><p>The function is a method in the derived class.  Here's the continuation of
+the declaration of <code>my_rosenbrock_functor</code>.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">       double f(vnl_vector&lt;double&gt; const&amp; params)
+       {
+         double x = params[0];
+         double y = params[1];
+         return vnl_math_sqr(10*(y-x*x)) + vnl_math_sqr(1-x);
+       }
+</pre></td></tr></table><p>Because a <code>vnl_cost_function</code> can deal with cost functions of any
+dimension, not just the 2D example here,
+<code>my_rosenbrock_functor</code> must tell the base class the size of the
+space it's working in.  This is done in the constructor as follows:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">       my_rosenbrock_functor():
+         vnl_cost_function(2) {}
+</pre></td></tr></table><p>And we can now close the declaration of <code>my_rosenbrock_functor</code>:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">     }
+</pre></td></tr></table>
+
+
+<hr size="6">
+<a name="SEC59"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC58" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC60" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC56" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.4.3 Running the minimization </h3>
+
+<p>In order to perform the minimization, a <code>vnl_amoeba</code> compute
+object is constructed, passing the <code>vnl_cost_function</code>.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">my_rosenbrock_functor f;
+vnl_amoeba minimizer(f);
+</pre></td></tr></table><p>Having provided an initial estimate of the solution in vector <code>x</code>, the
+minimization is performed:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">minimizer.minimize(x);
+</pre></td></tr></table><p>after which the vector <code>x</code> contains the minimizing parameters.
+</p>
+<hr size="6">
+<a name="SEC60"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC59" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC61" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC56" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.4.4 Least-squares problems: The Levenberg-Marquardt algorithm. </h3>
+
+<p>The Levenberg-Marquardt algorithm provides only for nonlinear least
+squares, rather than general function minimization.  This means that the
+function to be minimized must be the norm of a multivariate function.
+However, this often the case in vision problems, and allows us to use the
+powerful Levenberg-Marquardt algorithm.  The Rosenbrock function can also
+be written as a 2D-2D least squares problem as follows:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">f(x, y) = [ 10(y - x^2) ]
+          [    1-x      ]
+</pre></td></tr></table><p>In this case, we need to make a class derived from
+<code>vnl_least_squares_function</code>.  TODO
+</p>
+
+
+
+<hr size="6">
+<a name="SEC61"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC60" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC62" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.5 Design issues (Developer Topic) </h2>
+
+<p>This section documents some design decisions with which people might
+disagree.  Please let me know how you feel on these issues.  It's also a
+malleable to-do list.  The most important consideration has been to
+provide simple lightweight interfaces that nevertheless allow for maximum
+efficiency and flexibility.
+</p>
+<hr size="6">
+<a name="SEC62"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC61" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC63" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC61" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.5.1 Computation in constructors </h3>
+
+<p><a name="sec_003acomputors"></a>
+As noted above, a common model in this package is that the compute objects
+perform computation within the constructors.  While this is slightly
+distasteful from a traditional C++ viewpoint, it offers a number of
+advantages in both efficiency and ease of use.
+</p>
+<p>The philosophical argument, say in the case of SVD, is that SVD is a noun.
+The natural description is &quot;The SVD of a matrix M&quot; which is expressed in
+C++ as <code>vnl_svd&lt;double&gt; svd(M) </code>.
+</p>
+<p>Storage for the results of a computation is provided by the compute object
+which is convenient, allowing client code to access only those results in
+which it is interested.  Local storage is also more efficient, as objects
+are constructed at the correct size, and initialized immediately.  In
+contrast, passing empty objects to a function will generally involve a
+resize operation, while returning a structure will incur a speed penalty
+due to the necessary copy operations.
+</p>
+<p>Namespace clutter is avoided in the <code>vnl_matrix</code> class.  While svd()
+is a perfectly reasonable method for a matrix, there are many other
+decompositions that might be of interest, and adding them all would make
+for a very large matrix class, even though many methods might not be of
+general interest.
+</p>
+<p>The model extends readily to <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_10.png"
+ ALT="$n$"></SPAN> -ary operations such as generalized
+eigensystems, which combine two objects to produce others.  Such operations
+cannot be methods on just one matrix.
+</p>
+<hr size="6">
+<a name="SEC63"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC62" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC64" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC61" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.5.2 Fixed-size classes </h3>
+
+<p>The classes which provide for fast fixed-size matrices and vectors are
+essential in a system which wants to make claims for efficiency.  In
+addition, a great many uses of these objects <em>do</em> know the size in
+advance.  In this case code using say <code>vnl_double_3</code> is more efficient (as
+well as more self-documenting) than the equivalent referring to a
+<code>vnl_vector</code> of unknown size.
+</p>
+<hr size="6">
+<a name="SEC64"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC63" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC65" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC61" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.5.3 Transposing for Fortran </h3>
+
+<p>In calling Fortran code, the first difficulty that becomes apparent is that
+Fortran arrays are stored column-wise, while traditional `C' arrays are
+stored row-wise - a trend that is followed by the <code>vnl_matrix</code> class.
+One solution is simply to store C++ arrays column-wise, and this was an
+early plan for the IUE.
+</p>
+<p>I have not done anything to alleviate this for two reasons - most routines
+we call are expensive enough (i.e. <SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_11.png"
+ ALT="$O(n^3)$"></SPAN> ) that the <SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_12.png"
+ ALT="$O(n^2)$"></SPAN>  copy
+operation is only a small performance hit.  Secondly, many decompositions
+satisfy a transpose-equivalence relationship.  For example suppose we wish
+to use a Fortran matrix multiply which has been hand-optimized for some
+particular machine.  Such a routine may be declared
+</p><table><tr><td>&nbsp;</td><td><pre class="example">mmul(A, B, C) // Computes C = A B, fortran storage
+</pre></td></tr></table><p>To use this with row-stored arrays, we recall the simple identity
+</p><table><tr><td>&nbsp;</td><td><pre class="example">C = (C')' = (B' A')' = AB
+</pre></td></tr></table><p>and therefore call <code>mmul(B, A, C)</code>, reversing the order of parameters
+<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_13.png"
+ ALT="$A$"></SPAN>  and <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_14.png"
+ ALT="$B$"></SPAN> .  The fortran code will lay down the result of
+<SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_15.png"
+ ALT="$B' A'$"></SPAN>  into the columns of <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_16.png"
+ ALT="$C$"></SPAN> , thereby computing <SPAN CLASS="MATH"><IMG
+ WIDTH="71" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_17.png"
+ ALT="$C' =
+B' A'$"></SPAN>  from the point of view of the caller.
+</p>
+<p>This however, doesn't apply to the vnl_svd&lt;double&gt;, as algorithms generally require only the
+&quot;economy-size&quot; version where size(U) = size(M) in <SPAN CLASS="MATH"><IMG
+ WIDTH="77" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_18.png"
+ ALT="$U S V' = M$"></SPAN> .  This
+is <SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_19.png"
+ ALT="$O(mn^2)$"></SPAN>  flops rather than <SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_20.png"
+ ALT="$O(m^2n)$"></SPAN>  for the full size one.  Using the
+transpose-equivalence would mean a doubling of the computation time, as the
+&quot;economy-size&quot; decomposition is only implemented for <SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="27" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_21.png"
+ ALT="$m &gt; n$"></SPAN> .  If someone
+does need the full size decomposition, a flag could be added or a new <code>vnl_svd</code>
+class written.
+</p>
+
+
+
+<hr size="6">
+<a name="SEC65"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC64" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC47" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.6 Future work </h2>
+
+<p>Many of the existing methods are unimplemented, or could benefit from
+optimization.  Users can contribute code to address these deficiencies
+based on the existing examples, and using the conversion hints in
+Appendix~A.  In addition there are many algorithms that ought to be
+included, listed roughly in order of priority:
+</p><ul>
+<li>
+Additional matrix decompositions in the same vein, including an updateable
+QR, a basic LU, etc.
+
+</li><li> Choice of back-end functions--for optimization one might prefer Powell,
+or even simulated annealing.  For matrix decompositions, particular users
+might prefer to interface to NAG or IMSL routines.  These choices must be
+allowed to be made easily, thereby encouraging the comparison of algorithms
+and of alternative implementations.
+
+</li><li> Many classes are defined as double-only rather than templated.
+I will use default template arguments when the compilers support them.
+</li></ul>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC47" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_7.html#SEC66" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

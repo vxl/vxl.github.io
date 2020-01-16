@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvcsl__degree.html" title="A unit associated to the angle dimension." alt="" coords="5,231,99,255"/>
+<area shape="rect" href="$classvcsl__radian.html" title="Standard unit associated to the angle dimension." alt="" coords="123,231,213,255"/>
+<area shape="rect" href="$classvcsl__unit.html" title="Abstract unit associated to a dimension." alt="" coords="72,81,147,105"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="57,7,161,31"/>
+</map>

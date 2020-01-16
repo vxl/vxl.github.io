@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbgui3d__project2d__tableau.html" title="Tableau that projects a Coin3D scene graph into an image plane." alt="" coords="5,231,179,255"/>
+<area shape="rect" href="$classbgui3d__viewer__tableau.html" title="Abstract base tableau for 3D viewers." alt="" coords="203,231,360,255"/>
+<area shape="rect" href="core_vgui.tag$classvgui__tableau.html" title="vgui_tableau" alt="" coords="137,81,236,105"/>
+<area shape="rect" href="core_vgui.tag$classvgui__parent__child__link__data.html" title="vgui_parent_child_link_data" alt="" coords="93,7,280,31"/>
+<area shape="rect" href="$classbgui3d__fullviewer__tableau.html" title="Abstract base tableau for 3D viewers with interaction." alt="" coords="193,305,369,329"/>
+<area shape="rect" href="$classbgui3d__examiner__tableau.html" title="Examiner viewer tableau for 3D scenes." alt="" coords="195,380,368,404"/>
+<area shape="rect" href="$classbgui3d__examiner__slider__tableau.html" title="bgui3d_examiner_slider_tableau" alt="" coords="175,455,388,479"/>
+</map>

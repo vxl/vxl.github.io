@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__matcher__k__nearest__adv.html" title="For each &quot;from&quot; feature, match the k nearest &quot;to&quot; features." alt="" coords="665,5,857,29"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest__boundary.html" title="For each &quot;from&quot; feature, match the boundary points with the k nearest &quot;to&quot; features." alt="" coords="648,53,875,77"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest__random.html" title="For each &quot;from&quot; feature, match the k nearest &quot;to&quot; features." alt="" coords="653,101,869,125"/>
+<area shape="rect" href="$classrgrl__matcher.html" title="Interface for the routines that compute matches." alt="" coords="292,53,388,77"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="159,53,241,77"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,53,109,77"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest__pick__one.html" title="For each &quot;from&quot; feature, match the k nearest &quot;to&quot; features." alt="" coords="923,5,1147,29"/>
+</map>

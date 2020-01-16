@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbundler__sfm__select__next__images.html" title="Takes in the current reconstruction and the image set, and selects the next images to be added to the..." alt="" coords="7,5,225,29"/>
+<area shape="rect" href="$classbundler__sfm__impl__select__next__images.html" title="The default implementation of the select next image phase." alt="" coords="276,5,527,29"/>
+</map>

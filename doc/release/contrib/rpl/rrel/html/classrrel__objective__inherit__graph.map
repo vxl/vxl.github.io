@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrrel__kernel__density__obj.html" title="Kernel Density objective function." alt="" coords="156,5,313,29"/>
+<area shape="rect" href="$classrrel__lms__obj.html" title="The Least&#45;Median&#45;of&#45;Squares (LMS) objective function." alt="" coords="188,53,281,77"/>
+<area shape="rect" href="$classrrel__lts__obj.html" title="The Least&#45;Trimmed&#45;Squares (LTS) objective function." alt="" coords="192,101,277,125"/>
+<area shape="rect" href="$classrrel__mlesac__obj.html" title="MLESAC objective function." alt="" coords="177,149,292,173"/>
+<area shape="rect" href="$classrrel__muset__obj.html" title="The MUSET (MUSE trimmed) objective function, which should be used instead of LMS." alt="" coords="180,197,289,221"/>
+<area shape="rect" href="$classrrel__ransac__obj.html" title="The objective function for RANSAC." alt="" coords="179,245,291,269"/>
+<area shape="rect" href="$classrrel__wls__obj.html" title="Abstract base class for objective functions that can compute weights." alt="" coords="188,293,281,317"/>
+<area shape="rect" href="$classrrel__m__est__obj.html" title="Generic implementation for standard M&#45;estimators." alt="" coords="364,293,473,317"/>
+<area shape="rect" href="$classrrel__cauchy__obj.html" title="Cauchy robust loss function." alt="" coords="536,245,651,269"/>
+<area shape="rect" href="$classrrel__trunc__quad__obj.html" title="Truncated quadratic robust loss function." alt="" coords="524,293,663,317"/>
+<area shape="rect" href="$classrrel__tukey__obj.html" title="Beaton&#45;Tukey biweight." alt="" coords="541,341,645,365"/>
+</map>

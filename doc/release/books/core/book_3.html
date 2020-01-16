@@ -1,0 +1,565 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 3. vcl: C++ compatibility</title>
+
+<meta name="description" content="VXL: 3. vcl: C++ compatibility">
+<meta name="keywords" content="VXL: 3. vcl: C++ compatibility">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="vcl"></a>
+<a name="SEC26"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_2.html#SEC25" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 3. vcl: C++ compatibility </h1>
+
+
+  <blockquote><p>  <strong>Chapter summary</strong>:
+When you want a <code>std::string</code>, use <code>vcl_string</code>.
+  </p></blockquote>
+
+<p>The job of vcl is to fix your compiler.  C++ is not just a language; the
+standard also includes an extensive library of classes and functions, which
+make ISO C++ a powerful and useful tool for building computer programs.
+Unfortunately, few C++ compilers available in 2001 have a bug-free
+implementation of the standard, so we have to supply our own bug fixes.
+</p>
+<p>To give an example of the type of problems that vcl fixes, here are a few
+interpretations from the standard which have been observed in some well
+known vendors' libraries.  Many are entirely within the letter of the law,
+but remain prone to introduce confusion.
+</p>
+<p>On one compiler, <code>&lt;iostream&gt;</code> and <code>&lt;iostream.h&gt;</code> refer to
+entirely different stream libraries, which may not be linked together.
+Therefore every file in the program must use the same header.  For us, the
+<code>&lt;iostream&gt;</code> version is appropriate, but of course, not all of the
+unix compilers support its use.  The solution is for every v<em>x</em>l program
+to include <code>&lt;vcl_iostream.h&gt;</code>.  In this way, we can maintain
+consistency between the many compilers, and if we ever do need to use
+another stream library, we can make the switch in one place.
+Thus rule one is
+</p><blockquote><p>Wherever you wish to include standard header <code>&lt;foo&gt;</code>, you should
+include <code>&lt;vcl_foo.h&gt;</code> instead.
+</p></blockquote>
+
+<p>Some compilers place STL classes such as <code>vector&lt;&gt;</code> and <code>string</code> in
+namespace <code>std::</code>, some don't.  Yet others place them there, but do not
+implement namespaces properly.  Therefore, it is very difficult to write
+portable code because sometimes one must say <code>std::vector</code>, sometimes
+one must use <code>vector</code>.  Again, we need a way which works on all
+systems.  We could try to insert <code>using namespace std;</code> or <code>using
+std::vector</code> commands throughout the program, but (a) this is not
+considered good C++, and (b) it doesn't work anyway.
+</p>
+<p>The low-tech solution is simply to prefix each standard identifier with
+<code>vcl_</code>, so that <code>vcl_vector</code> works everywhere.  And this is
+what v<em>x</em>l does, when you include <code>&lt;vcl_vector.h&gt;</code>.  Thus, safe
+programmers prefix <em>everything</em> in the standard library with
+<code>vcl_</code>.
+</p><blockquote><p>Wherever you wish to use standard class or function <code>foo</code>, you should
+write <code>vcl_foo</code> instead.
+</p></blockquote>
+<p>This may seem excessive, but one gets used to it very quickly, and it
+quickly indicates to novice C++ programmers which functions are from the
+standard library.  You might think that the designers of v<em>x</em>l would have
+been clever enough to avoid the vcl_ prefix by using fancy compiler flags,
+and many #defines.  However, that way lies madness--trying to confuse a
+C++ compiler always rebounds on one.
+</p>
+<p>Also, when time comes when all compilers will implement ANSI STL classes
+in a consistent way, it's very easy to `perl away' the <code>vcl_</code> prefixes,
+or replace them with <code>std::</code>; it's much more difficult, if not impossible,
+to insert <code>std::</code> prefixes when there are no <code>vcl_</code> prefixes.
+</p>
+<hr size="6">
+<a name="SEC27"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC26" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC28" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.1 Example </h2>
+<p>This program is exemplary.  It shows how every identifier in the ISO
+library has been prefixed by <code>vcl_</code>.  It may look like extreme
+overkill, but it works, and can be made to work on all compilers we've
+seen.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vcl_string.h&gt;    // string
+#include &lt;vcl_iostream.h&gt;  // cout
+#include &lt;vcl_vector.h&gt;    // vector
+#include &lt;vcl_algorithm.h&gt; // copy
+#include &lt;vcl_iterator.h&gt;  // ostream_iterator
+
+int main()
+{
+  vcl_vector&lt;vcl_string&gt; strings;
+  strings.push_back(&quot;Hello, &quot;);
+  strings.push_back(&quot;World.&quot;);
+  vcl_copy(strings.begin(), strings.end(),
+           vcl_ostream_iterator&lt;vcl_string&gt;(vcl_cout));
+  return 0;
+}
+</pre></td></tr></table><p>The alternative is somewhat scary.  It begins
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">#if defined(_WIN32) || (defined(__SUNPRO_CC) &amp;&amp; (__SUNPRO_CC + 0) &gt;= 0x500)
+#include &lt;string&gt;
+#else
+#include ...
+</pre></td></tr></table>
+<p>This document has little more to say about the contents of VCL--a book on
+C++ should describe it better than we can.  However, it is important to
+note that nothing more can go in there.  If it's not in the standard, it's
+not in VCL.  Remember, VCL is full, nothing else can go in there.  It
+cannot for example be &quot;helpfully&quot; modified, Microsoft-style, to send
+standard error to a window (but see also <code>vul_redirector</code>).
+</p>
+
+<hr size="6">
+<a name="SEC28"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC27" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC29" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.2 Macros and standard C++ </h2>
+
+<p>The C++ ISO standard library headers include the functionality of the C ISO standard
+library headers.  For example, the declarations found in <code>&lt;stdlib.h&gt;</code> can be
+found in <code>&lt;cstdlib&gt;</code> but in namespace <code>std::</code>.  This means that functions
+like <code>printf()</code> should be called using <code>std::printf()</code> instead; omitting
+the <code>std::</code> is wrong and won't work if the compiler is truly conforming.  The
+exception to this (see <code>[C.2.3]</code> in the standard) is those names from ISO C
+which are actually macros.  The following is an incomplete list:
+</p>
+<ul>
+<li> assert
+</li><li> setjmp
+</li><li> NULL
+</li><li> errno
+</li><li> stdin, stdout, stderr
+</li><li> va_arg, va_start, va_end
+</li></ul>
+
+<p>For example, the following code is the correct way to use C streams in VXL:
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">#include &lt;vcl_cstdio.h&gt;
+#include &lt;vcl_cassert.h&gt;
+
+void f(char const *file_name)
+{
+  assert(file_name);
+  vcl_FILE *fp = vcl_fopen(file_name, &quot;r&quot;);
+  if (! fp) {
+    vcl_fprintf(stderr, &quot;failed to open %s for reading.\n&quot;, file_name);
+    vcl_abort();
+  }
+  ... other stuff ...
+}
+</pre></td></tr></table><p>Note that it uses <code>assert</code>, <code>stderr</code> and not <code>vcl_assert</code>, <code>vcl_stderr</code>
+even though it uses <code>vcl_fprintf</code>, <code>vcl_abort</code>.  This may seem complicated and
+hard to remember, but it isn't the fault of VCL.  If your compiler were strictly conformant
+you would still have to use <code>std::fprintf</code> and you couldn't use <code>std::stderr</code>.
+</p>
+
+<p><a name="VCL_005fRequirements"></a>
+</p><hr size="6">
+<a name="SEC29"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC28" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.3 Which parts of standard C++ may be used in VXL? </h2>
+
+
+<p>Eventually the answer to this will be &quot;all parts&quot; but until compilers
+catch up with the language standard, the answer is &quot;all but the following&quot;:
+</p>
+<ul>
+<li> run-time type information (RTTI) in core libraries.
+</li><li> exceptions in core libraries.
+</li><li> nested classes (not supported very well by MSVC)
+</li><li> wide characters (not supported by FreeBSD).
+</li><li> member templates (not supported by SGI CC 7.2.x).
+</li><li> partial template specializations (not supported by SGI CC 7.2.x).
+</li><li> non-type parameters in function templates (not supported by SunPro 5.0).
+</li><li> default template parameters which depend on previous template parameters.
+</li></ul>
+
+<p>Of course, if you are just using VXL for your own purposes you may use whatever
+C++ constructs you like, you just can't put them in the core VXL libraries.
+</p>
+<p>The justification for banning certain things in core libraries is to encourage
+the adoption of the core by reducing the possibility of porting problems.
+The justification for allowing it for Level 2 and greater libraries is that
+they are really pretty useful and hard to do without in more complex libraries
+than those in the core (e.g. RTTI for doing things like strategy patterns, or
+managing polymorphic class trees).
+</p>
+
+<hr size="6">
+<a name="SEC30"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC29" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC31" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.4 Template instantiation </h2>
+
+<p>In C++, template instantiation is done by the compiler.  In real life, it
+doesn't work as the standard says.  In brief here is how template instantiation
+is supposed to work:
+</p>
+<ul>
+<li> The compiler must instantiate every needed template before its first use.
+
+</li><li> The definition of a template must be in scope at the point of instantiation
+      unless the template is declared as exported.
+
+</li></ul>
+
+<p>To understand the implications of this (and the meaning of &quot;exported&quot;) let's
+consider the following program, composed of two &quot;translation units&quot;
+(i.e. files):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">// matrix.h
+template &lt;typename T&gt;
+struct matrix
+{
+  matrix(int, int);
+  ...
+};
+</pre></td></tr></table>
+<p>The class template <code>matrix&lt;&gt;</code> just declared is defined in
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">// matrix.txx
+#include &quot;matrix.h&quot;
+template &lt;typename T&gt;
+matrix&lt;T&gt;::matrix(int m, int n) { ... }
+</pre></td></tr></table>
+<p>Finally we refer to the matrix class in a little program:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">// program.cxx
+#include &quot;matrix.h&quot;
+int main()
+{
+  matrix&lt;double&gt; P(3, 4);
+  ...
+  return 0;
+}
+</pre></td></tr></table>
+<p>The program is ill-formed because the <code>matrix&lt;double&gt;</code> must be
+instantiated before its use in <code>program.cxx</code>, but the definition
+isn't in scope at that point.
+One way to fix this is to explicitly instantiate the required template in
+some source file and make sure to compile that source file first.
+Another is to include the definition of the template in the header file.
+A third solution is to put the keyword <code>export</code> in front of the declaration
+of <code>matrix&lt;T&gt;</code>, which makes it possible to implicitly instantiate
+<code>matrix&lt;double&gt;</code> even when the definition is not in scope.
+</p>
+<p>Unfortunately, there are at the time of writing (April 2001) no compilers
+which understand and implement <code>export</code> so we are currently limited to
+using two kinds of templates:
+</p><ul>
+<li> &quot;Inline&quot; templates whose definitions are in scope at the point of use.
+      This includes (in most implementations) the containers and algorithms
+      from the STL.  An example is <code>vcl_vector&lt;vcl_pair&lt;int, vcl_string&gt; &gt;</code>.
+</li><li> &quot;Export&quot; templates which are explicitly instantiated in the program (despite
+      being exported).  In VXL, these instantiations all live in the <code>Templates/</code>
+      directories in the source tree and include things like <code>vnl_svd&lt;T&gt;</code>
+      which only need to be instantiated for a handful of types anyway.
+</li></ul>
+
+<p>Now, it gets worse.  For various reasons it is sometimes advantageous to turn
+off automatic instantiation of the first kind of template.  This is only really
+the case for some architectures but if you are unlucky enough to be using one
+of them, you also have to explicitly instantiate your STL container classes
+and algorithms in the <code>Templates/</code> directories. [You should consider skipping
+the rest of this section until you actually have a template problem.  Don't read it
+just for pleasure.]  To make it easier to do
+this, and to make sure it works on all platforms, explicit instantiation is
+done using preprocessor macros.  The macro used to instantiate a class or function
+is obtained by capitalizing the name (of that class or function) and appending
+<code>_INSTANTIATE</code>.  For example, here is how to instantiate a
+<code>vcl_map&lt;int, X&gt;</code> where <code>X</code> is the name of some class:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">// Templates/vcl_map+int.X-.cxx
+#include &quot;X.h&quot;         // declaration of class X.
+#include &lt;vcl_map.txx&gt; // the instantiation macro lives here.
+VCL_MAP_INSTANTIATE(int, X, vcl_less&lt;int&gt;);
+</pre></td></tr></table>
+<p>and here is how to instantiate <code>vcl_vector&lt;X *&gt;</code>:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">// Templates/vcl_vector+X~-.cxx
+struct X; // forward declare the class.
+#include &lt;vcl_vector.txx&gt;
+VCL_VECTOR_INSTANTIATE(X *);
+</pre></td></tr></table>
+<p>The naming convention for such files is as follows:
+</p><ul>
+<li> Take the full template instantiation, e.g. 
+<code>VSL_VECTOR_IO_INSTANTIATE( vcl_vector&lt; vcl_pair&lt; unsigned int, vxl_int_64 &gt; &gt; )</code>
+</li><li> Strip the <code>_INSTANTIATE</code> and convert the Macro name to lowercase, e.g. 
+<code>vsl_vector_io( vcl_vector&lt; vcl_pair&lt; unsigned int, vxl_int_64 &gt; &gt;)</code>
+</li><li> Convert the macro's brackets <code>()</code> to angle brackets <code>&lt;&gt;</code> e.g.
+<code>vsl_vector_io&lt; vcl_vector&lt; vcl_pair&lt; unsigned int, vxl_int_64 &gt; &gt; &gt;</code>
+</li><li> Replace '<code>unsigned *</code>' with '<code>u*</code>', i.e. '<code>unsigned int</code>' 
+with '<code>uint</code>', etc. e.g.
+<code>vsl_vector_io&lt; vcl_vector&lt; vcl_pair&lt; uint, vxl_int_64 &gt; &gt; &gt;</code>
+</li><li> Strip '<code>vcl_</code>' prefixes from fixed width types. e.g.
+<code>vsl_vector_io&lt; vcl_vector&lt; vcl_pair&lt; uint, int_64 &gt; &gt; &gt;</code>
+</li><li> Strip spaces and replace '<code>&lt;</code>' with '<code>+</code>', '<code>&gt;</code>' with
+'<code>-</code>', and '<code>,</code>' with '<code>.</code>' e.g.
+<code>vsl_vector_io+vcl_vector+vcl_pair+uint.uint---</code>
+</li></ul>
+
+<p>If you are using the build system that comes with VXL and you aren't using
+implicit instantiation you should put such instantiations in the
+<code>Templates/</code> directory or you <em>will</em> be stuffed.
+</p>
+<hr size="6">
+<a name="SEC31"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC30" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC32" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.5 Use of Assertions (Developer Topic) </h2>
+
+
+<p>First of all a definition: Assertions include anything that acts
+like an assert().  They check for some error condition
+that should not occur if the code is working
+correctly<a name="DOCF1" href="book_fot.html#FOOT1">(1)</a>.  They are there to
+detect broken code.  The fact that they abort rather than do
+something more graceful is irrelevant because the program is
+already broken.  Typical things to check for include array bounds
+violations, container size mismatches, invalid function
+parameters.  The following things should not be considered as
+assertions; invalid user input, file input failure; users are too
+good at messing these things up, and should be treated
+sympathetically.
+</p>
+<p>When putting an assertion in one of the v<em>x</em>l libraries, you
+should make sure that it can be turned off using <code>NDEBUG</code>.
+This is the intention of the NDEBUG macro, and is very useful for
+time-critical code.
+The easiest way to do this is using the <code>assert()</code> macro.  If
+you want to print out a more useful error message you could try
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">#include &lt;vcl_iostream.h&gt;
+#include &lt;vcl_cstdlib.h&gt;
+int f()
+{ ...
+#ifndef NDEBUG
+  if (vcl_sqrt(4.0) &lt; 1.0)
+  {
+    vcl_cerr &lt;&lt; &quot;There is something very wrong with your&quot;
+             &lt;&lt; &quot;vcl_sqrt() function&quot; &lt;&lt; vcl_endl;
+    vcl_abort();
+  }
+  ...
+  return 0;
+}
+</pre></td></tr></table><p>However you should bear in mind the extra compilation overhead compared
+to just <code>#include &lt;vcl_cassert.h&gt;</code>.
+</p>
+<p>If you want finer control you can add extra control macros.
+Indeed in the case of time-critical code, you are encouraged to provide
+this extra control.  You can have the default (i.e. when the control macro
+is undefined) either include, or not include, the assertion.
+In any case, you <em>should</em> ensure that defining <code>NDEBUG</code> will
+override your specialist macros, and turn off <em>all</em> assertions.
+For example,
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">#include &lt;vcl_iostream.h&gt;
+#include &lt;vcl_cstdlib.h&gt;
+int f()
+{ ...
+#if (!defined NDEBUG) &amp;&amp; (defined I_AM_PARANOID_ABOUT_VCL_SQRT)
+  if (vcl_sqrt(4.0) &lt; 1.0)
+  {
+    vcl_cerr &lt;&lt; &quot;There is something very wrong with your&quot;
+             &lt;&lt; &quot;vcl_sqrt() function&quot; &lt;&lt; vcl_endl;
+    vcl_abort();
+  }
+  ...
+  return 0;
+}
+</pre></td></tr></table>
+<p>Of course, you should also document the effect of your macro in
+the function Doxygen markup (or class level if appropriate.)
+</p>
+<hr size="6">
+<a name="SEC32"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC31" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC33" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.6 Notes </h2>
+<hr size="6">
+<a name="SEC33"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC32" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC32" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.6.1 Forward Declaration of vcl Classes </h3>
+
+<p>Do not forward declare classes in vcl.  For example,
+</p><table><tr><td>&nbsp;</td><td><pre class="example">class vcl_string;   // This is not allowed. std::string is a typedef.
+class my_class {
+..
+</pre></td></tr></table>
+<p>In this case you should just include &lt;vcl_string.h&gt;.  In the case of stream
+stuff, there is an include file of forward declarations that will work.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vcl_iosfwd.h&gt;
+</pre></td></tr></table>
+<p>General rule: never forward declare vcl_something with &quot;class
+vcl_something;&quot; but either <samp>`#include &lt;vcl_something_fwd.h&gt;'</samp> or
+<samp>`#include &lt;vcl_something.h&gt;'</samp>
+</p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC26" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

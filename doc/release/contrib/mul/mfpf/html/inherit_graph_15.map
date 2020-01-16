@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmfpf__vec__cost__builder.html" title="Base for classes which build mfpf_vec_cost objects." alt="" coords="5,29,160,53"/>
+<area shape="rect" href="$classmfpf__sad__vec__cost__builder.html" title="Builder for mfpf_sad_vec_cost objects." alt="" coords="208,5,392,29"/>
+<area shape="rect" href="$classmfpf__ssd__vec__cost__builder.html" title="Builder for mfpf_ssd_vec_cost objects." alt="" coords="208,53,392,77"/>
+</map>

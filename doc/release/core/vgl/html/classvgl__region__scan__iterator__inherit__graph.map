@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgl__ellipse__scan__iterator.html" title="Scan convert an ellipse." alt="" coords="227,5,427,29"/>
+<area shape="rect" href="$classvgl__polygon__scan__iterator.html" title="Fill a polygonal face with interior scan lines." alt="" coords="223,53,431,77"/>
+<area shape="rect" href="$classvgl__triangle__scan__iterator.html" title="Optimized polygon scan iterator for triangles." alt="" coords="224,101,429,125"/>
+<area shape="rect" href="$classvgl__window__scan__iterator.html" title="Iterator to scan rectangular windows." alt="" coords="224,149,429,173"/>
+</map>

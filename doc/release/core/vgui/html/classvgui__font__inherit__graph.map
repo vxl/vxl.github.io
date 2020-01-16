@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgui__font__bitmap.html" title="vgui_font derived class that uses hardcoded fonts." alt="" coords="5,156,128,180"/>
+<area shape="rect" href="$classvgui__font__textured.html" title="vgui_font derived class that uses textured fonts." alt="" coords="152,156,283,180"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="89,7,193,31"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="$classMatchSet.html" title="MatchSet" alt="" coords="7,113,84,137"/>
+<area shape="rect" href="$classPairMatchSet.html" title="PairMatchSet" alt="" coords="139,77,240,101"/>
+<area shape="rect" href="$classTripleMatchSet.html" title="TripleMatchSet" alt="" coords="135,149,244,173"/>
+<area shape="rect" href="$classPairMatchSet2D3D.html" title="PairMatchSet2D3D" alt="" coords="305,5,441,29"/>
+<area shape="rect" href="$classPairMatchSetCorner.html" title="PairMatchSetCorner" alt="" coords="303,53,444,77"/>
+<area shape="rect" href="$classPairMatchSetLineSeg.html" title="PairMatchSetLineSeg" alt="" coords="299,101,448,125"/>
+<area shape="rect" href="$classTripleMatchSetCorner.html" title="TripleMatchSetCorner" alt="" coords="299,149,448,173"/>
+<area shape="rect" href="$classTripleMatchSetLineSeg.html" title="TripleMatchSetLineSeg" alt="" coords="295,197,452,221"/>
+</map>

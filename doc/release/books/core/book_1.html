@@ -1,0 +1,789 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 1. Introduction</title>
+
+<meta name="description" content="VXL: 1. Introduction">
+<meta name="keywords" content="VXL: 1. Introduction">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Introduction"></a>
+<a name="SEC1"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[ &lt;&lt; ]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 1. Introduction </h1>
+
+
+  <blockquote><p>  <strong>Chapter summary</strong>:
+ VXL is efficient, simple, and fun to use.
+  </p></blockquote>
+
+<p>This document describes v<em>x</em>l, a collection of C++ libraries designed for
+computer vision research.  Because it's for computer vision it needs to be
+<em>efficient</em>, handling large quantities of numerical data with little
+overhead.  Because it's for research it must be <em>portable</em>, so that
+one can write and run one's program on any machine available, for example
+in order to access a special camera or fast image processing hardware.
+</p>
+<p>The v<em>x</em>l collection's portability and efficiency are traits which are due
+in large part to its parentage.  The package was built by extracting the
+core functionalities of two large systems: the &quot;Image Understanding
+Environment&quot; (IUE) and &quot;Target junior&quot; (TargetJr).  Although these
+environments contain a wealth of useful code, and have facilitated much
+research, they are widely known for their bulk, and the difficulty of
+learning to use them.  Common complaints have been
+</p><ul>
+<li>
+&quot;Too heavy&quot;: To use even one small routine, a large portion of the
+environment must be included in the user's program, increasing program
+size, compile time, and startup time.  Sometimes the increase is such that
+debuggers and other tools fail to work.
+</li><li>
+&quot;Too slow&quot;: In some cases, the design of the earlier systems restricted
+the efficiency of code that could be written when using them.  This was in
+some part due to deficiencies of the C++ compilers in use, but also due to
+the use of since-superseded programming paradigms.
+</li><li>
+&quot;Too weird&quot;: Because the IUE is a large system, intended to be used as a
+programming environment, it imposes stylistic quirks on programmers who use
+it.  The most apparent of these was the use of LaTeX to generate code,
+which offered many benefits, but was ultimately rejected by users.
+</li></ul>
+<p>Despite these complaints, the quality of the software available in the
+environments, and the promise of a sustained, concerted software
+development effort has meant that the IUE/TargetJr has many users
+worldwide.  The job of v<em>x</em>l is to make that many <em>happy</em> users, by
+creating a set of libraries which have the same useful code, but which are
+light, fast, and not weird.
+</p>
+<hr size="6">
+<a name="SEC2"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC1" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.1 Core Libraries </h2>
+
+<p>The core of v<em>x</em>l was defined in February 2000, and comprises six
+libraries plus a compatibility layer.
+</p>
+<hr size="6">
+<a name="SEC3"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC2" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC4" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.1.1 vcl: The C++ compatibility layer. </h3>
+
+<p>The job of vcl is to turn your compiler into a standard C++ compiler.  In
+particular, it ensures that your standard library behaves at least
+something like that defined in the ANSI/ISO standard.  In an ideal world,
+vcl would not be necessary, as all compiler vendors would ship perfectly
+compliant systems.  But then, in a perfect world, C++ wouldn't be the only
+choice for high efficiency high-level programming.
+</p>
+<hr size="6">
+<a name="SEC4"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC3" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.1.2 vbl: Basic Templates. </h3>
+<p>The basic templates library contains a small set of generally useful templated
+containers and algorithms, e.g. smart pointers, triples, and sparse_arrays. Many of these
+things should have been in the STL.
+</p>
+<hr size="6">
+<a name="SEC5"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC4" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.1.3 vul: Utilities. </h3>
+<p>This contains a number of generally useful C++ classes and functions, notably
+file and directory handling,
+command-line argument parser, string utilities, a timer, etc.
+</p>
+<hr size="6">
+<a name="SEC6"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC5" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.1.4 vnl: Numerical algorithms. </h3>
+<p>The main classes in vnl are the matrix and vector classes, which are very
+simple c-like objects.  There is no reference counting, objects are
+returned by value, or passed into routines.  The use of objects to hold the
+output of matrix decompositions also reduces the amount of copying that
+needs to be done.  The numerical algorithms are wrappers around
+public-domain, high quality Fortran code from the TargetJr <code>netlib</code>
+library but that part of vnl is placed in a separate library: <code>vnl_algo</code>.
+</p>
+<hr size="6">
+<a name="SEC7"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC6" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.1.5 vil: Imaging. </h3>
+<p>The imaging library is designed to work well with very large images, but
+its primary design objective is to be fast and convenient for the typical
+in-core images that are encountered in video and digital image processing.
+A panoply of file formats is handled, and it is easy to add support for a
+new format.
+</p>
+<hr size="6">
+<a name="SEC8"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC7" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.1.6 vgl: Geometry. </h3>
+<p>It is in geometry that the spartan aesthetic of the core of v<em>x</em>l becomes
+most apparent.  The library deals with the geometry of points, curves, and
+other objects in 2 or more dimensions, but may not call on the numerics
+library.  Therefore, it is  restricted to operations which it is reasonable
+to express in standard C++, which places a useful limit on what may be
+placed there.  For example, surface fitting cannot be in geometry as it
+would require the singular value decomposition.  However, there is much
+here that is useful, and the library is quite large enough already.  The
+<code>vgl_algo</code> library contains the higher-level code, which is allowed
+to depend on <code>vnl</code> (and if necessary even on <code>vul</code>).
+</p>
+<hr size="6">
+<a name="SEC9"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC8" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC10" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.1.7 vsl: Binary I/O </h3>
+<p>This section describes how to save and restore objects using a binary stream.
+It details how to add the appropriate functions to each class to make use
+of this facility.
+</p>
+<hr size="6">
+<a name="SEC10"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC9" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC11" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.2 Additional Libraries </h2>
+
+<hr size="6">
+<a name="SEC11"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC10" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC10" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.2.1 vcsl: Co-ordinate Systems </h3>
+<p>This library allows you to represent and manipulate transformations, transformation graphs,
+and units of measurement.
+</p>
+<hr size="6">
+<a name="SEC12"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC11" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC10" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.2.2 vpgl: Cameras and Fundamental Matrix </h3>
+<p>Representation of various types of cameras and geometric relationships between cameras. Provides algorithms for camera calibration and other photogrammetry procedures.
+</p>
+<hr size="6">
+<a name="SEC13"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC12" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC14" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC10" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.2.3 vpdl: Probability Distributions </h3>
+<p>Data structures to represent univariate and multivariate probability distributions and algorithms to operate on them, like sampling and estimation.
+</p>
+<hr size="6">
+<a name="SEC14"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC13" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC15" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC10" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.2.4 vidl: Video </h3>
+<p>Load and save images from video files and sources.
+</p>
+<hr size="6">
+<a name="SEC15"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC14" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.3 Documentation </h2>
+<p>The v<em>x</em>l documentation comes in two main forms: this book, and structured
+comments in the source code, which are automatically extracted.  The book
+is intended to be a single reference, where all the high-level
+documentation resides.   In TargetJr and the IUE there was always a problem
+finding documentation, as it was in too many places.  In v<em>x</em>l, we are
+following the practice of some other successful systems such as vtk, and
+providing one monolithic document with, we hope, a good index.
+</p>
+
+<hr size="6">
+<a name="SEC16"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC15" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC15" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.3.1 The VXL Book </h3>
+
+<p>The book (in subdirectory <code>vxl/doc/book</code>) is a human-written collection of VXL
+documentation, suitable for printing.  It is intended to be readable as an
+introduction to the various facilities provided by the v<em>x</em>l libraries,
+and to be browsable as a first source of examples and tips.
+</p>
+<a name="SEC17"></a>
+<h4 class="subsubheading"> Why texinfo? </h4>
+<p>It is written in texinfo, a limited form of LaTeX which allows us to make
+various forms of output: printed, HTML, windows help files, emacs info, and
+plain text files.  Each of these forms has its adherents, and each is
+useful.  There are other documentation systems which allow multiple output
+formats, but none match texinfo in the three main formats: paper,
+hypertext, and ASCII.  This is because it's difficult to target such
+disparate formats, and texinfo has evolved over many years to do it well.
+</p>
+<p>On the other hand, texinfo is maybe hard to learn for those who don't know TeX
+or LaTeX, so we are keeping an eye on formats such as <em>DocBook</em>.
+</p>
+<hr size="6">
+<a name="SEC18"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC16" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC15" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.3.2 Automatically generated documentation </h3>
+
+<p>Although the human-written v<em>x</em>l book is the first source, the definitive
+authority on what a class or function does must be the source code
+comments.  The book will give a high-level description of the most
+important and commonly-used features of a class, but the source code
+contains the details.  In order to make these details easier to scan, the
+v<em>x</em>l source files contain specially structured comments, which can be
+scanned by the <em>Doxygen</em> program and converted into an attractive
+hyperlinked reference.
+</p>
+<p>An example of what the syntax for documentation looks like can be found
+in <code>vxl/doc/vxl_doc_rules.[h,cxx]</code>, but briefly a comment line which
+begins with <code>//:</code> is documentation for the type, function, or
+variable which follows it.  For example
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">//: Brief description of my_class
+class my_class {
+  //: \brief Brief description, the long one is in the .cxx file
+  my_class();
+};
+</pre></td></tr></table>
+
+<p><a name="VXL_005fPhilosophy"></a>
+</p><hr size="6">
+<a name="SEC19"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC18" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.4 The Design and Evolution of v<em>x</em>l </h2>
+
+<p>Design goals:
+</p>
+<ul>
+<li> Cross platform
+
+</li><li> Loosely coupled
+
+</li><li> light weight -- simple interfaces
+
+</li><li> high-powered -- allow infinitely large images.
+
+</li><li> uniform naming - of course.
+</li></ul>
+
+<hr size="6">
+<a name="SEC20"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC19" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.4.1 Motivation </h3>
+<p>In OpenGL, you guess the name of something, and you're generally
+right.  This is what we would like to achieve with v<em>x</em>l.
+</p>
+<a name="IDX1"></a>
+<p>Simple and free of programming dogma.  For example, many v<em>x</em>l routines
+exist as C-like functions.  For some tasks, C-like
+functions are more appropriate than a forced object-orientation, for others
+objects are clearly the more intuitive and compact representation.  This is
+clearly seen in the imaging library, where the <code>vil_image</code> object is
+passed to and returned from C-like functions, for example
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  vil_image i = vil_load(filename);
+  i = vil_smooth_gaussian(i, 0.6);
+  vil_save(i, out_filename, &quot;pnm&quot;);
+</pre></td></tr></table><p>In this case, object orientation ensures that memory is managed
+efficiently, without unnecessary copying of data, while using functions
+makes the code more readable.
+</p>
+<p>When building a large system, it is crucial to maintain consistent
+conventions for file-system structure, and identifier naming.  However, a
+crucial philosophy in the design of v<em>x</em>l is that system conventions must
+be pragmatic.  If programmers are ultimately constrained rather than helped
+by their environment, they will break the rules, and when they do so, they
+will break them in inconsistent ways.  Therefore it is crucial that
+consistency within the environment is achieved by conventions that are easy
+to live with.  One example, discussed below, is in the rule governing the
+relationship between header file names and the objects defined within that
+header.  The general principle, then, is &quot;as close to consistent as
+comfortable, but no more&quot;.
+</p>
+<hr size="6">
+<a name="SEC21"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC20" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.4.2 Names </h3>
+
+<p>Names are always the biggest issue in programming environments.  Uniform
+naming is one of the most important aspects of a library, and part of the
+design effort in v<em>x</em>l lays in choosing a good, workable scheme for the
+naming of classes, functions and files.  On the other hand, few issues
+cause as much debate as the choice of naming conventions.  However, we are
+lucky for two reasons: first, because we wish to run cross-platform, many
+options are restricted; second, as we can never please everybody, we can
+just choose a convention and pretend we all hate it.
+</p>
+<p>First things first.  The name v<em>x</em>l itself refers to a collection of
+libraries where the <em>x</em> is replaced by a one or two-letter code
+describing the contents.
+</p>
+<p>Second, do we use <code>MixedCaseIdentifiers</code> or
+<code>lowercase_with_underscores</code>?   Well, a certain operating system
+#defines 1300 of the <code>MixedCaseIdentifiers</code> in a header file.
+Therefore, programs which use names like <code>LoadImage</code> may or may not
+link.  For this reason, we chose the other ugly solution.
+</p>
+<a name="IDX2"></a>
+<a name="IDX3"></a>
+<a name="IDX4"></a>
+<p>For related reasons, source files in v<em>x</em>l all end in <code>.cxx</code>.
+Template definitions, which look like source files but are essentially
+header files (or actually #include files, as they are not separately
+compiled), are suffixed <code>.txx</code>.
+</p>
+<p>Each class or function in a v<em>x</em>l library begins with the name of that
+library, followed by an underscore, for example <code>vnl_matrix</code>.
+This makes it easy to locate the source code for any class, and easy to
+see the list of libraries on which one's program depends.
+</p>
+<a name="IDX5"></a>
+<p>This scheme was chosen over namespaces because few compilers support
+namespaces well, and their implications in large-scale development are as
+yet poorly understood.
+</p>
+<p>An obvious extension of this convention would be to insist that every class
+or function (in fact, every globally visible symbol exported by a library),
+should be defined in its own include file, yielding an easy relationship
+between symbols and include statements.  However, such a scheme
+imposes great demands on programmers, who must generate long lists of
+includes, and on library writers who must create many files with very
+little in each.  Pragmatism must rule if we are to avoid programmer
+discomfort, thus chaos.  A rule that is still useful, and easier to adhere
+to is used:
+</p><blockquote><p>The file <code>vxl/vxl_stuff.h</code> exports only identifiers which
+begin with <code>vxl_stuff_</code>, and possibly <code>vxl_stuff</code> itself.
+</p></blockquote>
+<p>An example of a header file which obeys this rule is shown in Figure 1.1.
+</p>
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <table class="cartouche" border="1"><tr><td>
+<table><tr><td>&nbsp;</td><td><pre class="example">#ifndef vxl_stuff_h_
+#define vxl_stuff_h_
+
+enum vxl_stuff_things {
+  vxl_stuff_bare,
+  vxl_stuff_spartan
+};
+
+class vxl_stuff {
+};
+
+bool vxl_stuff_grok(vxl_stuff);
+extern int vxl_stuff_val;
+
+#endif
+</pre></td></tr></table></td></tr></table>
+    <caption align="bottom">
+  <div align=left><strong>Figure 1.1:</strong>
+  <p>Example of a header file <code>vxl_stuff.h</code> which obeys the naming
+convention. Only identifiers that begin with <code>vxl_stuff_</code> may be
+defined.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+
+<p>Of course, this rule is less helpful to clients of the library, who might
+remember that there is a class called <code>vtl_thing_doer</code>, but not know
+which header file to include.  However, the disadvantage is not great, as
+the likely options are just <code>vtl/vtl_thing.h</code> and
+<code>vtl/vtl_thing_doer.h</code>.  What is ultimately helpful to clients is a
+uniform naming scheme, kept so by pragmatic constraints on the library
+developers.
+</p>
+<p>FAQ: What about <code>operator+(vcl_stuff, vcl_stuff)</code>?  Frequently given
+half-answer: Koenig lookup means it's OK.
+</p>
+
+<hr size="6">
+<a name="SEC22"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC21" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 1.4.3 Layering </h3>
+<p>Which brings us on to layering: core v<em>x</em>l libraries may not depend on
+each other.  The numerics library cannot use the handy string manipulation
+in vul, the imaging library cannot use matrices, or smart pointers.  This
+restriction is central to the design of v<em>x</em>l, because it intrinsically
+limits the size of the core libraries.
+It appears to contradict traditional software development practice because
+it implies that code will be duplicated rather than reused.  However,
+the amount of code duplicated is small, and the benefit of lego libraries
+is enormous.   The current status is encapsulated in this figure
+</p><table><tr><td>&nbsp;</td><td><pre class="example">Level:   0         1         2          3
+         vcl       vbl       vnl_algo   v**l
+                   vnl       vil_algo
+                   vil       vgl_algo
+                   vgl       v*l_io
+                   vul
+                   vsl
+</pre></td></tr></table><blockquote><p>Library layers: libraries in one layer may not call their
+siblings, even if this means code copying.
+</p></blockquote>
+
+<p>However, other alternatives have been considered, and may yet be
+considered.  For example, what about putting vul at level 0.5, so that
+common utilities can be available to level 1?  The problem of course is
+that everything will end up in the level 0.5 library.  We could impose the
+rule that nothing goes in vul unless it is used in at least two level 1
+libraries.  I don't know whether that would help or not...
+</p>
+<p>There have been two significant propositions to accept
+a level 0.5 library - for smart pointers, and binary IO. In both cases
+it turned out to be relatively straight forward to provide the required
+functionality without the 0.5 library, and indeed the proposers have
+found the alternative implementations superior in many ways.
+</p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<map id="G" name="G">
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="8,269,112,293"/>
+<area shape="rect" href="$classvsol__box__2d.html" title="A bounding box for 2d spatial objects." alt="" coords="183,221,279,245"/>
+<area shape="rect" href="$classvsol__box__3d.html" title="A bounding box for 3d spatial objects." alt="" coords="183,269,279,293"/>
+<area shape="rect" href="$classvsol__spatial__object.html" title="vsol_spatial_object" alt="" coords="163,317,299,341"/>
+<area shape="rect" href="$classvsol__spatial__object__2d.html" title="vsol_spatial_object_2d" alt="" coords="347,197,504,221"/>
+<area shape="rect" href="$classvsol__spatial__object__3d.html" title="vsol_spatial_object_3d" alt="" coords="347,413,504,437"/>
+<area shape="rect" href="$classvsol__curve__2d.html" title="vsol_curve_2d" alt="" coords="568,101,677,125"/>
+<area shape="rect" href="$classvsol__group__2d.html" title="vsol_group_2d" alt="" coords="568,149,677,173"/>
+<area shape="rect" href="$classvsol__point__2d.html" title="vsol_point_2d" alt="" coords="571,197,675,221"/>
+<area shape="rect" href="$classvsol__region__2d.html" title="vsol_region_2d" alt="" coords="567,245,679,269"/>
+<area shape="rect" href="$classvsol__conic__2d.html" title="Euclidean general conic class, part of the vsol_curve_2d hierarchy." alt="" coords="764,5,871,29"/>
+<area shape="rect" href="$classvsol__digital__curve__2d.html" title="Digital curve class, part of the vsol_curve_2d hierarchy." alt="" coords="743,53,892,77"/>
+<area shape="rect" href="$classvsol__line__2d.html" title="vsol_line_2d" alt="" coords="769,101,865,125"/>
+<area shape="rect" href="$classvsol__polyline__2d.html" title="General Polyline class, part of the vsol_curve_2d hierarchy." alt="" coords="757,149,877,173"/>
+<area shape="rect" href="$classvsol__poly__set__2d.html" title="General poly_set class, part of the vsol_curve_2d hierarchy." alt="" coords="755,197,880,221"/>
+<area shape="rect" href="$classvsol__polygon__2d.html" title="vsol_polygon_2d" alt="" coords="756,245,879,269"/>
+<area shape="rect" href="$classvsol__rectangle__2d.html" title="vsol_rectangle_2d" alt="" coords="943,221,1073,245"/>
+<area shape="rect" href="$classvsol__triangle__2d.html" title="vsol_triangle_2d" alt="" coords="948,269,1068,293"/>
+<area shape="rect" href="$classvsol__curve__3d.html" title="vsol_curve_3d" alt="" coords="568,317,677,341"/>
+<area shape="rect" href="$classvsol__cylinder.html" title="vsol_cylinder" alt="" coords="573,365,672,389"/>
+<area shape="rect" href="$classvsol__group__3d.html" title="vsol_group_3d" alt="" coords="568,413,677,437"/>
+<area shape="rect" href="$classvsol__point__3d.html" title="vsol_point_3d" alt="" coords="571,461,675,485"/>
+<area shape="rect" href="$classvsol__surface__3d.html" title="vsol_surface_3d" alt="" coords="563,509,683,533"/>
+<area shape="rect" href="$classvsol__volume__3d.html" title="vsol_volume_3d" alt="" coords="564,557,681,581"/>
+<area shape="rect" href="$classvsol__digital__curve__3d.html" title="Digital curve class, part of the vsol_curve_3d hierarchy." alt="" coords="743,293,892,317"/>
+<area shape="rect" href="$classvsol__line__3d.html" title="vsol_line_3d" alt="" coords="769,341,865,365"/>
+<area shape="rect" href="$classvsol__polyline__3d.html" title="General Polyline class, part of the vsol_curve_3d hierarchy." alt="" coords="757,389,877,413"/>
+<area shape="rect" href="$classvsol__region__3d.html" title="vsol_region_3d" alt="" coords="761,509,873,533"/>
+<area shape="rect" href="$classvsol__polygon__3d.html" title="vsol_polygon_3d" alt="" coords="947,509,1069,533"/>
+<area shape="rect" href="$classvsol__rectangle__3d.html" title="vsol_rectangle_3d" alt="" coords="1124,485,1255,509"/>
+<area shape="rect" href="$classvsol__triangle__3d.html" title="vsol_triangle_3d" alt="" coords="1129,533,1249,557"/>
+<area shape="rect" href="$classvsol__orient__box__3d.html" title="An oriented bounding box for 3d spatial objects." alt="" coords="748,557,887,581"/>
+<area shape="rect" href="$classvsol__polyhedron.html" title="vsol_polyhedron" alt="" coords="757,605,877,629"/>
+<area shape="rect" href="$classvsol__tetrahedron.html" title="vsol_tetrahedron" alt="" coords="947,605,1069,629"/>
+<area shape="rect" href="core_vgl.tag$classvgl__conic.html" title="vgl_conic\&lt; double \&gt;" alt="" coords="552,5,693,29"/>
+<area shape="rect" href="$classvsol__box.html" title="vsol_box" alt="" coords="23,221,97,245"/>
+<area shape="rect" href="$classvsol__flags__id.html" title="vsol_flags_id" alt="" coords="11,365,109,389"/>
+<area shape="rect" href="core_vul.tag$classvul__timestamp.html" title="vul_timestamp" alt="" coords="5,317,115,341"/>
+</map>

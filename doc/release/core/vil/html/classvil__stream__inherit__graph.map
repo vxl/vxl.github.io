@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__stream__core.html" title="An in&#45;core vil_stream implementation." alt="" coords="5,81,123,105"/>
+<area shape="rect" href="$classvil__stream__fstream.html" title="A vil_stream implementation using vcl_fstream." alt="" coords="147,81,283,105"/>
+<area shape="rect" href="$structvil__stream__section.html" title="make a section of a vil_stream behave like a vil_stream." alt="" coords="307,81,440,105"/>
+<area shape="rect" href="$classvil__stream__url.html" title="open an URL." alt="" coords="464,81,571,105"/>
+</map>
