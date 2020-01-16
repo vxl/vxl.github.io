@@ -1,0 +1,105 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__feature__region.html" title="Represents a feature (&quot;data point&quot;) used by the registration algorithms." alt="" coords="907,917,1040,941"/>
+<area shape="rect" href="$classrgrl__feature__face__region.html" title="rgrl_feature_face_region" alt="" coords="1188,917,1353,941"/>
+<area shape="rect" href="$classrgrl__feature__point__region.html" title="Represent a point in space." alt="" coords="1185,965,1356,989"/>
+<area shape="rect" href="$classrgrl__feature__trace__region.html" title="Represent a point along a trace (of a vessel, neuron, etc.)." alt="" coords="1185,869,1356,893"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="47,2201,151,2225"/>
+<area shape="rect" href="$classrgrl__command.html" title="rgrl_command is an implementation of the command design pattern that is used in callbacks." alt="" coords="296,2201,403,2225"/>
+<area shape="rect" href="$classrgrl__event.html" title="Event class provides a standard coding for sending and receiving messages." alt="" coords="309,2249,389,2273"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="308,1349,391,1373"/>
+<area shape="rect" href="$classrgrl__debug__feature__iteration__print.html" title="observer to view transformations at each iteration of feature&#45;based registration engine." alt="" coords="537,2201,759,2225"/>
+<area shape="rect" href="$classrgrl__debug__feature__iteration__save__matches.html" title="observer to save matches at each iteration of feature&#45;based registration engine." alt="" coords="508,2249,788,2273"/>
+<area shape="rect" href="$classrgrl__converge__status.html" title="Represent the registration status." alt="" coords="575,701,721,725"/>
+<area shape="rect" href="$classrgrl__convergence__tester.html" title="rgrl_convergence_tester" alt="" coords="567,749,729,773"/>
+<area shape="rect" href="$classrgrl__data__manager.html" title="rgrl_data_manager" alt="" coords="581,1001,715,1025"/>
+<area shape="rect" href="$classrgrl__estimator.html" title="Interface for the transform estimators." alt="" coords="596,1205,700,1229"/>
+<area shape="rect" href="$classrgrl__evaluator.html" title="rgrl_evaluator" alt="" coords="597,1121,699,1145"/>
+<area shape="rect" href="$classrgrl__feature.html" title="Represents a feature (&quot;data point&quot;) used by the registration algorithms." alt="" coords="603,1049,693,1073"/>
+<area shape="rect" href="$classrgrl__feature__based__registration.html" title="Feature&#45;based registration." alt="" coords="545,1301,751,1325"/>
+<area shape="rect" href="$classrgrl__feature__set.html" title="Base class to represent and provide access in several ways to a set of registration features..." alt="" coords="591,1349,705,1373"/>
+<area shape="rect" href="$classrgrl__initializer.html" title="Interface for initial estimate generators." alt="" coords="599,1445,697,1469"/>
+<area shape="rect" href="$classrgrl__invariant.html" title="Represent a feature associated with a set of invariant properties." alt="" coords="599,1493,697,1517"/>
+<area shape="rect" href="$classrgrl__invariant__match.html" title="rgrl_invariant_match" alt="" coords="577,1541,719,1565"/>
+<area shape="rect" href="$classrgrl__invariant__set.html" title="Represent a feature associated with a set of invariant properties." alt="" coords="587,1589,709,1613"/>
+<area shape="rect" href="$classrgrl__mask.html" title="base class of roi which is a pure virtual class." alt="" coords="608,1733,688,1757"/>
+<area shape="rect" href="$classrgrl__match__set.html" title="For each feature in the &quot;from&quot; set, there is a set of features in the &quot;to&quot; set." alt="" coords="593,1781,703,1805"/>
+<area shape="rect" href="$classrgrl__matcher.html" title="Interface for the routines that compute matches." alt="" coords="600,1973,696,1997"/>
+<area shape="rect" href="$classrgrl__scale.html" title="Represents error scale estimates." alt="" coords="608,2021,688,2045"/>
+<area shape="rect" href="$classrgrl__scale__estimator__unwgted.html" title="Interface for unweighted scale estimator." alt="" coords="548,2081,748,2105"/>
+<area shape="rect" href="$classrgrl__scale__estimator__wgted.html" title="Interface for weighted scale estimator." alt="" coords="556,2153,740,2177"/>
+<area shape="rect" href="$classrgrl__spline.html" title="A tensor&#45;product B&#45;spline in 4D can be written in." alt="" coords="607,317,689,341"/>
+<area shape="rect" href="$classrgrl__transformation.html" title="A base class that represents a transformation." alt="" coords="581,365,715,389"/>
+<area shape="rect" href="$classrgrl__view.html" title="Represents a &quot;view&quot; of the registration problem." alt="" coords="611,653,685,677"/>
+<area shape="rect" href="$classrgrl__weighter.html" title="Compute the weights based on the scales and matches." alt="" coords="599,821,697,845"/>
+<area shape="rect" href="$classrgrl__converge__status__nas.html" title="Represent the registration status." alt="" coords="887,629,1060,653"/>
+<area shape="rect" href="$classrgrl__convergence__on__median__error.html" title="Determine convergence based on the median geometric error." alt="" coords="857,725,1089,749"/>
+<area shape="rect" href="$classrgrl__convergence__on__weighted__error.html" title="Determine convergence based on the weighted average of geometric errors." alt="" coords="852,677,1095,701"/>
+<area shape="rect" href="$classrgrl__linear__estimator.html" title="Interface for linear transform estimators." alt="" coords="901,1205,1045,1229"/>
+<area shape="rect" href="$classrgrl__nonlinear__estimator.html" title="Interface for non&#45;linear transform estimators." alt="" coords="891,1157,1056,1181"/>
+<area shape="rect" href="$classrgrl__est__affine.html" title="Affine transform estimator." alt="" coords="1217,1397,1324,1421"/>
+<area shape="rect" href="$classrgrl__est__homography2d.html" title="homography2D transform estimator." alt="" coords="1189,1445,1352,1469"/>
+<area shape="rect" href="$classrgrl__est__quadratic.html" title="Quadratic transform estimator." alt="" coords="1207,1493,1335,1517"/>
+<area shape="rect" href="$classrgrl__est__reduced__quad2d.html" title="2D similarity transform estimator." alt="" coords="1184,1541,1357,1565"/>
+<area shape="rect" href="$classrgrl__est__similarity2d.html" title="2D similarity transform estimator." alt="" coords="1201,1301,1340,1325"/>
+<area shape="rect" href="$classrgrl__est__translation.html" title="Translation transform estimator." alt="" coords="1203,1349,1339,1373"/>
+<area shape="rect" href="$classrgrl__est__dis__homo2d__lm.html" title="homography2D transform estimator." alt="" coords="1187,1109,1355,1133"/>
+<area shape="rect" href="$classrgrl__est__homo2d__lm.html" title="homography2D transform estimator." alt="" coords="1199,1157,1343,1181"/>
+<area shape="rect" href="$classrgrl__est__homo2d__proj.html" title="homography2D transform estimator using the new proj function defined in rgrl_est_proj_func." alt="" coords="1195,1205,1347,1229"/>
+<area shape="rect" href="$classrgrl__est__homo2d__proj__rad.html" title="homography2D transform estimator using the new proj function defined in rgrl_est_proj_func." alt="" coords="1181,1253,1360,1277"/>
+<area shape="rect" href="$classrgrl__est__rigid.html" title="Rigid transform estimator." alt="" coords="1221,1013,1320,1037"/>
+<area shape="rect" href="$classrgrl__est__spline.html" title="rgrl_est_spline" alt="" coords="1217,1061,1324,1085"/>
+<area shape="rect" href="$classrgrl__evaluator__ssd.html" title="rgrl_evaluator_ssd" alt="" coords="908,1109,1039,1133"/>
+<area shape="rect" href="$classrgrl__feature__face__pt.html" title="rgrl_feature_face_pt" alt="" coords="903,965,1044,989"/>
+<area shape="rect" href="$classrgrl__feature__landmark.html" title="Represents a landmark feature." alt="" coords="897,1061,1049,1085"/>
+<area shape="rect" href="$classrgrl__feature__point.html" title="Represent a point in space." alt="" coords="911,1013,1036,1037"/>
+<area shape="rect" href="$classrgrl__feature__trace__pt.html" title="Represent a point along a trace (of a vessel, neuron, etc.)." alt="" coords="901,869,1045,893"/>
+<area shape="rect" href="$classrgrl__feature__set__bins.html" title="A set of features grouped only by N&#45;d location." alt="" coords="884,1301,1063,1325"/>
+<area shape="rect" href="$classrgrl__feature__set__bins__2d.html" title="A set of features grouped only by N&#45;d location." alt="" coords="889,1349,1057,1373"/>
+<area shape="rect" href="$classrgrl__feature__set__location.html" title="A set of features grouped only by N&#45;d location." alt="" coords="873,1397,1073,1421"/>
+<area shape="rect" href="$classrgrl__feature__set__location__masked.html" title="Represents a set of point features, valid in the masked region." alt="" coords="863,1253,1084,1277"/>
+<area shape="rect" href="$classrgrl__initializer__inv__indexing.html" title="Generate the set of initial estimates using invariant indexing." alt="" coords="884,1493,1063,1517"/>
+<area shape="rect" href="$classrgrl__initializer__prior.html" title="Generate initial estimates based on a single prior transformation." alt="" coords="907,1541,1040,1565"/>
+<area shape="rect" href="$classrgrl__initializer__ran__sam.html" title="Generate the initial estimate using random sampling." alt="" coords="893,1589,1053,1613"/>
+<area shape="rect" href="$classrgrl__initializer__reader.html" title="Generate initial estimates based on a single prior transformation." alt="" coords="900,1445,1047,1469"/>
+<area shape="rect" href="$classrgrl__invariant__single__landmark.html" title="Represent a 2D bifurcation landmark associated with a set of invariant properties." alt="" coords="872,1637,1075,1661"/>
+<area shape="rect" href="$classrgrl__mask__2d__image.html" title="this is a wrapper on the binary mask image. The image is define for the x&#45;y plane." alt="" coords="900,1829,1047,1853"/>
+<area shape="rect" href="$classrgrl__mask__3d__image.html" title="rgrl_mask_3d_image" alt="" coords="900,1877,1047,1901"/>
+<area shape="rect" href="$classrgrl__mask__box.html" title="this is a wrapper on the box." alt="" coords="919,1685,1028,1709"/>
+<area shape="rect" href="$classrgrl__mask__oriented__box.html" title="this is a wrapper on an oriented box." alt="" coords="892,1733,1055,1757"/>
+<area shape="rect" href="$classrgrl__mask__sphere.html" title="This is a wrapper on the circular region or sphere." alt="" coords="909,1781,1037,1805"/>
+<area shape="rect" href="$classrgrl__matcher__fixed.html" title="Returns a set of pre&#45;computed matches for the current view." alt="" coords="908,2069,1039,2093"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest.html" title="For each &quot;from&quot; feature, match the k nearest &quot;to&quot; features." alt="" coords="892,2117,1055,2141"/>
+<area shape="rect" href="$classrgrl__matcher__pseudo.html" title="For each &quot;from&quot; pseudo / weak feature, use intensity based matching to construct the &quot;to&quot; features..." alt="" coords="860,1925,1087,1949"/>
+<area shape="rect" href="$classrgrl__matcher__pseudo__3d.html" title="rgrl_matcher_pseudo_3d\&lt; PixelType \&gt;" alt="" coords="849,1973,1097,1997"/>
+<area shape="rect" href="$classrgrl__matcher__pseudo__int__3d.html" title="rgrl_matcher_pseudo_int_3d\&lt; PixelType \&gt;" alt="" coords="839,2021,1108,2045"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest__adv.html" title="For each &quot;from&quot; feature, match the k nearest &quot;to&quot; features." alt="" coords="1175,2117,1367,2141"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest__boundary.html" title="For each &quot;from&quot; feature, match the boundary points with the k nearest &quot;to&quot; features." alt="" coords="1157,2021,1384,2045"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest__random.html" title="For each &quot;from&quot; feature, match the k nearest &quot;to&quot; features." alt="" coords="1163,2069,1379,2093"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest__pick__one.html" title="For each &quot;from&quot; feature, match the k nearest &quot;to&quot; features." alt="" coords="1432,2117,1656,2141"/>
+<area shape="rect" href="$classrgrl__scale__estimator.html" title="Interface for scale estimator that can estimate with and without weights." alt="" coords="903,2165,1044,2189"/>
+<area shape="rect" href="$classrgrl__scale__est__closest.html" title="Unweighted scale estimator using closest of the match points." alt="" coords="1193,2165,1348,2189"/>
+<area shape="rect" href="$classrgrl__scale__est__null.html" title="A null scale estimator that has no effect on the weights." alt="" coords="1204,2213,1337,2237"/>
+<area shape="rect" href="$classrgrl__scale__est__all__weights.html" title="Weighted scale estimator that computes the scale as the sum of the weighted residuals divided by the ..." alt="" coords="884,2213,1063,2237"/>
+<area shape="rect" href="$classrgrl__trans__affine.html" title="rgrl_trans_affine" alt="" coords="915,197,1032,221"/>
+<area shape="rect" href="$classrgrl__trans__couple.html" title="A base class that represents a pair of transformation: forward &amp; backward." alt="" coords="911,245,1036,269"/>
+<area shape="rect" href="$classrgrl__trans__homo2d__proj__rad.html" title="Represents a 2D homography plus radial distortion transformation." alt="" coords="879,53,1068,77"/>
+<area shape="rect" href="$classrgrl__trans__homography2d.html" title="Represents a 2D homography transformation." alt="" coords="887,293,1060,317"/>
+<area shape="rect" href="$classrgrl__trans__mixed__spline.html" title="rgrl_trans_mixed_spline" alt="" coords="892,341,1055,365"/>
+<area shape="rect" href="$classrgrl__trans__quadratic.html" title="rgrl_trans_quadratic" alt="" coords="904,389,1043,413"/>
+<area shape="rect" href="$classrgrl__trans__rad__dis__homo2d.html" title="Represents a 2D homography transformation with radial lens distortion." alt="" coords="881,437,1065,461"/>
+<area shape="rect" href="$classrgrl__trans__reduced__quad.html" title="A reduced quadratic transformation, when centered, consists of a similarity transform + 2 2nd&#45;order r..." alt="" coords="888,485,1059,509"/>
+<area shape="rect" href="$classrgrl__trans__rigid.html" title="Represents a rigid transformation." alt="" coords="919,533,1028,557"/>
+<area shape="rect" href="$classrgrl__trans__similarity.html" title="Represents a similarity transformation." alt="" coords="905,581,1041,605"/>
+<area shape="rect" href="$classrgrl__trans__spline.html" title="rgrl_trans_spline" alt="" coords="913,101,1033,125"/>
+<area shape="rect" href="$classrgrl__trans__translation.html" title="rgrl_trans_translation" alt="" coords="900,149,1047,173"/>
+<area shape="rect" href="$classrgrl__weighter__m__est.html" title="rgrl_weighter_m_est" alt="" coords="903,821,1044,845"/>
+<area shape="rect" href="$classrgrl__weighter__unit.html" title="Assigns unit weight to everything." alt="" coords="909,773,1037,797"/>
+<area shape="rect" href="$classrgrl__weighter__indiv__scale.html" title="rgrl_weighter_indiv_scale" alt="" coords="1185,821,1356,845"/>
+<area shape="rect" href="core_vnl.tag$classvnl__least__squares__function.html" title="vnl_least_squares_function" alt="" coords="7,101,191,125"/>
+<area shape="rect" href="$classinverse__mapping__func.html" title="inverse_mapping_func" alt="" coords="272,173,427,197"/>
+<area shape="rect" href="$classrgrl__est__proj__func.html" title="a generic class to estimate a homogeneous projection matrix using L&#45;M." alt="" coords="240,29,459,53"/>
+<area shape="rect" href="$classrgrl__homo2d__func.html" title="rgrl_homo2d_func" alt="" coords="285,77,413,101"/>
+<area shape="rect" href="$classrgrl__rad__dis__homo2d__func.html" title="rgrl_rad_dis_homo2d_func" alt="" coords="260,125,439,149"/>
+<area shape="rect" href="$classrgrl__est__proj__rad__func.html" title="rgrl_est_proj_rad_func\&lt; Tdim, Fdim \&gt;" alt="" coords="525,5,771,29"/>
+<area shape="rect" href="$classrgrl__est__proj__rad__func.html" title="rgrl_est_proj_rad_func\&lt; 2, 2 \&gt;" alt="" coords="548,53,748,77"/>
+</map>

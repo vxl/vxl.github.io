@@ -1,0 +1,25 @@
+<map id="G" name="G">
+<area shape="rect" href="contrib_gel_gevd.tag$classgevd__param__mixin.html" title="gevd_param_mixin" alt="" coords="39,101,172,125"/>
+<area shape="rect" href="$classvifa__coll__lines__params.html" title="Container holding parameters for collinearizing lines." alt="" coords="293,5,451,29"/>
+<area shape="rect" href="$classvifa__group__pgram__params.html" title="Container holding parameters for grouping polygons." alt="" coords="281,53,463,77"/>
+<area shape="rect" href="$classvifa__int__face__attr__common__params.html" title="Container holding parameters for common intensity face attribute computations." alt="" coords="255,101,489,125"/>
+<area shape="rect" href="$classvifa__norm__params.html" title="vifa_norm_params" alt="" coords="305,197,439,221"/>
+<area shape="rect" href="$classvifa__parallel__params.html" title="vifa_parallel_params" alt="" coords="299,149,445,173"/>
+<area shape="rect" href="$classvifa__coll__lines.html" title="vifa_coll_lines" alt="" coords="577,5,684,29"/>
+<area shape="rect" href="$classvifa__group__pgram.html" title="vifa_group_pgram" alt="" coords="565,53,696,77"/>
+<area shape="rect" href="$classvifa__int__face__attr__common.html" title="vifa_int_face_attr_common" alt="" coords="539,101,723,125"/>
+<area shape="rect" href="$classvifa__int__face__attr.html" title="vifa_int_face_attr" alt="" coords="775,77,900,101"/>
+<area shape="rect" href="$classvifa__int__faces__attr.html" title="vifa_int_faces_attr" alt="" coords="772,125,903,149"/>
+<area shape="rect" href="$classvifa__int__faces__adj__attr.html" title="vifa_int_faces_adj_attr" alt="" coords="952,125,1109,149"/>
+<area shape="rect" href="$classvifa__parallel.html" title="Compute the parallel&#45;ness of a set of line segments." alt="" coords="584,149,677,173"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="53,233,157,257"/>
+<area shape="rect" href="$classvifa__bbox.html" title="vifa_bbox" alt="" coords="332,341,412,365"/>
+<area shape="rect" href="$classvifa__histogram.html" title="vifa_histogram" alt="" coords="317,245,427,269"/>
+<area shape="rect" href="$classvifa__imp__line.html" title="vifa_imp_line\&lt; Type \&gt;" alt="" coords="296,437,448,461"/>
+<area shape="rect" href="$classvifa__incr__var.html" title="Compute the mean &amp; variance measures of a data set." alt="" coords="323,293,421,317"/>
+<area shape="rect" href="$classvifa__line__cover.html" title="vifa_line_cover" alt="" coords="316,389,428,413"/>
+<area shape="rect" href="$classvifa__image__histogram.html" title="vifa_image_histogram" alt="" coords="555,245,707,269"/>
+<area shape="rect" href="core_vgl.tag$classvgl__box__2d.html" title="vgl_box_2d\&lt; double \&gt;" alt="" coords="29,341,181,365"/>
+<area shape="rect" href="core_vgl.tag$classvgl__line__segment__2d.html" title="vgl_line_segment_2d\&lt; Type \&gt;" alt="" coords="5,437,205,461"/>
+<area shape="rect" href="core_vul.tag$classvul__timestamp.html" title="vul_timestamp" alt="" coords="51,173,160,197"/>
+</map>

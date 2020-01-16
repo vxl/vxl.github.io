@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil3d__image__view__base.html" title="An abstract base class of smart pointers to actual image data in memory." alt="" coords="7,5,169,29"/>
+<area shape="rect" href="$classvil3d__image__view.html" title="Concrete view of image data of type T held in memory." alt="" coords="220,5,377,29"/>
+</map>

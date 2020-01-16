@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__transformation.html" title="A base class that represents a transformation." alt="" coords="5,252,139,276"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="31,161,113,185"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="20,84,124,108"/>
+<area shape="rect" href="$classrgrl__est__proj__rad__func.html" title="rgrl_est_proj_rad_func\&lt; 2, 2 \&gt;" alt="" coords="163,252,363,276"/>
+<area shape="rect" href="$classrgrl__est__proj__func.html" title="a generic class to estimate a homogeneous projection matrix using L&#45;M." alt="" coords="208,84,427,108"/>
+<area shape="rect" href="$classrgrl__est__proj__rad__func.html" title="rgrl_est_proj_rad_func\&lt; Tdim, Fdim \&gt;" alt="" coords="271,161,516,185"/>
+<area shape="rect" href="core_vnl.tag$classvnl__least__squares__function.html" title="vnl_least_squares_function" alt="" coords="225,7,409,31"/>
+<area shape="rect" title=" \&lt; 2, 2 \&gt;" alt="" coords="371,183,379,191"/>
+<area shape="rect" title=" \&lt; 2, 2 \&gt;" alt="" coords="276,248,284,256"/>
+</map>

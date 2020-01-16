@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvcsl__cartesian__2d.html" title="2D Cartesian coordinate system." alt="" coords="513,5,641,29"/>
+<area shape="rect" href="$classvcsl__cartesian__3d.html" title="3D Cartesian coordinate system." alt="" coords="513,53,641,77"/>
+<area shape="rect" href="$classvcsl__cylindrical.html" title="3D coordinate system specified by distance rho, angle theta and distance z." alt="" coords="521,101,633,125"/>
+<area shape="rect" href="$classvcsl__geographic.html" title="Represent a location relative to the earth." alt="" coords="519,149,636,173"/>
+<area shape="rect" href="$classvcsl__polar.html" title="Planar coordinate system specified by the parameters rho and theta." alt="" coords="536,197,619,221"/>
+<area shape="rect" href="$classvcsl__spherical.html" title="3D coordinate system specified by distance rho, angles theta and phi." alt="" coords="524,245,631,269"/>
+<area shape="rect" href="$classvcsl__coordinate__system.html" title="Abstract coordinate system." alt="" coords="157,125,323,149"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,125,109,149"/>
+<area shape="rect" href="$classvcsl__geocentric.html" title="A specific geographic coordinate system." alt="" coords="692,77,807,101"/>
+<area shape="rect" href="$classvcsl__geodetic.html" title="3D coordinate system intended to represent a location relative to the earth." alt="" coords="697,125,801,149"/>
+<area shape="rect" href="$classvcsl__lambertian.html" title="Lambert Conformal Conic Projection." alt="" coords="692,173,807,197"/>
+<area shape="rect" href="$classvcsl__utm.html" title="Universal Transverse Mercator projection." alt="" coords="712,221,787,245"/>
+</map>

@@ -1,0 +1,6 @@
+\form#0:$k(x) = 0.75x(1-x^2/15)/\sqrt{5} + 0.5$
+\form#1:$x^2<5$
+\form#2:$0 <= x <= 1 => -sqrt(5) <= y <= sqrt(5)$
+\form#3:${\frac {3}{20}}\,\left |{\it Dy}\right |\sqrt {5}\left (1-1/5\,{y}^{2}\right )=1$
+\form#4:$p(x)=\lambda exp(-\lambda x)$
+\form#5:$w=(3n/4)^{-0.2}\sigma$

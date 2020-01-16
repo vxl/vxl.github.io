@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__convergence__on__median__error.html" title="Determine convergence based on the median geometric error." alt="" coords="5,231,237,255"/>
+<area shape="rect" href="$classrgrl__convergence__on__weighted__error.html" title="Determine convergence based on the weighted average of geometric errors." alt="" coords="261,231,504,255"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="211,81,293,105"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="200,7,304,31"/>
+</map>

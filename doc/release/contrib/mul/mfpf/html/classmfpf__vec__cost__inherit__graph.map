@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmfpf__log__lin__class__cost.html" title="Computes log prob based on output of a linear classifier." alt="" coords="5,81,168,105"/>
+<area shape="rect" href="$classmfpf__sad__vec__cost.html" title="Computes weighted sum of absolute differences to a mean." alt="" coords="192,81,328,105"/>
+<area shape="rect" href="$classmfpf__ssd__vec__cost.html" title="Computes weighted sum of square differences to a mean." alt="" coords="352,81,488,105"/>
+</map>

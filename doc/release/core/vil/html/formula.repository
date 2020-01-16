@@ -1,0 +1,9 @@
+\form#0:$r$
+\form#1:$r, r^{-1}, r^{-1}, r^{-1}, r^{-2}, r^{-2}, r^{-2}, r^{-2}$
+\form#2:$(f*g)(x) = \int f(x-y) g(y) dy$
+\form#3:$k D^d \exp -\frac{x^2}{2\sigma^2} $
+\form#4:$ dest(x,y)=min_i,j (src(x+i,y+j)+ai(i^2)+aj(j^2)) $
+\form#5:$\bigwedge_{i,j,p} {\textstyle src}(i,j,p) == {\textstyle dest}(i,j,p)$
+\form#6:$dest(i,j)^2 = 1/np sum_p src(i,j,p)^2$
+\form#7:$dest(i,j) = sqrt(sum_p src(i,j,p)^2)$
+\form#8:$dest(i,j) = sum_p src(i,j,p)^2$

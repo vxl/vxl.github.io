@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__nitf2__field__functor.html" title="vil_nitf2_field_functor\&lt; T \&gt;" alt="" coords="7,53,185,77"/>
+<area shape="rect" href="$classvil__nitf2__choose__field__value.html" title="Functor vil_nitf2_choose_field_value defines a function that sets its out parameter to a value of one..." alt="" coords="236,5,455,29"/>
+<area shape="rect" href="$classvil__nitf2__constant__functor.html" title="vil_nitf2_constant_functor\&lt; T \&gt;" alt="" coords="243,53,448,77"/>
+<area shape="rect" href="$classvil__nitf2__field__value.html" title="Functor vil_nitf2_field_value defines a function that sets its out parameter to a value of a field fr..." alt="" coords="260,101,431,125"/>
+</map>

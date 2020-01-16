@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmipa__block__normaliser.html" title="Independently normalise (non&#45;overlapping) blocks within a region." alt="" coords="19,81,176,105"/>
+<area shape="rect" href="$classmipa__vector__normaliser.html" title="Base class for normalisation algorithms for image texture vectors." alt="" coords="16,7,179,31"/>
+</map>

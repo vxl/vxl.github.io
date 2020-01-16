@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvidl__dc1394__istream.html" title="A video input stream using libdc1394." alt="" coords="215,5,359,29"/>
+<area shape="rect" href="$classvidl__dshow__file__istream.html" title="DirectShow file input stream object." alt="" coords="205,53,368,77"/>
+<area shape="rect" href="$classvidl__dshow__live__istream.html" title="DirectShow live video input stream support." alt="" coords="149,101,424,125"/>
+<area shape="rect" href="$classvidl__ffmpeg__istream.html" title="A video input stream using FFMPEG to decoded files." alt="" coords="216,149,357,173"/>
+<area shape="rect" href="$classvidl__image__list__istream.html" title="A video input stream from a list of images on disk." alt="" coords="207,197,367,221"/>
+<area shape="rect" href="$classvidl__v4l2__istream.html" title="A video input stream using a v4l2 device." alt="" coords="224,245,349,269"/>
+<area shape="rect" href="$classvidl__v4l__istream.html" title="vidl_v4l_istream" alt="" coords="228,293,345,317"/>
+</map>

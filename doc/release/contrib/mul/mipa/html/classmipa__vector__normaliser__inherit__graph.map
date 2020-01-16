@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmipa__block__normaliser.html" title="Independently normalise (non&#45;overlapping) blocks within a region." alt="" coords="19,81,176,105"/>
+<area shape="rect" href="$classmipa__identity__normaliser.html" title="mipa_identity_normaliser" alt="" coords="200,81,371,105"/>
+<area shape="rect" href="$classmipa__l2norm__vector__normaliser.html" title="L2 norm." alt="" coords="395,81,605,105"/>
+<area shape="rect" href="$classmipa__ms__block__normaliser.html" title="Independently normalise (non&#45;overlapping) blocks within a region." alt="" coords="5,156,189,180"/>
+</map>

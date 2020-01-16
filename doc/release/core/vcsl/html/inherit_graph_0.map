@@ -1,0 +1,40 @@
+<map id="G" name="G">
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,293,109,317"/>
+<area shape="rect" href="$classvcsl__axis.html" title="Axis descriptor: a dimension, a unit, a label." alt="" coords="212,101,289,125"/>
+<area shape="rect" href="$classvcsl__coordinate__system.html" title="Abstract coordinate system." alt="" coords="168,149,333,173"/>
+<area shape="rect" href="$classvcsl__dimension.html" title="Abstract dimension." alt="" coords="193,221,308,245"/>
+<area shape="rect" href="$classvcsl__graph.html" title="Spatial coordinate system transformation graph." alt="" coords="207,269,295,293"/>
+<area shape="rect" href="$classvcsl__matrix__param.html" title="Auxiliary class for vcsl_matrix." alt="" coords="184,317,317,341"/>
+<area shape="rect" href="$classvcsl__spatial__transformation.html" title="Transformation between 2 spatial coordinate systems." alt="" coords="159,365,343,389"/>
+<area shape="rect" href="$classvcsl__spheroid.html" title="Reference sphere or ellipse for a geographic coordinate system." alt="" coords="199,413,303,437"/>
+<area shape="rect" href="$classvcsl__unit.html" title="Abstract unit associated to a dimension." alt="" coords="213,605,288,629"/>
+<area shape="rect" href="$classvcsl__cartesian.html" title="Cartesian coordinate system." alt="" coords="445,77,552,101"/>
+<area shape="rect" href="$classvcsl__spatial.html" title="A spatial coordinate system." alt="" coords="453,125,544,149"/>
+<area shape="rect" href="$classvcsl__cartesian__2d.html" title="2D Cartesian coordinate system." alt="" coords="656,5,784,29"/>
+<area shape="rect" href="$classvcsl__cartesian__3d.html" title="3D Cartesian coordinate system." alt="" coords="656,53,784,77"/>
+<area shape="rect" href="$classvcsl__cylindrical.html" title="3D coordinate system specified by distance rho, angle theta and distance z." alt="" coords="664,101,776,125"/>
+<area shape="rect" href="$classvcsl__geographic.html" title="Represent a location relative to the earth." alt="" coords="661,149,779,173"/>
+<area shape="rect" href="$classvcsl__polar.html" title="Planar coordinate system specified by the parameters rho and theta." alt="" coords="679,197,761,221"/>
+<area shape="rect" href="$classvcsl__spherical.html" title="3D coordinate system specified by distance rho, angles theta and phi." alt="" coords="667,245,773,269"/>
+<area shape="rect" href="$classvcsl__geocentric.html" title="A specific geographic coordinate system." alt="" coords="836,77,951,101"/>
+<area shape="rect" href="$classvcsl__geodetic.html" title="3D coordinate system intended to represent a location relative to the earth." alt="" coords="841,125,945,149"/>
+<area shape="rect" href="$classvcsl__lambertian.html" title="Lambert Conformal Conic Projection." alt="" coords="836,173,951,197"/>
+<area shape="rect" href="$classvcsl__utm.html" title="Universal Transverse Mercator projection." alt="" coords="856,221,931,245"/>
+<area shape="rect" href="$classvcsl__angle.html" title="Angle dimension." alt="" coords="456,173,541,197"/>
+<area shape="rect" href="$classvcsl__length.html" title="Length dimension." alt="" coords="455,221,543,245"/>
+<area shape="rect" href="$classvcsl__composition.html" title="Composition of transformations." alt="" coords="437,269,560,293"/>
+<area shape="rect" href="$classvcsl__cylindrical__to__cartesian__3d.html" title="Convert 3D cartesian coordinates to cylindrical coordinates." alt="" coords="392,317,605,341"/>
+<area shape="rect" href="$classvcsl__matrix.html" title="A coordinate transformation specified by a transformation matrix." alt="" coords="453,365,544,389"/>
+<area shape="rect" href="$classvcsl__perspective.html" title="Perspective projection transformation." alt="" coords="439,413,559,437"/>
+<area shape="rect" href="$classvcsl__rotation.html" title="Rotation transformation (either 2D or 3D)." alt="" coords="449,461,548,485"/>
+<area shape="rect" href="$classvcsl__scale.html" title="Scale transformation." alt="" coords="457,509,540,533"/>
+<area shape="rect" href="$classvcsl__translation.html" title="Translation transformation." alt="" coords="441,557,556,581"/>
+<area shape="rect" href="$classvcsl__displacement.html" title="Affine rotation." alt="" coords="655,461,785,485"/>
+<area shape="rect" href="$classvcsl__angle__unit.html" title="Abstract unit associated to the angle dimension." alt="" coords="441,605,556,629"/>
+<area shape="rect" href="$classvcsl__length__unit.html" title="Abstract unit associated to the length dimension." alt="" coords="440,677,557,701"/>
+<area shape="rect" href="$classvcsl__degree.html" title="A unit associated to the angle dimension." alt="" coords="673,557,767,581"/>
+<area shape="rect" href="$classvcsl__radian.html" title="Standard unit associated to the angle dimension." alt="" coords="675,605,765,629"/>
+<area shape="rect" href="$classvcsl__meter.html" title="Standard unit associated to the length dimension." alt="" coords="676,653,764,677"/>
+<area shape="rect" href="$classvcsl__micron.html" title="Standard unit associated to the length dimension." alt="" coords="673,701,767,725"/>
+<area shape="rect" href="$classvcsl__millimeter.html" title="Standard unit associated to the length dimension." alt="" coords="665,749,775,773"/>
+</map>

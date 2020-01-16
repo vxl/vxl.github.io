@@ -1,0 +1,21 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgui__adaptor.html" title="Provides an abstract interface to an OpenGL rendering state." alt="" coords="35,149,133,173"/>
+<area shape="rect" href="$structvgui__glut__adaptor.html" title="The GLUT (OpenGL Utility Toolkit) implementation of vgui_adaptor." alt="" coords="217,5,345,29"/>
+<area shape="rect" href="$classvgui__gtk2__adaptor.html" title="The GTK implementation of vgui_adaptor." alt="" coords="216,197,347,221"/>
+<area shape="rect" href="$classvgui__gtk__adaptor.html" title="The GTK implementation of vgui_adaptor." alt="" coords="219,245,344,269"/>
+<area shape="rect" href="$classvgui__mfc__adaptor.html" title="MFC implementation of vgui_adaptor." alt="" coords="217,53,345,77"/>
+<area shape="rect" href="$classvgui__qt__adaptor.html" title="OpenGL canvas in QT as a VGUI adaptor." alt="" coords="223,101,340,125"/>
+<area shape="rect" href="$classvgui__win32__adaptor.html" title="vgui_win32_adaptor" alt="" coords="211,293,352,317"/>
+<area shape="rect" href="$classvgui__wx__adaptor.html" title="wxWidgets implementation of vgui_adaptor." alt="" coords="220,149,343,173"/>
+<area shape="rect" href="$classvgui__mfc__view.html" title="vgui_mfc_view" alt="" coords="401,53,511,77"/>
+<area shape="rect" href="$classvgui__adaptor__mixin.html" title="Holds the dimensions of the adaptor and the event causing popup menus." alt="" coords="15,197,153,221"/>
+<area shape="rect" href="$classvgui__win32__cmdtarget.html" title="vgui_win32_cmdtarget" alt="" coords="7,317,161,341"/>
+<area shape="rect" href="$classvgui__win32__window.html" title="vgui_win32_window" alt="" coords="211,341,352,365"/>
+<area shape="rect" href="$classvgui__window.html" title="An abstract representation of a system window." alt="" coords="35,485,133,509"/>
+<area shape="rect" href="$structvgui__glut__window.html" title="The GLUT (OpenGL Utility Toolkit) implementation of vgui_window." alt="" coords="217,389,345,413"/>
+<area shape="rect" href="$classvgui__gtk2__window.html" title="The GTK implementation of vgui_window." alt="" coords="216,437,347,461"/>
+<area shape="rect" href="$classvgui__gtk__window.html" title="The GTK implementation of vgui_window." alt="" coords="220,485,343,509"/>
+<area shape="rect" href="$classvgui__mfc__window.html" title="The MFC implementation of vgui_window." alt="" coords="217,533,345,557"/>
+<area shape="rect" href="$classvgui__qt__window.html" title="QT implementation of vgui_window." alt="" coords="223,581,340,605"/>
+<area shape="rect" href="$classvgui__wx__window.html" title="wxWidgets implementation of vgui_window." alt="" coords="220,629,343,653"/>
+</map>

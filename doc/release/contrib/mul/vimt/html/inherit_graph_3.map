@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvimt__image.html" title="A base class for images of any dimension and type." alt="" coords="7,5,97,29"/>
+<area shape="rect" href="$classvimt__image__2d.html" title="A base class for arbitrary 2D images." alt="" coords="148,5,260,29"/>
+<area shape="rect" href="$classvimt__image__2d__of.html" title="Represent 2D image of type T together with a transform." alt="" coords="311,5,473,29"/>
+</map>

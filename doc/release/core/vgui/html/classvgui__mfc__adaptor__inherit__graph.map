@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgui__mfc__view.html" title="vgui_mfc_view" alt="" coords="71,156,180,180"/>
+<area shape="rect" href="$classvgui__adaptor.html" title="Provides an abstract interface to an OpenGL rendering state." alt="" coords="5,7,104,31"/>
+<area shape="rect" href="$classvgui__adaptor__mixin.html" title="Holds the dimensions of the adaptor and the event causing popup menus." alt="" coords="128,7,267,31"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__feature__region.html" title="Represents a feature (&quot;data point&quot;) used by the registration algorithms." alt="" coords="5,231,139,255"/>
+<area shape="rect" href="$classrgrl__feature__point.html" title="Represent a point in space." alt="" coords="163,231,288,255"/>
+<area shape="rect" href="$classrgrl__feature.html" title="Represents a feature (&quot;data point&quot;) used by the registration algorithms." alt="" coords="180,156,271,180"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="184,81,267,105"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="173,7,277,31"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgui__displaylist3D__tableau.html" title="Displaying of three&#45;dimensional geometric objects." alt="" coords="175,5,353,29"/>
+<area shape="rect" href="$classvgui__drag__tableau.html" title="A bare tableau which uses the vgui_drag_mixin." alt="" coords="199,53,329,77"/>
+<area shape="rect" href="$classvgui__viewer2D__tableau.html" title="Tableau with functions to view 2D objects (eg, zoom, drag, centre)." alt="" coords="184,101,344,125"/>
+<area shape="rect" href="$classvgui__viewer3D__tableau.html" title="Tableau with functions to view 3D objects (eg, rotate, zoom, etc)." alt="" coords="184,149,344,173"/>
+<area shape="rect" href="$classvgui__easy3D__tableau.html" title="Tableau to display three&#45;dimensional geometric objects." alt="" coords="404,5,553,29"/>
+</map>

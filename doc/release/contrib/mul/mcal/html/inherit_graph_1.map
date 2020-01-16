@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmcal__single__basis__cost.html" title="Base for objects which compute a cost function for one basis direction." alt="" coords="5,29,168,53"/>
+<area shape="rect" href="$classmcal__sparse__basis__cost.html" title="Cost function to promote sparse basis vectors." alt="" coords="216,5,384,29"/>
+<area shape="rect" href="$classmcal__var__basis__cost.html" title="Cost function returning variance along given vector." alt="" coords="227,53,373,77"/>
+</map>

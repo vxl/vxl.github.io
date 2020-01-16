@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmsm__similarity__aligner.html" title="Calculate and apply 2D similarity transformations." alt="" coords="5,81,163,105"/>
+<area shape="rect" href="$classmsm__translation__aligner.html" title="Calculate and apply 2D translations." alt="" coords="187,81,352,105"/>
+<area shape="rect" href="$classmsm__zoom__aligner.html" title="Calculate and apply translation + scale transform." alt="" coords="376,81,515,105"/>
+</map>

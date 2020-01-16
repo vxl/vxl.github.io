@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="contrib_mul_vil3d.tag$classvil3d__file__format.html" title="vil3d_file_format" alt="" coords="5,29,125,53"/>
+<area shape="rect" href="$classvimt3d__vil3d__v3i__format.html" title="Reader/Writer for v3i format images." alt="" coords="179,5,344,29"/>
+<area shape="rect" href="$classvimt3d__vil3d__v3m__format.html" title="Reader/Writer for v3m format images, specialised for label or mask images." alt="" coords="173,53,349,77"/>
+</map>

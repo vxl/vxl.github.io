@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvpdl__gaussian__base.html" title="The abstract base class for Gaussian distributions." alt="" coords="575,77,764,101"/>
+<area shape="rect" href="$classvpdl__multi__cmp__dist.html" title="The base class for all multiple component probability distributions." alt="" coords="575,204,764,228"/>
+<area shape="rect" href="$classvpdl__multi__cmp__dist.html" title="vpdl_multi_cmp_dist\&lt; vpdt_dist_traits\&lt; dist_t \&gt;::scalar_type, vpdt_dist_traits\&lt; dist_t \&gt;::dimension \&gt;" alt="" coords="1380,245,1988,269"/>
+<area shape="rect" href="$classvpdl__distribution.html" title="vpdl_distribution\&lt; vpdt_dist_traits\&lt; dist_t \&gt;::scalar_type, n \&gt;" alt="" coords="480,321,859,345"/>
+<area shape="rect" title=" \&lt; vpdt_dist_traits\&lt; dist_t \&gt;::scalar_type,n \&gt;" alt="" coords="101,265,109,273"/>
+<area shape="rect" title=" \&lt; vpdt_dist_traits\&lt; dist_t \&gt;::scalar_type,n \&gt;" alt="" coords="509,343,517,351"/>
+<area shape="rect" href="$classvpdl__gaussian.html" title="A Gaussian with variance independent in each dimension." alt="" coords="1608,5,1760,29"/>
+<area shape="rect" href="$classvpdl__gaussian__indep.html" title="A Gaussian with variance independent in each dimension." alt="" coords="1588,53,1780,77"/>
+<area shape="rect" href="$classvpdl__gaussian__sphere.html" title="A Gaussian with (hyper&#45;)spherical covariance." alt="" coords="1584,101,1784,125"/>
+<area shape="rect" href="$classvpdl__kernel__base.html" title="A base class for kernel (aka Parzen window) distributions." alt="" coords="1599,149,1769,173"/>
+<area shape="rect" href="$classvpdl__mixture.html" title="A mixture of distributions." alt="" coords="1612,197,1756,221"/>
+<area shape="rect" title=" \&lt; vpdt_dist_traits\&lt; dist_t \&gt;::scalar_type, vpdt_dist_traits\&lt; dist_t \&gt;::dimension \&gt;" alt="" coords="760,223,768,231"/>
+<area shape="rect" title=" \&lt; vpdt_dist_traits\&lt; dist_t \&gt;::scalar_type, vpdt_dist_traits\&lt; dist_t \&gt;::dimension \&gt;" alt="" coords="1376,249,1384,257"/>
+<area shape="rect" href="$classvpdl__kernel__fbw__base.html" title="A base class for fixed bandwidth kernel distributions." alt="" coords="2041,143,2241,167"/>
+<area shape="rect" href="$classvpdl__kernel__vbw__base.html" title="A base class for variable bandwidth kernel distributions." alt="" coords="2040,191,2243,215"/>
+<area shape="rect" href="$classvpdl__kernel__gaussian__sfbw.html" title="A fixed bandwidth spherical Gaussian kernel distribution." alt="" coords="2295,143,2524,167"/>
+<area shape="rect" href="$classvpdl__mixture__of.html" title="A mixture of a fixed type of distributions." alt="" coords="2056,245,2227,269"/>
+</map>

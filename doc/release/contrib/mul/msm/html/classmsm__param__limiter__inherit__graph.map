@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmsm__box__limiter.html" title="Apply limits to each parameter independently." alt="" coords="5,81,128,105"/>
+<area shape="rect" href="$classmsm__ellipsoid__limiter.html" title="Force param.s to lie in ellipsoid defined by variances." alt="" coords="152,81,301,105"/>
+<area shape="rect" href="$classmsm__no__limiter.html" title="No limits applied to parameters." alt="" coords="325,81,440,105"/>
+</map>

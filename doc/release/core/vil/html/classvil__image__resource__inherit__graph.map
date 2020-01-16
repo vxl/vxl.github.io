@@ -1,0 +1,35 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__blocked__image__resource.html" title="vil_blocked_image_resource" alt="" coords="264,77,456,101"/>
+<area shape="rect" href="$classvil__bmp__image.html" title="Generic image implementation for BMP files." alt="" coords="304,125,416,149"/>
+<area shape="rect" href="$classvil__clamp__image__resource.html" title="A generic_image adaptor that behaves like a clamped version of its input." alt="" coords="269,173,451,197"/>
+<area shape="rect" href="$classvil__convolve__1d__resource.html" title="A resource adaptor that behaves like a convolved version of its input." alt="" coords="192,221,528,245"/>
+<area shape="rect" href="$classvil__correlate__1d__resource.html" title="A resource adaptor that behaves like a correlated version of its input." alt="" coords="192,269,528,293"/>
+<area shape="rect" href="$classvil__crop__image__resource.html" title="A generic_image adaptor that behaves like a cropped version of its input." alt="" coords="275,317,445,341"/>
+<area shape="rect" href="$classvil__decimate__image__resource.html" title="A generic_image adaptor that behaves like a decimated version of its input." alt="" coords="260,365,460,389"/>
+<area shape="rect" href="$classvil__dicom__image.html" title="Generic image implementation for DICOM files." alt="" coords="299,413,421,437"/>
+<area shape="rect" href="$classvil__flip__lr__image__resource.html" title="A generic_image adaptor that behaves like a flipped left to right version of its input." alt="" coords="272,461,448,485"/>
+<area shape="rect" href="$classvil__flip__ud__image__resource.html" title="A generic_image adaptor that behaves like a flipped left to right version of its input." alt="" coords="268,509,452,533"/>
+<area shape="rect" href="$classvil__image__resource__plugin.html" title="A base class for a plugin for vil images loading." alt="" coords="269,557,451,581"/>
+<area shape="rect" href="$classvil__iris__generic__image.html" title="Generic image implementation for iris (SGI) RGB files." alt="" coords="283,605,437,629"/>
+<area shape="rect" href="$classvil__j2k__image.html" title="Class capable of reading JPEG2000 Part I files and ECW (ER Mapper&#39;s proprietary format) image files..." alt="" coords="308,653,412,677"/>
+<area shape="rect" href="$classvil__jpeg__image.html" title="generic_image implementation for JPEG files." alt="" coords="304,701,416,725"/>
+<area shape="rect" href="$classvil__memory__image.html" title="Generic image implementation for PNM files." alt="" coords="292,749,428,773"/>
+<area shape="rect" href="$classvil__mit__image.html" title="Generic image implementation for MIT files." alt="" coords="308,797,412,821"/>
+<area shape="rect" href="$classvil__openjpeg__image.html" title="Derived image resource for JPEG2000 imagery using OpenJPEG." alt="" coords="289,845,431,869"/>
+<area shape="rect" href="$classvil__plane__image__resource.html" title="A generic_image adaptor that behaves like a single plane version of its input." alt="" coords="271,893,449,917"/>
+<area shape="rect" href="$classvil__png__image.html" title="Generic image implementation for PNG files." alt="" coords="305,941,415,965"/>
+<area shape="rect" href="$classvil__pnm__image.html" title="Generic image implementation for PNM files." alt="" coords="304,989,416,1013"/>
+<area shape="rect" href="$classvil__pyramid__image__resource.html" title="Representation of a pyramid resolution hierarchy; mostly pure virtual methods." alt="" coords="264,1037,456,1061"/>
+<area shape="rect" href="$classvil__ras__image.html" title="Generic image implementation for Sun raster files." alt="" coords="308,1085,412,1109"/>
+<area shape="rect" href="$classvil__transpose__image__resource.html" title="A generic_image adaptor that behaves like a transposed version of its input." alt="" coords="259,1133,461,1157"/>
+<area shape="rect" href="$classvil__viff__image.html" title="Generic image implementation for VIFF (Khoros) files." alt="" coords="308,1181,412,1205"/>
+<area shape="rect" href="$classvil__blocked__image__facade.html" title="vil_blocked_image_facade" alt="" coords="615,5,793,29"/>
+<area shape="rect" href="$classvil__cached__image__resource.html" title="vil_cached_image_resource" alt="" coords="609,53,799,77"/>
+<area shape="rect" href="$classvil__nitf2__image.html" title="Class for reading NITF 2.1 imagery files." alt="" coords="648,101,760,125"/>
+<area shape="rect" href="$classvil__tiff__image.html" title="Generic image interface for image TIFF image files (could have multiple images)." alt="" coords="653,149,755,173"/>
+<area shape="rect" href="$classvil__j2k__nitf2__pyramid__image__resource.html" title="Representation of a pyramid resolution hierarchy; mostly pure virtual methods." alt="" coords="579,941,829,965"/>
+<area shape="rect" href="$classvil__j2k__pyramid__image__resource.html" title="vil_j2k_pyramid_image_resource" alt="" coords="596,989,812,1013"/>
+<area shape="rect" href="$classvil__openjpeg__pyramid__image__resource.html" title="vil_openjpeg_pyramid_image_resource" alt="" coords="577,1037,831,1061"/>
+<area shape="rect" href="$classvil__pyramid__image__list.html" title="vil_pyramid_image_list" alt="" coords="625,1085,783,1109"/>
+<area shape="rect" href="$classvil__tiff__pyramid__resource.html" title="Pyramid resource built on the multi&#45;image capability of the TIFF format." alt="" coords="619,1133,789,1157"/>
+</map>

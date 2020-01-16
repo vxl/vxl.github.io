@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="core_vnl.tag$classvnl__unary__function.html" title="vnl_unary_function\&lt; double, vnl_vector\&lt; double \&gt; \&gt;" alt="" coords="7,29,335,53"/>
+<area shape="rect" href="core_vnl.tag$classvnl__cost__function.html" title="vnl_cost_function" alt="" coords="385,29,511,53"/>
+<area shape="rect" href="$classmcal__pair__cost1.html" title="mcal_pair_cost1" alt="" coords="561,5,679,29"/>
+<area shape="rect" href="$classmcal__pair__cost2.html" title="Cost, assuming it can be evaluated from variance of projection." alt="" coords="561,53,679,77"/>
+</map>

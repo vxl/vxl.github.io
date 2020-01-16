@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbundler__tracks__propose__matches.html" title="An abstract functor that outputs a set of pairs of images that should be matched." alt="" coords="7,5,228,29"/>
+<area shape="rect" href="$classbundler__tracks__impl__propose__matches__all.html" title="A functor that provides the default matching algorithm." alt="" coords="277,5,552,29"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__linear__estimator.html" title="Interface for linear transform estimators." alt="" coords="453,149,597,173"/>
+<area shape="rect" href="$classrgrl__nonlinear__estimator.html" title="Interface for non&#45;linear transform estimators." alt="" coords="443,389,608,413"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="159,269,241,293"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,269,109,293"/>
+<area shape="rect" href="$classrgrl__est__affine.html" title="Affine transform estimator." alt="" coords="692,5,799,29"/>
+<area shape="rect" href="$classrgrl__est__homography2d.html" title="homography2D transform estimator." alt="" coords="664,53,827,77"/>
+<area shape="rect" href="$classrgrl__est__quadratic.html" title="Quadratic transform estimator." alt="" coords="681,101,809,125"/>
+<area shape="rect" href="$classrgrl__est__reduced__quad2d.html" title="2D similarity transform estimator." alt="" coords="659,149,832,173"/>
+<area shape="rect" href="$classrgrl__est__similarity2d.html" title="2D similarity transform estimator." alt="" coords="676,197,815,221"/>
+<area shape="rect" href="$classrgrl__est__translation.html" title="Translation transform estimator." alt="" coords="677,245,813,269"/>
+<area shape="rect" href="$classrgrl__est__dis__homo2d__lm.html" title="homography2D transform estimator." alt="" coords="661,293,829,317"/>
+<area shape="rect" href="$classrgrl__est__homo2d__lm.html" title="homography2D transform estimator." alt="" coords="673,341,817,365"/>
+<area shape="rect" href="$classrgrl__est__homo2d__proj.html" title="homography2D transform estimator using the new proj function defined in rgrl_est_proj_func." alt="" coords="669,389,821,413"/>
+<area shape="rect" href="$classrgrl__est__homo2d__proj__rad.html" title="homography2D transform estimator using the new proj function defined in rgrl_est_proj_func." alt="" coords="656,437,835,461"/>
+<area shape="rect" href="$classrgrl__est__rigid.html" title="Rigid transform estimator." alt="" coords="696,485,795,509"/>
+<area shape="rect" href="$classrgrl__est__spline.html" title="rgrl_est_spline" alt="" coords="692,533,799,557"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvnl__diag__matrix.html" title="vnl_diag_matrix\&lt; double \&gt;" alt="" coords="416,5,595,29"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="136,49,144,57"/>
+<area shape="rect" title=" \&lt; double \&gt;" alt="" coords="412,19,420,27"/>
+<area shape="rect" href="$classvnl__diag__matrix.html" title="vnl_diag_matrix\&lt; singval_t \&gt;" alt="" coords="409,53,601,77"/>
+<area shape="rect" title=" \&lt; singval_t \&gt;" alt="" coords="151,61,159,69"/>
+<area shape="rect" title=" \&lt; singval_t \&gt;" alt="" coords="405,61,413,69"/>
+<area shape="rect" href="$classvnl__diag__matrix.html" title="vnl_diag_matrix\&lt; vcl_complex\&lt; double \&gt; \&gt;" alt="" coords="368,101,643,125"/>
+<area shape="rect" title=" \&lt; vcl_complex\&lt; double \&gt; \&gt;" alt="" coords="135,75,143,83"/>
+<area shape="rect" title=" \&lt; vcl_complex\&lt; double \&gt; \&gt;" alt="" coords="364,101,372,109"/>
+</map>

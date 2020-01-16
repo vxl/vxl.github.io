@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbundler__tracks__refine.html" title="An abstract functor that takes in corresponding features between two images, and refines them accordi..." alt="" coords="7,5,156,29"/>
+<area shape="rect" href="$classbundler__tracks__impl__refine__epipolar.html" title="A functor that takes refines a set of matches features according to some thresholds." alt="" coords="207,5,441,29"/>
+</map>

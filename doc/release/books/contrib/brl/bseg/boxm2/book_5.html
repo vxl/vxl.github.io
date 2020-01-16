@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>BOXM2: 5. Boxm2 OpenCL Accelerated Package</title>
+
+<meta name="description" content="BOXM2: 5. Boxm2 OpenCL Accelerated Package">
+<meta name="keywords" content="BOXM2: 5. Boxm2 OpenCL Accelerated Package">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="ocl"></a>
+<a name="SEC22"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_4.html#SEC21" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC23" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC19" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC27" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 5. Boxm2 OpenCL Accelerated Package </h1>
+
+
+<blockquote><p><strong>Chapter summary</strong>:<br>
+GPU-accelerated octree based voxel modeling library.  
+</p></blockquote>
+
+<hr size="6">
+<a name="SEC23"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC22" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC24" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC27" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 5.1 OpenCL Process </h2>
+
+<p>The algorithms such as rendering, updating the volume, refining the model 
+or detecting change are implemented in OpenCL.  Each process is a subclass of
+<code>boxm2_opencl_process_base</code>, which provides three virtual functions: 
+</p>
+<ul class="toc">
+<li> <code>init_kernel(cl_context* context, cl_device_id* device)</code> : to initialize data members and compile OpenCL source.
+</li><li> <code>run(vcl_vector&lt;brdb_value_sptr&gt; &amp; input, vcl_vector&lt;brdb_value_sptr&gt; &amp; output)</code>:  runs the algorithm. The input and output vectors are used for interfacing with the process.
+</li><li> <code>finish()</code>: to destroy any intermediate data created.
+</li></ul>
+
+<p>The following processes have been implemented: 
+</p><ul class="toc">
+<li> <code>boxm2_opencl_render_process</code>: This process renders an expected image of the provided 
+model from a given viewpoint. The inputs to such process include scene, camera, and dimensions 
+of output image and the output of such a process include expected image. This process uses 
+a single pass of ray-tracing to update the volume.
+
+</li><li> <code>boxm2_opencl_update_process</code>: This process updates the model using an EO image and the 
+given sensor model. The inputs to such process include scene, camera, image and the output of 
+such a process is updated scene. This process uses multiple passes of ray-tracing to update the 
+volume.
+
+</li><li> <code>boxm2_opencl_refine_process</code>: This process refines the scene. This 
+refining results in the scene getting finer at places where the evidence 
+of surface increases. The inputs to such process include scene 
+and threshold and the output of such a process is updated scene. This process requires 
+serial iterating over blocks.
+</li></ul>
+
+<p>Each process uses inputs as processing inputs and return output if any through output vector. 
+The process is light-weight as it only process whats given to it.
+</p>
+<hr size="6">
+<a name="SEC24"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC23" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC27" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 5.2 Boxm2 OpenCL Processor </h2>
+
+<p>All data structures and algorithms have been optimized to run on a GPU.  
+The GPU processor has been designed as a wrapper around some necessary OpenCL
+objects, and allows for a simple interface to processes in boxm2.  The 
+Boxm2 OpenCL Processor is also a singleton class, allowing only one to be
+instantiated at a time.  
+</p>
+<p>An OpenCL cache has also been implemented in order to handle the incoming 
+and outgoing memory on the GPU, as well as ensure that memory allocated does not
+surpass the GPU's limits.  
+</p>
+
+<hr size="6">
+<a name="SEC25"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC24" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC24" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC27" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 5.2.1 OpenCL Cache </h3>
+<p>The OpenCL cache currently maintains one block and its data on GPU memory.  
+Whenever a new block is requested, the GPU releases the old block and writes the 
+requested block to the device.  
+</p>
+<p>The OpenCL cache returns <code>bocl_mem*</code> pointers, which are wrappers around 
+an OpenCL buffer, its corresponding host memory buffer, its size, a string ID, 
+as well as methods to transfer memory between host and device.  
+</p>
+<p>In a future iteration, the OpenCL cache will eventually process the data transfers 
+asynchronously, which will hide the latency between host (CPU) and device (GPU) 
+data transfers.  
+</p>
+
+<hr size="6">
+<a name="SEC26"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC25" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC27" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC24" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC27" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 5.2.2 Example: boxm2_opencl_render_process </h3>
+
+<p>The following is an example of how to render a single image 
+using the <code>boxm2_opencl_render_process</code>:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  //set up render camera, image buffer and vis image buffer (for algorithm)
+  vpgl_camera_double_sptr cam = pcam;
+  brdb_value_sptr brdb_cam = new brdb_value_t&lt;vpgl_camera_double_sptr&gt;(cam);
+  vil_image_view&lt;unsigned int&gt;* expimg = new vil_image_view&lt;unsigned int&gt;(ni(), nj());
+  expimg-&gt;fill(0);
+  vil_image_view_base_sptr expimg_sptr(expimg);// = new vil_image_view&lt;unsigned int&gt;(ni(), nj());
+  brdb_value_sptr brdb_expimg = new brdb_value_t&lt;vil_image_view_base_sptr&gt;(expimg_sptr);
+  vil_image_view&lt;float&gt;* vis_img = new vil_image_view&lt;float&gt;(ni(), nj());
+  vis_img-&gt;fill(1.0f);
+  brdb_value_sptr brdb_vis = new brdb_value_t&lt;vil_image_view_base_sptr&gt;(vis_img);
+
+  //set up scene 
+  boxm2_scene_sptr scene = new boxm2_scene(scene_file());
+  brdb_value_sptr brdb_scene = new brdb_value_t&lt;boxm2_scene_sptr&gt;(scene);
+  boxm2_nn_cache cache = new cache( scene.ptr() );
+
+  //initialize gpu_processor
+  boxm2_opencl_processor* gpu_pro = boxm2_opencl_processor::instance();
+  gpu_pro-&gt;set_scene(scene.ptr());
+  gpu_pro-&gt;set_cpu_cache(cache);
+  gpu_pro-&gt;init();
+
+  //set inputs
+  vcl_vector&lt;brdb_value_sptr&gt; input;
+  input.push_back(brdb_scene);
+  input.push_back(brdb_cam);
+  input.push_back(brdb_expimg);
+  input.push_back(brdb_vis);
+
+  //output vector
+  vcl_vector&lt;brdb_value_sptr&gt; output;
+
+  //initialize the GPU render process
+  boxm2_opencl_render_process gpu_render;
+  gpu_render.init_kernel(&amp;gpu_pro-&gt;context(), &amp;gpu_pro-&gt;devices()[0]);
+
+  //execute gpu_render process
+  gpu_pro-&gt;run(&amp;gpu_render, input, output);
+  gpu_pro-&gt;finish();
+
+  //the brdb_expimg now contains the expected image of 'scene'  
+
+  //clean up
+  gpu_render.clean();
+  gpu_pro-&gt;finish();
+</pre></td></tr></table>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC22" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC27" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

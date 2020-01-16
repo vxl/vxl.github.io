@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__mask.html" title="base class of roi which is a pure virtual class." alt="" coords="39,156,119,180"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="37,81,120,105"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="27,7,131,31"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmbl__data__collector.html" title="Templated base class for objects which collect sets of data." alt="" coords="17,81,183,105"/>
+<area shape="rect" href="$classmbl__data__collector__base.html" title="Non&#45;templated base class for mbl_data_collector&lt;T&gt;." alt="" coords="15,7,185,31"/>
+</map>

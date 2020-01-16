@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrrel__m__est__obj.html" title="Generic implementation for standard M&#45;estimators." alt="" coords="20,156,129,180"/>
+<area shape="rect" href="$classrrel__wls__obj.html" title="Abstract base class for objective functions that can compute weights." alt="" coords="28,81,121,105"/>
+<area shape="rect" href="$classrrel__objective.html" title="An objective function to be minimised." alt="" coords="24,7,125,31"/>
+</map>

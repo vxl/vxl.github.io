@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>BOXM2: 6. Boxm2 GUI demo</title>
+
+<meta name="description" content="BOXM2: 6. Boxm2 GUI demo">
+<meta name="keywords" content="BOXM2: 6. Boxm2 GUI demo">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="demo"></a>
+<a name="SEC27"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_5.html#SEC26" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC28" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC22" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 6. Boxm2 GUI demo </h1>
+
+
+<blockquote><p><strong>Chapter summary</strong>:<br>
+Render, update and refine gui-based demo in <code>boxm2</code> 
+</p></blockquote>
+
+<hr size="6">
+<a name="SEC28"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC27" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC29" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.1 <code>boxm2_render_tableau</code> </h2>
+<p>The bulk of the gui-based demo code is located in 
+<code>ocl/view/boxm2_render_tableau.h/cxx</code>. This tableau is initialized with 
+a <code>scene.xml</code> full path, a viewport size (ni,nj), a single initial camera
+vpgl_perspective_camera&lt;double&gt;*, a vector of camera file paths, and a vector of 
+image file paths.  
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  //: initialize tableau with scene_file, viewport size, initial cam,  
+  bool init(vcl_string scene_file,
+            unsigned ni,
+            unsigned nj,
+            vpgl_perspective_camera&lt;double&gt;* cam,
+            vcl_vector&lt;vcl_string&gt; cam_files,
+            vcl_vector&lt;vcl_string&gt; img_files);
+</pre></td></tr></table>
+<p>All events are handled in the virtual method <code>handle</code>: 
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  //: virtual function handles mouse and keyboard actions
+  virtual bool handle( vgui_event const&amp; e );
+</pre></td></tr></table>
+<p>After the tableau is initialized using the method above, the tableau must also 
+initialize an OpenGL context, some OpenCL objects, and some <code>boxm2</code> data 
+structures, which are handled in the following methods: 
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  cl_context create_clgl_context();
+  bool init_clgl();
+</pre></td></tr></table>
+
+<p>The handle method is currently equipped to handle the following commands: 
+</p><ul class="toc">
+<li> Mouse Dragging: rotates the camera around a focus point
+</li><li> Middle Click Dragging:  zooms in or out in the current look vector
+</li><li> Ctrl+Click Dragging: Pans the camera in the image plane
+</li><li> Keystroke 'U': updates the model from a random frame from the vector of image file paths
+</li><li> Keystroke 'D': refines the model, will display new cells as black
+</li><li> Keystroke 'S': will write the model to disk
+</li><li> Keystroke 'R': will return the camera to its initial position
+</li><li> Keystroke 'X', 'Y', or 'Z': will move the camera to look straight down the 'X', 'Y', or 'Z' axis respectively  
+</li><li> Keystroke 'C': will toggle to change detect mode on the images in the 
+      specified image directory.  While in change detect mode, keystroke 'N' will 
+      change the frame to the next image.  
+</li></ul>
+
+
+<hr size="6">
+<a name="SEC29"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC28" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[ &gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC28" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 6.1.1 Updating the voxel model </h3>
+<p>The following is an outline of the updating procedure performed by the 
+tableau.  
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">//: updates given a random frame
+float boxm2_render_tableau::update_frame()
+{
+  //choose random frame and corresponding camera (create portable sptrs)
+  vil_image_view&lt;float&gt;* floatimg = random_frame(); 
+  vil_image_view_base_sptr floatimg_sptr(floatimg);
+  brdb_value_sptr brdb_inimg = new brdb_value_t&lt;vil_image_view_base_sptr&gt;(floatimg_sptr);
+  vpgl_camera_double_sptr cam_sptr(pcam);
+  brdb_value_sptr brdb_cam = new brdb_value_t&lt;vpgl_camera_double_sptr&gt;(cam_sptr);
+
+  //create brdb pointer to scene
+  brdb_value_sptr brdb_scene = new brdb_value_t&lt;boxm2_scene_sptr&gt;(scene_);
+
+  //set inputs
+  vcl_vector&lt;brdb_value_sptr&gt; input;
+  input.push_back(brdb_scene);
+  input.push_back(brdb_cam);
+  input.push_back(brdb_inimg);
+
+  //initoutput vector
+  vcl_vector&lt;brdb_value_sptr&gt; output;
+
+  //execute gpu_update (update_ is of type boxm2_opencl_update_process)
+  gpu_pro_-&gt;run(&amp;update_, input, output);
+  return gpu_pro_-&gt;exec_time();
+
+</pre></td></tr></table>
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC27" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvidl__ostream.html" title="A base class for output video streams." alt="" coords="5,29,104,53"/>
+<area shape="rect" href="$classvidl__ffmpeg__ostream.html" title="A video output stream to an encoded file using FFMPEG." alt="" coords="163,5,309,29"/>
+<area shape="rect" href="$classvidl__image__list__ostream.html" title="A video output stream to a list of images." alt="" coords="153,53,319,77"/>
+</map>

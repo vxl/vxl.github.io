@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmmn__solver.html" title="Base for classes which solve Markov Random Field problems." alt="" coords="7,29,100,53"/>
+<area shape="rect" href="$classmmn__dp__solver.html" title="Solve restricted class of Markov problems (trees and tri&#45;trees)." alt="" coords="152,5,267,29"/>
+<area shape="rect" href="$classmmn__lbp__solver.html" title="Run loopy belief to estimate overall marginal probabilities of all node states." alt="" coords="149,53,269,77"/>
+</map>

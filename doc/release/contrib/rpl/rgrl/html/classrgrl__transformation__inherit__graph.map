@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__trans__affine.html" title="rgrl_trans_affine" alt="" coords="511,5,628,29"/>
+<area shape="rect" href="$classrgrl__trans__couple.html" title="A base class that represents a pair of transformation: forward &amp; backward." alt="" coords="507,53,632,77"/>
+<area shape="rect" href="$classrgrl__trans__homo2d__proj__rad.html" title="Represents a 2D homography plus radial distortion transformation." alt="" coords="475,101,664,125"/>
+<area shape="rect" href="$classrgrl__trans__homography2d.html" title="Represents a 2D homography transformation." alt="" coords="483,149,656,173"/>
+<area shape="rect" href="$classrgrl__trans__mixed__spline.html" title="rgrl_trans_mixed_spline" alt="" coords="488,197,651,221"/>
+<area shape="rect" href="$classrgrl__trans__quadratic.html" title="rgrl_trans_quadratic" alt="" coords="500,245,639,269"/>
+<area shape="rect" href="$classrgrl__trans__rad__dis__homo2d.html" title="Represents a 2D homography transformation with radial lens distortion." alt="" coords="477,293,661,317"/>
+<area shape="rect" href="$classrgrl__trans__reduced__quad.html" title="A reduced quadratic transformation, when centered, consists of a similarity transform + 2 2nd&#45;order r..." alt="" coords="484,341,655,365"/>
+<area shape="rect" href="$classrgrl__trans__rigid.html" title="Represents a rigid transformation." alt="" coords="515,389,624,413"/>
+<area shape="rect" href="$classrgrl__trans__similarity.html" title="Represents a similarity transformation." alt="" coords="501,437,637,461"/>
+<area shape="rect" href="$classrgrl__trans__spline.html" title="rgrl_trans_spline" alt="" coords="509,485,629,509"/>
+<area shape="rect" href="$classrgrl__trans__translation.html" title="rgrl_trans_translation" alt="" coords="496,533,643,557"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="159,269,241,293"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,269,109,293"/>
+</map>

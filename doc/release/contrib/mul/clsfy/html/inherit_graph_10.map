@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classclsfy__smo__base.html" title="A base class for sequential minimal optimisation." alt="" coords="5,5,123,29"/>
+<area shape="rect" href="$classclsfy__smo__1__lin.html" title="A sequential minimal optimisation for certain restricted quadratic problems." alt="" coords="171,5,288,29"/>
+<area shape="rect" href="$classclsfy__smo__1__rbf.html" title="A sequential minimal optimisation for certain restricted quadratic problems." alt="" coords="336,5,456,29"/>
+</map>

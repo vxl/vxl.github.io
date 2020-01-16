@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvsol__box__2d.html" title="A bounding box for 2d spatial objects." alt="" coords="5,81,101,105"/>
+<area shape="rect" href="$classvsol__box__3d.html" title="A bounding box for 3d spatial objects." alt="" coords="125,81,221,105"/>
+</map>

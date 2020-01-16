@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="$structvgui__glut__adaptor.html" title="The GLUT (OpenGL Utility Toolkit) implementation of vgui_adaptor." alt="" coords="161,5,289,29"/>
+<area shape="rect" href="$classvgui__gtk2__adaptor.html" title="The GTK implementation of vgui_adaptor." alt="" coords="160,53,291,77"/>
+<area shape="rect" href="$classvgui__gtk__adaptor.html" title="The GTK implementation of vgui_adaptor." alt="" coords="163,101,288,125"/>
+<area shape="rect" href="$classvgui__mfc__adaptor.html" title="MFC implementation of vgui_adaptor." alt="" coords="161,149,289,173"/>
+<area shape="rect" href="$classvgui__qt__adaptor.html" title="OpenGL canvas in QT as a VGUI adaptor." alt="" coords="167,197,284,221"/>
+<area shape="rect" href="$classvgui__win32__adaptor.html" title="vgui_win32_adaptor" alt="" coords="155,245,296,269"/>
+<area shape="rect" href="$classvgui__wx__adaptor.html" title="wxWidgets implementation of vgui_adaptor." alt="" coords="164,293,287,317"/>
+<area shape="rect" href="$classvgui__mfc__view.html" title="vgui_mfc_view" alt="" coords="345,149,455,173"/>
+</map>

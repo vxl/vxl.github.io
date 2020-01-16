@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" href="$classpdf1d__exponential.html" title="Class for exponential distributions." alt="" coords="5,81,136,105"/>
+<area shape="rect" href="$classpdf1d__flat.html" title="Class for univariate flat distributions: p(x)=1/(hi&#45;lo) in [lo,hi]." alt="" coords="160,81,240,105"/>
+<area shape="rect" href="$classpdf1d__gaussian.html" title="Class for univariate gaussian." alt="" coords="264,81,379,105"/>
+<area shape="rect" href="$classpdf1d__kernel__pdf.html" title="Class for univariate kernel based PDFs." alt="" coords="403,81,525,105"/>
+<area shape="rect" href="$classpdf1d__mixture.html" title="Represents a mixture model (a set of individual pdfs + weights)." alt="" coords="549,81,656,105"/>
+<area shape="rect" href="$classpdf1d__epanech__kernel__pdf.html" title="Univariate Epanechnikov kernel PDF $k(x)=0.75(1&#45;0.2x^2)/ {5}$." alt="" coords="167,156,348,180"/>
+<area shape="rect" href="$classpdf1d__gaussian__kernel__pdf.html" title="Class for univariate gaussian kernel based PDF." alt="" coords="372,156,556,180"/>
+<area shape="rect" href="$classpdf1d__weighted__kernel__pdf.html" title="Class for univariate kernel based PDFs." alt="" coords="580,156,764,180"/>
+<area shape="rect" href="$classpdf1d__weighted__epanech__kernel__pdf.html" title="Univariate Epanechnikov kernel PDF $k(x)=0.75(1&#45;0.2x^2)/{2}$." alt="" coords="551,231,793,255"/>
+</map>

@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 9. vsl: Binary I/O</title>
+
+<meta name="description" content="VXL: 9. vsl: Binary I/O">
+<meta name="keywords" content="VXL: 9. vsl: Binary I/O">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="vsl"></a>
+<a name="SEC102"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_8.html#SEC101" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC103" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC90" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 9. vsl: Binary I/O </h1>
+
+
+  <blockquote><p>  <strong>Chapter summary</strong>:
+This section describes how to save and restore objects using a binary stream.
+It details how to add the appropriate functions to each class to make use
+of this facility.
+  </p></blockquote>
+
+<p>All objects in VXL should be able to save themselves to a stream (eg a file)
+and restore (load) themselves from a stream (file). The main functions provided
+for this purpose are <code>vsl_b_write(os,object);</code> and <code>vsl_b_read(is,object&amp;);</code>.
+</p>
+<p>The binary IO for the core libraries (vbl, vil, vgl and vnl) is implemented in `clip-on'
+libraries which live in the <code>io</code> subdirectories of each library (thus the
+declaration of the function <code>vsl_b_write(vsl_b_ostream&amp;,vnl_vector const&amp;);</code>
+lives in the file <tt>`vnl/io/vnl_io_vector.h'</tt>.
+</p>
+<p>However, it is recommended that I/O for other libraries be provided by writing
+<code>b_write(os);</code> and <code>b_read(is);</code> functions in each class.  See the
+`Design Notes' section below.
+</p>
+<hr size="6">
+<a name="SEC103"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC102" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC104" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 9.1 Supported Platforms </h2>
+
+<p>The binary I/O code is known to work across the following hardware/OS/compiler
+combinations, but probably also works on most other platform/compiler combinations:
+</p>
+<ol>
+<li>  Intel - Linux - gcc-2.95 and gcc-3.0
+</li><li>  Intel - WindowsNT - vc++
+</li><li>  SGI - MIPS - MipsPRO CC
+</li><li>  Sun - Solaris - gcc-2.95
+</li><li>  DEC alpha - OSF - gcc-2.95 and gcc 3.0 (64 bit!)
+</li></ol>
+
+<p>Thus
+binary files produced by any of the above should be readable by any other of the above.
+There is of course a minor exception: large numbers (like integers larger than 4294967295)
+saved on a 64-bit platform cannot be read on a 32-bit platform.
+</p>
+<hr size="6">
+<a name="SEC104"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC103" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC105" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC103" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 9.1.1 caveats </h3>
+
+<p>The code has been designed to work on as many platforms as possible. However if your
+platform uses any of the following, then it will probably not work (as presently coded.)
+</p><ol>
+<li>  A middle endian word encoding scheme.
+</li><li>  Chars of length other than 8 bits.
+</li><li>  Non-IEEE format floats and doubles.
+</li></ol>
+
+<hr size="6">
+<a name="SEC105"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC104" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC106" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 9.2 Using Binary I/O </h2>
+
+<p>To save an object to a file, simply do the following:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  vxl_myclass my_object;
+  
+  // Fill my_object
+  
+  vsl_b_ofstream bfs(&quot;my_object.bvl&quot;);
+  if (!bfs)
+  {
+    vcl_cerr&lt;&lt;&quot;Failed to open my_object.bvl for output.&quot;&lt;&lt;vcl_endl;
+  }
+  else
+  {
+    vsl_b_write(bfs,my_object);
+    bfs.close();
+  }
+</pre></td></tr></table>
+<p>To load/restore the object from a file:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  vxl_myclass my_new_object;
+  
+  vsl_b_ifstream bfs(&quot;my_object.bvl&quot;);
+  if (!bfs)
+  {
+    vcl_cerr&lt;&lt;&quot;Failed to open my_object.bvl for input.&quot;&lt;&lt;vcl_endl;
+  }
+  else
+  {
+    vsl_b_read(bfs,my_object);
+    bfs.close();
+  }
+</pre></td></tr></table>
+<p>It is recommended that the default extension name for your binary files is <code>.bvl</code>.
+This extension does not appear to be used by any other program. In many cases however, you
+will want to pick a new extension to indicate the contents of a file. For example, we store
+active shape model objects with ending <code>.asm</code>.
+</p>
+<p>The classes <code>vsl_b_ifstream</code> and <code>vsl_b_ofstream</code> are simple wrappers around
+real <code>vcl_ifstream</code> and <code>vcl_ofstream</code> objects. These wrappers ensure that
+you open a file with CR/LF conversion turned off, and they should also allow lots of
+common misuses to be caught at compile time.
+</p>
+<p>The functions <code>vsl_b_write(os,X)</code> and <code>vsl_b_read(is,X)</code> are defined for all
+reasonable cases, including all inbuilt types, most classes in vcl and the classes in
+the core vxl libraries.
+</p>
+<p>When you write a new class, you should add the appropriate functions to allow easy
+use of binary I/O (see below).
+</p>
+<p>Or for simplicity we provide the utility functions which would allow you to write:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  #include &lt;vsl/vsl_quick_file.h&gt;
+  vxl_myclass my_object,my_new_object;
+  
+  vsl_quick_file_save(&quot;my_object.bvl&quot;,my_object);
+  vsl_quick_file_load(&quot;my_object.bvl&quot;,my_new_object);
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="SEC106"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC105" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC107" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC105" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 9.2.1 Saving multiple objects </h3>
+
+<p>One can use exactly the same approach to save a set of objects
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  vxl_myclass my_object;
+  vxl_my_other_class my_other_object;
+  
+  // Fill objects
+  // ...
+  
+  vsl_b_ofstream bfs(&quot;my_object.bvl&quot;);
+  if (!bfs)
+  {
+    vcl_cerr&lt;&lt;&quot;Failed to open my_object.bvl for output.&quot;&lt;&lt;vcl_endl;
+  }
+  else
+  {
+    vsl_b_write(bfs,my_object);
+    vsl_b_write(bfs,my_other_object);
+    bfs.close();
+  }
+</pre></td></tr></table>
+<p>(and similarly for loading them).
+</p>
+<p>A standard rule for ensuring trouble free I/O is
+</p><blockquote><p>Always write the input and output code in tandem - the output should
+precisely mirror the input.
+</p></blockquote>
+
+
+<hr size="6">
+<a name="SEC107"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC106" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC108" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC105" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 9.2.2 Binary I/O by baseclass pointer </h3>
+
+<p>When using polymorphism, there are frequently times when one needs to
+save and restore an object just using a base class pointer to it.
+<code>vsl</code> provides facilities to do this.
+</p>
+<p>Assuming class <code>my_derived</code> is derived from class <code>my_base</code>, the following
+will work.
+</p>
+<p>To save an object by baseclass:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  my_derived d;
+  
+  my_base *b = &amp;d;
+  
+  vsl_b_ofstream bfs(&quot;data.bvl&quot;);
+  vsl_b_write(bfs,b);
+  ...
+</pre></td></tr></table>
+<p>To restore an object:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  // Make application aware of possible classes that it might see in the file
+  
+  vsl_add_to_binary_loader(my_derived());
+  vsl_add_to_binary_loader(my_derived2());
+  ...
+  
+  my_base *b = 0;
+  
+  vsl_b_ifstream bfs(&quot;data.bvl&quot;);
+  vsl_b_read(bfs,b);
+  // b now points to the correct class which has been created
+  // on the heap and filled with the data from bfs
+  ...
+</pre></td></tr></table>
+<p>Note that the read function will only work if the application has been made
+aware of each of the possible derived classes that it might come across in the
+file.  This is done using calls to <code>vsl_add_to_binary_loader(my_derived())</code>
+(see appendix for details).
+</p>
+<p>To reduce the pain of doing this, many libraries have a function that adds all
+the relevant derived classes (eg <code>xxxx_add_all_binary_loaders()</code> where
+<code>xxxx</code> is the library name).
+</p>
+<hr size="6">
+<a name="SEC108"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC107" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC109" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC105" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 9.2.3 Which files do I need to include/link? </h3>
+
+<p>In general the vsl_b_read and vsl_b_write functions use Koenig Lookup - that is the location
+of their declaration depends on their parameters.
+</p>
+<p>The <code>vsl_b_stream</code> objects and <code>vsl_b_write</code> and <code>vsl_b_read</code> functions
+for fundamental data types are declared in <code>&lt;vsl/vsl_binary_io.h&gt;</code>. If you want to
+load or save a <code>vcl_vector</code>, the appropriate <code>vsl_b_write</code> and <code>vsl_b_read</code>
+functions will be in <code>&lt;vsl/vsl_vector_io.h&gt;</code>. Likewise for most of the other vcl classes.
+The <code>vsl</code> library contains the implementation of all of this.
+</p>
+<p>When reading/writing by baseclass pointer, you need to include <code>vsl/vsl_binary_loader.h</code>.
+</p>
+<p>If you want to load or save a <code>vgl_point_2d</code>, you will need to include
+<code>&lt;vgl/io/vgl_io_point_2d.h&gt;</code> and similarly for all other Level-1 VXL libraries. You
+will need to include the vgl_io library.
+For Level-2 libraries, the situation varies. If binary io has been defined at all for a
+level-2 library, it might be included in the library itself, e.g. the io functions for
+vpdfl_gaussian are declared in the same file as the Gaussian, <code>vpdfl/vpdfl_gaussian.h&gt;</code>.
+Alternatively, it might be in a clip-on library in the same form as the Level-1 libraries
+above.
+</p>
+<hr size="6">
+<a name="SEC109"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC108" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC110" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC105" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 9.2.4 How to save templated objects </h3>
+
+<p>The situation for templated objects is the same as above, except that you need to ensure that
+the appropriate (templated) <code>vsl_b_read</code> and <code>vsl_b_write</code> functions are explicitly instantiated.
+This instantiation is achieved by placing a file in the relevant &quot;Templates&quot; folder.
+</p>
+<p>An example template file, is shown below. It enables saving of a 2d array of &quot;<code>hjk_model</code>&quot;s
+(a completely made up plain class).
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  // This is my_module/hjk/Templates/vbl_array_2d_io+hjk_model~-.cxx
+  #include &lt;vbl/io/vbl_io_array_2d.txx&gt;
+  #include &lt;hjk/hjk_model.h&gt;
+  VBL_IO_ARRAY_2D_INSTANTIATE(hjk_model);
+</pre></td></tr></table>
+<p>The <code>vbl_io_array_2d.txx</code> file contains the <code>VBL_IO_ARRAY_2D_INSTANTIATE</code> macro and the
+<code>hjk_model.h</code> file contains the io header declarations for a plain class.
+</p>
+<p>Another example template file, allowing the saving of a vector of <code>vgl_point_2d</code> objects,
+is shown below.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  // file = my_module/hjk/Templates/vsl_vector_io+vgl_point_2d~-.cxx
+  #include &lt;vsl/vsl_vector_io.txx&gt;
+  #include &lt;vgl/io/vgl_io_point_2d.h&gt;
+  VSL_VECTOR_IO_INSTANTIATE(vgl_point_2d&lt;double&gt;);
+</pre></td></tr></table>
+<p>The <code>vsl_vector_io.txx</code> file contains the <code>VSL_VECTOR_IO_INSTANTIATE</code> macro and the
+<code>vgl_io_point_2d.h</code> file contains the io header declarations for <code>vgl_point_2d&lt;double&gt;</code>.
+</p>
+<p>You should now be able to load and save templated objects with lines such as:-
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  vcl_vector&lt;hjk_model&gt; hjk_model_vec;
+  vsl_b_ofstream bfs(&quot;hjk_model_vec.bvl&quot;);
+  if (!bfs)
+  {
+    vcl_cerr&lt;&lt;&quot;Failed to open hjk_model_vec.bvl for output.&quot;&lt;&lt;vcl_endl;
+  }
+  else
+  {
+    vsl_b_write(bfs,hjk_model_vec);
+    bfs.close();
+  }
+</pre></td></tr></table>
+<p>NB, the template instantiation files should be placed in your own libraries (ie here &quot;hjk&quot;) to
+avoid creating unnecessary and unused versions of a given templated function.
+</p>
+
+<hr size="6">
+<a name="SEC110"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC109" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC111" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 9.3 Tidy Printing with <code>vsl_indent</code> </h2>
+
+<p>The utility functions and class in <code>vsl_indent</code> give a way of putting
+indentation into output streams to give more legible printed output.
+</p>
+<p>If each class implements it's printing (print(os) or print_summary(os))
+in such a way that at the beginning of each new line one inserts an
+indentation using
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  os&lt;&lt;vsl_indent()&lt;&lt;&quot;Rest of stuff..&quot;&lt;&lt;vcl_endl;
+</pre></td></tr></table><p>and increases and decreases the current indentation for the stream with
+<code>vsl_indent_inc(os)</code> and <code>vsl_indent_dec(os)</code>,
+then one can easily generate readable output for complex nested sets
+of classes.
+</p>
+<p>It's use is best described by example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  vcl_cout&lt;&lt;vsl_indent()&lt;&lt;&quot;No Indent&quot;&lt;&lt;vcl_endl;
+  vsl_indent_inc(vcl_cout);
+  vcl_cout&lt;&lt;vsl_indent()&lt;&lt;&quot;1 Indent&quot;&lt;&lt;vcl_endl;
+  vsl_indent_inc(vcl_cout);
+  vcl_cout&lt;&lt;vsl_indent()&lt;&lt;&quot;2 Indent&quot;&lt;&lt;vcl_endl;
+  vsl_indent_dec(vcl_cout);
+  vcl_cout&lt;&lt;vsl_indent()&lt;&lt;&quot;1 Indent&quot;&lt;&lt;vcl_endl;
+  vsl_indent_dec(vcl_cout);
+  vcl_cout&lt;&lt;vsl_indent()&lt;&lt;&quot;No Indent&quot;&lt;&lt;vcl_endl;
+</pre></td></tr></table>
+<p>This produces output of the form
+</p><table><tr><td>&nbsp;</td><td><pre class="example">No Indent
+  1 Indent
+    2 Indent
+  1 Indent
+No Indent
+</pre></td></tr></table>
+<p>Example of use in class output:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  class Fred
+  {
+   public:
+    void print(vcl_ostream&amp; os) const { os&lt;&lt;vsl_indent(os)&lt;&lt;&quot;Fred's data&quot;; }
+  };
+  
+  vcl_ostream&amp; operator&lt;&lt;(vcl_ostream&amp; os, Fred const&amp; fred)
+  {
+    os&lt;&lt;&quot;Fred: &quot;&lt;&lt;vcl_endl;
+    vsl_indent_inc(os);
+    fred.print(os);
+    vsl_indent_dec(os);
+    return os;
+  }
+  
+  class Jim
+  {
+   private:
+    Fred fred_;
+   public:
+    void print(vcl_ostream&amp; os) const
+    {
+       os&lt;&lt;vsl_indent()&lt;&lt;fred_&lt;&lt;vcl_endl
+           vsl_indent()&lt;&lt;&quot;Jim's other data&quot;;
+    }
+  };
+  
+  vcl_ostream&amp; operator&lt;&lt;(vcl_ostream&amp; os, Jim const&amp; jim)
+  {
+    os&lt;&lt;&quot;Jim: &quot;&lt;&lt;vcl_endl;
+    vsl_indent_inc(os);
+    jim.print(os);
+    vsl_indent_dec(os);
+    return os;
+  }
+  
+  main()
+  {
+    Jim jim;
+    vcl_cout&lt;&lt;jim&lt;&lt;vcl_endl;
+  }
+</pre></td></tr></table>
+<p>This produces output:
+</p><table><tr><td>&nbsp;</td><td><pre class="example"> Jim:
+   Fred's data
+   Jim's other data
+</pre></td></tr></table>
+<p>If Jim were then included as a member of another class, Harry, one could get
+output of the form
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  Harry:
+   Harry's basic data
+   jim1:
+     Fred's data
+     Jim's other data
+   jim2:
+     Fred's data
+     Jim's other data
+</pre></td></tr></table>
+<p>and so forth.  The author humbly suggests that this makes the summaries
+quite readable.
+</p>
+<hr size="6">
+<a name="SEC111"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC110" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 9.4 Error Detection </h2>
+
+<p>IO is often prone to errors beyond the control of the programmer. In
+particular, files can be come corrupted, given to programs that can't read
+a new format, read on platforms that do not support large enough numbers.
+</p>
+<p>vsl attempts to detect as many error conditions as possible.
+It prints an error message to <code>vcl_cerr</code> and sets the fail bit
+on the input stream. Any objects that were being loaded when the error
+occurred should be consistent at least as far as being able to delete the
+object safely.
+</p>
+<p>During the opening of a binary input stream, vsl also checks
+for a schema version number, and magic number that confirm that
+the stream was written by vsl.
+</p>
+<p>It is easy to detect the error condition as the example shows
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  vsl_b_ifstream bfs_in(path);
+  if (!bfs_in)
+  {
+    vcl_cout &lt;&lt; &quot;Could not open &quot; &lt;&lt; path
+             &lt;&lt; &quot; for reading as binary IO&quot; &lt;&lt; vcl_endl;
+    return;
+  }
+  vsl_b_read(bfs_in, my_obj);
+  if (!bfs_in)
+  {
+    vcl_cout &lt;&lt; &quot;Unable to read my_obj&quot; &lt;&lt; vcl_endl;
+    return;
+  }
+  bfs_in.close();
+</pre></td></tr></table>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC102" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_10.html#SEC112" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

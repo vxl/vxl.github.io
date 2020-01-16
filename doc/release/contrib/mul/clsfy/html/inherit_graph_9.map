@@ -1,0 +1,15 @@
+<map id="G" name="G">
+<area shape="rect" href="$classclsfy__classifier__base.html" title="A common interface for 1&#45;out&#45;of&#45;N classifiers." alt="" coords="5,269,149,293"/>
+<area shape="rect" href="$classclsfy__binary__1d__wrapper.html" title="Make a clsfy_classifier_1d derivative look like a clsfy_classifierbase derivative." alt="" coords="203,5,373,29"/>
+<area shape="rect" href="$classclsfy__binary__hyperplane.html" title="A binary output hyperplane classifier." alt="" coords="205,53,371,77"/>
+<area shape="rect" href="$classclsfy__binary__pdf__classifier.html" title="Decisions are based on an explicit multivariate probability distribution." alt="" coords="199,101,377,125"/>
+<area shape="rect" href="$classclsfy__binary__tree.html" title="A binary tree classifier." alt="" coords="227,149,349,173"/>
+<area shape="rect" href="$classclsfy__direct__boost.html" title="Classifier using adaboost on combinations of simple 1D classifiers." alt="" coords="224,197,352,221"/>
+<area shape="rect" href="$classclsfy__k__nearest__neighbour.html" title="A Binary k&#45;Nearest Neighbour classifier." alt="" coords="197,245,379,269"/>
+<area shape="rect" href="$classclsfy__null__classifier.html" title="A classifier that always returns the same answer." alt="" coords="220,293,356,317"/>
+<area shape="rect" href="$classclsfy__random__classifier.html" title="A common interface for 1&#45;out&#45;of&#45;N classifiers." alt="" coords="208,341,368,365"/>
+<area shape="rect" href="$classclsfy__random__forest.html" title="Forest of clsfy_binary_tree trees." alt="" coords="217,389,359,413"/>
+<area shape="rect" href="$classclsfy__rbf__parzen.html" title="A Parzen binary classifier using an RBF Window." alt="" coords="228,437,348,461"/>
+<area shape="rect" href="$classclsfy__rbf__svm.html" title="A Support Vector Machine Binary Classifier." alt="" coords="236,485,340,509"/>
+<area shape="rect" href="$classclsfy__simple__adaboost.html" title="Classifier using adaboost on combinations of simple 1D classifiers." alt="" coords="209,533,367,557"/>
+</map>

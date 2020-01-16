@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" href="$classHMatrix2DAffineCompute.html" title="HMatrix2DAffineCompute" alt="" coords="204,5,377,29"/>
+<area shape="rect" href="$classHMatrix2DCompute4Line.html" title="HMatrix2DCompute4Line" alt="" coords="205,53,376,77"/>
+<area shape="rect" href="$classHMatrix2DCompute4Point.html" title="HMatrix2DCompute4Point" alt="" coords="203,101,379,125"/>
+<area shape="rect" href="$classHMatrix2DComputeLinear.html" title="HMatrix2DComputeLinear" alt="" coords="203,149,379,173"/>
+<area shape="rect" href="$classHMatrix2DEuclideanCompute.html" title="HMatrix2DEuclideanCompute" alt="" coords="192,197,389,221"/>
+<area shape="rect" href="$classHMatrix2DSimilarityCompute.html" title="HMatrix2DSimilarityCompute" alt="" coords="195,245,387,269"/>
+</map>

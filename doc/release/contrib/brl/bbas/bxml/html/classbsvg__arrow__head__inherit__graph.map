@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbsvg__group.html" title="an SVG tag to group elements." alt="" coords="24,305,115,329"/>
+<area shape="rect" href="$classbsvg__element.html" title="bsvg_element" alt="" coords="17,231,121,255"/>
+<area shape="rect" href="$classbxml__element.html" title="An XML element." alt="" coords="17,156,121,180"/>
+<area shape="rect" href="$classbxml__data.html" title="A block of character data found within XML tags." alt="" coords="28,81,111,105"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="17,7,121,31"/>
+</map>

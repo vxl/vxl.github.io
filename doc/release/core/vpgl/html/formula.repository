@@ -1,0 +1,5 @@
+\form#0:$pl^t[F]pr = 0$
+\form#1:$E = [K_{left}]^t [F] [K_{right}]$
+\form#2:$[K_{left}]^{-1} p_{left}$
+\form#3:$E = Kl^T \times F \times Kr$
+\form#4:$F = Kl^{-T} \times E \times Kr^{-1}$

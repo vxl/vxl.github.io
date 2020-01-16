@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvimt__dog__pyramid__builder__2d.html" title="Build difference of gaussian pyramids of vimt_image_2d_of&lt;T&gt;." alt="" coords="264,5,496,29"/>
+<area shape="rect" href="$classvimt__gaussian__pyramid__builder__2d.html" title="Build gaussian pyramids of vimt_image_2d_of&lt;T&gt;." alt="" coords="249,53,511,77"/>
+<area shape="rect" href="$classvimt__scale__pyramid__builder__2d.html" title="Build pyramids of vimt_image_2d_of&lt;vxl_byte&gt; at any scale step." alt="" coords="260,101,500,125"/>
+<area shape="rect" href="$classvimt__gaussian__pyramid__builder__2d__general.html" title="Build pyramids of vimt_image_2d_of&lt;vxl_byte&gt; at any scale step." alt="" coords="560,53,875,77"/>
+</map>

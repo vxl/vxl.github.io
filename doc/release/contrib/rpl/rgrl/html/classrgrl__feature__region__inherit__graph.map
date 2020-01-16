@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__feature__face__region.html" title="rgrl_feature_face_region" alt="" coords="5,81,171,105"/>
+<area shape="rect" href="$classrgrl__feature__point__region.html" title="Represent a point in space." alt="" coords="195,81,365,105"/>
+<area shape="rect" href="$classrgrl__feature__trace__region.html" title="Represent a point along a trace (of a vessel, neuron, etc.)." alt="" coords="389,81,560,105"/>
+</map>

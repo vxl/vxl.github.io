@@ -1,0 +1,20 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__bmp__file__format.html" title="Loader for BMP files." alt="" coords="192,5,331,29"/>
+<area shape="rect" href="$classvil__dicom__file__format.html" title="Loader for DICOM files." alt="" coords="188,53,335,77"/>
+<area shape="rect" href="$classvil__iris__file__format.html" title="Loader for RGB files (sgi iris)." alt="" coords="196,101,327,125"/>
+<area shape="rect" href="$classvil__j2k__file__format.html" title="vil_j2k_file_format" alt="" coords="196,149,327,173"/>
+<area shape="rect" href="$classvil__jpeg__file__format.html" title="Loader for JPEG files." alt="" coords="192,197,331,221"/>
+<area shape="rect" href="$classvil__mit__file__format.html" title="Loader for MIT files." alt="" coords="196,245,327,269"/>
+<area shape="rect" href="$classvil__nitf2__file__format.html" title="vil_nitf2_file_format" alt="" coords="192,293,331,317"/>
+<area shape="rect" href="$classvil__openjpeg__j2k__file__format.html" title="vil_openjpeg_j2k_file_format" alt="" coords="165,341,357,365"/>
+<area shape="rect" href="$classvil__openjpeg__jp2__file__format.html" title="vil_openjpeg_jp2_file_format" alt="" coords="165,389,357,413"/>
+<area shape="rect" href="$classvil__png__file__format.html" title="Portable network graphics, http://www.cdrom.com/pub/png." alt="" coords="195,437,328,461"/>
+<area shape="rect" href="$classvil__pnm__file__format.html" title="Loader for PPM,PGM,PBM files." alt="" coords="192,485,331,509"/>
+<area shape="rect" href="$classvil__pyramid__image__list__format.html" title="vil_pyramid_image_list_format" alt="" coords="160,533,363,557"/>
+<area shape="rect" href="$classvil__ras__file__format.html" title="Loader for Sun raster files." alt="" coords="196,581,327,605"/>
+<area shape="rect" href="$classvil__tiff__file__format.html" title="Loader for tiff files." alt="" coords="197,629,325,653"/>
+<area shape="rect" href="$classvil__viff__file__format.html" title="Loader for VIFF files, i.e., 1&#45;banded Khoros 1.0 images." alt="" coords="196,677,327,701"/>
+<area shape="rect" href="$classvil__pbm__file__format.html" title="Alias name for pnm; only tag() differs." alt="" coords="411,437,549,461"/>
+<area shape="rect" href="$classvil__pgm__file__format.html" title="Alias name for pnm; only tag() differs." alt="" coords="411,485,549,509"/>
+<area shape="rect" href="$classvil__ppm__file__format.html" title="Alias name for pnm; only tag() differs." alt="" coords="411,533,549,557"/>
+</map>

@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 1. Introduction</title>
+
+<meta name="description" content="VXL: 1. Introduction">
+<meta name="keywords" content="VXL: 1. Introduction">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Introduction"></a>
+<a name="SEC1"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book.html#Top" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[ &lt;&lt; ]</td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC3" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC15" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 1. Introduction </h1>
+
+
+<blockquote><p><strong>Chapter summary</strong>:<br>
+ VXL is efficient, simple, and fun to use.
+</p></blockquote>
+
+
+<p> v<em>x</em>l is a collection of C++ libraries designed for
+computer vision research.  Because it's for computer vision it needs to be
+<em>efficient</em>, handling large quantities of numerical data with little
+overhead.  Because it's for research it must be <em>portable</em>, so that
+one can write and run one's program on any machine available, for example
+in order to access a special camera or fast image processing hardware.
+</p>
+<p>This document describes the image processing libraries in v<em>x</em>l.
+These libraries were largely written by Terry Boult at Lehigh University
+in 1997/8. They have were adapted for use in VXL by Peter Vanroose.
+</p>
+<hr size="6">
+<a name="SEC2"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC1" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC3" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC3" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC15" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 1.1 Contents </h2>
+
+<p>The image processing libraries can be found in the tbl module on the VXL source code
+tree.
+</p>
+<ul>
+<li> vipl: The Templated Image Processing Library.
+
+<p>vipl provides filtering classes which can be used with almost any input or
+output image type, any pixel type, and any region of interest. It deals with images
+that are too large to fit in memory, loading and processing them in sections.
+It provides all this efficiently by being heavily templated. This can be somewhat
+intimidating, and so there is an alternative library ...
+</p>
+</li><li> vepl: The Easy Image Processing Library for use with vil
+
+<p>vepl provides simple functions to perform the most common image processing operations.
+The implementations of these functions are using the vipl generic filtering classes.
+</p>
+</li><li> vepl1: The Easy Image Processing Library for use with vil1
+
+<p>vepl1 provides simple functions to perform the most common image processing operations,
+but with the legacy vil1_image class instead of with vil_image_view&lt;T&gt;.
+</p>
+</li></ul>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC3" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC15" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

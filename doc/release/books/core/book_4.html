@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 4. vbl: Basic Templates</title>
+
+<meta name="description" content="VXL: 4. vbl: Basic Templates">
+<meta name="keywords" content="VXL: 4. vbl: Basic Templates">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="vbl"></a>
+<a name="SEC34"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_3.html#SEC33" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC35" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC26" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC35" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 4. vbl: Basic Templates </h1>
+
+
+  <blockquote><p>  <strong>Chapter summary</strong>:
+The STL isn't perfect. vbl provides some of the missing classes.
+  </p></blockquote>
+
+
+<p>All C++ programs need a few basic utilities, and all C++ programmers write
+their own at some point.  The things included in vbl are not considered any
+better or worse than the several other libraries available, but they are
+consistently named and lightweight.  The key elements of this library
+are:
+</p>
+<dl>
+<dt><u>class template:</u> <b><code>vbl_smart_ptr</code></b>
+<a name="IDX6"></a>
+</dt>
+<dd><p>Reference counted smart pointers for any class that defines <code>ref</code> and
+<code>unref</code>.
+</p></dd></dl>
+
+<dl>
+<dt><u>class:</u> <b><code>vbl_triple</code></b>
+<a name="IDX7"></a>
+</dt>
+<dd><p>Three element version of <code>vcl_pair</code>.
+</p></dd></dl>
+
+<dl>
+<dt><u>class:</u> <b><code>vbl_array_2d</code></b>
+<a name="IDX8"></a>
+</dt>
+<dd><p>A simple two dimensional array
+</p></dd></dl>
+
+<dl>
+<dt><u>class:</u> <b><code>vbl_sparse_array_2d</code></b>
+<a name="IDX9"></a>
+</dt>
+<dd><p>A simple two dimensional sparse array
+</p></dd></dl>
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_3.html#SEC26" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC35" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

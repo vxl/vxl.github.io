@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classclsfy__classifier__1d.html" title="A common interface for 1&#45;out&#45;of&#45;N classifiers of 1D data." alt="" coords="5,29,136,53"/>
+<area shape="rect" href="$classclsfy__binary__threshold__1d.html" title="Simplest possible 1D classifier: A single thresholding function." alt="" coords="185,5,361,29"/>
+<area shape="rect" href="$classclsfy__mean__square__1d.html" title="Simplest possible 1D classifier: A single thresholding function." alt="" coords="193,53,353,77"/>
+</map>

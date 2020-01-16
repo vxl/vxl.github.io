@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classmbl__data__collector__list.html" title="Collect data and store them in a list." alt="" coords="460,5,647,29"/>
+<area shape="rect" href="$classmbl__file__data__collector.html" title="Collect data objects and store them in a file." alt="" coords="459,53,648,77"/>
+<area shape="rect" href="$classmbl__stochastic__data__collector.html" title="Collects vectors, but only stores a subsample of them." alt="" coords="437,101,669,125"/>
+<area shape="rect" href="$classmbl__data__collector__base.html" title="Non&#45;templated base class for mbl_data_collector&lt;T&gt;." alt="" coords="5,53,176,77"/>
+</map>

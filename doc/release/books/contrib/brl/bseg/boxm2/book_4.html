@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>BOXM2: 4. cpp: Boxm2 C++ Package.</title>
+
+<meta name="description" content="BOXM2: 4. cpp: Boxm2 C++ Package.">
+<meta name="keywords" content="BOXM2: 4. cpp: Boxm2 C++ Package.">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="cpp"></a>
+<a name="SEC19"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_3.html#SEC18" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC13" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC22" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 4. cpp: Boxm2 C++ Package. </h1>
+
+
+
+<blockquote><p><strong>Chapter summary</strong>:<br>
+C++ implementation of the library.
+</p></blockquote>
+<hr size="6">
+<a name="SEC20"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC19" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC22" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.1 Processes </h2>
+<p>The algorithms such as rendering, updating the volume or change detection  in c++ are developed and the API to such algorithms are subclasses of <code>boxm2_cpp_process_base</code>. For example, <code>class boxm2_render_process: public boxm2_cpp_process_base</code>. Such process has three virtual functions
+</p><ul class="toc">
+<li> <code>init()</code> : to initialize data members or parameters.
+</li><li> <code>run(vcl_vector&lt;brdb_value_sptr&gt; &amp; input, vcl_vector&lt;brdb_value_sptr&gt; &amp; output)</code>:  runs the algorithm. The input and output vectors are used for interfacing with the process.
+</li><li> <code>finish()</code>: to destroy any intermediate data created.
+</li></ul>
+
+<p>Few processes are discussed below:
+</p><ul class="toc">
+<li> <code>boxm2_cpp_render_process</code>: This process renders an expected image of the provided model from a given viewpoint. The inputs to such process include scene, camera, and dimensions of output image and the output of such a process include expected image. This process uses a single pass of ray-tracing to update the volume.
+
+</li><li> <code>boxm2_cpp_update_process</code>:This process updates the model using an EO image and the given sensor model. The inputs to such process include scene, camera, image and the output of such a process is updated scene. This process uses multiple passes of ray-tracing to update the volume.
+
+</li><li> <code>boxm2_cpp_refine_process</code>:This process refines/merge the scene. This refining/merging results in the scene getting finer or coarser at places where the evidence of surface increases or decreases respectively. The inputs to such process include scene and threshold and the output of such a process is updated scene. This process requires serial iterating over blocks.
+</li></ul>
+<p>Each process uses inputs as processing inputs and return output if any through output vector. The process is light-weight as it only process the data provided to it. Multiple  processes might be called in a given system which leads to discussion of <code>boxm2_cpp_processor</code>.
+</p>
+<hr size="6">
+<a name="SEC21"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC20" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC22" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC22" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 4.2 cpp Processor </h2>
+
+<p>A processor <code>boxm2_cpp_processor</code> is subclass from <code>boxm2_processor</code>. The cpp processor is responsible for calling cpp processes and passing them inputs. The processor is a high level manager which interacts with the user and translates the user actions into different process calls. Example of usage of such a processor is shown below:
+</p>
+<p>An example of C++ rendering algorithm is shown below.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  //: load the scene
+  boxm2_scene_sptr scene = new boxm2_scene(scene_file());
+  // initialize the cache
+  boxm2_nn_cache cache( scene.ptr() );
+
+  //: initialize the cpp processor
+  boxm2_cpp_processor cpp_pro;
+  cpp_pro.init();
+  cpp_pro.set_scene(scene.ptr());
+
+  //: initialize process
+  boxm2_cpp_render_process cpp_render;
+  cpp_render.init();
+  cpp_render.set_cache(&amp;cache);
+
+  //: inputs for the process.
+  brdb_value_sptr brdb_scene_sptr = new brdb_value_t&lt;boxm2_scene_sptr&gt;(scene);
+  brdb_value_sptr brdb_cam = new brdb_value_t&lt;vpgl_camera_double_sptr&gt;(cam);
+  brdb_value_sptr brdb_inimg = new brdb_value_t&lt;vil_image_view_base_sptr&gt;(floatimg);
+
+  vcl_vector&lt;brdb_value_sptr&gt; input;
+  input.push_back(brdb_scene_sptr);
+  input.push_back(brdb_cam);
+  input.push_back(brdb_inimg);
+
+  //init output vector
+  vcl_vector&lt;brdb_value_sptr&gt; output;
+
+  //: run the process
+  cpp_pro.run(&amp;cpp_render, input, output);
+  vcl_cout&lt;&lt;&quot;Time taken is :&quot; &lt;&lt;t.all()&lt;&lt;vcl_endl;
+  cpp_pro.finish();
+
+</pre></td></tr></table><p>In this example, processor is initialized and then it is used to call rendering process. Similarly multiple processes can be called using this processor.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC19" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_5.html#SEC22" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvbl__bounding__box__base.html" title="vbl_bounding_box_base\&lt; T, vbl_bounding_box_DIM\&lt; DIM \&gt; \&gt;" alt="" coords="5,97,395,121"/>
+<area shape="rect" title=" \&lt; T, vbl_bounding_box_DIM\&lt; DIM \&gt; \&gt;" alt="" coords="196,28,204,36"/>
+<area shape="rect" title=" \&lt; T, vbl_bounding_box_DIM\&lt; DIM \&gt; \&gt;" alt="" coords="196,93,204,101"/>
+<area shape="rect" href="$classvbl__bounding__box.html" title="A class to hold and update a bounding box." alt="" coords="104,175,296,199"/>
+</map>

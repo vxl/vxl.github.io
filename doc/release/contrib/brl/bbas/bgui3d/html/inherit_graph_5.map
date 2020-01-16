@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,197,109,221"/>
+<area shape="rect" href="core_vgui.tag$structvgui__command.html" title="vgui_command" alt="" coords="159,197,271,221"/>
+<area shape="rect" href="$classbgui3d__animate__command.html" title="A vgui command used to toggle animation." alt="" coords="344,5,525,29"/>
+<area shape="rect" href="$classbgui3d__axis__visible__command.html" title="A vgui command used to toggle axis visibility." alt="" coords="333,53,536,77"/>
+<area shape="rect" href="$classbgui3d__camera__type__command.html" title="A vgui command used to toggle camera type." alt="" coords="329,101,540,125"/>
+<area shape="rect" href="$classbgui3d__export__command.html" title="A vgui command used to write a scene graph to disk." alt="" coords="349,149,520,173"/>
+<area shape="rect" href="$classbgui3d__headlight__command.html" title="A vgui command used to toggle the headlight." alt="" coords="340,197,529,221"/>
+<area shape="rect" href="$classbgui3d__import__command.html" title="A vgui command used to import a scene graph from a file." alt="" coords="349,245,520,269"/>
+<area shape="rect" href="$classbgui3d__interaction__type__command.html" title="A vgui command used to toggle interaction type." alt="" coords="320,293,549,317"/>
+<area shape="rect" href="$classbgui3d__seek__distance__command.html" title="A vgui command used to toggle interaction type." alt="" coords="325,341,544,365"/>
+<area shape="rect" href="$classbgui3d__select__camera__command.html" title="A vgui command used to select a camera." alt="" coords="324,389,545,413"/>
+</map>

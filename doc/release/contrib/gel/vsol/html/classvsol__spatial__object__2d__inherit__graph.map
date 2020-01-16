@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvsol__curve__2d.html" title="vsol_curve_2d" alt="" coords="555,77,664,101"/>
+<area shape="rect" href="$classvsol__group__2d.html" title="vsol_group_2d" alt="" coords="555,125,664,149"/>
+<area shape="rect" href="$classvsol__point__2d.html" title="vsol_point_2d" alt="" coords="557,173,661,197"/>
+<area shape="rect" href="$classvsol__region__2d.html" title="vsol_region_2d" alt="" coords="553,221,665,245"/>
+<area shape="rect" href="$classvsol__spatial__object.html" title="vsol_spatial_object" alt="" coords="163,149,299,173"/>
+<area shape="rect" href="core_vul.tag$classvul__timestamp.html" title="vul_timestamp" alt="" coords="5,101,115,125"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="8,149,112,173"/>
+<area shape="rect" href="$classvsol__flags__id.html" title="vsol_flags_id" alt="" coords="11,197,109,221"/>
+<area shape="rect" href="$classvsol__conic__2d.html" title="Euclidean general conic class, part of the vsol_curve_2d hierarchy." alt="" coords="737,5,844,29"/>
+<area shape="rect" href="$classvsol__digital__curve__2d.html" title="Digital curve class, part of the vsol_curve_2d hierarchy." alt="" coords="716,53,865,77"/>
+<area shape="rect" href="$classvsol__line__2d.html" title="vsol_line_2d" alt="" coords="743,101,839,125"/>
+<area shape="rect" href="$classvsol__polyline__2d.html" title="General Polyline class, part of the vsol_curve_2d hierarchy." alt="" coords="731,149,851,173"/>
+<area shape="rect" href="$classvsol__poly__set__2d.html" title="General poly_set class, part of the vsol_curve_2d hierarchy." alt="" coords="728,209,853,233"/>
+<area shape="rect" href="$classvsol__polygon__2d.html" title="vsol_polygon_2d" alt="" coords="729,257,852,281"/>
+<area shape="rect" href="$classvsol__rectangle__2d.html" title="vsol_rectangle_2d" alt="" coords="916,233,1047,257"/>
+<area shape="rect" href="$classvsol__triangle__2d.html" title="vsol_triangle_2d" alt="" coords="921,281,1041,305"/>
+</map>

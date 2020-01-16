@@ -1,0 +1,2 @@
+\form#0:$(f*g)(x) = \int f(x-y) g(y) dy$
+\form#1:$\bigwedge_{i,j,k,p} {\textstyle src}(i,j,k,p) == {\textstyle dest}(i,j,k,p)$

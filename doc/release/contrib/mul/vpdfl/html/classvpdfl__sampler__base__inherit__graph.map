@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvpdfl__axis__gaussian__sampler.html" title="Samples from an axis aligned Gaussian PDF." alt="" coords="217,5,415,29"/>
+<area shape="rect" href="$classvpdfl__gaussian__kernel__pdf__sampler.html" title="Samples from an axis aligned Gaussian PDF." alt="" coords="199,53,433,77"/>
+<area shape="rect" href="$classvpdfl__gaussian__sampler.html" title="Samples from a Gaussian PDF." alt="" coords="233,101,399,125"/>
+<area shape="rect" href="$classvpdfl__mixture__sampler.html" title="Instance class for vpdfl_mixture." alt="" coords="237,149,395,173"/>
+<area shape="rect" href="$classvpdfl__pc__gaussian__sampler.html" title="Multi&#45;Variate Axis&#45;Aligned principal component Gaussian PDF." alt="" coords="484,101,671,125"/>
+</map>

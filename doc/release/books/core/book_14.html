@@ -1,0 +1,1116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 14. vpgl: Cameras and Fundamental Matrix</title>
+
+<meta name="description" content="VXL: 14. vpgl: Cameras and Fundamental Matrix">
+<meta name="keywords" content="VXL: 14. vpgl: Cameras and Fundamental Matrix">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="vpgl"></a>
+<a name="SEC173"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_13.html#SEC172" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC174" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_13.html#SEC167" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 14. vpgl: Cameras and Fundamental Matrix </h1>
+
+
+  <blockquote><p>  <strong>Chapter summary</strong>:
+</p>
+<p> This 2nd level library provides representation for <em>cameras</em>. A
+camera enables the projection of 3-d structures into an image. A large
+segment of computer vision research is devoted to the calibration of
+cameras and the use of cameras to visualize scenes as well as
+reconstruct the 3-d geometry of scenes from multiple views. The
+<code>vpgl</code> library provides the essential classes and algorithms for
+carrying out these tasks. The name <code>vpgl</code>, stands for VXL
+photogrammetry library. The name is derived from the field of
+photogrammetry which is also focused on computations involving the
+projection of the 3-d world into images and the recovery of 3-d
+structure from multiple images. Works on photogrammetry date back several centurites and thus provide the inspiration for the name.
+  </p></blockquote>
+
+<hr size="6">
+<a name="SEC174"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC173" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC175" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 14.1 Class Overview </h2>
+<p>A Universal Modeling Language (UML) presentation of the key
+<code>vpgl</code> classes is shown in Figure 1. The <code>camera</code> classes
+represent various parameterizations of the projection from 3-d to
+2-d. The <code>fundamental_matrix</code> and <code>essential_matrix</code> define
+the geometric relationship between a pair of images. The <code>lvcs</code>
+class is necessary to provide a mapping between geographic coordinates
+and a local Euclidean reference frame. A summary of the role of each
+camera class is itemized as follows.
+</p>
+<ul>
+<li> <code>vpgl_camera&lt;T&gt;</code> - The base class for all cameras. The virtual function common to all camera class is <code>void project(T x, T y, T z, T u, T v)</code>. This function projects a given 3-d point, (x, y, z), into a 2-d image location (u, v).
+</li><li> <code>vpgl_proj_camera&lt;T&gt;</code> - A camera that prameterizes the
+projection as a 3x4 matrix. A 3-d point to be projected is represented
+in homogenous coordinates as, for example, a
+<code>vgl_homg_point_3d&lt;T&gt;</code>. The corresponding four-element vector is
+multiplied by the projection matrix to produce the three homogeneous
+coordinates of an image point. The image point is represented, for
+example, as a <code>vgl_homg_point_2d&lt;T&gt;</code>. The use of homogeneous
+coordinates accounts for points that may be at infinity in either the
+3-d world or the image.
+</li><li> <code>vpgl_perspective_camera&lt;T&gt;</code> - A camera that is defined by
+a triple of parameter classes: (K) <code>vpgl_calibration_matrix&lt;T&gt;</code>; (R) 
+ <code>vgl_rotation_3d&lt;T&gt;</code>; and (t) - <code>vgl_vector_3d&lt;T&gt;</code>. The
+matrix K represents the internal parameters of a physical camera, such
+as focal length. The 3-d rotation, R,  defines the orientation of the
+camera coordinate system with repect to the world origin. The vector,t, is the translation of the camera center with respect to the world origin.
+</li><li> <code>vpgl_affine_camera&lt;T&gt;</code> - A camera that has its center of
+projection at infinity. Thus the camera rays are all parallel to each
+other. This camera produces significantly simpler computation of the
+properties of projected 3-d geometry. For example, parallel lines in
+the 3-d world project to parallel lines in the image, which isn't the
+case for a perspective camera. The affine camera is parameterized by a
+3x4 matrix where the last row is (0 0 0 1).
+</li><li> <code>vpgl_rational_camera&lt;T&gt;</code> - The projection of a rational
+camera is reprsented by four cubic polynomials in x, y and z, and
+associated scale and offsets. This representation can accurately model
+the image mapping produced by a scanning line camera such as is
+employed in satellite image collectors. There are 90 parameters
+overall, 80 to represent the polynomial coefficients and 10 for the
+scale and offsets. The projection is from geographic coordinates,
+longitude, latitude and elevation to image row (line) and column
+(sample).
+</li><li> <code>vpgl_local_rational_camera&lt;T&gt;</code> - Similar to the rational
+camera except the 3-d point coordinates are expressed in a local
+tangent plane to the Earth's surface at a point specified by the local
+vertical coordinate system (lvcs). The lvcs is reprsented by the <code>vpgl_lvcs</code> class.
+</li><li> <code>vpgl_generic_camera&lt;T&gt;</code> - A camera that is represented by a grid of rays. This structure can represent very general forms of world to image mapping, e.g. a camera that has multiple centers of projection. 
+</li></ul>
+
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <p><img src="./vpgl_classes.png" alt="vpgl_classes">
+    <caption align="bottom">
+  <div align=left><strong>Figure 1:</strong>
+  The UML description of the major classes in <code>vpgl</code>. 
+    </div>
+  </caption>
+      </td></tr></table></p>
+  It is noted that <code>vpgl</code> is dependent on two other core libraries, <code>vgl</code> and <code>vnl</code>.
+</p><hr size="6">
+<a name="SEC175"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC174" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC176" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC174" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 14.1.1 <code>vpgl_proj_camera</code> </h3>
+<p>The projective camera is based on the computations inherent in
+projective geometry. As described in the chapter on <code>vgl</code>, in
+order to uniformly represent points at infinity as well as finite
+points it is necessary to use homogenous coordinates where an extra
+scale factor is appended to the Euclidian coordinates. Thus a point in
+3-d is represented by the vector <!-- MATH
+ $X = (x, y, z, 1)^t$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="105" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_24.png"
+ ALT="$X = (x, y, z, 1)^t$"></SPAN> . The
+projection is then defined by,
+</p>
+<p> <!-- MATH
+ $(@lambda u, @lambda v, @lambda)^t = [3@times4]@ X$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="346" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_25.png"
+ ALT="$(@lambda u, @lambda v, @lambda)^t = [3@times4]@ X$"></SPAN> ,
+</p>
+<p> where <SPAN CLASS="MATH"><IMG
+ WIDTH="76" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_26.png"
+ ALT="$[3@times4]$"></SPAN>  is the 3x4 projection matrix and
+<SPAN CLASS="MATH"><IMG
+ WIDTH="63" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_27.png"
+ ALT="$@lambda$"></SPAN>  is called the projective scale factor. The <code>vgl</code>
+library reprsesents both 2-d and 3-d points in homogeneous
+coordinates, i.e., <code>vgl_homg_pont_2d&lt;T&gt;</code> and
+<code>vgl_homg_point_3d&lt;T&gt;</code> respectively. <code>vpgl_proj_camera&lt;T&gt;</code>
+also supports an interface to <code>vnl</code>, where homogenous coordinates
+are represented by vnl vectors. The projection matrix of the
+<code>vpgl_proj_camera</code> is represented internally as a
+<code>vnl_matrix_fixed&lt;T, 3, 4&gt;</code>.
+</p>
+<p>The projective camera also supports <em>backprojection</em> which casts
+a ray through a point in the image. A first point on the ray is
+defined as the center of projection, <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_16.png"
+ ALT="$C$"></SPAN> , which is the nullvector
+of the projection matrix. That is, 
+</p>
+<p><!-- MATH
+ $(0, 0, 0)^t = [3@times4]@ (C_x, C_y, C_z, 1)^t$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="258" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_28.png"
+ ALT="$(0, 0, 0)^t = [3@times4]@ (C_x, C_y, C_z, 1)^t$"></SPAN> . 
+</p>
+<p>The second point on the ray, <code>X</code>, is any solution to the equation, 
+</p>
+<p><!-- MATH
+ $(u, v, 1)^t = [3@times4]@ X$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="175" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_29.png"
+ ALT="$(u, v, 1)^t = [3@times4]@ X$"></SPAN> , 
+</p>
+<p>where <SPAN CLASS="MATH"><IMG
+ WIDTH="57" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_30.png"
+ ALT="$(u, v, 1)^t$"></SPAN>  is the image point being backprojected. The
+solution of this equation uses the <code>vnl_svd</code> <code>solve</code> method,
+and so the SVD is cached as a member of <code>vpgl_proj_camera</code> for
+efficiency.
+</p>
+<p>The following example illustrates the use of <code>vpgl_proj_camera</code> basic projection methods.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  vnl_matrix_fixed&lt;double,3,4&gt; M( 0.0 );
+  M[0][0] = M[1][1] = M[2][2] = M[2][3] = 1;
+  vpgl_proj_camera&lt;double&gt; pcam(M);
+  vgl_homg_point_3d&lt;double&gt; X(1, 2, 9, 1);
+  vgl_homg_point_2d&lt;double&gt; x;
+  x = pcam.project(X); // x = pcam(X) also works
+</pre></td></tr></table><p>The result is <!-- MATH
+ $x = (1, 2, 10)^t$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="92" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_31.png"
+ ALT="$x = (1, 2, 10)^t$"></SPAN> , or <!-- MATH
+ $u=0.1, v = 0.2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="104" HEIGHT="27" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_32.png"
+ ALT="$u=0.1, v = 0.2$"></SPAN> . Note that the () operator is assigned to represent a shorthand form for <code>project</code>.
+</p>
+<p>An example of backprojection is as follows.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   vgl_homg_point_2d&lt;double&gt; p(0.0, 0.0);
+   vgl_homg_line_3d_2_points&lt;double&gt; l3d = pcam.backproject(p);
+   vgl_ray_3d&lt;double&gt; r3d = pcam.backproject_ray(p);
+</pre></td></tr></table><p>The line <code>l3d</code> is represented by two points, the finite point,
+<code>l3d.point_finite()</code>, which corresponds to the center of
+projection of the camera. The second point,
+<code>l3d.point_infinite()</code>, is an ideal point (point at infinity) and
+corresponds to the tangent vector along the line. An alternative
+representation of the result of backprojection is
+<code>vgl_ray_3d&lt;T&gt;</code>, which is described by a 3-d origin,
+<code>vgl_point_3d&lt;T&gt;</code>, and a ray direction, <code>vgl_vector_3d&lt;T&gt;</code>.
+</p>
+<hr size="6">
+<a name="SEC176"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC175" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC177" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC174" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 14.1.2 <code>vpgl_perspective_camera</code> </h3>
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <p><img src="./perspectivecamera.png" alt="perspectivecamera">
+    <caption align="bottom">
+  <div align=left><strong>Figure 2:</strong>
+  The geometry of the perspective camera.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  The parameters of the perspective camera geometry are grouped in terms
+of <em>interor</em> and <em>exterior</em> parameters. The exterior
+parameters are the 3-d rotation, <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_33.png"
+ ALT="$R$"></SPAN> , and translation vector,
+<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_34.png"
+ ALT="$t$"></SPAN> , that relate the coordinate system of Figure 2 to the world
+origin. The position of the camera center, <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_16.png"
+ ALT="$C$"></SPAN> , is related to the
+exterior camera parameters by <SPAN CLASS="MATH"><IMG
+ WIDTH="69" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_35.png"
+ ALT="$C = -R^t t$"></SPAN> .The interior
+parameters shown in Figure 2.
+</p>
+<p>The key interior parameters
+are the principal point, <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="27" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_36.png"
+ ALT="$p$"></SPAN> , where the ray from the center of
+projection, perpendicular to the image plane, pierces the image plane,
+and the focal length, <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_6.png"
+ ALT="$f$"></SPAN> , which is the distance from the center of
+projection to the image plane along the principal ray.
+</p>
+<p>The perspective camera projection maps a 3-d homogenous point,
+<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_37.png"
+ ALT="$X$"></SPAN> , into a homogenous image point, <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_1.png"
+ ALT="$x$"></SPAN> . The projection
+operation is factored into two matrix components as, <SPAN CLASS="MATH"><IMG
+ WIDTH="88" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_38.png"
+ ALT="$ x =
+K[R\vert t]X$"></SPAN> , where <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_39.png"
+ ALT="$[R\vert t]$"></SPAN>  is a partitioned 3x4 matrix. The 3x3
+matrix, <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_40.png"
+ ALT="$K$"></SPAN>  is called the <em>calibration matrix</em> and
+represents the internal camera parameters. That is,
+</p><table><tr><td>&nbsp;</td><td><pre class="example">      _          _
+     | fx  s   px |
+ K = |  0  fy  py |
+     |  0  0   1  |
+      -         -
+</pre></td></tr></table><p>The elements, <code>fx</code> and <code>fy</code> are the focal length represented
+in units of the physical pixel size in the <code>x</code> and <code>y</code> coordinate
+system of the imaging device. A typical pixel dimenision is, <code>dx
+= dy = 5.0</code> microns. Thus for a 50mm focal length, <code>fx = fy =
+10000.0</code>. The element <code>s</code> represents the skew that results if the image plane is tilted with respect to the lens axis. The principal point image coordinates are <code>px</code> and <code>py</code>.
+</p>
+<p>The use of <code>vpgl</code> classes in constructing and accessing a perspective camera is illustrated by the following example.
+</p><table><tr><td>&nbsp;</td><td><pre class="example"> // The default constructor is the identity matrix
+ vpgl_calibration_matrix&lt;double&gt; K;
+ K.set_focal_length(50.0e-3);
+ K.set_x_scale(5.0e-6);
+ K.set_y_scale(5.0e-6);
+ vgl_point_2d&lt;double&gt; pp(640.0, 384.0); //for a 1280x768 image
+ K.set_principal_point(pp);
+ vgl_rotation_3d&lt;double&gt; R;// the identiy rotation
+ vgl_vector_3d&lt;double&gt; t(0, 0, 10.0); //Translate along z. 
+ vpgl_perspective_camera&lt;double&gt; per_cam(K, R, t);
+ vgl_homg_point_3d&lt;double&gt; X(1.0, 2.0, 9.0, 1.0).
+ vgl_homg_point_2d&lt;double&gt; x = per_cam(X);
+ // the principal ray direction
+ vgl_vector_3d&lt;double&gt; pray_dir = per_cam.principal_axis();
+ // point the camera so that the principal ray
+ // pierces the specified point
+ vgl_homg_point_3d&lt;double&gt; origin(0, 0, 0);
+ per_cam.look_at(origin);
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC177"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC176" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC178" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC174" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 14.1.3 <code>vpgl_affine_camera</code> </h3>
+<p>The affine camera is a type of projective camera where the center of
+projection is at infinity (an ideal point). In this case, all the
+camera rays are parallel, i.e. they intersect at infinity. The main
+addition to this class is a viewing distance to provide a finite
+location for the origin of the camera rays. A finite ray origin is
+useful for ray tracing algorithms. The affine camera matrix can be
+specified by the first tworows of the 3x4 projection matrix, since the
+bottom row is <!-- MATH
+ $[0 @ 0 @ 0 @ 1]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="76" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_41.png"
+ ALT="$[0 @ 0 @ 0 @ 1]$"></SPAN> . An example illustrating the affine camera interface follows.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  vnl_vector_fixed&lt;double, 4&gt; r0(1.0, 0.0, 0.0, 0.0);
+  vnl_vector_fixed&lt;double, 4&gt; r1(0.0, 1.0, 0.0, 0.0);  
+  vpgl_affine_camera&lt;double&gt; aff_cam(r0, r1);
+  aff_cam.set_viewing_distance(1000.0);//1Km above the scene
+  vgl_homg_plane_3d&lt;double&gt; pplane = aff_cam.principal_plane();
+
+</pre></td></tr></table><p>In this example, the <code>principal_plane</code> is perpendicular to the camera rays and is positioned so the perpedicular distance from the origin is the <code>viewing_distance</code>.
+</p>
+<hr size="6">
+<a name="SEC178"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC177" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC179" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC174" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 14.1.4 <code>vpgl_rational_camera</code> </h3>
+<p> The rational camera does not reprsent physical parameters of
+projection as in the case of the perspective camera. Instead the
+camera computation is an approximation to some physical projection
+process, based on rational polynomials. This formulation arises since
+the actual physical model may have a large number of parameters and
+the projection computation may involve thousands of calculations. An
+example is a <em>pushbroom </em> image sensor, where a moving linear
+array is scanned over the scene by a rotating platform. The motion of
+the platform may be non-uniform with overshoot and oscillations. This
+complex scanning motion can be represented by a polynomial
+approximation with far fewer parameters than the kinetic motion
+parameters of the scanning platform. The standard rational camera is 
+based on cubic polynomials in (x, y, z) with units in the wgs84 geographic coordinate system of longitude (x), latitude (y) and elevation (z). 
+</p>
+<p>A cubic polynomial in three variables requires 20 monomial terms, such as <!-- MATH
+ $x^3, x^2y, ..., y^3, ... 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="115" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_42.png"
+ ALT="$x^3, x^2y, ..., y^3, ... 1$"></SPAN> . There are four such polynomials used to compute the row and column coordinates of the projected 3-d geographic position. That is,
+</p>
+<p> <!-- MATH
+ $u = {P(x, y, z) @over Q(x, y,z)}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="194" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_43.png"
+ ALT="$ u = {P(x, y, z) @over Q(x, y,z)}$"></SPAN>   and <!-- MATH
+ $v = {R(x, y, z) @over S(x, y, z)}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="191" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_44.png"
+ ALT="$v = {R(x, y, z) @over S(x, y, z)}$"></SPAN> ,
+</p>
+<p>where <SPAN CLASS="MATH"><IMG
+ WIDTH="66" HEIGHT="28" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_45.png"
+ ALT="$P, Q, R, S$"></SPAN>  are cubic polynomials. The polynomial coefficients are computed from the recorded motion states of the sensor platform during the image scan. This representation is also called a Rational Polynomial Coefficient (RPC) model. It is common for commercial satellite images to have associated metadata that includes the 90 parameters for the RPC model.
+</p>
+<p>The standard units of x and y are degrees and the unit of z is the
+meter. These units are significantly different in scale for the same
+Euclidan distance. For example on the surface of the Earth, one degree
+is about 100Km. To avoid large inaccuracies in the projection due to
+numerical precision it is necessary to offset and scale both the 3-d
+and 2-d coordinates onto the range <SPAN CLASS="MATH"><IMG
+ WIDTH="56" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_46.png"
+ ALT="$[-1,@ 1]$"></SPAN> . This normalization
+is defined by ten additional camera parameters, which represent scale
+and offset coefficients, two for each of the five world and image
+coordinates. An example of constructing and applying a the rational camera is provided by the following example. 
+</p><table><tr><td>&nbsp;</td><td><pre class="example">//Rational polynomial coefficients
+//Rational polynomial coefficients
+vcl_vector&lt;double&gt; neu_u(20,0.0), den_u(20,0.0),
+neu_v(20,0.0),den_v(20,0.0);
+  
+neu_u[0]=0.1; neu_u[10]=0.071; neu_u[7]=0.01;  neu_u[9]=0.3;
+neu_u[15]=1.0; neu_u[18]=1.0, neu_u[19]=0.75;
+
+den_u[0]=0.1; den_u[10]=0.05; den_u[17]=0.01; den_u[9]=1.0;
+den_u[15]=1.0; den_u[18]=1.0; den_u[19]=1.0;
+
+neu_v[0]=0.02; neu_v[10]=0.014; neu_v[7]=0.1; neu_v[9]=0.4;
+neu_v[15]=0.5; neu_v[18]=0.01; neu_v[19]=0.33;
+
+den_v[0]=0.1; den_v[10]=0.05; den_v[17]=0.03; den_v[9]=1.0;
+den_v[15]=1.0; den_v[18]=0.3; den_v[19]=1.0;
+
+//Scale and offsets
+double sx = 50.0, ox = 150.0;
+double sy = 125.0, oy = 100.0;
+double sz = 5.0, oz = 10.0;
+double su = 1000.0, ou = 500;
+double sv = 500.0, ov = 200;
+//construct the camera
+vpgl_rational_camera&lt;double&gt; rcam(neu_u, den_u, neu_v, den_v,
+                                  sx, ox, sy, oy, sz, oz,
+                                  su, ou, sv, ov);
+vgl_point_3d&lt;double&gt; X(150.0, 100.0, 10.0);                                 
+vgl_point_2d&lt;double&gt; x;
+x = project(X); // xu = 1250.0, xv = 365.0
+
+</pre></td></tr></table><p>It is noted that the <code>vpgl_rational_camera</code> class does not have a <code>back_project</code> method. Solving a system of third order polynomials is not feasible in closed form and involves elaborate non-linear optimization routines. Thus the backprojection operations are relegated to the <code>/algo</code> sub-library.
+</p><hr size="6">
+<a name="SEC179"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC178" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC180" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC174" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 14.1.5 <code>vpgl_local rational_camera</code> </h3>
+<p>The geographic spherical coordinates defined for the standard rational
+camera are not convenient when processing geometry such as 3-d models
+of buildings. For example, determining if planar surfaces are
+orthogonal is an involved computation when the planes are described in
+spherical Earth coordinates. It is often simpler to convert the
+geographic coordinates to a local Euclidian frame. The Euclidia frame
+is based on a local tangent plane at a specified geographic origin as
+shown in Figure 3. If the scene of interest is relatively small, say
+less than 1Km, then the local tangent approximation is sufficiently
+accurate for most computer vision applications.
+</p>
+<p>The <code>vpgl_local_rational_camera</code> is a sub-class of the <code>vpgl_rational_camera</code>, with an added member that defines a local vertical coordinate frame. The member is an instance of the class, <code>vpgl_lvcs</code>.
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <img src="./lvcs.png" alt="lvcs">
+    <caption align="bottom">
+  <div align=left><strong>Figure 3:</strong>
+  A local vertical coordinate system defined on the surface of the Earth. 
+    </div>
+  </caption>
+      </td></tr></table></p>
+  Following is an example of constructing a local rational camera.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">// read the rational camera from a file in rpb format
+vpgl_rational_camera&lt;double&gt; rcam;
+vcl_ifstream is(&quot;./rpc_camera.rpb&quot;);
+is &gt;&gt; rcam ;
+// get the center of the polynomial approximation volume
+double xoff = rcam.offset(vpgl_rational_camera&lt;double&gt;::X_INDX);
+double yoff = rcam.offset(vpgl_rational_camera&lt;double&gt;::Y_INDX);
+double zoff = rcam.offset(vpgl_rational_camera&lt;double&gt;::Z_INDX);
+// set the lvcs origin
+vpgl_lvcs lvcs(yoff, xoff, zoff);
+// construct the local rational camera
+vpgl_local_rational_camera&lt;double&gt; lrcam(lvcs, rcam);
+double ul, vl;
+//ul and vl will be at the center of the image
+lrcam.project(0.0, 0.0, 0.0, ul, vl);
+
+</pre></td></tr></table><p>There is a somewhat standard ascii format for rational polynomial coefficients called a &quot;RPB&quot; file. Alternatively, the National Imagery Transmission Format (NITF) header specifies a datablock for RPC coefficients. The class, <code>vpgl_nitf_rational_camera</code> class in the <code>file_formats</code> sub-directory is provided to extract the coefficients from NITF image files.
+</p><hr size="6">
+<a name="SEC180"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC179" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC181" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC174" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 14.1.6 <code>vpgl_generic_camera</code> </h3>
+<p>The generic camera is represented by a grid of rays, one per pixel of the camera image. In <code>vpgl</code> the rays are stored in a pyramid of image resolutions to support efficient computation of the <code>project</code> method. That is, it is necessary to find a ray in the highest resolution grid that is closest to the specified 3-d point. This search is done hierarchically for speed. The backproject function is trival since each pixel has an associated ray. The main motiviation for this camera class is to support ray tracing in volumetric processing.
+</p><hr size="6">
+<a name="SEC181"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC180" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC182" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC174" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 14.1.7 <code>vpgl_fundamental_matrix</code> </h3>
+<p>The geometric relationship between a pair of images is captured by the <em>fundamental matrix</em>, as shown in Figure 4. In the field of photogrammetry, this relationship is called <em>relative orientation</em>. Given a point, <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_1.png"
+ ALT="$x$"></SPAN> , in a left camera view, its backprojection forms a ray that intersects the 3-d point, <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_37.png"
+ ALT="$X$"></SPAN> , that projects to <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_1.png"
+ ALT="$x$"></SPAN> . However the location of <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_37.png"
+ ALT="$X$"></SPAN>  along the ray cannot be determined from a single image. Thus the image point <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_1.png"
+ ALT="$x$"></SPAN>  defines a 3-d ray that projects into a second image as a line. In the figure this image line is denoted by <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_47.png"
+ ALT="$l'$"></SPAN> . The image point in the right camera corresponding to the projection of <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_37.png"
+ ALT="$X$"></SPAN> , <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_48.png"
+ ALT="$x'$"></SPAN> ,  must lie on <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_47.png"
+ ALT="$l'$"></SPAN>  as shown.
+</p>
+<p>It is also the case that the line <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_47.png"
+ ALT="$l'$"></SPAN>  intersects a point,
+<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_49.png"
+ ALT="$e'$"></SPAN> , called the <em>epipole</em>. Two epipoles are constructed as the
+intersection of the line joining the two camera centers with each
+image, i.e., <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_50.png"
+ ALT="$e, e'$"></SPAN> . Thus, the relationship between the two
+cameras is also refered to as epipolar geometry. The relationship between the point <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_1.png"
+ ALT="$x$"></SPAN>  and the @line{l'} is defined by a 3x3 matrix, <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_51.png"
+ ALT="$F$"></SPAN> . That is,
+</p>
+<p><SPAN CLASS="MATH"><IMG
+ WIDTH="64" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_52.png"
+ ALT="$l' = F@ x$"></SPAN> .
+</p>
+<p>The matrix, <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_51.png"
+ ALT="$F$"></SPAN> , is called the fundamental matrix.
+</p>
+
+<p>The fundamental matrix plays an important role in finding the correspondence of feature points between two images, for example in tracking objects in video sequences. If two image features one each in a pair of images correspond to the same 3-d point, it must be the case that the <em>epipolar constraint</em> is statisfied by the two points, where,
+</p>
+<p><SPAN CLASS="MATH"><IMG
+ WIDTH="68" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_53.png"
+ ALT="$x'^tFx = 0$"></SPAN> 
+</p>
+<p>This constraint is used to verify that proposed feature correspondences are consistent with the epipolar geometry of the two views being matched. 
+</p>
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <p><img src="./epipolar.png" alt="epipolar">
+    <caption align="bottom">
+  <div align=left><strong>Figure 4:</strong>
+  The geometry of the fundamental matrix.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  </p>
+<p>The fundamental matrix can be constructed from two cameras as illustrated in the following code fragment.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">// Ml and Mr, some 3x4 matrices
+vpgl_proj_camera&lt;double&gt; Cl(Ml),Cr(Mr) // right and left cameras 
+vpgl_fundamental_matrix&lt;double&gt; F1( C1r, C1l );
+</pre></td></tr></table><p>It is also the case that the fundamental matrix is sufficient to
+define two cameras, although not uniquely. The method for extracting
+the &quot;left&quot; camera, assuming the &quot;right&quot; camera is the identity
+matrix is,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">vpgl_proj_camera&lt;T&gt; 
+ extract_left_camera(const vnl_vector_fixed&lt;T,3&gt;&amp; v, T lambda ) const;
+</pre></td></tr></table><p>The meaning of the arguments <code>v</code> and <code>lamba</code> are defined in Hartley and Zisserman, 2nd edition, p. 256.
+</p>
+<p>An example of accessing one of the the epipolar lines is illustrated below.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">vpgl_fundamental_matrix&lt;double&gt; F;
+vgl_homg_point&lt;double&gt; p(1.0, 2.0);
+//The right epipolar line
+vgl_homg_line_2d&lt;double&gt; l_r = F.r_epipolar_line( p );
+</pre></td></tr></table><hr size="6">
+<a name="SEC182"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC181" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC183" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC174" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 14.1.8 <code>vpgl_algo</code> </h3>
+<p>A number of algorithms have been developed that make use of the camera data structures in vpgl. These algorithms are described in the following subsections.
+</p><hr size="6">
+<a name="SEC183"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC182" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC184" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC182" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 14.1.8.1 {<code>vpgl_fm_compute_*_point</code> </h4>
+<p>The library contains implementations of computing the fundamental matrix from differing numbers of correspondences between the left and right images. The most widely used algorithm is the so-called eight-point algorithm. An example of its application follows.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">// corresponding points
+vcl_vector&lt; vgl_homg_point_2d&lt;double&gt; &gt; p1r, p1l;
+vpgl_fm_compute_8_point fmc;
+vpgl_fundamental_matrix&lt;double&gt; fm1est;
+fmc.compute( p1r, p1l, fm1est );
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC184"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC183" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC185" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC182" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 14.1.8.2 {<code>vpgl_ortho_procrustes</code> </h4>
+<p>The orthogonal procrustes problem is defined by the relationship between
+two given 3-d pointsets, i.e.,
+</p>
+<p><!-- MATH
+ $X_i = s(RY_i +t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="108" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_54.png"
+ ALT="$X_i = s(RY_i +t)$"></SPAN> ,
+</p>
+<p>where the goal is to determine the scale, <SPAN CLASS="MATH"><IMG
+ WIDTH="10" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_55.png"
+ ALT="$s$"></SPAN> , the 3-d rotation
+<SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_33.png"
+ ALT="$R$"></SPAN> , and the translation vector <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_34.png"
+ ALT="$t$"></SPAN> . The constructor for the
+<code>vpgl_ortho_procrustes</code> takes in the two point sets and calling
+any of the accessors for the unkown transformation parameters will
+trigger solution processing. An example of using the algorithm follows.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  // two sets of five 3-d points
+  vnl_matrix&lt;double&gt; X(3, 5), Y(3, 5);
+  vpgl_ortho_procrustes op(X, Y);
+  vgl_rotation_3d&lt;double&gt; R = op.R();
+  double s = op.s();
+  vnl_vector_fixed&lt;double, 3&gt; t = op.s();
+  double error = op.residual_mean_sq_error();
+
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC185"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC184" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC186" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC182" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 14.1.8.3 {<code>vpgl_camera_compute</code>  </h4>
+<p>This algorithm computes camera parameters from known correspondences between a set of 3-d points and their projection into the camera image plane. An example is the  static method,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">bool vpgl_proj_camera_compute::
+   compute( const vcl_vector&lt; vgl_homg_point_2d&lt;double&gt; &gt;&amp; image_pts,
+            const vcl_vector&lt; vgl_homg_point_3d&lt;double&gt; &gt;&amp; world_pts,
+            vpgl_proj_camera&lt;double&gt;&amp; camera );
+</pre></td></tr></table>
+<p>There is also the class <code>vpgl_perspective_camera_compute</code>, which can find the <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_40.png"
+ ALT="$K$"></SPAN> , <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_33.png"
+ ALT="$R$"></SPAN> , <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_34.png"
+ ALT="$t$"></SPAN>  parameters of the perspective camera, or just <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_33.png"
+ ALT="$R$"></SPAN>  and <SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="12" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_34.png"
+ ALT="$t$"></SPAN> , given <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="book_40.png"
+ ALT="$K$"></SPAN> .
+</p><hr size="6">
+<a name="SEC186"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC185" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC187" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC182" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 14.1.8.4 {<code>vpgl_camera_convert</code>  </h4>
+<p>This algorithm class converts between various camera types. A typical example is to convert from a rational camera to a generic camera. Recall that a generic camera is represented by a grid of 3-d rays, one for each pixel in a specified image. It is effective to convert the rational camera to a generic camera to enable efficient ray tracing computations. An example of the conversion interface follows.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">bool convert( vpgl_local_rational_camera&lt;double&gt; const&amp; rat_cam,
+              int ni, int nj,
+              vpgl_generic_camera&lt;double&gt; &amp; gen_cam, unsigned level = 0);
+</pre></td></tr></table><p>The <code>level</code> argument refers to the representation of the camera rays, which are stored in a pyramid structure to enable fast computation for projecting a 3-d point into the camera image. <code>level=0</code> corresponds to the base image resolution of the pyramid.
+</p><hr size="6">
+<a name="SEC187"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC186" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC188" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC182" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 14.1.8.5 {<code>vpgl_rational_adjust_onept</code> </h4>
+<p>In many cases the rational polynomial projection exhibits very high
+relative accuracy, but there can be a small pointing error that can be
+corrected by translating the image plane. It is often the case that an
+image analyst will select a single corespondence in multiple images
+and then the cameras are adjusted so that the corresponding 3-d point
+projects correctly in each image. The translations are computed so that
+each camera translation is as small as possible, while maintaining a consistent projection from 3-d to 2d. The geometry of the adjustment process is shown in Figure 5.
+    <p>
+  <table border="1" cellpadding="10" align=center width=80%>
+  <tr><td>
+  <img src="./rational_adjust.png" alt="rational_adjust">
+    <caption align="bottom">
+  <div align=left><strong>Figure 5:</strong>
+  The adjustment of rational camera <SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_56.png"
+ ALT="$(u, v)$"></SPAN>  translation offsets.
+    </div>
+  </caption>
+      </td></tr></table></p>
+  An example of the algorithm use is given in the example below.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">//single image correspondence to correct cameras
+vgl_point_2d&lt;double&gt; p1(25479.9, 409.113), p2(17528.2, 14638);
+
+vcl_vector&lt;vgl_point_2d&lt;double&gt; &gt; corrs;
+corrs.push_back(p1);   corrs.push_back(p2);
+
+vcl_vector&lt;vpgl_rational_camera&lt;double&gt; &gt; cams(2);
+cams[0]= rcam1;
+cams[1]= rcam2;
+vcl_vector&lt;vgl_vector_2d&lt;double&gt; &gt; cam_trans;
+
+vgl_point_3d&lt;double&gt; intersection;
+bool good  = vpgl_rational_adjust_onept::adjust(cams, corrs, cam_trans,
+
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC188"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC187" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC189" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC182" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 14.1.8.6 {<code>vpgl_rational_adjust</code> </h4>
+<p>This algorithm carries out a similar function to <code>vpgl_rational_adjust_onept</code> but instead adjusts the translation of a single rational camera from a set of correspondences between 3-d points and 2-d image points. The signature is,
+</p><table><tr><td>&nbsp;</td><td><pre class="example">bool adjust(vpgl_rational_camera&lt;double&gt; const&amp; initial_rcam,
+            vcl_vector&lt;vgl_point_2d&lt;double&gt; &gt; img_pts,
+            vcl_vector&lt;vgl_point_3d&lt;double&gt; &gt; geo_pts,
+            vpgl_rational_camera&lt;double&gt; &amp; adj_rcam)
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC189"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC188" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC190" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC174" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 14.1.9 {<code>vpgl_backproject</code>  </h3>
+<p>It is useful for many applications to determine a 3-d point as the
+backprojection of an image point. The 3-d point is not defined unless
+a 3-d surface is also specified. This algorithm class applies
+non-linear optimization to find the closest 3-d point on a 3-d surface
+to a backprojected camera ray. 
+</p>
+<p>A polymorphic form of the backproject method is as follows.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">bool bproj_plane(const vpgl_camera&lt;double&gt;* cam,
+                 vnl_double_2 const&amp; image_point,
+                 vnl_double_4 const&amp; plane,
+                 vnl_double_3 const&amp; initial_guess,
+                 vnl_double_3&amp; world_point);
+</pre></td></tr></table><p>Note that since a non-linear solution is required in general (e.g. a rational camera) it is necessary to provide a guess as the starting point for the solution. In most cases the initial guess can just be the origin.  Another method on <code>vpgl_backproject</code> with a specific rational camera interface is shown below.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">...
+vpgl_rational_camera&lt;double&gt; rcam(neu_u, den_u, neu_v, den_v, 
+                                  sx, ox, sy, oy, sz, oz,
+                                  su, ou, sv, ov)
+vnl_double_4 plane;
+vnl_double_2 image_point;
+image_point[0]=1250.0;   image_point[1]=332;
+initial_guess[0]=200.0; initial_guess[1]=150.0; initial_guess[2]=15.0;
+plane[0]=0; plane[1]=0; plane[2]=1.0; plane[3]=-10.0;
+ 
+bool success = 
+  vpgl_backproject::bproj_plane(rcam, image_point, plane,
+                                initial_guess, world_point);
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC190"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC189" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC191" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC189" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 14.1.9.1 {<code>vpgl_ray</code> </h4>
+<p>This class contains various static methods for computing camera rays. For example, a non-linear computation is needed to determine a ray from a rational camera at a given 3-d point in space. The method signature is,
+</p><table><tr><td>&nbsp;</td><td><pre class="example">bool ray(vpgl_rational_camera&lt;double&gt; const&amp; rcam,
+         vnl_double_3 const&amp; point_3d,
+         vnl_double_3&amp; ray)
+</pre></td></tr></table>
+<p>Another example based a <code>vgl</code> interface and with an abstract camera is,
+</p><table><tr><td>&nbsp;</td><td><pre class="example">bool ray(const vpgl_camera&lt;double&gt;*  cam,
+         vgl_point_3d&lt;double&gt; const&amp; point_3d,
+         vgl_vector_3d&lt;double&gt;&amp; ray)
+</pre></td></tr></table>
+<p>This method polymorphically computes the ray, depending on the camera subclass.
+</p>
+<hr size="6">
+<a name="SEC191"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC190" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC189" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 14.1.9.2 {<code>vpgl_ray_intersect</code> </h4>
+<p>This algorithm class computes the 3-d point that lies closest to a set of camera rays. The algorithm assumes a non-linear solution to include the rational camera. An example intersection computation is illustrated in the following example.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  vcl_vector&lt;vpgl_camera&lt;double&gt;* &gt; cams(2);
+  cams[0]= (vpgl_camera&lt;double&gt;*)(&amp;rcam1);
+  cams[1]= (vpgl_camera&lt;double&gt;*)(&amp;rcam2);
+  vcl_vector&lt;vgl_point_2d&lt;double&gt; &gt; image_pts;
+  image_pts.push_back(p1);   image_pts.push_back(p2);
+  vpgl_ray_intersect ri(2);
+  vgl_point_3d&lt;double&gt; intersection;
+  vgl_point_3d&lt;double&gt; initial_point(44.3542,33.1855 ,32);
+  bool good = 
+    ri.intersect(cams, image_pts, initial_point, intersection);
+</pre></td></tr></table><p>Note that a class instance is required, rather than a static method.
+</p><hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC173" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_15.html#SEC192" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

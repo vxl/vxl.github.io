@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbsta__gaussian.html" title="A Gaussian distribution." alt="" coords="547,77,699,101"/>
+<area shape="rect" href="$classbsta__parzen.html" title="A Parzen distribution." alt="" coords="553,171,692,195"/>
+<area shape="rect" href="$classbsta__parzen.html" title="bsta_parzen\&lt; T, 1 \&gt;" alt="" coords="925,208,1064,232"/>
+<area shape="rect" href="$classbsta__von__mises.html" title="A Von_Mises distribution." alt="" coords="541,269,704,293"/>
+<area shape="rect" href="$classbsta__distribution.html" title="bsta_distribution\&lt; dist_::math_type, dist_::dimension \&gt;" alt="" coords="451,317,795,341"/>
+<area shape="rect" title=" \&lt; dist_::math_type, dist_::dimension \&gt;" alt="" coords="104,241,112,249"/>
+<area shape="rect" title=" \&lt; dist_::math_type, dist_::dimension \&gt;" alt="" coords="447,323,455,331"/>
+<area shape="rect" href="$classbsta__gaussian__full.html" title="A Gaussian distribution with a full covariance matrix." alt="" coords="907,5,1083,29"/>
+<area shape="rect" href="$classbsta__gaussian__indep.html" title="A Gaussian distribution, independent in each dimension." alt="" coords="899,53,1091,77"/>
+<area shape="rect" href="$classbsta__gaussian__sphere.html" title="A (hyper&#45;)spherical Gaussian distribution." alt="" coords="895,101,1095,125"/>
+<area shape="rect" href="$classbsta__parzen__sphere.html" title="A parzen distribution." alt="" coords="901,149,1088,173"/>
+<area shape="rect" title=" \&lt; T, 1 \&gt;" alt="" coords="689,185,697,193"/>
+<area shape="rect" title=" \&lt; T, 1 \&gt;" alt="" coords="921,209,929,217"/>
+<area shape="rect" href="$classbsta__sample__set.html" title="A class to hold samples, the window width parameter, weights for each sample, assignments of each sam..." alt="" coords="1157,149,1325,173"/>
+<area shape="rect" href="$classbsta__parzen__sphere_3_01T_00_011_01_4.html" title="specialize to the scalar case, needed due to differences in computing the covariance matrix..." alt="" coords="1148,208,1335,232"/>
+<area shape="rect" href="$classbsta__mixture.html" title="A mixture of distributions." alt="" coords="920,293,1069,317"/>
+<area shape="rect" href="$classbsta__mixture__fixed.html" title="A mixture of distributions with a fixed size of s components." alt="" coords="895,341,1095,365"/>
+</map>

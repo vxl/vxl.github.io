@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgui__button__field.html" title="button control in a dialog." alt="" coords="5,81,128,105"/>
+<area shape="rect" href="$classvgui__file__field.html" title="File browser in a dialog." alt="" coords="152,81,256,105"/>
+<area shape="rect" href="$classvgui__simple__field.html" title="Templated fields for dialog boxes." alt="" coords="280,81,435,105"/>
+<area shape="rect" href="$classvgui__string__field.html" title="A dialog field implementation that holds a vcl_string." alt="" coords="459,81,576,105"/>
+</map>

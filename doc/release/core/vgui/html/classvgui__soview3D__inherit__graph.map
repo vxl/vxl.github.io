@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvgui__lineseg3D.html" title="3&#45;dimensional line segment." alt="" coords="5,156,117,180"/>
+<area shape="rect" href="$classvgui__point3D.html" title="3&#45;dimensional point." alt="" coords="141,156,240,180"/>
+<area shape="rect" href="$classvgui__triangle3D.html" title="3&#45;dimensional line segment." alt="" coords="264,156,379,180"/>
+<area shape="rect" href="$classvgui__soview.html" title="Spatial object view (base class for 2 &amp; 3D geometric objects)." alt="" coords="144,7,237,31"/>
+</map>

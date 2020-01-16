@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvnl__vector.html" title="Mathematical vector class, templated by type of element." alt="" coords="5,29,120,53"/>
+<area shape="rect" href="$classvnl__file__vector.html" title="Templated class to load a vector from a file." alt="" coords="169,5,308,29"/>
+<area shape="rect" href="$classvnl__vector__ref.html" title="vnl_vector using user&#45;supplied storage." alt="" coords="169,53,308,77"/>
+</map>

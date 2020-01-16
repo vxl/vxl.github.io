@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbsta__parzen__sphere.html" title="A parzen distribution." alt="" coords="5,175,192,199"/>
+<area shape="rect" href="$classbsta__parzen.html" title="bsta_parzen\&lt; T, 1 \&gt;" alt="" coords="220,175,359,199"/>
+<area shape="rect" title=" \&lt; T, 1 \&gt;" alt="" coords="173,105,181,113"/>
+<area shape="rect" title=" \&lt; T, 1 \&gt;" alt="" coords="268,171,276,179"/>
+<area shape="rect" href="$classbsta__distribution.html" title="A base class for probability distributions." alt="" coords="77,7,240,31"/>
+<area shape="rect" href="$classbsta__sample__set.html" title="A class to hold samples, the window width parameter, weights for each sample, assignments of each sam..." alt="" coords="8,252,176,276"/>
+<area shape="rect" href="$classbsta__parzen__sphere_3_01T_00_011_01_4.html" title="specialize to the scalar case, needed due to differences in computing the covariance matrix..." alt="" coords="200,252,387,276"/>
+</map>

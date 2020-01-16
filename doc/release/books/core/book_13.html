@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 13. vcsl: Co-ordinate systems</title>
+
+<meta name="description" content="VXL: 13. vcsl: Co-ordinate systems">
+<meta name="keywords" content="VXL: 13. vcsl: Co-ordinate systems">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="vcsl"></a>
+<a name="SEC167"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_12.html#SEC166" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC168" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_12.html#SEC157" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_14.html#SEC173" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 13. vcsl: Co-ordinate systems </h1>
+
+
+  <blockquote><p>  <strong>Chapter summary</strong>:
+Metric entities, co-ordinate systems and transformations.
+  </p></blockquote>
+
+<p>This non-core Level 2 library <code>vcsl</code> is intended to provide an environment
+for representing co-ordinate systems, transformations, dimensions, and metric
+units.
+</p>
+<p>This includes classes for
+</p><ul>
+<li> Radians, degrees, and meters.
+</li><li> 2D and 3D Cartesian co-ordinate systems
+</li><li> Various polar co-ordinate systems
+</li><li> Various geographic co-ordinate systems
+</li><li> Various transformations between those
+</li></ul>
+
+<hr size="6">
+<a name="SEC168"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC167" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC169" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC167" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC167" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_14.html#SEC173" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 13.1 Contents </h2>
+<hr size="6">
+<a name="SEC169"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC168" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC170" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC167" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC168" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_14.html#SEC173" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.1.1 Metric and Dimensional classes </h3>
+
+<ul>
+<li> <code>vcsl_dimension</code> - Abstract dimension
+  <ul>
+<li> <code>vcsl_length</code>
+    </li><li> <code>vcsl_angle</code>
+    </li><li> <code>vcsl_area</code>
+    </li><li> <code>vcsl_volume</code>
+  </li></ul>
+
+  </li><li> <code>vcsl_unit</code> - Abstract unit associated to a dimension
+  <ul>
+<li> <code>vcsl_length_unit</code>
+    <ul>
+<li> <code>vcsl_meter</code> - This is the standard length unit
+    </li></ul>
+    </li><li> <code>vcsl_angle_unit</code>
+    <ul>
+<li> <code>vcsl_radian</code> - This is the standard angular unit
+      </li><li> <code>vcsl_degree</code>
+    </li></ul>
+    </li><li> <code>vcsl_area_unit</code>
+    <ul>
+<li> <code>vcsl_squaremeter</code> - This is the standard area unit
+    </li></ul>
+    </li><li> <code>vcsl_volume_unit</code>
+    <ul>
+<li> <code>vcsl_cubicmeter</code> - This is the standard volume unit
+      </li><li> <code>vcsl_liter</code>
+    </li></ul>
+</li></ul>
+</li></ul>
+
+<hr size="6">
+<a name="SEC170"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC169" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC171" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC167" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC168" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_14.html#SEC173" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 13.1.2 Co-ordinate Systems and Transformations </h3>
+<ul>
+<li> <code>vcsl_coordinate_system</code>
+  <ul>
+<li> <code>vcsl_planar</code>
+    <ul>
+<li> <code>vcsl_cartesian_2d</code>
+      </li><li> <code>vcsl_polar</code>
+    </li></ul>
+    </li><li> <code>vcsl_spatial</code>
+    <ul>
+<li> <code>vcsl_cartesian_3d</code>
+      </li><li> <code>vcsl_cylindrical</code>
+      </li><li> <code>vcsl_spherical</code>
+      </li><li> <code>vcsl_geographic</code>
+      <ul>
+<li> <code>vcsl_geocentric</code> - Intended to represent a location relative to the earth
+        </li><li> <code>vcsl_geodetic</code> - Intended to represent a location relative to the earth
+        </li><li> <code>vcsl_lambertian</code> - Lambert Conformal Conic Projection
+        </li><li> <code>vcsl_utm</code> - Universal Transverse Mercator projection
+      </li></ul>
+</li></ul>
+</li></ul>
+
+  </li><li> <code>vcsl_transformation</code>
+  <ul>
+<li> <code>vcsl_planar_transformation</code>
+    <ul>
+<li> <code>vcsl_rotation_2d</code> - Rotation about an axis through the origin
+      <ul>
+<li> <code>vcsl_displacement_2d</code> - Rotation about a general axis
+      </li></ul>
+      </li><li> <code>vcsl_scale_2d</code>
+      </li><li> <code>vcsl_translation_2d</code>
+      </li><li> <code>vcsl_composition_2d</code> - Composition of transformations
+    </li></ul>
+
+    </li><li> <code>vcsl_spatial_transformation</code>
+    <ul>
+<li> <code>vcsl_cylindrical_to_cartesian_3d</code>
+      </li><li> <code>vcsl_rotation_3d</code> - Rotation about an axis through the origin
+      <ul>
+<li> <code>vcsl_displacement_3d</code> - Rotation about a general axis
+      </li></ul>
+      </li><li> <code>vcsl_scale_3d</code>
+      </li><li> <code>vcsl_translation_3d</code>
+      </li><li> <code>vcsl_composition_3d</code> - Composition of transformations
+    </li></ul>
+
+    </li><li> <code>vcsl_3d_to_2d_transformation</code>
+    <ul>
+<li> <code>vcsl_perspective</code>
+    </li></ul>
+</li></ul>
+
+  </li><li> <code>vcsl_graph</code> - Represent multiple co-ordinate systems and transformation between them.
+
+</li></ul>
+
+<hr size="6">
+<a name="SEC171"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC170" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC172" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC167" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC167" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_14.html#SEC173" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 13.2 Examples </h2>
+
+<p>The following example shows how to use and build a set of co-ordinate systems.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">
+#include &lt;vcsl/vcsl_cartesian_3d.h&gt;
+#include &lt;vcsl/vcsl_rotation_3d.h&gt;
+#include &lt;vcsl/vcsl_graph.h&gt;
+...
+  //: Convenient indices for vectors representing points, etc.
+  enum AXES { X, Y, Z, T };
+
+  //: Graph of defined CS (Co-ordinate system)
+  // All CS must be added to this graph as they are created.
+  vcsl_graph_sptr graphCS = new vcsl_graph;
+
+  //: World Coordinate System
+  // Equivalent to the Top view, by definition.
+  //
+  // A CS for which no parent is defined is absolute.  Logically,
+  // there must be one absolute CS which all other directly or
+  // indirectly relate to.
+  vcsl_spatial_sptr WCS = new vcsl_cartesian_3d;
+
+  // Add WCS to the global map of coordinate systems.
+  WCS-&gt;set_graph(graphCS);
+
+  // New CS can be defined relative to any point (translation) or
+  // axis (rotation) in the parent CS.  But it is so common to do
+  // so relative to the X, Y, or Z axes, that it is convenient to
+  // define the corresponding vectors:
+
+  //: x-axis vector
+  vnl_vector_fixed &lt;double, 3&gt; xA;
+  xA[X]=1; xA[Y] = 0; xA[Z] = 0;
+
+  //: y-axis vector
+  vnl_vector_fixed &lt;double, 3&gt; yA;
+  yA[X]=0; yA[Y] = 1; yA[Z] = 0;
+
+  //: z-axis vector
+  vnl_vector_fixed &lt;double, 3&gt; zA;
+  zA[X]=0; zA[Y] = 0; zA[Z] = 1;
+
+  //: 90 degree rotation about WCS y-axis
+  // Transforms from WCS to right CS
+  vcsl_rotation_3d rightXF;
+  rightXF.set_static(vnl_math::pi_over_2, yA);
+
+  //: WCS rotated 90 degrees about the y-axis to produce right hand view/CS
+  vcsl_spatial_sptr right = new vcsl_cartesian_3d;
+  right-&gt;set_graph(graphCS);
+  right-&gt;set_unique(WCS, &amp;rightXF);
+
+  //: Corner of a box with opposite corner at origin of WCS.
+  vnl_vector_fixed &lt;double, 3&gt; corner;
+  corner[X] = 1; corner[Y] = 2; corner[Z] = 3;
+
+  // By inspection, corner should be (-3,2,1) in 'right' CS
+  vnl_vector&lt;double&gt; cornerXF = WCS-&gt;from_local_to_cs(corner, right, 0);
+
+  vcl_cout &lt;&lt; cornerXF.x() &lt;&lt; &quot;, &quot; &lt;&lt; cornerXF.y() &lt;&lt; &quot;, &quot; &lt;&lt; cornerXF.z() &lt;&lt; '\n';
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC172"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC171" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_14.html#SEC173" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC167" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC167" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_14.html#SEC173" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 13.3 Further Work </h2>
+
+<ol>
+<li> Write conversion between classic coordinate systems in the same style as the
+class vcsl_cylindrical_to_cartesian_3d (singleton pattern)
+    <ul>
+<li> <code>vcsl_spherical_to_cartesian_3d</code>
+    </li><li> <code>vcsl_polar_to_cartesian_2d</code>
+    </li><li> <code>vcsl_geocentric_to_cartesian_3d</code>
+    </li><li> <code>vcsl_geodetic_to_cartesian_3d</code>
+    </li><li> <code>vcsl_lambertian_to_cartesian_3d</code>
+    </li><li> <code>vcsl_utm_to_cartesian_3d</code>
+    </li></ul>
+
+</li><li> Add other units and dimensions
+
+</li><li> In <code>vcsl_transformation</code>, add
+<table><tr><td>&nbsp;</td><td><pre class="example">//: May `this' have a matrix representation ?
+virtual bool is_linear(void) const=0;
+
+//: Homogeneous matrix of `this' at time `time'
+// REQUIRE: is_valid()
+// REQUIRE: is_linear()
+virtual vnl_matrix&lt;double&gt; matrix_value(const double time, bool type) const;
+</pre></td></tr></table></li></ol>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC167" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_14.html#SEC173" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

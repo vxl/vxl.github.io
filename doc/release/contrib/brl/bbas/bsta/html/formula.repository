@@ -1,0 +1,5 @@
+\form#0:$\alpha>=1$
+\form#1:$\beta>=1$
+\form#2:$ \mu(\mu(1-\mu)/var-1)>1 $
+\form#3:$ (1-\mu)(\mu(1-\mu)/var-1)>1 $
+\form#4:$$ -(\alpha-1)log(x/\mu)-(\beta-1)\log((1-x)/(1-\mu)) > 3 $

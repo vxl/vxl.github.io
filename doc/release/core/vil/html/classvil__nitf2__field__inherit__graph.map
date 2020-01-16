@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__nitf2__array__field.html" title="Abstract class for array fields, i.e., fields that occur within a repeat loop." alt="" coords="59,81,195,105"/>
+<area shape="rect" href="$classvil__nitf2__scalar__field.html" title="vil_nitf2_scalar_field" alt="" coords="255,81,396,105"/>
+<area shape="rect" href="$classvil__nitf2__typed__array__field.html" title="Typed concrete class for array fields." alt="" coords="5,156,213,180"/>
+<area shape="rect" href="$classvil__nitf2__typed__scalar__field.html" title="vil_nitf2_typed_scalar_field\&lt; T \&gt;" alt="" coords="237,156,451,180"/>
+</map>

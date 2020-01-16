@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvpdl__kernel__base.html" title="A base class for kernel (aka Parzen window) distributions." alt="" coords="21,156,192,180"/>
+<area shape="rect" href="$classvpdl__multi__cmp__dist.html" title="The base class for all multiple component probability distributions." alt="" coords="12,81,201,105"/>
+<area shape="rect" href="$classvpdl__distribution.html" title="The base class for all probability distributions." alt="" coords="25,7,188,31"/>
+</map>

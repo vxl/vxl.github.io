@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__nitf2__compound__field__value.html" title="vil_nitf2_compound_field_value" alt="" coords="5,29,213,53"/>
+<area shape="rect" href="$classvil__nitf2__date__time.html" title="vil_nitf2_date_time" alt="" coords="263,5,396,29"/>
+<area shape="rect" href="$classvil__nitf2__location.html" title="vil_nitf2_location" alt="" coords="269,53,389,77"/>
+<area shape="rect" href="$structvil__nitf2__location__degrees.html" title="vil_nitf2_location_degrees" alt="" coords="447,29,623,53"/>
+<area shape="rect" href="$structvil__nitf2__location__dmsh.html" title="vil_nitf2_location_dmsh" alt="" coords="455,77,615,101"/>
+</map>

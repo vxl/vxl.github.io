@@ -1,0 +1,23 @@
+<map id="G" name="G">
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="8,77,112,101"/>
+<area shape="rect" href="contrib_gel_vsol.tag$classvsol__spatial__object.html" title="vsol_spatial_object" alt="" coords="209,125,345,149"/>
+<area shape="rect" href="$structvtol__extract__topology__edgel__chain.html" title="Stores an edgel chain and a corresponding topological edge." alt="" coords="164,77,391,101"/>
+<area shape="rect" href="$classvtol__extract__topology__region__type.html" title="Stores the boundary of a region." alt="" coords="164,29,391,53"/>
+<area shape="rect" href="contrib_gel_vsol.tag$classvsol__spatial__object__2d.html" title="vsol_spatial_object_2d" alt="" coords="440,125,597,149"/>
+<area shape="rect" href="$classvtol__topology__object.html" title="Base class for topology objects." alt="" coords="647,125,791,149"/>
+<area shape="rect" href="$classvtol__block.html" title="vtol_block" alt="" coords="857,5,940,29"/>
+<area shape="rect" href="$classvtol__chain.html" title="Base class of vtol_two_chain and vtol_one_chain (representation of holes)." alt="" coords="857,53,940,77"/>
+<area shape="rect" href="$classvtol__edge.html" title="topological edge." alt="" coords="859,101,939,125"/>
+<area shape="rect" href="$classvtol__face.html" title="vtol_face" alt="" coords="860,149,937,173"/>
+<area shape="rect" href="$classvtol__vertex.html" title="vtol_vertex" alt="" coords="855,197,943,221"/>
+<area shape="rect" href="$classvtol__zero__chain.html" title="vtol_zero_chain" alt="" coords="841,245,956,269"/>
+<area shape="rect" href="$classvtol__one__chain.html" title="The class represents a collection of edges and orientations." alt="" coords="1007,53,1119,77"/>
+<area shape="rect" href="$classvtol__two__chain.html" title="vtol_two_chain" alt="" coords="1007,5,1119,29"/>
+<area shape="rect" href="$classvtol__edge__2d.html" title="topological edge." alt="" coords="1012,101,1113,125"/>
+<area shape="rect" href="$classvtol__face__2d.html" title="vtol_face_2d" alt="" coords="1013,149,1112,173"/>
+<area shape="rect" href="$classvtol__intensity__face.html" title="vtol_intensity_face" alt="" coords="1168,149,1301,173"/>
+<area shape="rect" href="$classvtol__vertex__2d.html" title="vtol_vertex_2d" alt="" coords="1008,197,1117,221"/>
+<area shape="rect" href="contrib_gel_vsol.tag$classvsol__flags__id.html" title="vsol_flags_id" alt="" coords="11,125,109,149"/>
+<area shape="rect" href="core_vul.tag$classvul__timestamp.html" title="vul_timestamp" alt="" coords="5,173,115,197"/>
+<area shape="rect" href="$classvtol__topology__cache.html" title="This class keeps a cache of various topology object lists." alt="" coords="205,173,349,197"/>
+</map>

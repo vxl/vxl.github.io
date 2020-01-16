@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__pbm__file__format.html" title="Alias name for pnm; only tag() differs." alt="" coords="5,156,144,180"/>
+<area shape="rect" href="$classvil__pgm__file__format.html" title="Alias name for pnm; only tag() differs." alt="" coords="168,156,307,180"/>
+<area shape="rect" href="$classvil__ppm__file__format.html" title="Alias name for pnm; only tag() differs." alt="" coords="331,156,469,180"/>
+<area shape="rect" href="$classvil__file__format.html" title="Base class for image formats." alt="" coords="185,7,289,31"/>
+</map>

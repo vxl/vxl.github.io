@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvipl__filter__2d.html" title="vipl_filter_2d\&lt; ImgIn, ImgOut, DataIn, DataOut, PixelItr \&gt;" alt="" coords="15,252,372,276"/>
+<area shape="rect" href="$classvipl__filter.html" title="vipl_filter\&lt; ImgIn, ImgOut, DataIn, DataOut, 2, PixelItr \&gt;" alt="" coords="17,175,369,199"/>
+<area shape="rect" href="$classvipl__filter__abs.html" title="vipl_filter_abs" alt="" coords="184,7,288,31"/>
+<area shape="rect" href="$classvipl__filter.html" title="vipl_filter\&lt; ImgIn, ImgOut, DataIn, DataOut, Arity, PixelItr \&gt;" alt="" coords="209,84,580,108"/>
+<area shape="rect" title=" \&lt; ImgIn, ImgOut, DataIn, DataOut, 2, PixelItr \&gt;" alt="" coords="361,105,369,113"/>
+<area shape="rect" title=" \&lt; ImgIn, ImgOut, DataIn, DataOut, 2, PixelItr \&gt;" alt="" coords="216,171,224,179"/>
+</map>

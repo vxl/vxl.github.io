@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" href="$classbsvg__ellipse.html" title="bsvg_ellipse" alt="" coords="5,305,99,329"/>
+<area shape="rect" href="$classbsvg__group.html" title="an SVG tag to group elements." alt="" coords="123,305,213,329"/>
+<area shape="rect" href="$classbsvg__line.html" title="bsvg_line" alt="" coords="237,305,315,329"/>
+<area shape="rect" href="$classbsvg__polyline.html" title="bsvg_polyline" alt="" coords="339,305,440,329"/>
+<area shape="rect" href="$classbsvg__rectangle.html" title="bsvg_rectangle" alt="" coords="464,305,576,329"/>
+<area shape="rect" href="$classbsvg__text.html" title="bsvg_text" alt="" coords="600,305,677,329"/>
+<area shape="rect" href="$classbxml__element.html" title="An XML element." alt="" coords="280,156,384,180"/>
+<area shape="rect" href="$classbxml__data.html" title="A block of character data found within XML tags." alt="" coords="291,81,373,105"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="280,7,384,31"/>
+<area shape="rect" href="$classbsvg__arrow__head.html" title="tip of the arrow will be at x, y and the length will be l." alt="" coords="37,380,165,404"/>
+<area shape="rect" href="$classbsvg__splice.html" title="draw a splice e.g. for a &quot;pie chart&quot;." alt="" coords="189,380,280,404"/>
+</map>

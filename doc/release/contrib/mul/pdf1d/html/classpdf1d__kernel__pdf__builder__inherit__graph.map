@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classpdf1d__epanech__kernel__pdf__builder.html" title="Build Epanechnikov kernel pdf objects." alt="" coords="5,156,235,180"/>
+<area shape="rect" href="$classpdf1d__gaussian__kernel__pdf__builder.html" title="Build gaussian kernel pdf objects." alt="" coords="259,156,491,180"/>
+<area shape="rect" href="$classpdf1d__builder.html" title="Base for classes to build pdf1d_pdf objects." alt="" coords="196,7,297,31"/>
+</map>

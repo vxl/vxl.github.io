@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" href="core_vgui.tag$classvgui__soview.html" title="vgui_soview" alt="" coords="7,101,100,125"/>
+<area shape="rect" href="core_vgui.tag$classvgui__soview2D.html" title="vgui_soview2D" alt="" coords="149,101,261,125"/>
+<area shape="rect" href="core_vgui.tag$classvgui__soview2D__group.html" title="vgui_soview2D_group" alt="" coords="316,53,468,77"/>
+<area shape="rect" href="core_vgui.tag$classvgui__soview2D__linestrip.html" title="vgui_soview2D_linestrip" alt="" coords="309,101,475,125"/>
+<area shape="rect" href="core_vgui.tag$classvgui__soview2D__point.html" title="vgui_soview2D_point" alt="" coords="319,149,465,173"/>
+<area shape="rect" href="$classsegv__vtol__soview2D__edge__group.html" title="segv_vtol_soview2D_edge_group" alt="" coords="523,5,744,29"/>
+<area shape="rect" href="$classsegv__vtol__soview2D__face.html" title="segv_vtol_soview2D_face" alt="" coords="545,53,721,77"/>
+<area shape="rect" href="$classsegv__vtol__soview2D__edge.html" title="segv_vtol_soview2D_edge" alt="" coords="544,101,723,125"/>
+<area shape="rect" href="$classsegv__vtol__soview2D__vertex.html" title="vtol_vertex_2d." alt="" coords="540,149,727,173"/>
+</map>

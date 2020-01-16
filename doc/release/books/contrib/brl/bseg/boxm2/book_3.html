@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>BOXM2: 3. Boxm2 IO Package</title>
+
+<meta name="description" content="BOXM2: 3. Boxm2 IO Package">
+<meta name="keywords" content="BOXM2: 3. Boxm2 IO Package">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="io"></a>
+<a name="SEC13"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_2.html#SEC12" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC14" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_2.html#SEC7" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC19" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 3. Boxm2 IO Package </h1>
+
+
+<blockquote><p><strong>Chapter summary</strong>:<br>
+IO and cache for boxm2 data structures.  
+</p></blockquote>
+
+<p>The <code>boxm2_io</code> sub library has been designed to simplify disk io when 
+running <code>boxm2</code> algorithms.  
+</p>
+<hr size="6">
+<a name="SEC14"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC13" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC15" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC19" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.1 Disk IO </h2>
+<p>There are two methods of reading and writing blocks to disk, synchronous and 
+asynchronous.  Synchronously reading and writing will block and wait for 
+the read to finish, while asynchronous reading and writing will return 
+immediately, and allow for processing on other data.  
+</p>
+<hr size="6">
+<a name="SEC15"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC14" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC14" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC19" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.1.1 Synchronous IO </h3>
+<p>The <code>boxm2_sio_mgr</code> provides synchronous reading and writing of <code>boxm2_block</code>s
+and <code>boxm2_data_base</code>s, as well as <code>boxm2_data&lt;T&gt;</code>s.  The following static methods  
+are implemented: 
+</p>
+<table><tr><td>&nbsp;</td><td><ul class="toc">
+<li><pre class="example"> boxm2_block* load_block(vcl_string dir, boxm2_block_id block_id)
+</pre></li><li><pre class="example"> boxm2_data_base* load_block_data_generic(vcl_string dir, boxm2_block_id id, vcl_string data_type);
+</pre></li><li><pre class="example"> boxm2_data&lt;T&gt;* load_block_data&lt;T&gt;(vcl_string dir, boxm2_block_id block_id)
+</pre></li></ul>
+</td></tr></table>
+<p>as well as their writing counterparts:
+</p><table><tr><td>&nbsp;</td><td><ul class="toc">
+<li><pre class="example"> void save_block(vcl_string dir, boxm2_block* block)
+</pre></li><li><pre class="example"> void save_block_data_base(vcl_string dir, boxm2_block_id block_id, boxm2_data_base* data, vcl_string prefix)
+</pre></li><li><pre class="example"> void save_block_data&lt;T&gt;(vcl_string dir, boxm2_block_id block_id, boxm2_data&lt;T&gt; * block_data )
+</pre></li></ul>
+</td></tr></table>
+<hr size="6">
+<a name="SEC16"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC15" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC14" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC19" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.1.2 Asynchronous IO </h3>
+<p>The asynchronous manager handles asynchronous requests, which take the form 
+of <code>baio</code> objects (located in <code>src/contrib/brl/bbas/baio/</code>).  
+These <code>baio</code> objects are implemented in a system-dependent manner.  Currently 
+linux and windows <code>baio</code> objects have been implemented and tested.  The 
+mac os x <code>baio</code> implementation remains untested.  
+</p>
+
+<hr size="6">
+<a name="SEC17"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC16" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC19" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.2 Boxm2 Cache </h2>
+<p>The pure virtual <code>boxm2_cache</code> class provides the following interface:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  //: returns block pointer to block specified by ID
+  virtual boxm2_block* get_block(boxm2_block_id id) = 0;
+
+  //: returns data_base pointer
+  virtual boxm2_data_base* get_data_base(boxm2_block_id, vcl_string type) = 0;
+
+  //: returns data pointer to data specified by ID and data_type
+  template &lt;boxm2_data_type T&gt;
+  boxm2_data&lt;T&gt;* get_data(boxm2_block_id id);
+</pre></td></tr></table>
+<p>Different realizations of this abstract class provide different methods of 
+caching <code>boxm2_block</code>s and <code>boxm2_data_base</code>s.  Below is an example of
+the nearest neighbor cache that we have implemented.  
+</p>
+<hr size="6">
+<a name="SEC18"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC17" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC19" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC19" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 3.2.1 Example: boxm2_nn_cache </h3>
+<p>The <code>boxm2_nn_cache</code> maintains two maps, one for <code>boxm2_block</code>s, and
+a map of <code>boxm2_data_base</code>s.  It also maintains an asynchronous io 
+manager.  When a call to <code>get_block</code> or <code>get_data_base</code> 
+is made, the nearest neighbor cache loads any finished asynch requests, 
+searches its cache for the appropriate block, updates its cache by sending out 
+asynchronous requests for any missing neighbors, and then returns the block. 
+The following is its <code>get_block</code> procedure:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">boxm2_block* boxm2_nn_cache::get_block(boxm2_block_id id)
+{
+  //first thing to do is to load all async requests into the cache
+  this-&gt;finish_async_blocks();
+
+  //then look for the block you're requesting
+  if ( cached_blocks_.find(id) != cached_blocks_.end() )
+  {
+    //vcl_cout&lt;&lt;&quot;CACHE HIT!&quot;&lt;&lt;vcl_endl;
+    this-&gt;update_block_cache(cached_blocks_[id]);
+    return cached_blocks_[id];
+  
+
+  //vcl_cout&lt;&lt;&quot;Cache miss&quot;&lt;&lt;vcl_endl;
+  boxm2_block* loaded = boxm2_sio_mgr::load_block(scene_dir_, id);
+  
+  //if the block is null then initialize an empty one
+  if(!loaded &amp;&amp; scene_-&gt;block_exists(id)) {
+    vcl_cout&lt;&lt;&quot;boxm2_nn_cache::initializing empty block &quot;&lt;&lt;id&lt;&lt;vcl_endl;
+    boxm2_block_metadata data = scene_-&gt;get_block_metadata(id); 
+    loaded = new boxm2_block(data);
+  
+  
+  this-&gt;update_block_cache(loaded);
+  return loaded;
+
+</pre></td></tr></table>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC13" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC19" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[Index]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

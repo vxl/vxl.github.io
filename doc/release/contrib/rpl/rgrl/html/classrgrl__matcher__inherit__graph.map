@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" href="$classrgrl__matcher__fixed.html" title="Returns a set of pre&#45;computed matches for the current view." alt="" coords="508,5,639,29"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest.html" title="For each &quot;from&quot; feature, match the k nearest &quot;to&quot; features." alt="" coords="492,53,655,77"/>
+<area shape="rect" href="$classrgrl__matcher__pseudo.html" title="For each &quot;from&quot; pseudo / weak feature, use intensity based matching to construct the &quot;to&quot; features..." alt="" coords="460,101,687,125"/>
+<area shape="rect" href="$classrgrl__matcher__pseudo__3d.html" title="rgrl_matcher_pseudo_3d\&lt; PixelType \&gt;" alt="" coords="449,149,697,173"/>
+<area shape="rect" href="$classrgrl__matcher__pseudo__int__3d.html" title="rgrl_matcher_pseudo_int_3d\&lt; PixelType \&gt;" alt="" coords="439,197,708,221"/>
+<area shape="rect" href="$classrgrl__object.html" title="rgrl_object implements callbacks (via object/observer), and debug flags." alt="" coords="159,101,241,125"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="5,101,109,125"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest__adv.html" title="For each &quot;from&quot; feature, match the k nearest &quot;to&quot; features." alt="" coords="775,5,967,29"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest__boundary.html" title="For each &quot;from&quot; feature, match the boundary points with the k nearest &quot;to&quot; features." alt="" coords="757,53,984,77"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest__random.html" title="For each &quot;from&quot; feature, match the k nearest &quot;to&quot; features." alt="" coords="763,101,979,125"/>
+<area shape="rect" href="$classrgrl__matcher__k__nearest__pick__one.html" title="For each &quot;from&quot; feature, match the k nearest &quot;to&quot; features." alt="" coords="1032,5,1256,29"/>
+</map>

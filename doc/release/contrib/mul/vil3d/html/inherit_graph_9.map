@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil3d__image__resource.html" title="Abstract representation of an image source or image destination." alt="" coords="7,125,159,149"/>
+<area shape="rect" href="$classvil3d__analyze__image.html" title="Object which acts as an interface to an analyze format file." alt="" coords="228,5,375,29"/>
+<area shape="rect" href="$classvil3d__crop__image__resource.html" title="A generic_image adaptor that behaves like a cropped version of its input." alt="" coords="208,53,395,77"/>
+<area shape="rect" href="$classvil3d__gipl__image.html" title="vil3d_gipl_image" alt="" coords="240,101,363,125"/>
+<area shape="rect" href="$classvil3d__memory__image.html" title="Generic image implementation for PNM files." alt="" coords="227,149,376,173"/>
+<area shape="rect" href="$classvil3d__meta__image.html" title="vil3d_meta_image" alt="" coords="236,197,367,221"/>
+<area shape="rect" href="$classvil3d__slice__list__image.html" title="Format class for a volume made up of a list of images." alt="" coords="225,245,377,269"/>
+<area shape="rect" href="$classvil3d__dicom__image.html" title="A DICOM volume on disk." alt="" coords="444,245,580,269"/>
+</map>

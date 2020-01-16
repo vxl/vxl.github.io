@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__j2k__nitf2__pyramid__image__resource.html" title="Representation of a pyramid resolution hierarchy; mostly pure virtual methods." alt="" coords="437,5,688,29"/>
+<area shape="rect" href="$classvil__j2k__pyramid__image__resource.html" title="vil_j2k_pyramid_image_resource" alt="" coords="455,53,671,77"/>
+<area shape="rect" href="$classvil__openjpeg__pyramid__image__resource.html" title="vil_openjpeg_pyramid_image_resource" alt="" coords="436,101,689,125"/>
+<area shape="rect" href="$classvil__pyramid__image__list.html" title="vil_pyramid_image_list" alt="" coords="484,149,641,173"/>
+<area shape="rect" href="$classvil__tiff__pyramid__resource.html" title="Pyramid resource built on the multi&#45;image capability of the TIFF format." alt="" coords="477,197,648,221"/>
+<area shape="rect" href="$classvil__image__resource.html" title="Abstract representation of an image source or image destination." alt="" coords="5,101,144,125"/>
+</map>

@@ -1,0 +1,620 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>VXL: 5. vul: Utilities</title>
+
+<meta name="description" content="VXL: 5. vul: Utilities">
+<meta name="keywords" content="VXL: 5. vul: Utilities">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="vul"></a>
+<a name="SEC35"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC36" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_4.html#SEC34" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 5. vul: Utilities </h1>
+
+
+  <blockquote><p>  <strong>Chapter summary</strong>:
+General utilities are often handy.  vul has a few.
+  </p></blockquote>
+
+<p>Like vbl, vul also provides some basic utilities. The difference is
+philosophical: vbl includes things that could be thought of as extending
+the STL, while vul provides just plain utilities which don't claim to be
+useful or general enough to incorporate into the STL, and may not follow
+the spirit of the STL. The key elements of this library are:
+</p>
+<dl>
+<dt><u>class:</u> <b><code>vul_file</code></b>
+<a name="IDX10"></a>
+</dt>
+<dt><u>class:</u> <b><code>vul_directory</code></b>
+<a name="IDX11"></a>
+</dt>
+<dd><p>File handling utilities, directory reading
+</p></dd></dl>
+
+<dl>
+<dt><u>class:</u> <b><code>vul_url</code></b>
+<a name="IDX12"></a>
+</dt>
+<dd><p>Downloading files over HTTP.
+</p></dd></dl>
+
+<dl>
+<dt><u>class template:</u> <b><code>vul_arg</code></b>
+<a name="IDX13"></a>
+</dt>
+<dd><p>Parse command-line arguments conveniently.
+</p></dd></dl>
+
+<dl>
+<dt><u>class:</u> <b><code>vul_redirector</code></b>
+<a name="IDX14"></a>
+</dt>
+<dd><p>Simplify redirection of standard output/error
+</p></dd></dl>
+
+<dl>
+<dt><u>class:</u> <b><code>vul_awk</code></b>
+<a name="IDX15"></a>
+</dt>
+<dd><p>Read text files, breaking each line into fields.
+</p></dd></dl>
+
+<dl>
+<dt><u>class:</u> <b><code>vul_reg_exp</code></b>
+<a name="IDX16"></a>
+</dt>
+<dd><p>Regular expression matching.
+</p></dd></dl>
+
+<hr size="6">
+<a name="SEC36"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC35" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC37" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 5.1 Redirecting standard output: <code>vul_redirector</code> </h2>
+
+<p><a name="vul_005fredirector"></a>
+</p>
+<p>The class <code>vul_redirector</code> is provided to simplify the task of
+filtering the output of <code>vcl_cerr</code> and <code>vcl_cout</code>, a common requirement
+in graphical applications.  This encapsulates some of the subtleties of
+deriving from <code>vcl_streambuf</code>, providing a simpler interface.
+</p>
+<p>The basic usage is to subclass from <code>vul_redirector</code>, implementing the
+<code>putchunk</code> method, which is then called whenever characters are ready
+for output.  The <code>vul_redirector</code> constructor takes care of attaching
+the new buffer to the stream, and of restoring the original behaviour on
+destruction.  Here is a simple example, which switches output on or off
+depending on the value of a global flag;
+</p><table><tr><td>&nbsp;</td><td><pre class="example">
+#include &lt;vul/vul_redirector.h&gt;
+
+bool on = true;
+
+struct my_redirector : vul_redirector {
+  my_redirector(vcl_ostream&amp; s): vul_redirector(s) {}
+  int putchunk(char const* buf, int n) {
+    if (on)
+      return vul_redirector::put_passthru(buf, n);
+    else
+      return n;
+  }
+};
+</pre></td></tr></table><p>and here is a calling program which exercises the example.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">int main(int argc, char* argv[])
+{
+  vcl_cerr &lt;&lt; &quot;hi\n&quot;;
+  {
+    my_redirector redir(vcl_cerr);
+    on = false;
+    vcl_cerr &lt;&lt; &quot;magic\n&quot;;
+  }
+  vcl_cerr &lt;&lt; &quot;what did I miss?\n&quot;;
+  return 0;
+}
+</pre></td></tr></table>
+<p>When this program is run, the word <code>magic</code> is not displayed, because
+<code>my_redirector::putchunk</code> finds that <code>on == false</code>.  Question,
+what to you think <code>put_passthru</code> does?  What happens if you set
+<code>on = true</code> on line 6?
+</p>
+
+<hr size="6">
+<a name="SEC37"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC36" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC38" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 5.2 Complex output formatting: <code>vul_printf</code> </h2>
+
+
+<p>While it is possible to achieve all of the functionality
+of the C <code>printf</code> function in C++, it is very very difficult.
+There are many times when programs can be made clearer by the use
+of printf formatting, rather than the standard iostream operators.
+On the other hand, one needs iostreams for type-safe (and convenient)
+output of user-defined objects.  Thus vul provides a stream-aware
+version, <code>vul_printf</code>:
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">vcl_ostream&amp; vul_printf(vcl_ostream&amp;, char const* format, ...);
+</pre></td></tr></table><p>so that one can say, for example,
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">vul_printf(vcl_cerr, &quot;Line %05d, Code %-30s\n&quot;, __LINE__, code);
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="SEC38"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC37" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC39" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 5.3 Reading command-line arguments: <code>vul_arg</code> </h2>
+
+
+<p>My favourite bit of vul is the <code>vul_arg</code> header which provides the
+easiest way to parse command-line arguments that I've seen.  The basic idea
+is that a minimal specification for a command-line argument includes: the
+argument's type, a variable to hold it, its flag, and possibly some
+descriptive text and a default value.
+</p>
+<p>In the default, easy to use (and a bit naughty) form, each argument is
+declared anywhere in the program, like so:
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">   vul_arg&lt;double&gt; my_threshold(&quot;-fudge&quot;, &quot;Twiddle fudge&quot;, 1.7);
+   //     Type     Variable     Flag      Help text        Default
+</pre></td></tr></table><p>and when <code>vul_arg_parse</code> is called, all the arguments are gathered,
+and extracted from the command line.  To use an argument anywhere in the
+program, use its <code>()</code> operator:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   vcl_cerr &lt;&lt; &quot;The threshold = &quot; &lt;&lt; my_threshold() &lt;&lt; vcl_endl;
+</pre></td></tr></table><p>To check if an argument was changed from its default value, one can check
+<code>bool my_threshold.set()</code>.
+</p>
+<p>Here is a complete example which uses <code>vul_arg</code>.  I tend to give these
+argument variables names beginning with <code>a_</code>, but don't let that put
+you off.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vcl_iostream.h&gt;
+#include &lt;vul/vul_arg.h&gt;
+
+vul_arg&lt;double&gt; a_naughty_global_arg(&quot;-hack&quot;, &quot;Fudge&quot;, 1.2);
+
+void main(int argc, char* argv[])
+{
+  vul_arg&lt;char const*&gt;     a_filename(0, &quot;Input filename&quot;);
+  vul_arg&lt;bool&gt;            a_fast(&quot;-fast&quot;, &quot;Go fast&quot;, false);
+  vul_arg_parse(argc, argv);
+
+  vcl_cerr &lt;&lt; &quot;Filename [&quot; &lt;&lt; a_filename() &lt;&lt; &quot;]\n&quot;;
+}
+</pre></td></tr></table><p>Passing a <code>0</code> as the flag string means that the argument is
+obligatory, and will be taken as the first unparsed word on the command
+line.
+</p>
+<hr size="6">
+<a name="SEC39"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC38" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC40" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC38" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 5.3.1 Required arguments </h3>
+
+<p>As shown in the example above, a very simple method to set an argument as 
+obligatory is passing a <code>0</code> (or an empty string) as the flag string.
+If there are two or more arguments, the parser extracts these arguments
+using the order they appear on the command line.
+</p>
+<p>In that case, there is not a flag string. This method to provide obligatory 
+arguments is very common (i.e. when you use operating system shells). However,
+if you have many arguments or want a more readable interface, you could prefer
+a required argument which includes a flag string.
+</p>
+<p>To add this functionality, vul includes a special constructor to indicate that
+the argument is required. If you want the paremeter to be obligatory, add the
+special value <code>is_required</code> as the third parameter. For example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">  vul_arg&lt;int&gt;    key      (&quot;-key&quot;, &quot;Required int&quot;, vul_arg&lt;int&gt;::is_required);
+  //     Type     Variable   Flag      Help text      dummy parameter
+</pre></td></tr></table>
+<p>Note that there is not a default value, because it does not make sense.
+</p>
+<hr size="6">
+<a name="SEC40"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC39" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC41" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC38" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 5.3.2 Help text </h3>
+
+<p>The help text supplied with each argument is used to provide a summary of
+options when the special argument <code>-?</code> is seen.  Running this example
+with the <code>-?</code> flag produces the output.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">Usage: ./example_vul_arg.exe [-hack float] string [-fast bool]
+
+REQUIRED:
+         string       Input filename  ['-']
+
+Optional:
+  Switch Type         Help [value]
+
+   -hack float        Quick hack factor  [1.2]
+   -fast bool         Go fast  [not set]
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC41"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC40" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC42" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC38" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 5.3.3 Lists of numbers </h3>
+
+<p>A very useful specialization also exists to read ranges of numbers.
+Imagine a program called makemovie which operates on a list of frames,
+specified on the command line:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">makemovie -frames 1:10,9:-1:1,0,0,0,0
+</pre></td></tr></table><p>These can be easily read into a <code>vcl_list&lt;int&gt;</code>:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;vcl_list.h&gt;
+vul_arg&lt;vcl_list&lt;int&gt; &gt;  a_frame_list(&quot;-frames&quot;, &quot;List of indices&quot;);
+</pre></td></tr></table><p>The list will preserve the order specified on the command line, so in the
+above example, the result of printing the list would be
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">1 2 3 4 5 6 7 8 9 10 9 8 7 6 5 4 3 2 1 0 0 0 0
+</pre></td></tr></table><p>As a gratuitous STL example, here is the code that printed that list
+<a name="IDX17"></a>
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">vcl_copy(a_frame_list().begin(), a_frame_list().end(),
+         vcl_ostream_iterator&lt;int&gt;(vcl_cout, &quot; &quot;));
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC42"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC41" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC43" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC38" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 5.3.4 More structured argument handling </h3>
+
+<p>Of course, it's disgraceful programming practice to throw args around ones
+program higgledy piggledy, so one can collect arguments in objects of type
+<code>vul_arg_list</code>.
+</p>
+
+<hr size="6">
+<a name="SEC43"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC42" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC44" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 5.4 Timing operations: vul_timer </h2>
+
+
+<p>If you want to measure elapsed time, for example to find out how long a
+section of your program takes to run, use the <code>vul_timer</code> class.  When
+a <code>vul_timer</code> is initialized, like so, it records the current time.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   vul_timer mytimer;
+</pre></td></tr></table><p>Later, you can find out the elapsed time using the <code>real()</code> method:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   vcl_cerr &lt;&lt; &quot;That took &quot; &lt;&lt; mytimer.real() &lt;&lt; &quot; milliseconds\n&quot;;
+</pre></td></tr></table><p>If you want to reset the timer to make a new measurement, use the
+<code>mark()</code> method.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   mytimer.mark();  // Reset and start counting from zero again.
+</pre></td></tr></table>
+<p>If you are running other jobs on your computer, you might like to know how
+much time was used by your program alone.  For that, one would use the
+<code>user()</code> method.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   vcl_cerr &lt;&lt; &quot;Of which &quot; &lt;&lt; mytimer.user() &lt;&lt; &quot;ms was actually me\n&quot;;
+</pre></td></tr></table><p>In general, it is better to use the <code>real</code>, &quot;wall-clock&quot; elapsed
+time, as the CPU time returned by user can fail to include work carried out
+on your program's behalf by the operating system.  For example, if you're
+using a lot of memory, the system will swap pages in and out of virtual
+memory, and your program will run slowly, but <code>user()</code> will not report
+it.
+</p>
+<p>Finally, there's a super-convenient <code>print</code> method, which is used
+to just print the real and user times to a stream without any
+formatting, for quick testing purposes.  Here's an example
+</p><table><tr><td>&nbsp;</td><td><pre class="example">  vul_timer tic; // Start timing
+  // do stuff
+  tic.print(vcl_cerr); // Print times to vcl_cerr.
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="SEC44"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC43" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC45" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 5.5 Reading ASCII files: <code>vul_awk</code> </h2>
+
+
+<p>It is often convenient to read text files a line at a time, and split each
+line into space-separated fields.  The <code>vul_awk</code> class is an easy way
+to do this.  It also adds a few handy extras like stripping comments, and
+remembering the line number for error messages.  It is used like this:
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">   vcl_ifstream thefile(&quot;myfile.txt&quot;);
+   vul_awk awk(thefile); // initialize and read 1st line
+   for (; awk; ++awk) {
+     vcl_cerr &lt;&lt; &quot;Field 0 = &quot; &lt;&lt; awk[0] &lt;&lt; vcl_endl;
+     vcl_cerr &lt;&lt; &quot;Field 2 = &quot; &lt;&lt; awk[2] &lt;&lt; vcl_endl;
+   }
+</pre></td></tr></table><p>If <code>myfile.txt</code> contained the text
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">  dapple dawn-drawn falcon,
+  solihull 1  grimsby 3
+</pre></td></tr></table><p>the above program would print
+</p><table><tr><td>&nbsp;</td><td><pre class="smallexample">  Field 0 = dapple
+  Field 2 = falcon,
+  Field 0 = solihull
+  Field 2 = grimsby
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC45"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC44" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC46" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 5.6 Regular expression parsing: <code>vul_reg_exp</code> </h2>
+
+<p>A regular expression allows a programmer to specify complex patterns that
+can be searched for and matched against the character string of a string
+object. In its simplest form, a regular expression is a sequence of
+characters used to search for exact character matches. However, many times
+the exact sequence to be found is not known, or only a match at the
+beginning or end of a string is desired. The vul regular expression class
+implements regular expression pattern matching as is found and implemented
+in many UNIX commands and utilities, notably perl.  The perl code
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   $filename =~ m&quot;([a-z]+)\.h&quot;;
+   print $1;
+</pre></td></tr></table><p>is written as follows in v<em>x</em>l
+</p><table><tr><td>&nbsp;</td><td><pre class="example">   vul_reg_exp re(&quot;([a-z]+)\\.h&quot;);
+   re.find(filename);
+   vcl_cerr &lt;&lt; re.match(1);
+</pre></td></tr></table>
+<p>The vul syntax is similar to perl's, although not quite as clean.  Here are
+the metacharacters:
+</p><table><tr><td>&nbsp;</td><td><pre class="example"> ^        Matches at beginning of a line
+ $        Matches at end of a line
+ .        Matches any single character
+[ ]       Matches any character(s) inside the brackets
+[^ ]      Matches any character(s) not inside the brackets
+ -        Matches any character in range on either side of a dash
+ *        Matches preceding pattern zero or more times
+ +        Matches preceding pattern one or more times
+ ?        Matches preceding pattern zero or once only
+()        Saves a matched expression and uses it in a later match.
+</pre></td></tr></table><p>Note that more than one of these metacharacters can be used in a single
+regular expression in order to create complex search patterns. For example,
+the pattern <code>[^ab1-9]</code> says to match any character sequence that does
+not begin with the characters &quot;ab&quot; followed by numbers in the series 1-9.
+</p>
+
+<hr size="6">
+<a name="SEC46"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC45" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC35" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 5.7 Loading files using Internet protocols: <code>vul_url</code> </h2>
+
+
+<p><code>vul_url</code> provides a useful means of downloading files over the internet.
+For example, if you used to have code like this
+</p><table><tr><td>&nbsp;</td><td><pre class="example">bool read_ascii(vcl_istream &amp;);
+...
+int main() {
+...
+  vcl_ifstream  input(filename);
+  if (!(!input))
+    read_ascii(input);
+  input.close;
+...
+</pre></td></tr></table><p>You can get this code to work, even if <code>filename</code> begins with <code>&quot;http://&quot;</code>
+by modifying your code to look like.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">bool read_ascii(vcl_istream &amp;);
+...
+int main() {
+...
+  vcl_istream  *p_input = vul_url::open(filename);
+  if (p_input != 0 &amp;&amp; !(!(*input)))
+    read_ascii(*input);
+  delete input;
+...
+</pre></td></tr></table><p>This will now work both when filename is an HTTP URL and when it is an ordinary filename.
+</p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC35" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_6.html#SEC47" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_20.html#SEC255" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

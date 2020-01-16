@@ -1,0 +1,26 @@
+<map id="G" name="G">
+<area shape="rect" href="$classsdet__texture__classifier__params.html" title="sdet_texture_classifier_params" alt="" coords="7,5,212,29"/>
+<area shape="rect" href="$classsdet__texture__classifier.html" title="sdet_texture_classifier" alt="" coords="285,5,440,29"/>
+<area shape="rect" href="$classsdet__atmospheric__image__classifier.html" title="sdet_atmospheric_image_classifier" alt="" coords="513,5,743,29"/>
+<area shape="rect" href="core_vbl.tag$classvbl__ref__count.html" title="vbl_ref_count" alt="" coords="57,221,161,245"/>
+<area shape="rect" href="$classsdet__denoise__mrf__bp__params.html" title="sdet_denoise_mrf_bp_params" alt="" coords="261,53,464,77"/>
+<area shape="rect" href="$classsdet__denoise__mrf__params.html" title="sdet_denoise_mrf_params" alt="" coords="273,101,452,125"/>
+<area shape="rect" href="$classsdet__fit__conics__params.html" title="sdet_fit_conics_params" alt="" coords="281,149,444,173"/>
+<area shape="rect" href="$classsdet__fit__lines__params.html" title="sdet_fit_lines_params" alt="" coords="287,197,439,221"/>
+<area shape="rect" href="$classsdet__image__mesh__params.html" title="sdet_image_mesh_params" alt="" coords="272,245,453,269"/>
+<area shape="rect" href="$classsdet__mrf__bp.html" title="sdet_mrf_bp" alt="" coords="315,293,411,317"/>
+<area shape="rect" href="$classsdet__mrf__site__bp.html" title="sdet_mrf_site_bp" alt="" coords="301,341,424,365"/>
+<area shape="rect" href="$classsdet__region__edge.html" title="sdet_region_edge" alt="" coords="299,389,427,413"/>
+<area shape="rect" href="contrib_gel_vsol.tag$classvsol__spatial__object.html" title="vsol_spatial_object" alt="" coords="295,437,431,461"/>
+<area shape="rect" href="$classsdet__denoise__mrf__bp.html" title="sdet_denoise_mrf_bp" alt="" coords="553,53,703,77"/>
+<area shape="rect" href="$classsdet__denoise__mrf.html" title="sdet_denoise_mrf" alt="" coords="564,101,692,125"/>
+<area shape="rect" href="$classsdet__fit__conics.html" title="sdet_fit_conics" alt="" coords="573,149,683,173"/>
+<area shape="rect" href="$classsdet__fit__lines.html" title="sdet_fit_lines" alt="" coords="579,197,677,221"/>
+<area shape="rect" href="$classsdet__image__mesh.html" title="sdet_image_mesh" alt="" coords="563,245,693,269"/>
+<area shape="rect" href="contrib_gel_vsol.tag$classvsol__spatial__object__2d.html" title="vsol_spatial_object_2d" alt="" coords="549,437,707,461"/>
+<area shape="rect" href="contrib_gel_vsol.tag$classvsol__region__2d.html" title="vsol_region_2d" alt="" coords="793,437,905,461"/>
+<area shape="rect" href="contrib_gel_vdgl.tag$classvdgl__digital__region.html" title="vdgl_digital_region" alt="" coords="955,437,1088,461"/>
+<area shape="rect" href="$classsdet__region.html" title="sdet_region" alt="" coords="1137,437,1228,461"/>
+<area shape="rect" href="contrib_gel_vsol.tag$classvsol__flags__id.html" title="vsol_flags_id" alt="" coords="60,413,159,437"/>
+<area shape="rect" href="core_vul.tag$classvul__timestamp.html" title="vul_timestamp" alt="" coords="55,461,164,485"/>
+</map>

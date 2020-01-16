@@ -1,0 +1,51 @@
+\form#0:$P(x < X) =$
+\form#1:$a[i] = A[i] / \sum_j A[j]$
+\form#2:$b[i] = B[i] / \sum_j B[j]$
+\form#3:$\displaystyle \sum_i \frac{ (a[i] - b[i])^2 }{ a[i] } $
+\form#4:$\displaystyle \sum_i \frac{ (a[i] - b[i])^2 }{ b[i] } $
+\form#5:$\displaystyle \sum_i \frac{ (a[i] - b[i])^2 }{ a[i] + b[i] } $
+\form#6:$res[k] := \displaystyle\sum_{i=-\infty}^{+\infty} v1[k-i] \cdot v2[i]$
+\form#7:$res[k] := \displaystyle\sum_{i=0}^{n-1} v1[k-i] \cdot v2[i]$
+\form#8:$N = 2^P 3^Q 5^R$
+\form#9:$A x = \lambda B x$
+\form#10:$A$
+\form#11:$B$
+\form#12:$\lambda$
+\form#13:$x$
+\form#14:$V = [ x_0 x_1 .. x_n ]$
+\form#15:$D = [ \lambda_0 \lambda_1 ... \lambda_n ]$
+\form#16:$C^\top C = B$
+\form#17:$C^{-\top} A C^{-1} x = \lambda x$
+\form#18:$ a[0] x^d + a[1] x^{d-1} + \cdots + a[d] = 0 $
+\form#19:$A x = \lambda x$
+\form#20:$M = U W V^\top$
+\form#21:$m \times n$
+\form#22:$M$
+\form#23:$U$
+\form#24:$W$
+\form#25:$V$
+\form#26:$U W V^\top = M$
+\form#27:$n \times n$
+\form#28:$m > n$
+\form#29:$A = V D V^t$
+\form#30:$D$
+\form#31:$P(a,x)=\frac{1}{\Gamma(a)}\int_0^x e^{-t}t^{a-1}dt$
+\form#32:$Q(a,x)=\frac{1}{\Gamma(a)}\int_x^{\infty}e^{-t}t^{a-1}dt$
+\form#33:$O(1)$
+\form#34:$O(r.c)$
+\form#35:$O(n)$
+\form#36:$O(\min(r,c))$
+\form#37:$\exp(X) = \displaystyle\sum_{n \ge 0} X^n/n!$
+\form#38:$X^i$
+\form#39:$p(X)$
+\form#40:$X$
+\form#41:$p'(X)$
+\form#42:$\int p$
+\form#43:$X^n$
+\form#44:$ a[d] X^d + a[d-1] X^{d-1} + \cdots + a[0] = 0 $
+\form#45:$x^2 + y^2 + z^2 + r^2 = 1$
+\form#46:$A X^3 + B XY + C Y^2 + D XY^2$
+\form#47:$\frac1{\sqrt{|x_2-x_1|}}\,\sqrt{\int_{x_1}^{x_2}\left(f_1(x)-f_2(x)\right)^2\,dx}$
+\form#48:$p(x)$
+\form#49:$p'(x)$
+\form#50:$O(m^2)$

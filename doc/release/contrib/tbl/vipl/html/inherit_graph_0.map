@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvipl__filter__abs.html" title="vipl_filter_abs" alt="" coords="5,341,109,365"/>
+<area shape="rect" href="$classvipl__filter.html" title="vipl_filter\&lt; ImgIn, ImgOut, DataIn, DataOut, Arity, PixelItr \&gt;" alt="" coords="157,317,528,341"/>
+<area shape="rect" href="$classvipl__filter.html" title="vipl_filter\&lt; ImgIn, ImgOut, DataIn, DataOut, 2, PixelItr \&gt;" alt="" coords="167,365,519,389"/>
+<area shape="rect" href="$classvipl__filter__2d.html" title="vipl_filter_2d\&lt; ImgIn, ImgOut, DataIn, DataOut, PixelItr \&gt;" alt="" coords="577,365,935,389"/>
+<area shape="rect" href="$classvipl__add__random__noise.html" title="add random noise to all pixels." alt="" coords="992,5,1416,29"/>
+<area shape="rect" href="$classvipl__convert.html" title="convert between arbitrary image types." alt="" coords="1027,53,1381,77"/>
+<area shape="rect" href="$classvipl__dilate__disk.html" title="morphological dilation with circular element." alt="" coords="1017,101,1391,125"/>
+<area shape="rect" href="$classvipl__dyadic.html" title="apply any (fixed) function to all (out,in) pixel pairs." alt="" coords="1029,149,1379,173"/>
+<area shape="rect" href="$classvipl__erode__disk.html" title="morphological erosion with circular element." alt="" coords="1016,197,1392,221"/>
+<area shape="rect" href="$classvipl__gaussian__convolution.html" title="Gaussian smoothing." alt="" coords="985,245,1423,269"/>
+<area shape="rect" href="$classvipl__gradient__dir.html" title="atan2 of vipl_x_gradient and vipl_y_gradient." alt="" coords="1013,293,1395,317"/>
+<area shape="rect" href="$classvipl__gradient__mag.html" title="sqrt of vipl_x_gradient square plus vipl_y_gradient square." alt="" coords="1008,341,1400,365"/>
+<area shape="rect" href="$classvipl__histogram.html" title="Pixel value histogram of 2D image." alt="" coords="1019,389,1389,413"/>
+<area shape="rect" href="$classvipl__median.html" title="median filter with circular element." alt="" coords="1027,437,1381,461"/>
+<area shape="rect" href="$classvipl__moment.html" title="computation of n&#45;th order moment." alt="" coords="1024,485,1384,509"/>
+<area shape="rect" href="$classvipl__monadic.html" title="apply any (fixed) function to all pixels." alt="" coords="1024,533,1384,557"/>
+<area shape="rect" href="$classvipl__sobel.html" title="vipl_sobel convolution filter." alt="" coords="1033,581,1375,605"/>
+<area shape="rect" href="$classvipl__threshold.html" title="set pixel to given value if above/below certain threshold." alt="" coords="1021,629,1387,653"/>
+<area shape="rect" href="$classvipl__x__gradient.html" title="Convolve image with horizontal [&#45;1 1] filter." alt="" coords="1017,677,1391,701"/>
+<area shape="rect" href="$classvipl__y__gradient.html" title="Convolve image with vertical [&#45;1 1] filter." alt="" coords="1017,725,1391,749"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classvil__image__view.html" title="vil_image_view\&lt; bool \&gt;" alt="" coords="5,175,165,199"/>
+<area shape="rect" title=" \&lt; bool \&gt;" alt="" coords="81,105,89,113"/>
+<area shape="rect" title=" \&lt; bool \&gt;" alt="" coords="81,171,89,179"/>
+<area shape="rect" href="$classvil__image__view__base.html" title="An abstract base class of smart pointers to actual image data in memory." alt="" coords="11,7,160,31"/>
+</map>

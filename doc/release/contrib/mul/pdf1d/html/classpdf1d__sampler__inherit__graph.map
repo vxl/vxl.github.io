@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" href="$classpdf1d__epanech__kernel__pdf__sampler.html" title="Generates random samples from an Epanechnikov kernel estimate." alt="" coords="183,5,420,29"/>
+<area shape="rect" href="$classpdf1d__exponential__sampler.html" title="Samples from Univariate exponential distributions." alt="" coords="209,53,393,77"/>
+<area shape="rect" href="$classpdf1d__flat__sampler.html" title="Samples from Univariate flat distributions." alt="" coords="233,101,369,125"/>
+<area shape="rect" href="$classpdf1d__gaussian__kernel__pdf__sampler.html" title="Generates random samples from a gaussian kernel estimate." alt="" coords="181,149,421,173"/>
+<area shape="rect" href="$classpdf1d__gaussian__sampler.html" title="Samples from Univariate Gaussian." alt="" coords="216,197,387,221"/>
+<area shape="rect" href="$classpdf1d__mixture__sampler.html" title="Instance class for pdf1d_mixture." alt="" coords="221,245,381,269"/>
+<area shape="rect" href="$classpdf1d__weighted__epanech__kernel__sampler.html" title="Generates random samples from an Epanechnikov kernel estimate." alt="" coords="165,293,437,317"/>
+</map>

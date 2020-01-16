@@ -1,0 +1,563 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on May, 1 2013 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>MUL: 2. mbl: Manchester basics library.</title>
+
+<meta name="description" content="MUL: 2. mbl: Manchester basics library.">
+<meta name="keywords" content="MUL: 2. mbl: Manchester basics library.">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="mbl"></a>
+<a name="SEC8"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="book_1.html#SEC7" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book_1.html#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 2. mbl: Manchester basics library. </h1>
+
+
+
+<blockquote><p><strong>Chapter summary</strong>:<br>
+General utilities used by several mul libraries.
+</p></blockquote>
+
+
+<hr size="6">
+<a name="SEC9"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC8" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC10" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 2.1 Data Collectors, and Data Wrappers. </h2>
+<p>The STL iterators are great general purpose devices - however they force
+authors of new algorithms to write heavily templated code. This can prove
+difficult for the user, and impossible for some compilers in the case of extra-templated
+member functions. The mbl classes are templated, but on data-type, and this template parameter
+doesn't have the same potential to confuse.
+</p>
+<p>The purpose of the <code>mbl_data_collector</code> and <code>mbl_data_wrapper</code> are to provide similar
+purpose as STL iterators, but using polymorphism, instead of templating to handle different types
+of iterator. The descendants of <code>mbl_data_collector</code> provide something similar to an STL
+output iterator. The descendants of <code>mbl_data_wrapper</code> provide something similar to an
+STL input iterator.
+</p>
+<hr size="6">
+<a name="SEC10"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC9" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC11" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.1.1 Data Wrappers. </h3>
+
+<p>When reading data from an <code>mbl_data_wrapper</code>, you do not need to know which polymorphic
+concrete type is being used. This way a client can pass you data from any source.
+Reading data from an <code>mbl_data_wrapper</code> is straight forward.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">    vnl_vector&lt;double&gt; my_sum(mbl_data_wrapper&lt;vnl_vector&lt;double&gt; &gt;&amp; data)
+    {
+      data.reset();
+      vnl_vector&lt;double&gt; sum = data.current();
+      while (data.next())
+        sum += data.current();
+    }
+</pre></td></tr></table>
+<p>You can do random access, using the <code>set_index(int n)</code> method, but there is no guarantee that
+the underlying iterator supports this efficiently, so you should use sequential access where possible.
+The wrappers themselves do not support IO, because they are only wrappers - they do not own the
+wrapped data.
+</p>
+<p>Currently there is only one concrete wrapper, <code>mbl_data_array_wrapper</code> which wraps C-style data
+arrays. This can be used to wrap <code>vcl_vector</code>s. Wrappers have in the past been written to
+read files of data directly from disk.
+</p>
+<hr size="6">
+<a name="SEC11"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC10" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.1.2 Data Collectors. </h3>
+
+<p>When writing data to an <code>mbl_data_collector</code>, you do not need to know which polymorphic
+concrete type is being used. This way you can pass a client data in any way they choose.
+Writing data to an <code>mbl_data_collector</code> is straight forward.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">    void my_random_data(mbl_data_collector&lt;vnl_vector&lt;double&gt; &gt;&amp; data)
+    {
+      // Create sampler
+      vpdfl_axis_gaussian gaussian;
+      gaussian.set(vnl_vector&lt;double&gt;(20,0.0),
+                   vnl_vector&lt;double&gt;(20,1.0));
+      vpdfl_sampler_base *sampler = gaussian.new_sampler();
+
+      // set up stuff
+      data.clear();
+      vnl_vector&lt;double&gt; x;
+
+      // put random samples in collector
+      for (unsigned i=0 i&lt;2000; ++i)
+      {
+        sampler-&gt;sample(x);  // generate random sample
+        data.record(x);     // record sample
+      }
+    }
+</pre></td></tr></table>
+<p>You can store a collector using <code>vsl</code>, although if you want to store a polymorphic collector variable,
+you will need to cast the pointer to a <code>mbl_data_collector_base</code><a name="DOCF1" href="book_fot.html#FOOT1">(1)</a>.
+</p>
+<p>You can create a mbl_data_wrapper from an <code>mbl_data_collector</code> by calling
+<code>collector.data_wrapper()</code>.
+</p>
+<p>There are two concrete data collectors - <code>mbl_data_collector_list</code> and
+<code>mbl_stochastic_data_collector</code>. The former stores all the data given to it, whilst the
+latter stores a fixed size complete random subset of all the data given to it. This is useful
+if you do not know how much data an algorithm is going to produce, but for space or time reasons
+you can only store and use subset of it.
+</p>
+
+<hr size="6">
+<a name="SEC12"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC11" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 2.2 Random Number Generator </h2>
+
+<p>Rather than use <code>vnl_sample()</code>, <code>vnl_random</code>, provides a superior
+random number generator.
+</p>
+<ul class="toc">
+<li> It should provide the same pseudo-random sequence whatever platform you are running
+on.
+</li><li> It is based on an algorithm which is known to have less correlation between
+adjacent samples, than some standard pseudo random number generators.
+</li><li> It has been thoroughly tested (See below for some examples.)
+@end itemize.
+
+<p>The downside of vnl_random is that it is about 5 times slower than some other
+pseudo-random number generators. For a discussion on speed/randomness trade-off see
+<cite>Press et al. Numerical Recipes in C, Cambridge, 1992.</cite>
+</p>
+</li></ul>
+<hr size="6">
+<a name="SEC13"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC12" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC14" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.2.1 The randomness of vnl_random (Advanced Topic) </h3>
+
+
+<p>I was using a <code>vpdfl_axis_gaussian_sampler</code> to produce some test data, and
+there seemed to be too many outliers. I was worried about the randomness
+of the <code>vnl_random::normal()</code>, so I ran some tests.
+</p>
+<hr size="6">
+<a name="SEC14"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC13" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC15" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 2.2.1.1 Tim's rank diagram test </h4>
+<ul class="toc">
+<li> Sort the samples
+</li><li> plot rank vs <SPAN CLASS="MATH"><IMG
+ WIDTH="68" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_1.png"
+ ALT="$P(x' &lt; x)$"></SPAN> 
+</li><li> i.e. plot i vs <!-- MATH
+ $0.5*(1+vcl_erf(x/vcl_sqrt(2.0))$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="212" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="book_2.png"
+ ALT="$0.5*(1+vcl_erf(x/vcl_sqrt(2.0))$"></SPAN> 
+</li></ul>
+
+<p><img src="mbl_mz_random_graph1.jpg" alt="mbl_mz_random_graph1">
+</p>
+<p>This seems normal.
+</p>
+<hr size="6">
+<a name="SEC15"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC14" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 2.2.1.2 Testing specifically for outliers. </h4>
+
+<p>For a seed of 123456, the numbers of outliers at 1, 2, 3, and 4 s.d.
+were all greater than the expected value. This bias was reduced
+but still evident when the number of samples was increased from 10^4 to 10^5 and 10^6.
+</p>
+<p>The results for a key of  9667566 are
+</p><table><tr><td>&nbsp;</td><td><pre class="example">Got 3183 samples outside 1 sd- expected3174
+Got 463 samples outside 2 sd- expected455
+Got 28 samples outside 3 sd- expected27.5
+Got 0 samples outside 4 sd- expected0.6
+</pre></td></tr></table>
+<p>These seem <em>more normal</em>.
+</p>
+<hr size="6">
+<a name="SEC16"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC15" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 2.2.1.3 Testing distribution of outliers separations. </h4>
+
+<p>One further possibility is that there might be correlation between adjacent samples. So
+I counted the separations (number of samples) between outliers (those that exceeded 2 standard
+deviations), and plotted the distribution of intervals, along with the expected distribution.
+The first graph is for a seed of 123456, and the second for a seed of 9667566.
+(Note: The key on the following two graphs is reversed.)
+</p>
+<p><img src="mbl_mz_random_graph2.jpg" alt="mbl_mz_random_graph2">
+<img src="mbl_mz_random_graph3.jpg" alt="mbl_mz_random_graph3">
+</p>
+<hr size="6">
+<a name="SEC17"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC16" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h4 class="subsubsection"> 2.2.1.4 Conclusions </h4>
+
+<p>There does not appear to be a persistent bias in the number of outliers as
+the seed is modified.
+</p>
+<p>A seed of 123456 does seem to give more outliers than expected, and in particular
+gives more adjacent outliers that expected - which can have significant effects
+on 2-D test data set generation.
+</p>
+<p>Use a different seed 9667566
+</p>
+<p>Ian Scott
+29 November 2000
+</p>
+<hr size="6">
+<a name="SEC18"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC17" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 2.3 Miscellaneous </h2>
+<dl compact="compact">
+<dt> <code>mbl_cloneable_ptr</code></dt>
+<dd><p>Almost the opposite of a vbl_smart_ptr, this class acts like a pointer,
+but performs a deep copy of the referenced object when the pointer itself is copied.
+Supports IO via <code>vsl</code>.
+</p>
+</dd>
+<dt> <code>mbl_chord</code></dt>
+<dd><p>Describes a horizontal line on a image.
+</p>
+</dd>
+<dt> <code>mbl_priority_bounded_queue</code></dt>
+<dd><p>This acts like a vcl_priority_queue, but only stores the n least values, where n
+is the configurable bound.
+</p>
+</dd>
+<dt> <code>mbl_stats_1d, mbl_sum_1d</code></dt>
+<dd><p>Calculate, store, and manipulate running statistics and sums.
+</p>
+</dd>
+<dt> <code>mbl_lda</code></dt>
+<dd><p>Calculate, manipulate and use a Linear Discriminant Analysis of data.
+</p>
+</dd>
+<dt> <code>mbl_gamma.h</code></dt>
+<dd><p>Complete and incomplete gamma functions
+</p>
+</dd>
+<dt> <code>mbl_k_means.h</code></dt>
+<dd><p>Perform k means clustering.
+</p>
+</dd>
+<dt> <code>mbl_matrix_products.h, mbl_matxvec.h</code></dt>
+<dd><p>Perform various linear algebra operations.
+</p>
+</dd>
+<dt> <code>mbl_print.h</code></dt>
+<dd><p>Commands that debuggers can run easily on demand. Include this file
+in your application, and you call these functions from a debugger to
+display common containers.
+</p></dd>
+</dl>
+
+
+<hr size="6">
+<a name="SEC19"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC18" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 2.4 Further Development </h2>
+<hr size="6">
+<a name="SEC20"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC19" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.4.1 Other Algorithms. </h3>
+<p>It would be useful to have several random number generators all with a similar
+interface to <code>vnl_random</code>. Adding an abstract base class, would allow the
+use of the strategy pattern - for instance swapping in a more random generator.
+</p>
+<hr size="6">
+<a name="SEC21"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC20" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.4.2 Input/Output </h3>
+<p>Since the random number generator has a real state, it could be useful to be able
+to save  that state to a <code>vsl_b_istream</code>.
+</p>
+<hr size="6">
+<a name="SEC22"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC21" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection"> 2.4.3 Move contents to VXL </h3>
+<p>With a bit more development some of this code could be usefully moved into @VXL .
+e.g. </p><table><tr><td>&nbsp;</td><td><pre class="example">mbl_chord -&gt; vil1_chord,
+mbl_gamma.h -&gt; vnl_gamma.h,
+mbl_priority_bounded_queue.h -&gt; vbl_priority_bounded_queue,
+etc.
+</pre></td></tr></table>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="book_3.html#SEC23" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="book.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[Contents]</td>
+<td valign="middle" align="left">[<a href="book_8.html#SEC50" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="book_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>May, 1 2013</i> using <a href="http://texi2html.cvshome.org/"><i>texi2html 1.76</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>
